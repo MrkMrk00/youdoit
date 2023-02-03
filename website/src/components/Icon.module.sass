@@ -1,0 +1,17 @@
+@use 'sass:math'
+
+// Normalizes height to 1em while preserving aspect ratio
+=normalizeSize($intrinsicWidth, $intrinsicHeight)
+	$height: 1em
+
+	width: math.div($intrinsicWidth, $intrinsicHeight) * $height
+	height: $height
+
+.icon
+	// Add all svg icons and corresponding dimensions
+	&-instagram
+		+normalizeSize(41, 40)
+	&-linkedin
+		+normalizeSize(38, 37)
+	&-twitter
+		+normalizeSize(40, 35)

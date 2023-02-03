@@ -1,0 +1,33 @@
+@use 'common'
+
+:root
+	--common-edge-gap: 1rem
+	--common-content-width-small: 32rem
+	--common-content-width-normal: 50rem
+	--common-content-width-wide: 75rem
+	overflow-y: scroll
+
+	// https://www.npmjs.com/package/shared-loading-indicator
+	--ProgressLoadingIndicator-color: #{common.$primary-color}
+
+	@media (min-width: 40rem)
+		--common-edge-gap: 2rem
+
+body
+	margin: 0
+	font-family: common.$inter-font
+	background-color: #FFFFFF
+	color: #000000
+
+	@media (prefers-color-scheme: dark)
+		background-color: #121212
+		color: #FFFFFF
+
+*, *::before, *::after
+	box-sizing: border-box
+
+button
+	cursor: pointer
+
+h1
+	color: common.$primary-color
