@@ -1,6 +1,5 @@
 import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-definition'
 import { publicRole } from './acl'
-import { Image } from './Image'
 import { Linkable } from './Linkable'
 
 @acl.allow(publicRole, { read: true })
@@ -27,7 +26,7 @@ export class ContentReference {
 	type = d.enumColumn(ContentReferenceType).notNull()
 
 	primaryText = d.stringColumn()
-	image = d.manyHasOne(Image).setNullOnDelete()
+	// image = d.manyHasOne(Image).setNullOnDelete()
 	linkables = d.oneHasMany(ContentReferenceLinkableItem, 'reference')
 }
 
