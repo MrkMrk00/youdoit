@@ -1,4 +1,5 @@
 import { SchemaDefinition as d } from '@contember/schema-definition'
+import { Image } from './Image'
 import { Locale } from './Locale'
 
 export class Recipe {
@@ -9,7 +10,7 @@ export class Recipe {
 	price = d.stringColumn()
 	// steps = d.oneHasMany() @TODO
 	// author = d.manyHasOne() @TODO
-	// mainImage = d.manyHasOne() @TODO
+	mainImage = d.manyHasOne(Image)
 }
 
 export class RecipeLocale {
