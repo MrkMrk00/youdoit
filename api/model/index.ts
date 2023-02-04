@@ -1,7 +1,6 @@
 export * from './acl'
 export * from './Content'
 export * from './General'
-export * from './GenericPage'
 export * from './Image'
 export * from './Link'
 export * from './Linkable'
