@@ -2,14 +2,13 @@ import type { ReferenceRendererProps } from '@contember/react-client'
 import { RichTextRenderer } from '@contember/react-client'
 import clsx from 'clsx'
 import type { FunctionComponent, ReactNode } from 'react'
+import type { ContentReferenceType } from '../../generated/contember'
 import type { ContentBlockResult } from '../data/ContentBlockFragment'
 import type { ContentResult } from '../data/ContentFragment'
-import type { ContentReferenceType } from '../../generated/contember'
 import { useContentRendererCopyPasteBugWorkaround } from '../utilities/useContentRendererCopyPasteBugWorkaround'
 import { Container } from './Container'
 import styles from './ContentRenderer.module.sass'
 import { Linkables } from './Linkables'
-import { ResponsiveImage } from './ResponsiveImage'
 import { Wysiwyg } from './Wysiwyg'
 
 export interface ContentRendererProps {
@@ -29,12 +28,12 @@ const referenceRenderers: {
 		return (
 			reference.image && (
 				<Container>
-					<ResponsiveImage
+					{/* <ResponsiveImage
 						src={reference.image.url}
 						width={reference.image.width}
 						height={reference.image.height}
 						alt={reference.image.alt ?? ''}
-					/>
+					/> */}
 				</Container>
 			)
 		)
