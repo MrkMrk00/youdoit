@@ -1,6 +1,7 @@
 import { SchemaDefinition as d } from '@contember/schema-definition'
 import { Image } from './Image'
 import { Locale } from './Locale'
+import { StepsGroup } from './StepsGroup'
 
 export class Recipe {
 	order = d.intColumn().notNull()
@@ -11,6 +12,7 @@ export class Recipe {
 	// steps = d.oneHasMany() @TODO
 	// author = d.manyHasOne() @TODO
 	mainImage = d.manyHasOne(Image)
+	stepsGroups = d.oneHasMany(StepsGroup, 'recipe')
 }
 
 export class RecipeLocale {

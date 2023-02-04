@@ -1,0 +1,450 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "Step",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "step",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "StepLocale",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "step_locale",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "StepsGroup",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "steps_group",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "StepsGroupLocale",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "steps_group_locale",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Step",
+			"field": {
+				"name": "order",
+				"columnName": "order",
+				"columnType": "integer",
+				"nullable": false,
+				"type": "Integer"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "StepLocale",
+			"field": {
+				"name": "title",
+				"columnName": "title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "StepsGroup",
+			"field": {
+				"name": "order",
+				"columnName": "order",
+				"columnType": "integer",
+				"nullable": false,
+				"type": "Integer"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "StepsGroupLocale",
+			"field": {
+				"name": "title",
+				"columnName": "title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "StepsGroupLocale",
+			"field": {
+				"name": "buttonTitle",
+				"columnName": "button_title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "Step",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "group",
+				"target": "StepsGroup",
+				"joiningColumn": {
+					"columnName": "group_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "steps"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "steps",
+				"target": "Step",
+				"ownedBy": "group"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "base",
+				"target": "Step",
+				"joiningColumn": {
+					"columnName": "base_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "locales"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "locales",
+				"target": "StepLocale",
+				"ownedBy": "base"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "locale",
+				"target": "Locale",
+				"joiningColumn": {
+					"columnName": "locale_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "steps"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "steps",
+				"target": "StepLocale",
+				"ownedBy": "locale"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepsGroup",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "recipe",
+				"target": "Recipe",
+				"joiningColumn": {
+					"columnName": "recipe_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "stepsGroups"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "stepsGroups",
+				"target": "StepsGroup",
+				"ownedBy": "recipe"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepsGroupLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "base",
+				"target": "StepsGroup",
+				"joiningColumn": {
+					"columnName": "base_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "locales"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "locales",
+				"target": "StepsGroupLocale",
+				"ownedBy": "base"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepsGroupLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "locale",
+				"target": "Locale",
+				"joiningColumn": {
+					"columnName": "locale_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "stepsGroups"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "stepsGroups",
+				"target": "StepsGroupLocale",
+				"ownedBy": "locale"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Step",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"group": true,
+								"locales": true,
+								"order": true
+							},
+							"create": {
+								"id": true,
+								"group": true,
+								"locales": true,
+								"order": true
+							},
+							"update": {
+								"id": true,
+								"group": true,
+								"locales": true,
+								"order": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepLocale",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true
+							},
+							"create": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true
+							},
+							"update": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepsGroup",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"recipe": true,
+								"locales": true,
+								"order": true,
+								"steps": true
+							},
+							"create": {
+								"id": true,
+								"recipe": true,
+								"locales": true,
+								"order": true,
+								"steps": true
+							},
+							"update": {
+								"id": true,
+								"recipe": true,
+								"locales": true,
+								"order": true,
+								"steps": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepsGroupLocale",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true,
+								"buttonTitle": true
+							},
+							"create": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true,
+								"buttonTitle": true
+							},
+							"update": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true,
+								"buttonTitle": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/create/stepsGroups",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/create/steps",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/update/stepsGroups",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/update/steps",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/read/stepsGroups",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/read/steps",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/create/stepsGroups",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/update/stepsGroups",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/read/stepsGroups",
+					"value": true
+				}
+			]
+		}
+	]
+}
