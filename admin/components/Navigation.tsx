@@ -4,7 +4,6 @@ export const Navigation = () => (
 	<Menu>
 		<Menu.Item>
 			<Menu.Item title="General" to="general" />
-			<Menu.Item title="Redirects" to="redirect/list" />
 			<Menu.Item title="Recipes" to="recipeList" />
 			<Menu.Item title="Settings">
 				<Menu.Item title="Locales" to="localesPage" />
