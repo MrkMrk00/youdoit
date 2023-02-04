@@ -9,6 +9,9 @@ export default () => {
 			itemsPerPage={50}
 			rendererProps={{ title: 'Repice', actions: <LinkButton to="recipeCreate">Add a new recipe</LinkButton> }}
 		>
+			{/* {request?.dimensions.locale.map((localeCode) => (
+				<TextCell field={`locale.code='${localeCode}'.title`} />
+			))} */}
 			<GenericCell shrunk>
 				<LinkButton to="recipeEdit(id: $entity.id)">Edit</LinkButton>
 			</GenericCell>
