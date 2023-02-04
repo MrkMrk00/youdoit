@@ -2,7 +2,6 @@ import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-d
 import { publicRole } from './acl'
 import { Image } from './Image'
 import { One } from './One'
-import { Seo } from './Seo'
 
 @acl.allow(publicRole, { read: true })
 export class General {
@@ -11,5 +10,5 @@ export class General {
 	dummy = d.stringColumn()
 	image = d.manyHasOne(Image).setNullOnDelete()
 
-	seo = d.oneHasOne(Seo)
+	// seo = d.oneHasOne(Seo)
 }
