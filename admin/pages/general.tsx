@@ -1,5 +1,4 @@
 import { EditPage, TextField } from '@contember/admin'
-import { ImageField, SeoField } from '@mangoweb/contember-plugins'
 
 export default () => (
 	<EditPage
@@ -10,8 +9,8 @@ export default () => (
 		}}
 	>
 		<TextField field="dummy" label="Dummy text" />
-		<ImageField field="image" label="Dummy image" />
+		{/* <ImageField field="image" label="Dummy image" /> */}
 
-		<SeoField field="seo" />
+		{/* <SeoField field="seo" /> */}
 	</EditPage>
 )
