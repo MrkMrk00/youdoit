@@ -14,7 +14,7 @@ export class Recipe {
 	mainImage = d.manyHasOne(Image)
 	stepsGroups = d.oneHasMany(StepsGroup, 'recipe')
 }
-
+@d.Unique('base', 'locale')
 export class RecipeLocale {
 	base = d.manyHasOne(Recipe, 'locales').notNull().cascadeOnDelete()
 	locale = d.manyHasOne(Locale, 'recipes').cascadeOnDelete().notNull()
