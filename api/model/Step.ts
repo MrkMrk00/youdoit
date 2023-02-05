@@ -8,6 +8,7 @@ export class Step {
 	order = d.intColumn().notNull()
 }
 
+@d.Unique('base', 'locale')
 export class StepLocale {
 	base = d.manyHasOne(Step, 'locales').cascadeOnDelete().notNull()
 	locale = d.manyHasOne(Locale, 'steps').cascadeOnDelete().notNull()

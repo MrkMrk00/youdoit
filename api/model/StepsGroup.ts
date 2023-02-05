@@ -12,6 +12,7 @@ export class StepsGroup {
 	steps = d.oneHasMany(Step, 'group')
 }
 
+@d.Unique('base', 'locale')
 export class StepsGroupLocale {
 	base = d.manyHasOne(StepsGroup, 'locales').cascadeOnDelete().notNull()
 	locale = d.manyHasOne(Locale, 'stepsGroups').cascadeOnDelete().notNull()
