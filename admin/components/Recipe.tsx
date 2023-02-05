@@ -1,5 +1,6 @@
-import { Component, DateTimeField, RichTextField, TextField } from '@contember/admin'
+import { Component, DateTimeField, Repeater, RichTextField, TextField } from '@contember/admin'
 import { ImageField, LocaleSideDimension } from '@mangoweb/contember-plugins'
+import { StepGroup } from './StepGroup'
 
 export const Recipe = Component(() => {
 	return (
@@ -11,6 +12,9 @@ export const Recipe = Component(() => {
 				<TextField field="title" label="Title" />
 				<RichTextField field="description" label="Description" />
 			</LocaleSideDimension>
+			<Repeater field="stepsGroups" label="Step groups" sortableBy="order">
+				<StepGroup />
+			</Repeater>
 		</>
 	)
 })
