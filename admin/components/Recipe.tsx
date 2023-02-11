@@ -1,5 +1,6 @@
 import { Component, DateTimeField, Repeater, RichTextField, TextField } from '@contember/admin'
-import { ImageField, LocaleSideDimension } from '@mangoweb/contember-plugins'
+import { ImageField } from './ImageField'
+import { LocaleSideDimension } from './LocaleSideDimensions'
 import { StepGroup } from './StepGroup'
 
 export const Recipe = Component(() => {
