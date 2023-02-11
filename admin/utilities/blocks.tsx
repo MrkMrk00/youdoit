@@ -1,5 +1,5 @@
 import { TextField } from '@contember/admin'
-import { ImageField } from '@mangoweb/contember-plugins'
+import { ImageField } from '../components/ImageField'
 import type { Blocks } from './blockHelpers'
 
 // Add all blocks here
