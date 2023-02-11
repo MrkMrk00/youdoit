@@ -1,0 +1,195 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "updateRelationOrderBy",
+			"entityName": "StepsGroup",
+			"fieldName": "steps",
+			"orderBy": [
+				{
+					"path": [
+						"order"
+					],
+					"direction": "asc"
+				}
+			]
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "PinnedRecipe",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "pinned_recipe",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "PinnedRecipe",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "user",
+				"target": "User",
+				"joiningColumn": {
+					"columnName": "user_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "pinnedRecipes"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "pinnedRecipes",
+				"target": "PinnedRecipe",
+				"ownedBy": "user"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "PinnedRecipe",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "derivedBy",
+				"target": "Recipe",
+				"joiningColumn": {
+					"columnName": "derived_by_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "pinnedRecipes"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "pinnedRecipes",
+				"target": "PinnedRecipe",
+				"ownedBy": "derivedBy"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "Recipe",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "createdBy",
+				"target": "User",
+				"joiningColumn": {
+					"columnName": "created_by_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "createdRecipes"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "createdRecipes",
+				"target": "Recipe",
+				"ownedBy": "createdBy"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/PinnedRecipe",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"user": true,
+								"derivedBy": true
+							},
+							"create": {
+								"id": true,
+								"user": true,
+								"derivedBy": true
+							},
+							"update": {
+								"id": true,
+								"user": true,
+								"derivedBy": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/create/createdBy",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/create/pinnedRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/update/createdBy",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/update/pinnedRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/read/createdBy",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/read/pinnedRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/read/pinnedRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/read/createdRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/create/pinnedRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/create/createdRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/update/pinnedRecipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/update/createdRecipes",
+					"value": true
+				}
+			]
+		}
+	]
+}

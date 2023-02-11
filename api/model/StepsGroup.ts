@@ -9,7 +9,7 @@ export class StepsGroup {
 	order = d.intColumn().notNull()
 
 	// gallery = @TODO
-	steps = d.oneHasMany(Step, 'group')
+	steps = d.oneHasMany(Step, 'group').orderBy('order')
 }
 
 @d.Unique('base', 'locale')
