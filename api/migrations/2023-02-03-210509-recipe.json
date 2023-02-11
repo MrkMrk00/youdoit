@@ -1,0 +1,232 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "Recipe",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "recipe",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "RecipeLocale",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "recipe_locale",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Recipe",
+			"field": {
+				"name": "order",
+				"columnName": "order",
+				"columnType": "integer",
+				"nullable": false,
+				"type": "Integer"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Recipe",
+			"field": {
+				"name": "publishDate",
+				"columnName": "publish_date",
+				"columnType": "date",
+				"nullable": true,
+				"type": "Date"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Recipe",
+			"field": {
+				"name": "price",
+				"columnName": "price",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "RecipeLocale",
+			"field": {
+				"name": "title",
+				"columnName": "title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "RecipeLocale",
+			"field": {
+				"name": "description",
+				"columnName": "description",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "RecipeLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "base",
+				"target": "Recipe",
+				"joiningColumn": {
+					"columnName": "base_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "locales"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "locales",
+				"target": "RecipeLocale",
+				"ownedBy": "base"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "RecipeLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "locale",
+				"target": "Locale",
+				"joiningColumn": {
+					"columnName": "locale_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "recipes"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "recipes",
+				"target": "RecipeLocale",
+				"ownedBy": "locale"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"order": true,
+								"locales": true,
+								"publishDate": true,
+								"price": true
+							},
+							"create": {
+								"id": true,
+								"order": true,
+								"locales": true,
+								"publishDate": true,
+								"price": true
+							},
+							"update": {
+								"id": true,
+								"order": true,
+								"locales": true,
+								"publishDate": true,
+								"price": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/RecipeLocale",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true,
+								"description": true
+							},
+							"create": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true,
+								"description": true
+							},
+							"update": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true,
+								"description": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/read/recipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/create/recipes",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/update/recipes",
+					"value": true
+				}
+			]
+		}
+	]
+}

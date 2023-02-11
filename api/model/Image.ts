@@ -1,7 +1,11 @@
-import { AclDefinition as acl } from '@contember/schema-definition'
-import { Image } from '@mangoweb/contember-plugins/dist/commonjs/image/api/model'
-import { publicRole } from './acl'
+import { SchemaDefinition as d } from '@contember/schema-definition'
 
-acl.allow(publicRole, { read: true })(Image)
+export class Image {
+	url = d.stringColumn().notNull()
+	width = d.intColumn()
+	height = d.intColumn()
+	size = d.intColumn()
+	type = d.stringColumn()
 
-export { Image }
+	alt = d.stringColumn()
+}

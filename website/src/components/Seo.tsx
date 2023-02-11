@@ -1,19 +1,16 @@
 import Head from 'next/head'
 import type { FunctionComponent } from 'react'
-import type { SeoResult } from '../data/SeoFragment'
 
 export type SeoProps = {
 	canonicalUrl: string | null
-	seo: SeoResult
+	// seo: SeoResult
 }
 
-export const Seo: FunctionComponent<SeoProps> = ({
-	canonicalUrl,
-	seo: { title, description, ogTitle, ogDescription, ogImage, noIndex, noFollow },
-}) => {
+export const Seo: FunctionComponent<SeoProps> = () => {
 	return (
 		<Head>
-			<title>{title}</title>
+			<title>Title</title>
+			{/* <title>{title}</title>
 			{description && <meta name="description" content={description} />}
 			<meta property="og:locale" content="en_US" />
 			{ogTitle && <meta property="og:title" content={ogTitle} />}
@@ -33,7 +30,7 @@ export const Seo: FunctionComponent<SeoProps> = ({
 			) : noFollow ? (
 				<meta name="robots" content="nofollow" />
 			) : null}
-			{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}{' '}
+			{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}{' '} */}
 		</Head>
 	)
 }

@@ -1,0 +1,9 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "removeEntity",
+			"entityName": "Seo"
+		}
+	]
+}
