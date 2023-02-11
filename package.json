@@ -33,7 +33,6 @@
 		"@contember/react-client": "^1.1.0-alpha.17",
 		"@contember/schema": "^1.2.0-alpha.18",
 		"@contember/schema-definition": "^1.2.0-alpha.18",
-		"@mangoweb/contember-plugins": "^0.15.0",
 		"@next/bundle-analyzer": "^13.0.6",
 		"@next/font": "^13.0.6",
 		"@sentry/nextjs": "^7.24.1",
