@@ -2,7 +2,7 @@ import type { GraphQLTypes, InputType } from '../../generated/contember'
 import { Selector } from '../../generated/contember'
 import type { scalarResolver } from '../utilities/createScalarResolver'
 
-export function ImageFragment() {
+export const ImageFragment = () => {
 	return Selector('Image')({
 		id: true,
 		url: true,
