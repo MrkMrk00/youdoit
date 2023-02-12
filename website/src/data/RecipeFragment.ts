@@ -6,7 +6,7 @@ import { ImageFragment } from './ImageFragment'
 export const RecipeFragment = (locale: string) =>
 	Selector('Recipe')({
 		id: true,
-		// createdBy:[{}, {}],
+		createdBy: [{}, { firstName: true, lastName: true }],
 		// pinnedRecipes: [{}, {}]
 		publishDate: true,
 		price: true,
