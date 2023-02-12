@@ -2,7 +2,7 @@ import { SchemaDefinition as d } from '@contember/schema-definition'
 import { Image } from './Image'
 import { Locale } from './Locale'
 import { PinnedRecipe } from './PinnedRecipe'
-import { StepsGroup } from './StepsGroup'
+import { StepGroup } from './StepGroup'
 import { User } from './User'
 
 export class Recipe {
@@ -17,7 +17,7 @@ export class Recipe {
 	// steps = d.oneHasMany() @TODO
 	// author = d.manyHasOne() @TODO
 	mainImage = d.manyHasOne(Image)
-	stepsGroups = d.oneHasMany(StepsGroup, 'recipe')
+	stepsGroups = d.oneHasMany(StepGroup, 'recipe')
 }
 @d.Unique('base', 'locale')
 export class RecipeLocale {

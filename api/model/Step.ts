@@ -2,10 +2,10 @@ import { SchemaDefinition as d } from '@contember/schema-definition'
 import { ImplemetationDate } from './ImplementationDate'
 import { Locale } from './Locale'
 import { ModificationDate } from './ModificationDate'
-import { StepsGroup } from './StepsGroup'
+import { StepGroup } from './StepGroup'
 
 export class Step {
-	group = d.manyHasOne(StepsGroup, 'steps').cascadeOnDelete().notNull()
+	group = d.manyHasOne(StepGroup, 'steps').cascadeOnDelete().notNull()
 	locales = d.oneHasMany(StepLocale, 'base')
 	order = d.intColumn().notNull()
 	implementationDate = d.oneHasMany(ImplemetationDate, 'step')
