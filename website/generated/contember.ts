@@ -2966,7 +2966,7 @@ export const AllTypesProps: Record<string,any> = {
 			options:"MutationTransactionOptions"
 		},
 		generateUploadUrl:{
-
+			acl:"S3Acl"
 		},
 		generateReadUrl:{
 
@@ -3287,7 +3287,8 @@ export const AllTypesProps: Record<string,any> = {
 	Json: `scalar.Json` as const,
 	_OnDeleteBehaviour: "enum" as const,
 	_RelationSide: "enum" as const,
-	_OrderByDirection: "enum" as const
+	_OrderByDirection: "enum" as const,
+	S3Acl: "enum" as const
 }
 
 export const ReturnTypes: Record<string,any> = {
@@ -8388,7 +8389,7 @@ updateStepGroupLocale?: [{	by: ValueTypes["StepGroupLocaleUniqueWhere"] | Variab
 upsertStepGroupLocale?: [{	by: ValueTypes["StepGroupLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepGroupLocaleWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["StepGroupLocaleUpdateInput"] | Variable<any, string>,	create: ValueTypes["StepGroupLocaleCreateInput"] | Variable<any, string>},ValueTypes["StepGroupLocaleUpsertResult"]],
 transaction?: [{	options?: ValueTypes["MutationTransactionOptions"] | undefined | null | Variable<any, string>},ValueTypes["MutationTransaction"]],
 	query?:ValueTypes["Query"],
-generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
+generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>,	acl?: ValueTypes["S3Acl"] | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
 generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>},ValueTypes["S3SignedRead"]],
 		__typename?: boolean | `@${string}`
 }>;
@@ -9080,7 +9081,8 @@ upsertStepGroupLocale?: [{	by: ValueTypes["StepGroupLocaleUniqueWhere"] | Variab
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null | Variable<any, string>
 };
-	["Json"]:unknown;
+	/** Json custom scalar type */
+["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ValueTypes["_Enum"],
 	entities?:ValueTypes["_Entity"],
@@ -9192,6 +9194,7 @@ upsertStepGroupLocale?: [{	by: ValueTypes["StepGroupLocaleUniqueWhere"] | Variab
 	value?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ValueTypes["S3Header"],
@@ -12030,7 +12033,7 @@ updateStepGroupLocale?: [{	by: ResolverInputTypes["StepGroupLocaleUniqueWhere"],
 upsertStepGroupLocale?: [{	by: ResolverInputTypes["StepGroupLocaleUniqueWhere"],	filter?: ResolverInputTypes["StepGroupLocaleWhere"] | undefined | null,	update: ResolverInputTypes["StepGroupLocaleUpdateInput"],	create: ResolverInputTypes["StepGroupLocaleCreateInput"]},ResolverInputTypes["StepGroupLocaleUpsertResult"]],
 transaction?: [{	options?: ResolverInputTypes["MutationTransactionOptions"] | undefined | null},ResolverInputTypes["MutationTransaction"]],
 	query?:ResolverInputTypes["Query"],
-generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null},ResolverInputTypes["S3SignedUpload"]],
+generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null,	acl?: ResolverInputTypes["S3Acl"] | undefined | null},ResolverInputTypes["S3SignedUpload"]],
 generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},ResolverInputTypes["S3SignedRead"]],
 		__typename?: boolean | `@${string}`
 }>;
@@ -12722,7 +12725,8 @@ upsertStepGroupLocale?: [{	by: ResolverInputTypes["StepGroupLocaleUniqueWhere"],
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null
 };
-	["Json"]:unknown;
+	/** Json custom scalar type */
+["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ResolverInputTypes["_Enum"],
 	entities?:ResolverInputTypes["_Entity"],
@@ -12835,6 +12839,7 @@ upsertStepGroupLocale?: [{	by: ResolverInputTypes["StepGroupLocaleUniqueWhere"],
 	value?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ResolverInputTypes["S3Header"],
@@ -16135,7 +16140,8 @@ export type ModelTypes = {
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined
 };
-	["Json"]:any;
+	/** Json custom scalar type */
+["Json"]:any;
 	["_Schema"]: {
 		enums: Array<ModelTypes["_Enum"]>,
 	entities: Array<ModelTypes["_Entity"]>
@@ -16219,6 +16225,7 @@ export type ModelTypes = {
 		key: string,
 	value: string
 };
+	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: {
 		url: string,
 	headers: Array<ModelTypes["S3Header"]>,
@@ -19748,7 +19755,8 @@ export type GraphQLTypes = {
 	["MutationTransactionOptions"]: {
 		deferForeignKeyConstraints?: boolean | undefined
 };
-	["Json"]: "scalar" & { name: "Json" };
+	/** Json custom scalar type */
+["Json"]: "scalar" & { name: "Json" };
 	["_Schema"]: {
 	__typename: "_Schema",
 	enums: Array<GraphQLTypes["_Enum"]>,
@@ -19861,6 +19869,7 @@ export type GraphQLTypes = {
 	key: string,
 	value: string
 };
+	["S3Acl"]: S3Acl;
 	["S3SignedRead"]: {
 	__typename: "S3SignedRead",
 	url: string,
@@ -19907,6 +19916,11 @@ export const enum _RelationSide {
 export const enum _OrderByDirection {
 	asc = "asc",
 	desc = "desc"
+}
+export const enum S3Acl {
+	PUBLIC_READ = "PUBLIC_READ",
+	PRIVATE = "PRIVATE",
+	NONE = "NONE"
 }
 
 type ZEUS_VARIABLES = {
@@ -20236,4 +20250,5 @@ type ZEUS_VARIABLES = {
 	["_OnDeleteBehaviour"]: ValueTypes["_OnDeleteBehaviour"];
 	["_RelationSide"]: ValueTypes["_RelationSide"];
 	["_OrderByDirection"]: ValueTypes["_OrderByDirection"];
+	["S3Acl"]: ValueTypes["S3Acl"];
 }
