@@ -1,0 +1,46 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createColumn",
+			"entityName": "HomePage",
+			"field": {
+				"name": "unique",
+				"columnName": "unique",
+				"columnType": "One",
+				"nullable": false,
+				"type": "Enum"
+			}
+		},
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "HomePage",
+			"unique": {
+				"fields": [
+					"unique"
+				],
+				"name": "unique_HomePage_unique_2f5df6"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePage/operations/read/unique",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePage/operations/create/unique",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePage/operations/update/unique",
+					"value": true
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,187 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "Seo",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "seo",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Seo",
+			"field": {
+				"name": "title",
+				"columnName": "title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Seo",
+			"field": {
+				"name": "description",
+				"columnName": "description",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Seo",
+			"field": {
+				"name": "ogTitle",
+				"columnName": "og_title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Seo",
+			"field": {
+				"name": "ogDescription",
+				"columnName": "og_description",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Seo",
+			"field": {
+				"name": "noIndex",
+				"columnName": "no_index",
+				"columnType": "boolean",
+				"nullable": true,
+				"type": "Bool",
+				"default": false
+			},
+			"fillValue": false
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Seo",
+			"field": {
+				"name": "noFollow",
+				"columnName": "no_follow",
+				"columnType": "boolean",
+				"nullable": true,
+				"type": "Bool",
+				"default": false
+			},
+			"fillValue": false
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "HomePageLocale",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "seo",
+				"target": "Seo",
+				"joiningColumn": {
+					"columnName": "seo_id",
+					"onDelete": "restrict"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "Seo",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "ogImage",
+				"target": "Image",
+				"joiningColumn": {
+					"columnName": "og_image_id",
+					"onDelete": "cascade"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Seo",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"title": true,
+								"description": true,
+								"ogTitle": true,
+								"ogDescription": true,
+								"ogImage": true,
+								"noIndex": true,
+								"noFollow": true
+							},
+							"create": {
+								"id": true,
+								"title": true,
+								"description": true,
+								"ogTitle": true,
+								"ogDescription": true,
+								"ogImage": true,
+								"noIndex": true,
+								"noFollow": true
+							},
+							"update": {
+								"id": true,
+								"title": true,
+								"description": true,
+								"ogTitle": true,
+								"ogDescription": true,
+								"ogImage": true,
+								"noIndex": true,
+								"noFollow": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePageLocale/operations/read/seo",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePageLocale/operations/create/seo",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePageLocale/operations/update/seo",
+					"value": true
+				}
+			]
+		}
+	]
+}
