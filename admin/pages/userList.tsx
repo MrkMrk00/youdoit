@@ -7,6 +7,7 @@ export default () => {
 			itemsPerPage={50}
 			rendererProps={{ title: 'User', actions: <LinkButton to="userCreate">Add a new user</LinkButton> }}
 		>
+			<TextCell field="firstName" />
 			<TextCell field="lastName" />
 			<GenericCell shrunk>
 				<LinkButton to="userEdit(id: $entity.id)">Edit</LinkButton>
