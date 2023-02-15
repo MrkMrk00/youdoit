@@ -1,5 +1,6 @@
 import { Container } from '../components/Container'
 import { Icon } from '../components/Icon'
+import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { contember } from '../utilities/contember'
 import { scalarResolver } from '../utilities/createScalarResolver'
 import { getLinkableUrlFromContext } from '../utilities/getLinkableUrlFromContext'
@@ -97,6 +98,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			},
 			{
 				url: true,
+				homePage: [{}, HomePageLocaleFragment()],
 				// genericPage: [{}, GenericPageFragment()],
 				// redirect: [
 				// 	{},
@@ -131,7 +133,11 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		return (process.env.NEXT_PUBLIC_WEB_URL ?? '') + url
 	})()
 
-	// const page = data.getLinkable?.genericPage
+	if (!data.getLinkable) {
+		throw new Error('Page not found')
+	}
+
+	const { homePage } = data.getLinkable
 
 	// if (!page) {
 	// 	return {
@@ -143,6 +149,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		props: {
 			// general: data.getGeneral,
 			// page,
+			homePage,
 			seo: {
 				canonicalUrl,
 				// seo: {
