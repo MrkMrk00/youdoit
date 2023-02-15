@@ -1,5 +1,6 @@
 import { Container } from '../components/Container'
 import { Icon } from '../components/Icon'
+import { HomePage } from '../components/pages/HomePage'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { contember } from '../utilities/contember'
 import { scalarResolver } from '../utilities/createScalarResolver'
@@ -9,7 +10,7 @@ import { handleGetStaticPaths, handleGetStaticProps } from '../utilities/handler
 
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
-export default function ({ seo }: PageProps) {
+export default function ({ seo, homePage }: PageProps) {
 	console.log(seo)
 	return (
 		<>
@@ -19,6 +20,7 @@ export default function ({ seo }: PageProps) {
 					Page <Icon name="twitter" /> <Icon name="instagram" /> <Icon name="linkedin" />
 				</h1>
 			</Container>
+			{homePage && <HomePage homePage={homePage} />}
 			{/* {page && (
 				<>
 					<Container>
@@ -133,10 +135,10 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		return (process.env.NEXT_PUBLIC_WEB_URL ?? '') + url
 	})()
 
+	console.log(data.getLinkable?.homePage)
 	if (!data.getLinkable) {
 		throw new Error('Page not found')
 	}
-
 	const { homePage } = data.getLinkable
 
 	// if (!page) {

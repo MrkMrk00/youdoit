@@ -5,7 +5,7 @@ import type { scalarResolver } from '../utilities/createScalarResolver'
 export function LocaleFragment() {
 	return Selector('Locale')({
 		code: true,
-		order: true,
+		// order: true,
 	})
 }
 
