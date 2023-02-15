@@ -55,6 +55,11 @@ const configuration = {
 		})
 		return config
 	},
+	i18n: {
+		locales: ['en', 'cs'],
+		defaultLocale: 'cs',
+		domains: [],
+	},
 	reactStrictMode: true,
 }
 
