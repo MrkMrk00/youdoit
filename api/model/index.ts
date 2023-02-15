@@ -1,5 +1,6 @@
 export * from './acl'
 export * from './Content'
+export * from './HomePage'
 export * from './Image'
 export * from './ImplementationDate'
 export * from './Link'
