@@ -1,5 +1,6 @@
 import { OrderDirection } from '../../generated/contember'
 import { Container } from '../components/Container'
+import { Layout } from '../components/Layout'
 import { HomePage } from '../components/pages/HomePage'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { RecipeFragment } from '../data/RecipeFragment'
@@ -14,7 +15,7 @@ export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 export default function ({ seo, homePage, recipes }: PageProps) {
 	console.log(seo)
 	return (
-		<>
+		<Layout>
 			{/* <Seo {...seo} /> */}
 
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} />}
@@ -39,7 +40,7 @@ export default function ({ seo, homePage, recipes }: PageProps) {
 					/>
 				)} */}
 			</Container>
-		</>
+		</Layout>
 	)
 }
 
