@@ -58,6 +58,7 @@ const configuration = {
 	i18n: {
 		locales: ['en', 'cs'],
 		defaultLocale: 'cs',
+		localeDetection: false,
 		domains: [],
 	},
 	reactStrictMode: true,
