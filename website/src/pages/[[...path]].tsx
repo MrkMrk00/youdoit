@@ -1,7 +1,8 @@
+import { OrderDirection } from '../../generated/contember'
 import { Container } from '../components/Container'
-import { Icon } from '../components/Icon'
 import { HomePage } from '../components/pages/HomePage'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
+import { RecipeFragment } from '../data/RecipeFragment'
 import { contember } from '../utilities/contember'
 import { scalarResolver } from '../utilities/createScalarResolver'
 import { getLinkableUrlFromContext } from '../utilities/getLinkableUrlFromContext'
@@ -10,17 +11,13 @@ import { handleGetStaticPaths, handleGetStaticProps } from '../utilities/handler
 
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
-export default function ({ seo, homePage }: PageProps) {
+export default function ({ seo, homePage, recipes }: PageProps) {
 	console.log(seo)
 	return (
 		<>
 			{/* <Seo {...seo} /> */}
-			<Container size="wide">
-				<h1>
-					Page <Icon name="twitter" /> <Icon name="instagram" /> <Icon name="linkedin" />
-				</h1>
-			</Container>
-			{homePage && <HomePage homePage={homePage} />}
+
+			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} />}
 			{/* {page && (
 				<>
 					<Container>
@@ -85,6 +82,12 @@ export const getStaticPaths = handleGetStaticPaths(async (context) => {
 export const getStaticProps = handleGetStaticProps(async (context) => {
 	const url = getLinkableUrlFromContext(context)
 
+	const { locale } = context
+
+	if (!locale) {
+		throw new Error('Locale not defined.')
+	}
+
 	const data = await contember('query', { scalars: scalarResolver })({
 		// getGeneral: [
 		// 	{
@@ -94,6 +97,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		// 	},
 		// 	GeneralFragment(),
 		// ],
+		listRecipe: [{ orderBy: [{ publishDate: OrderDirection.desc }] }, RecipeFragment(locale)],
 		getLinkable: [
 			{
 				by: { url },
@@ -152,6 +156,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			// general: data.getGeneral,
 			// page,
 			homePage,
+			recipes: data.listRecipe,
 			seo: {
 				canonicalUrl,
 				// seo: {
