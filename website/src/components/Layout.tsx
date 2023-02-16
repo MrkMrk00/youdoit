@@ -9,7 +9,7 @@ export type LayoutProps = {
 export const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
 	return (
 		<div className={styles.wrapper}>
-			{children}
+			<div className={styles.content}>{children}</div>
 			<div className={styles.navigation}>
 				<div className={styles.personalIcon}>
 					<Icon name="personal" />
