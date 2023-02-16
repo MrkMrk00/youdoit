@@ -1,9 +1,8 @@
 import type { FunctionComponent } from 'react'
-import { Fragment } from 'react'
 import type { HomePageLocaleResult } from '../../data/HomePageLocaleFragment'
 import type { RecipeResult } from '../../data/RecipeFragment'
 import { Container } from '../Container'
-import { RecipeTile } from '../RecipeTile'
+import { RecipeCarousel } from '../RecipeCarousel'
 import styles from './HomePage.module.sass'
 
 export interface HomePageProps {
@@ -18,16 +17,7 @@ export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes }
 				<div>
 					<div>{homePage.title}</div>
 				</div>
-
-				<div className={styles.recipeList}>
-					{recipes.map((recipe) => {
-						return (
-							<Fragment key={recipe.id}>
-								<RecipeTile tile={recipe} />
-							</Fragment>
-						)
-					})}
-				</div>
+				<RecipeCarousel tiles={recipes} />
 			</div>
 		</Container>
 	)
