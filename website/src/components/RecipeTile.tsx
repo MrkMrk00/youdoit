@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import type { FunctionComponent } from 'react'
 import type { RecipeResult } from '../data/RecipeFragment'
 import { PriceTag } from './PriceTag'
@@ -9,9 +10,9 @@ export interface RecipeTile {
 	type: 'main' | 'carousel' | 'withDescription'
 }
 
-export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile }) => {
+export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile, type }) => {
 	return (
-		<div className={styles.wrapper}>
+		<div className={clsx(styles.wrapper, styles[`is_${type}`])}>
 			{tile.mainImage?.url && (
 				<div className={styles.image}>
 					<TileImage image={tile.mainImage} fill objectFit="cover" />

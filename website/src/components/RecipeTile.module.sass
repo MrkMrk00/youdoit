@@ -1,12 +1,33 @@
+@use 'sass:math'
+
 .wrapper
 	position: relative
 	color: #FFF
+	border-radius: 1.875rem
+	overflow: hidden
+	&.is_main
+		.image
+			aspect-ratio: 390 / 310
+		.title
+			font-weight: 800
+			font-size: 15px
+			line-height: 20px
+		.content
+			justify-content: center
+	&.is_carousel
+		min-width: 11.25rem
+		.image
+			aspect-ratio: 180 / 300
+		.title
+			font-weight: 800
+			font-size: 1.5625rem
+			line-height: math.div(35, 25)
+		.content
+			justify-content: flex-end
 
 .image
 	position: relative
-	aspect-ratio: 390 / 310
-	border-radius: 1.875rem
-	overflow: hidden
+	aspect-ratio: 1
 
 .content
 	position: absolute
@@ -17,12 +38,6 @@
 	padding: 1.25rem
 	display: flex
 	flex-direction: column
-	justify-content: center
-
-.title
-	font-weight: 800
-	font-size: 15px
-	line-height: 20px
 
 .price
 	display: flex
