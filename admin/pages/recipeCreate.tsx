@@ -9,6 +9,7 @@ export default () => (
 			navigation: <NavigateBackButton to="recipelist">Recipes</NavigateBackButton>,
 		}}
 		redirectOnSuccess="recipeEdit(id: $entity.id)"
+		setOnCreate="(publishDate = 'now')"
 		orderField="order"
 		newOrderFieldValue={0}
 	>
