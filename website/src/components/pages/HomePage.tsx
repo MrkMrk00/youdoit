@@ -1,6 +1,7 @@
 import type { FunctionComponent } from 'react'
 import type { HomePageLocaleResult } from '../../data/HomePageLocaleFragment'
 import type { RecipeResult } from '../../data/RecipeFragment'
+import { recipesChunk } from '../../utilities/recipesChunk'
 import { Container } from '../Container'
 import { RecipeCarousel } from '../RecipeCarousel'
 import { RecipeTile } from '../RecipeTile'
@@ -13,7 +14,7 @@ export interface HomePageProps {
 }
 
 export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes }) => {
-	const [mainRecipe, ...otherRecipes] = recipes
+	const recipesGroups = recipesChunk(recipes, 10)
 
 	return (
 		<Container>
@@ -21,12 +22,21 @@ export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes }
 				<div>
 					<div>{homePage.title}</div>
 				</div>
-				<div className={styles.recipes}>
-					<RecipeTile tile={recipes[1]} type="main" />
-					<RecipeCarousel tiles={otherRecipes} />
-					<RecipeTile tile={mainRecipe} type="withDescription" />
-					<RecommendedRecipes recipes={otherRecipes} />
-				</div>
+				{recipesGroups.map((group, index) => {
+					const main = group.at(0)
+					const carousel = group.slice(1, 6)
+					const withDescription = group.at(6)
+					const recommendedRecipes = group.slice(7)
+
+					return (
+						<div className={styles.recipes} key={index}>
+							{main && <RecipeTile tile={main} type="main" />}
+							{carousel.length > 0 && <RecipeCarousel tiles={carousel} />}
+							{withDescription && <RecipeTile tile={withDescription} type="withDescription" />}
+							{recommendedRecipes.length > 0 && <RecommendedRecipes recipes={recommendedRecipes} />}
+						</div>
+					)
+				})}
 			</div>
 		</Container>
 	)
