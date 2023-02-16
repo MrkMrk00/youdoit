@@ -29,7 +29,7 @@ export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile, type }) => {
 					)}
 				</div>
 			</div>
-			{tile.localesByLocale?.tileDescription && (
+			{tile.localesByLocale?.tileDescription && type === 'withDescription' && (
 				<div className={styles.tileDescription}>
 					<RichTextRenderer source={tile.localesByLocale?.tileDescription} />
 				</div>

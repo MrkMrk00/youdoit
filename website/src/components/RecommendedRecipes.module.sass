@@ -1,0 +1,33 @@
+@use 'common'
+@use 'sass:math'
+
+.list
+	display: grid
+
+.tile
+	display: flex
+	align-items: center
+	justify-content: space-between
+	border-bottom: 1px solid #E3E3E3
+	padding: .9375rem 0
+	&:last-child
+		border-bottom: none
+
+.tileIn
+	display: flex
+	align-items: center
+	gap: .625rem
+
+.image
+	position: relative
+	aspect-ratio: 1
+	min-width: 6.5625rem
+	border-radius: 1.25rem
+	overflow: hidden
+
+.title
+	line-height: math.div(28, 25)
+	font-weight: 800
+	font-size: 1.25rem
+	@media ( min-width: common.$break480 )
+		font-size: 1.5625rem
