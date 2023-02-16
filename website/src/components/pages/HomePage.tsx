@@ -21,9 +21,11 @@ export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes }
 				<div>
 					<div>{homePage.title}</div>
 				</div>
-				<MainRecipe recipe={mainRecipe} />
-				<RecipeCarousel tiles={otherRecipes} />
-				<RecipeTileWithDescription tile={mainRecipe} />
+				<div className={styles.recipes}>
+					<MainRecipe recipe={mainRecipe} />
+					<RecipeCarousel tiles={otherRecipes} />
+					<RecipeTileWithDescription tile={mainRecipe} />
+				</div>
 			</div>
 		</Container>
 	)
