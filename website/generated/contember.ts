@@ -393,6 +393,44 @@ export const AllTypesProps: Record<string,any> = {
 		validateUpdateSeo:{
 			by:"SeoUniqueWhere",
 			data:"SeoUpdateInput"
+		},
+		getRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere"
+		},
+		listRecipeList:{
+			filter:"RecipeListWhere",
+			orderBy:"RecipeListOrderBy"
+		},
+		paginateRecipeList:{
+			filter:"RecipeListWhere",
+			orderBy:"RecipeListOrderBy"
+		},
+		validateCreateRecipeList:{
+			data:"RecipeListCreateInput"
+		},
+		validateUpdateRecipeList:{
+			by:"RecipeListUniqueWhere",
+			data:"RecipeListUpdateInput"
+		},
+		getRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere"
+		},
+		listRecipeListItem:{
+			filter:"RecipeListItemWhere",
+			orderBy:"RecipeListItemOrderBy"
+		},
+		paginateRecipeListItem:{
+			filter:"RecipeListItemWhere",
+			orderBy:"RecipeListItemOrderBy"
+		},
+		validateCreateRecipeListItem:{
+			data:"RecipeListItemCreateInput"
+		},
+		validateUpdateRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			data:"RecipeListItemUpdateInput"
 		}
 	},
 	Content:{
@@ -564,7 +602,6 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	RecipeWhere:{
 		id:"UUIDCondition",
-		order:"IntCondition",
 		publishDate:"DateCondition",
 		price:"StringCondition",
 		locales:"RecipeLocaleWhere",
@@ -1031,7 +1068,6 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	RecipeOrderBy:{
 		id:"OrderDirection",
-		order:"OrderDirection",
 		publishDate:"OrderDirection",
 		price:"OrderDirection",
 		mainImage:"ImageOrderBy",
@@ -2774,6 +2810,134 @@ export const AllTypesProps: Record<string,any> = {
 		link:"HomePageLocaleUpdateLinkEntityRelationInput",
 		seo:"HomePageLocaleUpdateSeoEntityRelationInput"
 	},
+	RecipeList:{
+		items:{
+			filter:"RecipeListItemWhere",
+			orderBy:"RecipeListItemOrderBy"
+		},
+		paginateItems:{
+			filter:"RecipeListItemWhere",
+			orderBy:"RecipeListItemOrderBy"
+		}
+	},
+	RecipeListItem:{
+		list:{
+			filter:"RecipeListWhere"
+		},
+		recipe:{
+			filter:"RecipeWhere"
+		}
+	},
+	RecipeListWhere:{
+		id:"UUIDCondition",
+		items:"RecipeListItemWhere",
+		and:"RecipeListWhere",
+		or:"RecipeListWhere",
+		not:"RecipeListWhere"
+	},
+	RecipeListItemWhere:{
+		id:"UUIDCondition",
+		order:"IntCondition",
+		list:"RecipeListWhere",
+		recipe:"RecipeWhere",
+		and:"RecipeListItemWhere",
+		or:"RecipeListItemWhere",
+		not:"RecipeListItemWhere"
+	},
+	RecipeListItemOrderBy:{
+		id:"OrderDirection",
+		order:"OrderDirection",
+		list:"RecipeListOrderBy",
+		recipe:"RecipeOrderBy"
+	},
+	RecipeListOrderBy:{
+		id:"OrderDirection"
+	},
+	RecipeListUniqueWhere:{
+		id:"UUID",
+		items:"RecipeListItemUniqueWhere"
+	},
+	RecipeListItemUniqueWhere:{
+		id:"UUID"
+	},
+	RecipeListCreateInput:{
+		id:"UUID",
+		items:"RecipeListCreateItemsEntityRelationInput"
+	},
+	RecipeListCreateItemsEntityRelationInput:{
+		connect:"RecipeListItemUniqueWhere",
+		create:"RecipeListItemWithoutListCreateInput"
+	},
+	RecipeListItemWithoutListCreateInput:{
+		id:"UUID",
+		recipe:"RecipeListItemCreateRecipeEntityRelationInput"
+	},
+	RecipeListItemCreateRecipeEntityRelationInput:{
+		connect:"RecipeUniqueWhere",
+		create:"RecipeCreateInput"
+	},
+	RecipeListUpdateInput:{
+		items:"RecipeListUpdateItemsEntityRelationInput"
+	},
+	RecipeListUpdateItemsEntityRelationInput:{
+		create:"RecipeListItemWithoutListCreateInput",
+		update:"RecipeListUpdateItemsRelationInput",
+		upsert:"RecipeListUpsertItemsRelationInput",
+		connect:"RecipeListItemUniqueWhere",
+		disconnect:"RecipeListItemUniqueWhere",
+		delete:"RecipeListItemUniqueWhere"
+	},
+	RecipeListUpdateItemsRelationInput:{
+		by:"RecipeListItemUniqueWhere",
+		data:"RecipeListItemWithoutListUpdateInput"
+	},
+	RecipeListItemWithoutListUpdateInput:{
+		recipe:"RecipeListItemUpdateRecipeEntityRelationInput"
+	},
+	RecipeListItemUpdateRecipeEntityRelationInput:{
+		create:"RecipeCreateInput",
+		update:"RecipeUpdateInput",
+		upsert:"RecipeListItemUpsertRecipeRelationInput",
+		connect:"RecipeUniqueWhere"
+	},
+	RecipeListItemUpsertRecipeRelationInput:{
+		update:"RecipeUpdateInput",
+		create:"RecipeCreateInput"
+	},
+	RecipeListUpsertItemsRelationInput:{
+		by:"RecipeListItemUniqueWhere",
+		update:"RecipeListItemWithoutListUpdateInput",
+		create:"RecipeListItemWithoutListCreateInput"
+	},
+	RecipeListItemCreateInput:{
+		id:"UUID",
+		list:"RecipeListItemCreateListEntityRelationInput",
+		recipe:"RecipeListItemCreateRecipeEntityRelationInput"
+	},
+	RecipeListItemCreateListEntityRelationInput:{
+		connect:"RecipeListUniqueWhere",
+		create:"RecipeListWithoutItemsCreateInput"
+	},
+	RecipeListWithoutItemsCreateInput:{
+		id:"UUID"
+	},
+	RecipeListItemUpdateInput:{
+		list:"RecipeListItemUpdateListEntityRelationInput",
+		recipe:"RecipeListItemUpdateRecipeEntityRelationInput"
+	},
+	RecipeListItemUpdateListEntityRelationInput:{
+		create:"RecipeListWithoutItemsCreateInput",
+		update:"RecipeListWithoutItemsUpdateInput",
+		upsert:"RecipeListItemUpsertListRelationInput",
+		connect:"RecipeListUniqueWhere"
+	},
+	RecipeListWithoutItemsUpdateInput:{
+
+	},
+	RecipeListItemUpsertListRelationInput:{
+		update:"RecipeListWithoutItemsUpdateInput",
+		create:"RecipeListWithoutItemsCreateInput"
+	},
 	QueryTransaction:{
 		getContent:{
 			by:"ContentUniqueWhere",
@@ -3166,6 +3330,44 @@ export const AllTypesProps: Record<string,any> = {
 		validateUpdateSeo:{
 			by:"SeoUniqueWhere",
 			data:"SeoUpdateInput"
+		},
+		getRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere"
+		},
+		listRecipeList:{
+			filter:"RecipeListWhere",
+			orderBy:"RecipeListOrderBy"
+		},
+		paginateRecipeList:{
+			filter:"RecipeListWhere",
+			orderBy:"RecipeListOrderBy"
+		},
+		validateCreateRecipeList:{
+			data:"RecipeListCreateInput"
+		},
+		validateUpdateRecipeList:{
+			by:"RecipeListUniqueWhere",
+			data:"RecipeListUpdateInput"
+		},
+		getRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere"
+		},
+		listRecipeListItem:{
+			filter:"RecipeListItemWhere",
+			orderBy:"RecipeListItemOrderBy"
+		},
+		paginateRecipeListItem:{
+			filter:"RecipeListItemWhere",
+			orderBy:"RecipeListItemOrderBy"
+		},
+		validateCreateRecipeListItem:{
+			data:"RecipeListItemCreateInput"
+		},
+		validateUpdateRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			data:"RecipeListItemUpdateInput"
 		}
 	},
 	Mutation:{
@@ -3528,6 +3730,42 @@ export const AllTypesProps: Record<string,any> = {
 			filter:"SeoWhere",
 			update:"SeoUpdateInput",
 			create:"SeoCreateInput"
+		},
+		createRecipeList:{
+			data:"RecipeListCreateInput"
+		},
+		deleteRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere"
+		},
+		updateRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere",
+			data:"RecipeListUpdateInput"
+		},
+		upsertRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere",
+			update:"RecipeListUpdateInput",
+			create:"RecipeListCreateInput"
+		},
+		createRecipeListItem:{
+			data:"RecipeListItemCreateInput"
+		},
+		deleteRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere"
+		},
+		updateRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere",
+			data:"RecipeListItemUpdateInput"
+		},
+		upsertRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere",
+			update:"RecipeListItemUpdateInput",
+			create:"RecipeListItemCreateInput"
 		},
 		transaction:{
 			options:"MutationTransactionOptions"
@@ -3900,6 +4138,42 @@ export const AllTypesProps: Record<string,any> = {
 			filter:"SeoWhere",
 			update:"SeoUpdateInput",
 			create:"SeoCreateInput"
+		},
+		createRecipeList:{
+			data:"RecipeListCreateInput"
+		},
+		deleteRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere"
+		},
+		updateRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere",
+			data:"RecipeListUpdateInput"
+		},
+		upsertRecipeList:{
+			by:"RecipeListUniqueWhere",
+			filter:"RecipeListWhere",
+			update:"RecipeListUpdateInput",
+			create:"RecipeListCreateInput"
+		},
+		createRecipeListItem:{
+			data:"RecipeListItemCreateInput"
+		},
+		deleteRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere"
+		},
+		updateRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere",
+			data:"RecipeListItemUpdateInput"
+		},
+		upsertRecipeListItem:{
+			by:"RecipeListItemUniqueWhere",
+			filter:"RecipeListItemWhere",
+			update:"RecipeListItemUpdateInput",
+			create:"RecipeListItemCreateInput"
 		}
 	},
 	MutationTransactionOptions:{
@@ -4016,6 +4290,16 @@ export const ReturnTypes: Record<string,any> = {
 		paginateSeo:"SeoConnection",
 		validateCreateSeo:"_ValidationResult",
 		validateUpdateSeo:"_ValidationResult",
+		getRecipeList:"RecipeList",
+		listRecipeList:"RecipeList",
+		paginateRecipeList:"RecipeListConnection",
+		validateCreateRecipeList:"_ValidationResult",
+		validateUpdateRecipeList:"_ValidationResult",
+		getRecipeListItem:"RecipeListItem",
+		listRecipeListItem:"RecipeListItem",
+		paginateRecipeListItem:"RecipeListItemConnection",
+		validateCreateRecipeListItem:"_ValidationResult",
+		validateUpdateRecipeListItem:"_ValidationResult",
 		transaction:"QueryTransaction",
 		_info:"Info",
 		schema:"_Schema",
@@ -4184,7 +4468,6 @@ export const ReturnTypes: Record<string,any> = {
 	Recipe:{
 		_meta:"RecipeMeta",
 		id:"UUID",
-		order:"Int",
 		publishDate:"Date",
 		price:"String",
 		locales:"RecipeLocale",
@@ -4203,7 +4486,6 @@ export const ReturnTypes: Record<string,any> = {
 	},
 	RecipeMeta:{
 		id:"FieldMeta",
-		order:"FieldMeta",
 		publishDate:"FieldMeta",
 		price:"FieldMeta",
 		locales:"FieldMeta",
@@ -4568,6 +4850,43 @@ export const ReturnTypes: Record<string,any> = {
 	SeoEdge:{
 		node:"Seo"
 	},
+	RecipeList:{
+		_meta:"RecipeListMeta",
+		id:"UUID",
+		items:"RecipeListItem",
+		paginateItems:"RecipeListItemConnection"
+	},
+	RecipeListMeta:{
+		id:"FieldMeta",
+		items:"FieldMeta"
+	},
+	RecipeListItem:{
+		_meta:"RecipeListItemMeta",
+		id:"UUID",
+		order:"Int",
+		list:"RecipeList",
+		recipe:"Recipe"
+	},
+	RecipeListItemMeta:{
+		id:"FieldMeta",
+		order:"FieldMeta",
+		list:"FieldMeta",
+		recipe:"FieldMeta"
+	},
+	RecipeListItemConnection:{
+		pageInfo:"PageInfo",
+		edges:"RecipeListItemEdge"
+	},
+	RecipeListItemEdge:{
+		node:"RecipeListItem"
+	},
+	RecipeListConnection:{
+		pageInfo:"PageInfo",
+		edges:"RecipeListEdge"
+	},
+	RecipeListEdge:{
+		node:"RecipeList"
+	},
 	QueryTransaction:{
 		getContent:"Content",
 		listContent:"Content",
@@ -4671,7 +4990,17 @@ export const ReturnTypes: Record<string,any> = {
 		listSeo:"Seo",
 		paginateSeo:"SeoConnection",
 		validateCreateSeo:"_ValidationResult",
-		validateUpdateSeo:"_ValidationResult"
+		validateUpdateSeo:"_ValidationResult",
+		getRecipeList:"RecipeList",
+		listRecipeList:"RecipeList",
+		paginateRecipeList:"RecipeListConnection",
+		validateCreateRecipeList:"_ValidationResult",
+		validateUpdateRecipeList:"_ValidationResult",
+		getRecipeListItem:"RecipeListItem",
+		listRecipeListItem:"RecipeListItem",
+		paginateRecipeListItem:"RecipeListItemConnection",
+		validateCreateRecipeListItem:"_ValidationResult",
+		validateUpdateRecipeListItem:"_ValidationResult"
 	},
 	Info:{
 		description:"String"
@@ -4757,6 +5086,14 @@ export const ReturnTypes: Record<string,any> = {
 		deleteSeo:"SeoDeleteResult",
 		updateSeo:"SeoUpdateResult",
 		upsertSeo:"SeoUpsertResult",
+		createRecipeList:"RecipeListCreateResult",
+		deleteRecipeList:"RecipeListDeleteResult",
+		updateRecipeList:"RecipeListUpdateResult",
+		upsertRecipeList:"RecipeListUpsertResult",
+		createRecipeListItem:"RecipeListItemCreateResult",
+		deleteRecipeListItem:"RecipeListItemDeleteResult",
+		updateRecipeListItem:"RecipeListItemUpdateResult",
+		upsertRecipeListItem:"RecipeListItemUpsertResult",
 		transaction:"MutationTransaction",
 		query:"Query",
 		generateUploadUrl:"S3SignedUpload",
@@ -4850,6 +5187,14 @@ export const ReturnTypes: Record<string,any> = {
 		"...on SeoDeleteResult": "SeoDeleteResult",
 		"...on SeoUpdateResult": "SeoUpdateResult",
 		"...on SeoUpsertResult": "SeoUpsertResult",
+		"...on RecipeListCreateResult": "RecipeListCreateResult",
+		"...on RecipeListDeleteResult": "RecipeListDeleteResult",
+		"...on RecipeListUpdateResult": "RecipeListUpdateResult",
+		"...on RecipeListUpsertResult": "RecipeListUpsertResult",
+		"...on RecipeListItemCreateResult": "RecipeListItemCreateResult",
+		"...on RecipeListItemDeleteResult": "RecipeListItemDeleteResult",
+		"...on RecipeListItemUpdateResult": "RecipeListItemUpdateResult",
+		"...on RecipeListItemUpsertResult": "RecipeListItemUpsertResult",
 		ok:"Boolean",
 		errorMessage:"String",
 		errors:"_MutationError"
@@ -5393,6 +5738,60 @@ export const ReturnTypes: Record<string,any> = {
 		node:"Seo",
 		validation:"_ValidationResult"
 	},
+	RecipeListCreateResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeList",
+		validation:"_ValidationResult"
+	},
+	RecipeListDeleteResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeList"
+	},
+	RecipeListUpdateResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeList",
+		validation:"_ValidationResult"
+	},
+	RecipeListUpsertResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeList",
+		validation:"_ValidationResult"
+	},
+	RecipeListItemCreateResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeListItem",
+		validation:"_ValidationResult"
+	},
+	RecipeListItemDeleteResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeListItem"
+	},
+	RecipeListItemUpdateResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeListItem",
+		validation:"_ValidationResult"
+	},
+	RecipeListItemUpsertResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"RecipeListItem",
+		validation:"_ValidationResult"
+	},
 	MutationTransaction:{
 		ok:"Boolean",
 		errorMessage:"String",
@@ -5478,6 +5877,14 @@ export const ReturnTypes: Record<string,any> = {
 		deleteSeo:"SeoDeleteResult",
 		updateSeo:"SeoUpdateResult",
 		upsertSeo:"SeoUpsertResult",
+		createRecipeList:"RecipeListCreateResult",
+		deleteRecipeList:"RecipeListDeleteResult",
+		updateRecipeList:"RecipeListUpdateResult",
+		upsertRecipeList:"RecipeListUpsertResult",
+		createRecipeListItem:"RecipeListItemCreateResult",
+		deleteRecipeListItem:"RecipeListItemDeleteResult",
+		updateRecipeListItem:"RecipeListItemUpdateResult",
+		upsertRecipeListItem:"RecipeListItemUpsertResult",
 		query:"Query"
 	},
 	Json: `scalar.Json` as const,
@@ -6518,6 +6925,16 @@ listSeo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, 
 paginateSeo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["SeoOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["SeoConnection"]],
 validateCreateSeo?: [{	data: ValueTypes["SeoCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 validateUpdateSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	data: ValueTypes["SeoUpdateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+getRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeList"]],
+listRecipeList?: [{	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeList"]],
+paginateRecipeList?: [{	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListConnection"]],
+validateCreateRecipeList?: [{	data: ValueTypes["RecipeListCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+validateUpdateRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	data: ValueTypes["RecipeListUpdateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+getRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeListItem"]],
+listRecipeListItem?: [{	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListItemOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListItem"]],
+paginateRecipeListItem?: [{	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListItemOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListItemConnection"]],
+validateCreateRecipeListItem?: [{	data: ValueTypes["RecipeListItemCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+validateUpdateRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	data: ValueTypes["RecipeListItemUpdateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 	transaction?:ValueTypes["QueryTransaction"],
 	_info?:ValueTypes["Info"],
 	schema?:ValueTypes["_Schema"],
@@ -6731,7 +7148,6 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 };
 	["RecipeWhere"]: {
 	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
-	order?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["DateCondition"] | undefined | null | Variable<any, string>,
 	price?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
 	locales?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>,
@@ -7178,7 +7594,6 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	["Recipe"]: AliasType<{
 	_meta?:ValueTypes["RecipeMeta"],
 	id?:boolean | `@${string}`,
-	order?:boolean | `@${string}`,
 	publishDate?:boolean | `@${string}`,
 	price?:boolean | `@${string}`,
 locales?: [{	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
@@ -7198,7 +7613,6 @@ paginateStepsGroups?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | nul
 }>;
 	["RecipeMeta"]: AliasType<{
 	id?:ValueTypes["FieldMeta"],
-	order?:ValueTypes["FieldMeta"],
 	publishDate?:ValueTypes["FieldMeta"],
 	price?:ValueTypes["FieldMeta"],
 	locales?:ValueTypes["FieldMeta"],
@@ -7221,7 +7635,6 @@ paginateStepsGroups?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | nul
 	_random?: boolean | undefined | null | Variable<any, string>,
 	_randomSeeded?: number | undefined | null | Variable<any, string>,
 	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	order?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	price?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	mainImage?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>,
@@ -8054,7 +8467,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["RecipeWithoutLocalesCreateInput"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	mainImage?: ValueTypes["RecipeCreateMainImageEntityRelationInput"] | undefined | null | Variable<any, string>,
@@ -8118,7 +8530,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["RecipeWithoutCreatedByCreateInput"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -8203,7 +8614,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["RecipeWithoutPinnedRecipesCreateInput"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -8348,7 +8758,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["RecipeWithoutStepsGroupsCreateInput"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -8561,7 +8970,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	delete?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeWithoutLocalesUpdateInput"]: {
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	mainImage?: ValueTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined | null | Variable<any, string>,
@@ -8651,7 +9059,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	data?: ValueTypes["RecipeWithoutCreatedByUpdateInput"] | undefined | null | Variable<any, string>
 };
 	["RecipeWithoutCreatedByUpdateInput"]: {
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -8765,7 +9172,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	delete?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeWithoutPinnedRecipesUpdateInput"]: {
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -8978,7 +9384,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	delete?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeWithoutStepsGroupsUpdateInput"]: {
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -9332,7 +9737,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["RecipeCreateInput"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -9343,7 +9747,6 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeUpdateInput"]: {
-	order?: number | undefined | null | Variable<any, string>,
 	publishDate?: ValueTypes["Date"] | undefined | null | Variable<any, string>,
 	price?: string | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
@@ -9590,6 +9993,182 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	node?:ValueTypes["Seo"],
 		__typename?: boolean | `@${string}`
 }>;
+	["RecipeList"]: AliasType<{
+	_meta?:ValueTypes["RecipeListMeta"],
+	id?:boolean | `@${string}`,
+items?: [{	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListItemOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListItem"]],
+paginateItems?: [{	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListItemOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListItemConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	items?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItem"]: AliasType<{
+	_meta?:ValueTypes["RecipeListItemMeta"],
+	id?:boolean | `@${string}`,
+	order?:boolean | `@${string}`,
+list?: [{	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeList"]],
+recipe?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	order?:ValueTypes["FieldMeta"],
+	list?:ValueTypes["FieldMeta"],
+	recipe?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	items?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["RecipeListWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["RecipeListWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>
+};
+	["RecipeListItemWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	order?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
+	list?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,
+	recipe?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["RecipeListItemWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["RecipeListItemWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>
+};
+	["RecipeListItemOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	order?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	list?: ValueTypes["RecipeListOrderBy"] | undefined | null | Variable<any, string>,
+	recipe?: ValueTypes["RecipeOrderBy"] | undefined | null | Variable<any, string>
+};
+	["RecipeListOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+};
+	["RecipeListItemConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["RecipeListItemEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemEdge"]: AliasType<{
+	node?:ValueTypes["RecipeListItem"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	items?: ValueTypes["RecipeListItemUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["RecipeListItemUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>
+};
+	["RecipeListConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["RecipeListEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListEdge"]: AliasType<{
+	node?:ValueTypes["RecipeList"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListCreateInput"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	items?: Array<ValueTypes["RecipeListCreateItemsEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListCreateItemsEntityRelationInput"]: {
+	connect?: ValueTypes["RecipeListItemUniqueWhere"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["RecipeListItemWithoutListCreateInput"] | undefined | null | Variable<any, string>,
+	alias?: string | undefined | null | Variable<any, string>
+};
+	["RecipeListItemWithoutListCreateInput"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	order?: number | undefined | null | Variable<any, string>,
+	recipe?: ValueTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListItemCreateRecipeEntityRelationInput"]: {
+	connect?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["RecipeCreateInput"] | undefined | null | Variable<any, string>
+};
+	["RecipeListUpdateInput"]: {
+	items?: Array<ValueTypes["RecipeListUpdateItemsEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListUpdateItemsEntityRelationInput"]: {
+	create?: ValueTypes["RecipeListItemWithoutListCreateInput"] | undefined | null | Variable<any, string>,
+	update?: ValueTypes["RecipeListUpdateItemsRelationInput"] | undefined | null | Variable<any, string>,
+	upsert?: ValueTypes["RecipeListUpsertItemsRelationInput"] | undefined | null | Variable<any, string>,
+	connect?: ValueTypes["RecipeListItemUniqueWhere"] | undefined | null | Variable<any, string>,
+	disconnect?: ValueTypes["RecipeListItemUniqueWhere"] | undefined | null | Variable<any, string>,
+	delete?: ValueTypes["RecipeListItemUniqueWhere"] | undefined | null | Variable<any, string>,
+	alias?: string | undefined | null | Variable<any, string>
+};
+	["RecipeListUpdateItemsRelationInput"]: {
+	by?: ValueTypes["RecipeListItemUniqueWhere"] | undefined | null | Variable<any, string>,
+	data?: ValueTypes["RecipeListItemWithoutListUpdateInput"] | undefined | null | Variable<any, string>
+};
+	["RecipeListItemWithoutListUpdateInput"]: {
+	order?: number | undefined | null | Variable<any, string>,
+	recipe?: ValueTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListItemUpdateRecipeEntityRelationInput"]: {
+	create?: ValueTypes["RecipeCreateInput"] | undefined | null | Variable<any, string>,
+	update?: ValueTypes["RecipeUpdateInput"] | undefined | null | Variable<any, string>,
+	upsert?: ValueTypes["RecipeListItemUpsertRecipeRelationInput"] | undefined | null | Variable<any, string>,
+	connect?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>,
+	disconnect?: boolean | undefined | null | Variable<any, string>,
+	delete?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListItemUpsertRecipeRelationInput"]: {
+	update?: ValueTypes["RecipeUpdateInput"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["RecipeCreateInput"] | undefined | null | Variable<any, string>
+};
+	["RecipeListUpsertItemsRelationInput"]: {
+	by?: ValueTypes["RecipeListItemUniqueWhere"] | undefined | null | Variable<any, string>,
+	update?: ValueTypes["RecipeListItemWithoutListUpdateInput"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["RecipeListItemWithoutListCreateInput"] | undefined | null | Variable<any, string>
+};
+	["RecipeListItemCreateInput"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	order?: number | undefined | null | Variable<any, string>,
+	list?: ValueTypes["RecipeListItemCreateListEntityRelationInput"] | undefined | null | Variable<any, string>,
+	recipe?: ValueTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListItemCreateListEntityRelationInput"]: {
+	connect?: ValueTypes["RecipeListUniqueWhere"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["RecipeListWithoutItemsCreateInput"] | undefined | null | Variable<any, string>
+};
+	["RecipeListWithoutItemsCreateInput"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListItemUpdateInput"]: {
+	order?: number | undefined | null | Variable<any, string>,
+	list?: ValueTypes["RecipeListItemUpdateListEntityRelationInput"] | undefined | null | Variable<any, string>,
+	recipe?: ValueTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListItemUpdateListEntityRelationInput"]: {
+	create?: ValueTypes["RecipeListWithoutItemsCreateInput"] | undefined | null | Variable<any, string>,
+	update?: ValueTypes["RecipeListWithoutItemsUpdateInput"] | undefined | null | Variable<any, string>,
+	upsert?: ValueTypes["RecipeListItemUpsertListRelationInput"] | undefined | null | Variable<any, string>,
+	connect?: ValueTypes["RecipeListUniqueWhere"] | undefined | null | Variable<any, string>,
+	disconnect?: boolean | undefined | null | Variable<any, string>,
+	delete?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListWithoutItemsUpdateInput"]: {
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeListItemUpsertListRelationInput"]: {
+	update?: ValueTypes["RecipeListWithoutItemsUpdateInput"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["RecipeListWithoutItemsCreateInput"] | undefined | null | Variable<any, string>
+};
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ValueTypes["ContentUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>},ValueTypes["Content"]],
 listContent?: [{	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ContentOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Content"]],
@@ -9694,6 +10273,16 @@ listSeo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, 
 paginateSeo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["SeoOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["SeoConnection"]],
 validateCreateSeo?: [{	data: ValueTypes["SeoCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 validateUpdateSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	data: ValueTypes["SeoUpdateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+getRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeList"]],
+listRecipeList?: [{	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeList"]],
+paginateRecipeList?: [{	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListConnection"]],
+validateCreateRecipeList?: [{	data: ValueTypes["RecipeListCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+validateUpdateRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	data: ValueTypes["RecipeListUpdateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+getRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeListItem"]],
+listRecipeListItem?: [{	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListItemOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListItem"]],
+paginateRecipeListItem?: [{	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeListItemOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeListItemConnection"]],
+validateCreateRecipeListItem?: [{	data: ValueTypes["RecipeListItemCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
+validateUpdateRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	data: ValueTypes["RecipeListItemUpdateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -9781,6 +10370,14 @@ createSeo?: [{	data: ValueTypes["SeoCreateInput"] | Variable<any, string>},Value
 deleteSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>},ValueTypes["SeoDeleteResult"]],
 updateSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,	data: ValueTypes["SeoUpdateInput"] | Variable<any, string>},ValueTypes["SeoUpdateResult"]],
 upsertSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["SeoUpdateInput"] | Variable<any, string>,	create: ValueTypes["SeoCreateInput"] | Variable<any, string>},ValueTypes["SeoUpsertResult"]],
+createRecipeList?: [{	data: ValueTypes["RecipeListCreateInput"] | Variable<any, string>},ValueTypes["RecipeListCreateResult"]],
+deleteRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeListDeleteResult"]],
+updateRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	data: ValueTypes["RecipeListUpdateInput"] | Variable<any, string>},ValueTypes["RecipeListUpdateResult"]],
+upsertRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["RecipeListUpdateInput"] | Variable<any, string>,	create: ValueTypes["RecipeListCreateInput"] | Variable<any, string>},ValueTypes["RecipeListUpsertResult"]],
+createRecipeListItem?: [{	data: ValueTypes["RecipeListItemCreateInput"] | Variable<any, string>},ValueTypes["RecipeListItemCreateResult"]],
+deleteRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeListItemDeleteResult"]],
+updateRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	data: ValueTypes["RecipeListItemUpdateInput"] | Variable<any, string>},ValueTypes["RecipeListItemUpdateResult"]],
+upsertRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["RecipeListItemUpdateInput"] | Variable<any, string>,	create: ValueTypes["RecipeListItemCreateInput"] | Variable<any, string>},ValueTypes["RecipeListItemUpsertResult"]],
 transaction?: [{	options?: ValueTypes["MutationTransactionOptions"] | undefined | null | Variable<any, string>},ValueTypes["MutationTransaction"]],
 	query?:ValueTypes["Query"],
 generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
@@ -9879,6 +10476,14 @@ generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: num
 		['...on SeoDeleteResult']?: Omit<ValueTypes["SeoDeleteResult"],keyof ValueTypes["MutationResult"]>;
 		['...on SeoUpdateResult']?: Omit<ValueTypes["SeoUpdateResult"],keyof ValueTypes["MutationResult"]>;
 		['...on SeoUpsertResult']?: Omit<ValueTypes["SeoUpsertResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListCreateResult']?: Omit<ValueTypes["RecipeListCreateResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListDeleteResult']?: Omit<ValueTypes["RecipeListDeleteResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListUpdateResult']?: Omit<ValueTypes["RecipeListUpdateResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListUpsertResult']?: Omit<ValueTypes["RecipeListUpsertResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListItemCreateResult']?: Omit<ValueTypes["RecipeListItemCreateResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListItemDeleteResult']?: Omit<ValueTypes["RecipeListItemDeleteResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListItemUpdateResult']?: Omit<ValueTypes["RecipeListItemUpdateResult"],keyof ValueTypes["MutationResult"]>;
+		['...on RecipeListItemUpsertResult']?: Omit<ValueTypes["RecipeListItemUpsertResult"],keyof ValueTypes["MutationResult"]>;
 		__typename?: boolean | `@${string}`
 }>;
 	["_MutationError"]: AliasType<{
@@ -10501,6 +11106,68 @@ generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: num
 	validation?:ValueTypes["_ValidationResult"],
 		__typename?: boolean | `@${string}`
 }>;
+	["RecipeListCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeList"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeList"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListUpdateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeList"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListUpsertResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeList"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeListItem"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeListItem"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemUpdateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeListItem"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemUpsertResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["RecipeListItem"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
 	["MutationTransaction"]: AliasType<{
 	ok?:boolean | `@${string}`,
 	errorMessage?:boolean | `@${string}`,
@@ -10586,6 +11253,14 @@ createSeo?: [{	data: ValueTypes["SeoCreateInput"] | Variable<any, string>},Value
 deleteSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>},ValueTypes["SeoDeleteResult"]],
 updateSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,	data: ValueTypes["SeoUpdateInput"] | Variable<any, string>},ValueTypes["SeoUpdateResult"]],
 upsertSeo?: [{	by: ValueTypes["SeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["SeoUpdateInput"] | Variable<any, string>,	create: ValueTypes["SeoCreateInput"] | Variable<any, string>},ValueTypes["SeoUpsertResult"]],
+createRecipeList?: [{	data: ValueTypes["RecipeListCreateInput"] | Variable<any, string>},ValueTypes["RecipeListCreateResult"]],
+deleteRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeListDeleteResult"]],
+updateRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	data: ValueTypes["RecipeListUpdateInput"] | Variable<any, string>},ValueTypes["RecipeListUpdateResult"]],
+upsertRecipeList?: [{	by: ValueTypes["RecipeListUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["RecipeListUpdateInput"] | Variable<any, string>,	create: ValueTypes["RecipeListCreateInput"] | Variable<any, string>},ValueTypes["RecipeListUpsertResult"]],
+createRecipeListItem?: [{	data: ValueTypes["RecipeListItemCreateInput"] | Variable<any, string>},ValueTypes["RecipeListItemCreateResult"]],
+deleteRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeListItemDeleteResult"]],
+updateRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	data: ValueTypes["RecipeListItemUpdateInput"] | Variable<any, string>},ValueTypes["RecipeListItemUpdateResult"]],
+upsertRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["RecipeListItemUpdateInput"] | Variable<any, string>,	create: ValueTypes["RecipeListItemCreateInput"] | Variable<any, string>},ValueTypes["RecipeListItemUpsertResult"]],
 	query?:ValueTypes["Query"],
 		__typename?: boolean | `@${string}`
 }>;
@@ -10821,6 +11496,16 @@ listSeo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	orderBy
 paginateSeo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["SeoOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["SeoConnection"]],
 validateCreateSeo?: [{	data: ResolverInputTypes["SeoCreateInput"]},ResolverInputTypes["_ValidationResult"]],
 validateUpdateSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	data: ResolverInputTypes["SeoUpdateInput"]},ResolverInputTypes["_ValidationResult"]],
+getRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null},ResolverInputTypes["RecipeList"]],
+listRecipeList?: [{	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["RecipeList"]],
+paginateRecipeList?: [{	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RecipeListConnection"]],
+validateCreateRecipeList?: [{	data: ResolverInputTypes["RecipeListCreateInput"]},ResolverInputTypes["_ValidationResult"]],
+validateUpdateRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	data: ResolverInputTypes["RecipeListUpdateInput"]},ResolverInputTypes["_ValidationResult"]],
+getRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null},ResolverInputTypes["RecipeListItem"]],
+listRecipeListItem?: [{	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListItemOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["RecipeListItem"]],
+paginateRecipeListItem?: [{	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListItemOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RecipeListItemConnection"]],
+validateCreateRecipeListItem?: [{	data: ResolverInputTypes["RecipeListItemCreateInput"]},ResolverInputTypes["_ValidationResult"]],
+validateUpdateRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	data: ResolverInputTypes["RecipeListItemUpdateInput"]},ResolverInputTypes["_ValidationResult"]],
 	transaction?:ResolverInputTypes["QueryTransaction"],
 	_info?:ResolverInputTypes["Info"],
 	schema?:ResolverInputTypes["_Schema"],
@@ -11034,7 +11719,6 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 };
 	["RecipeWhere"]: {
 	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
-	order?: ResolverInputTypes["IntCondition"] | undefined | null,
 	publishDate?: ResolverInputTypes["DateCondition"] | undefined | null,
 	price?: ResolverInputTypes["StringCondition"] | undefined | null,
 	locales?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null,
@@ -11481,7 +12165,6 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	["Recipe"]: AliasType<{
 	_meta?:ResolverInputTypes["RecipeMeta"],
 	id?:boolean | `@${string}`,
-	order?:boolean | `@${string}`,
 	publishDate?:boolean | `@${string}`,
 	price?:boolean | `@${string}`,
 locales?: [{	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["RecipeLocale"]],
@@ -11501,7 +12184,6 @@ paginateStepsGroups?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefin
 }>;
 	["RecipeMeta"]: AliasType<{
 	id?:ResolverInputTypes["FieldMeta"],
-	order?:ResolverInputTypes["FieldMeta"],
 	publishDate?:ResolverInputTypes["FieldMeta"],
 	price?:ResolverInputTypes["FieldMeta"],
 	locales?:ResolverInputTypes["FieldMeta"],
@@ -11524,7 +12206,6 @@ paginateStepsGroups?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefin
 	_random?: boolean | undefined | null,
 	_randomSeeded?: number | undefined | null,
 	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	order?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	publishDate?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	price?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	mainImage?: ResolverInputTypes["ImageOrderBy"] | undefined | null,
@@ -12358,7 +13039,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["RecipeWithoutLocalesCreateInput"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	mainImage?: ResolverInputTypes["RecipeCreateMainImageEntityRelationInput"] | undefined | null,
@@ -12422,7 +13102,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["RecipeWithoutCreatedByCreateInput"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null,
@@ -12507,7 +13186,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["RecipeWithoutPinnedRecipesCreateInput"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null,
@@ -12652,7 +13330,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["RecipeWithoutStepsGroupsCreateInput"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null,
@@ -12865,7 +13542,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	delete?: boolean | undefined | null
 };
 	["RecipeWithoutLocalesUpdateInput"]: {
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	mainImage?: ResolverInputTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined | null,
@@ -12955,7 +13631,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	data?: ResolverInputTypes["RecipeWithoutCreatedByUpdateInput"] | undefined | null
 };
 	["RecipeWithoutCreatedByUpdateInput"]: {
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null,
@@ -13069,7 +13744,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	delete?: boolean | undefined | null
 };
 	["RecipeWithoutPinnedRecipesUpdateInput"]: {
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null,
@@ -13282,7 +13956,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	delete?: boolean | undefined | null
 };
 	["RecipeWithoutStepsGroupsUpdateInput"]: {
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null,
@@ -13636,7 +14309,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["RecipeCreateInput"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined | null,
@@ -13647,7 +14319,6 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeUpdateInput"]: {
-	order?: number | undefined | null,
 	publishDate?: ResolverInputTypes["Date"] | undefined | null,
 	price?: string | undefined | null,
 	locales?: Array<ResolverInputTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined | null,
@@ -13894,6 +14565,182 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	node?:ResolverInputTypes["Seo"],
 		__typename?: boolean | `@${string}`
 }>;
+	["RecipeList"]: AliasType<{
+	_meta?:ResolverInputTypes["RecipeListMeta"],
+	id?:boolean | `@${string}`,
+items?: [{	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListItemOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["RecipeListItem"]],
+paginateItems?: [{	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListItemOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RecipeListItemConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	items?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItem"]: AliasType<{
+	_meta?:ResolverInputTypes["RecipeListItemMeta"],
+	id?:boolean | `@${string}`,
+	order?:boolean | `@${string}`,
+list?: [{	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null},ResolverInputTypes["RecipeList"]],
+recipe?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},ResolverInputTypes["Recipe"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	order?:ResolverInputTypes["FieldMeta"],
+	list?:ResolverInputTypes["FieldMeta"],
+	recipe?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	items?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,
+	and?: Array<ResolverInputTypes["RecipeListWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["RecipeListWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["RecipeListWhere"] | undefined | null
+};
+	["RecipeListItemWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	order?: ResolverInputTypes["IntCondition"] | undefined | null,
+	list?: ResolverInputTypes["RecipeListWhere"] | undefined | null,
+	recipe?: ResolverInputTypes["RecipeWhere"] | undefined | null,
+	and?: Array<ResolverInputTypes["RecipeListItemWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["RecipeListItemWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null
+};
+	["RecipeListItemOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	order?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	list?: ResolverInputTypes["RecipeListOrderBy"] | undefined | null,
+	recipe?: ResolverInputTypes["RecipeOrderBy"] | undefined | null
+};
+	["RecipeListOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null
+};
+	["RecipeListItemConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["RecipeListItemEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemEdge"]: AliasType<{
+	node?:ResolverInputTypes["RecipeListItem"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	items?: ResolverInputTypes["RecipeListItemUniqueWhere"] | undefined | null
+};
+	["RecipeListItemUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null
+};
+	["RecipeListConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["RecipeListEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListEdge"]: AliasType<{
+	node?:ResolverInputTypes["RecipeList"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListCreateInput"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	items?: Array<ResolverInputTypes["RecipeListCreateItemsEntityRelationInput"]> | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListCreateItemsEntityRelationInput"]: {
+	connect?: ResolverInputTypes["RecipeListItemUniqueWhere"] | undefined | null,
+	create?: ResolverInputTypes["RecipeListItemWithoutListCreateInput"] | undefined | null,
+	alias?: string | undefined | null
+};
+	["RecipeListItemWithoutListCreateInput"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	order?: number | undefined | null,
+	recipe?: ResolverInputTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListItemCreateRecipeEntityRelationInput"]: {
+	connect?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null,
+	create?: ResolverInputTypes["RecipeCreateInput"] | undefined | null
+};
+	["RecipeListUpdateInput"]: {
+	items?: Array<ResolverInputTypes["RecipeListUpdateItemsEntityRelationInput"]> | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListUpdateItemsEntityRelationInput"]: {
+	create?: ResolverInputTypes["RecipeListItemWithoutListCreateInput"] | undefined | null,
+	update?: ResolverInputTypes["RecipeListUpdateItemsRelationInput"] | undefined | null,
+	upsert?: ResolverInputTypes["RecipeListUpsertItemsRelationInput"] | undefined | null,
+	connect?: ResolverInputTypes["RecipeListItemUniqueWhere"] | undefined | null,
+	disconnect?: ResolverInputTypes["RecipeListItemUniqueWhere"] | undefined | null,
+	delete?: ResolverInputTypes["RecipeListItemUniqueWhere"] | undefined | null,
+	alias?: string | undefined | null
+};
+	["RecipeListUpdateItemsRelationInput"]: {
+	by?: ResolverInputTypes["RecipeListItemUniqueWhere"] | undefined | null,
+	data?: ResolverInputTypes["RecipeListItemWithoutListUpdateInput"] | undefined | null
+};
+	["RecipeListItemWithoutListUpdateInput"]: {
+	order?: number | undefined | null,
+	recipe?: ResolverInputTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListItemUpdateRecipeEntityRelationInput"]: {
+	create?: ResolverInputTypes["RecipeCreateInput"] | undefined | null,
+	update?: ResolverInputTypes["RecipeUpdateInput"] | undefined | null,
+	upsert?: ResolverInputTypes["RecipeListItemUpsertRecipeRelationInput"] | undefined | null,
+	connect?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null,
+	disconnect?: boolean | undefined | null,
+	delete?: boolean | undefined | null
+};
+	["RecipeListItemUpsertRecipeRelationInput"]: {
+	update?: ResolverInputTypes["RecipeUpdateInput"] | undefined | null,
+	create?: ResolverInputTypes["RecipeCreateInput"] | undefined | null
+};
+	["RecipeListUpsertItemsRelationInput"]: {
+	by?: ResolverInputTypes["RecipeListItemUniqueWhere"] | undefined | null,
+	update?: ResolverInputTypes["RecipeListItemWithoutListUpdateInput"] | undefined | null,
+	create?: ResolverInputTypes["RecipeListItemWithoutListCreateInput"] | undefined | null
+};
+	["RecipeListItemCreateInput"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	order?: number | undefined | null,
+	list?: ResolverInputTypes["RecipeListItemCreateListEntityRelationInput"] | undefined | null,
+	recipe?: ResolverInputTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListItemCreateListEntityRelationInput"]: {
+	connect?: ResolverInputTypes["RecipeListUniqueWhere"] | undefined | null,
+	create?: ResolverInputTypes["RecipeListWithoutItemsCreateInput"] | undefined | null
+};
+	["RecipeListWithoutItemsCreateInput"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListItemUpdateInput"]: {
+	order?: number | undefined | null,
+	list?: ResolverInputTypes["RecipeListItemUpdateListEntityRelationInput"] | undefined | null,
+	recipe?: ResolverInputTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListItemUpdateListEntityRelationInput"]: {
+	create?: ResolverInputTypes["RecipeListWithoutItemsCreateInput"] | undefined | null,
+	update?: ResolverInputTypes["RecipeListWithoutItemsUpdateInput"] | undefined | null,
+	upsert?: ResolverInputTypes["RecipeListItemUpsertListRelationInput"] | undefined | null,
+	connect?: ResolverInputTypes["RecipeListUniqueWhere"] | undefined | null,
+	disconnect?: boolean | undefined | null,
+	delete?: boolean | undefined | null
+};
+	["RecipeListWithoutItemsUpdateInput"]: {
+	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeListItemUpsertListRelationInput"]: {
+	update?: ResolverInputTypes["RecipeListWithoutItemsUpdateInput"] | undefined | null,
+	create?: ResolverInputTypes["RecipeListWithoutItemsCreateInput"] | undefined | null
+};
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ResolverInputTypes["ContentUniqueWhere"],	filter?: ResolverInputTypes["ContentWhere"] | undefined | null},ResolverInputTypes["Content"]],
 listContent?: [{	filter?: ResolverInputTypes["ContentWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ContentOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Content"]],
@@ -13998,6 +14845,16 @@ listSeo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	orderBy
 paginateSeo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["SeoOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["SeoConnection"]],
 validateCreateSeo?: [{	data: ResolverInputTypes["SeoCreateInput"]},ResolverInputTypes["_ValidationResult"]],
 validateUpdateSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	data: ResolverInputTypes["SeoUpdateInput"]},ResolverInputTypes["_ValidationResult"]],
+getRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null},ResolverInputTypes["RecipeList"]],
+listRecipeList?: [{	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["RecipeList"]],
+paginateRecipeList?: [{	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RecipeListConnection"]],
+validateCreateRecipeList?: [{	data: ResolverInputTypes["RecipeListCreateInput"]},ResolverInputTypes["_ValidationResult"]],
+validateUpdateRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	data: ResolverInputTypes["RecipeListUpdateInput"]},ResolverInputTypes["_ValidationResult"]],
+getRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null},ResolverInputTypes["RecipeListItem"]],
+listRecipeListItem?: [{	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListItemOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["RecipeListItem"]],
+paginateRecipeListItem?: [{	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeListItemOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RecipeListItemConnection"]],
+validateCreateRecipeListItem?: [{	data: ResolverInputTypes["RecipeListItemCreateInput"]},ResolverInputTypes["_ValidationResult"]],
+validateUpdateRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	data: ResolverInputTypes["RecipeListItemUpdateInput"]},ResolverInputTypes["_ValidationResult"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -14085,6 +14942,14 @@ createSeo?: [{	data: ResolverInputTypes["SeoCreateInput"]},ResolverInputTypes["S
 deleteSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	filter?: ResolverInputTypes["SeoWhere"] | undefined | null},ResolverInputTypes["SeoDeleteResult"]],
 updateSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	data: ResolverInputTypes["SeoUpdateInput"]},ResolverInputTypes["SeoUpdateResult"]],
 upsertSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	update: ResolverInputTypes["SeoUpdateInput"],	create: ResolverInputTypes["SeoCreateInput"]},ResolverInputTypes["SeoUpsertResult"]],
+createRecipeList?: [{	data: ResolverInputTypes["RecipeListCreateInput"]},ResolverInputTypes["RecipeListCreateResult"]],
+deleteRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null},ResolverInputTypes["RecipeListDeleteResult"]],
+updateRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	data: ResolverInputTypes["RecipeListUpdateInput"]},ResolverInputTypes["RecipeListUpdateResult"]],
+upsertRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	update: ResolverInputTypes["RecipeListUpdateInput"],	create: ResolverInputTypes["RecipeListCreateInput"]},ResolverInputTypes["RecipeListUpsertResult"]],
+createRecipeListItem?: [{	data: ResolverInputTypes["RecipeListItemCreateInput"]},ResolverInputTypes["RecipeListItemCreateResult"]],
+deleteRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null},ResolverInputTypes["RecipeListItemDeleteResult"]],
+updateRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	data: ResolverInputTypes["RecipeListItemUpdateInput"]},ResolverInputTypes["RecipeListItemUpdateResult"]],
+upsertRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	update: ResolverInputTypes["RecipeListItemUpdateInput"],	create: ResolverInputTypes["RecipeListItemCreateInput"]},ResolverInputTypes["RecipeListItemUpsertResult"]],
 transaction?: [{	options?: ResolverInputTypes["MutationTransactionOptions"] | undefined | null},ResolverInputTypes["MutationTransaction"]],
 	query?:ResolverInputTypes["Query"],
 generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null},ResolverInputTypes["S3SignedUpload"]],
@@ -14183,6 +15048,14 @@ generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},
 		['...on SeoDeleteResult']?: Omit<ResolverInputTypes["SeoDeleteResult"],keyof ResolverInputTypes["MutationResult"]>;
 		['...on SeoUpdateResult']?: Omit<ResolverInputTypes["SeoUpdateResult"],keyof ResolverInputTypes["MutationResult"]>;
 		['...on SeoUpsertResult']?: Omit<ResolverInputTypes["SeoUpsertResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListCreateResult']?: Omit<ResolverInputTypes["RecipeListCreateResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListDeleteResult']?: Omit<ResolverInputTypes["RecipeListDeleteResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListUpdateResult']?: Omit<ResolverInputTypes["RecipeListUpdateResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListUpsertResult']?: Omit<ResolverInputTypes["RecipeListUpsertResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListItemCreateResult']?: Omit<ResolverInputTypes["RecipeListItemCreateResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListItemDeleteResult']?: Omit<ResolverInputTypes["RecipeListItemDeleteResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListItemUpdateResult']?: Omit<ResolverInputTypes["RecipeListItemUpdateResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on RecipeListItemUpsertResult']?: Omit<ResolverInputTypes["RecipeListItemUpsertResult"],keyof ResolverInputTypes["MutationResult"]>;
 		__typename?: boolean | `@${string}`
 }>;
 	["_MutationError"]: AliasType<{
@@ -14805,6 +15678,68 @@ generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},
 	validation?:ResolverInputTypes["_ValidationResult"],
 		__typename?: boolean | `@${string}`
 }>;
+	["RecipeListCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeList"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeList"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListUpdateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeList"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListUpsertResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeList"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeListItem"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeListItem"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemUpdateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeListItem"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RecipeListItemUpsertResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["RecipeListItem"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
 	["MutationTransaction"]: AliasType<{
 	ok?:boolean | `@${string}`,
 	errorMessage?:boolean | `@${string}`,
@@ -14890,6 +15825,14 @@ createSeo?: [{	data: ResolverInputTypes["SeoCreateInput"]},ResolverInputTypes["S
 deleteSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	filter?: ResolverInputTypes["SeoWhere"] | undefined | null},ResolverInputTypes["SeoDeleteResult"]],
 updateSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	data: ResolverInputTypes["SeoUpdateInput"]},ResolverInputTypes["SeoUpdateResult"]],
 upsertSeo?: [{	by: ResolverInputTypes["SeoUniqueWhere"],	filter?: ResolverInputTypes["SeoWhere"] | undefined | null,	update: ResolverInputTypes["SeoUpdateInput"],	create: ResolverInputTypes["SeoCreateInput"]},ResolverInputTypes["SeoUpsertResult"]],
+createRecipeList?: [{	data: ResolverInputTypes["RecipeListCreateInput"]},ResolverInputTypes["RecipeListCreateResult"]],
+deleteRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null},ResolverInputTypes["RecipeListDeleteResult"]],
+updateRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	data: ResolverInputTypes["RecipeListUpdateInput"]},ResolverInputTypes["RecipeListUpdateResult"]],
+upsertRecipeList?: [{	by: ResolverInputTypes["RecipeListUniqueWhere"],	filter?: ResolverInputTypes["RecipeListWhere"] | undefined | null,	update: ResolverInputTypes["RecipeListUpdateInput"],	create: ResolverInputTypes["RecipeListCreateInput"]},ResolverInputTypes["RecipeListUpsertResult"]],
+createRecipeListItem?: [{	data: ResolverInputTypes["RecipeListItemCreateInput"]},ResolverInputTypes["RecipeListItemCreateResult"]],
+deleteRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null},ResolverInputTypes["RecipeListItemDeleteResult"]],
+updateRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	data: ResolverInputTypes["RecipeListItemUpdateInput"]},ResolverInputTypes["RecipeListItemUpdateResult"]],
+upsertRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	update: ResolverInputTypes["RecipeListItemUpdateInput"],	create: ResolverInputTypes["RecipeListItemCreateInput"]},ResolverInputTypes["RecipeListItemUpsertResult"]],
 	query?:ResolverInputTypes["Query"],
 		__typename?: boolean | `@${string}`
 }>;
@@ -15126,6 +16069,16 @@ export type ModelTypes = {
 	paginateSeo: ModelTypes["SeoConnection"],
 	validateCreateSeo: ModelTypes["_ValidationResult"],
 	validateUpdateSeo: ModelTypes["_ValidationResult"],
+	getRecipeList?: ModelTypes["RecipeList"] | undefined,
+	listRecipeList: Array<ModelTypes["RecipeList"]>,
+	paginateRecipeList: ModelTypes["RecipeListConnection"],
+	validateCreateRecipeList: ModelTypes["_ValidationResult"],
+	validateUpdateRecipeList: ModelTypes["_ValidationResult"],
+	getRecipeListItem?: ModelTypes["RecipeListItem"] | undefined,
+	listRecipeListItem: Array<ModelTypes["RecipeListItem"]>,
+	paginateRecipeListItem: ModelTypes["RecipeListItemConnection"],
+	validateCreateRecipeListItem: ModelTypes["_ValidationResult"],
+	validateUpdateRecipeListItem: ModelTypes["_ValidationResult"],
 	transaction?: ModelTypes["QueryTransaction"] | undefined,
 	_info?: ModelTypes["Info"] | undefined,
 	schema?: ModelTypes["_Schema"] | undefined,
@@ -15333,7 +16286,6 @@ export type ModelTypes = {
 };
 	["RecipeWhere"]: {
 	id?: ModelTypes["UUIDCondition"] | undefined,
-	order?: ModelTypes["IntCondition"] | undefined,
 	publishDate?: ModelTypes["DateCondition"] | undefined,
 	price?: ModelTypes["StringCondition"] | undefined,
 	locales?: ModelTypes["RecipeLocaleWhere"] | undefined,
@@ -15763,7 +16715,6 @@ export type ModelTypes = {
 	["Recipe"]: {
 		_meta?: ModelTypes["RecipeMeta"] | undefined,
 	id: ModelTypes["UUID"],
-	order: number,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales: Array<ModelTypes["RecipeLocale"]>,
@@ -15782,7 +16733,6 @@ export type ModelTypes = {
 };
 	["RecipeMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
-	order?: ModelTypes["FieldMeta"] | undefined,
 	publishDate?: ModelTypes["FieldMeta"] | undefined,
 	price?: ModelTypes["FieldMeta"] | undefined,
 	locales?: ModelTypes["FieldMeta"] | undefined,
@@ -15804,7 +16754,6 @@ export type ModelTypes = {
 	_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
 	id?: ModelTypes["OrderDirection"] | undefined,
-	order?: ModelTypes["OrderDirection"] | undefined,
 	publishDate?: ModelTypes["OrderDirection"] | undefined,
 	price?: ModelTypes["OrderDirection"] | undefined,
 	mainImage?: ModelTypes["ImageOrderBy"] | undefined,
@@ -16579,7 +17528,6 @@ export type ModelTypes = {
 };
 	["RecipeWithoutLocalesCreateInput"]: {
 	id?: ModelTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	mainImage?: ModelTypes["RecipeCreateMainImageEntityRelationInput"] | undefined,
@@ -16643,7 +17591,6 @@ export type ModelTypes = {
 };
 	["RecipeWithoutCreatedByCreateInput"]: {
 	id?: ModelTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -16728,7 +17675,6 @@ export type ModelTypes = {
 };
 	["RecipeWithoutPinnedRecipesCreateInput"]: {
 	id?: ModelTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -16873,7 +17819,6 @@ export type ModelTypes = {
 };
 	["RecipeWithoutStepsGroupsCreateInput"]: {
 	id?: ModelTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -17086,7 +18031,6 @@ export type ModelTypes = {
 	delete?: boolean | undefined
 };
 	["RecipeWithoutLocalesUpdateInput"]: {
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	mainImage?: ModelTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined,
@@ -17176,7 +18120,6 @@ export type ModelTypes = {
 	data?: ModelTypes["RecipeWithoutCreatedByUpdateInput"] | undefined
 };
 	["RecipeWithoutCreatedByUpdateInput"]: {
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
@@ -17290,7 +18233,6 @@ export type ModelTypes = {
 	delete?: boolean | undefined
 };
 	["RecipeWithoutPinnedRecipesUpdateInput"]: {
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
@@ -17503,7 +18445,6 @@ export type ModelTypes = {
 	delete?: boolean | undefined
 };
 	["RecipeWithoutStepsGroupsUpdateInput"]: {
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
@@ -17853,7 +18794,6 @@ export type ModelTypes = {
 };
 	["RecipeCreateInput"]: {
 	id?: ModelTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -17864,7 +18804,6 @@ export type ModelTypes = {
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateInput"]: {
-	order?: number | undefined,
 	publishDate?: ModelTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<ModelTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
@@ -18103,6 +19042,174 @@ export type ModelTypes = {
 	["SeoEdge"]: {
 		node: ModelTypes["Seo"]
 };
+	["RecipeList"]: {
+		_meta?: ModelTypes["RecipeListMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	items: Array<ModelTypes["RecipeListItem"]>,
+	paginateItems: ModelTypes["RecipeListItemConnection"]
+};
+	["RecipeListMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	items?: ModelTypes["FieldMeta"] | undefined
+};
+	["RecipeListItem"]: {
+		_meta?: ModelTypes["RecipeListItemMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	order: number,
+	list?: ModelTypes["RecipeList"] | undefined,
+	recipe?: ModelTypes["Recipe"] | undefined
+};
+	["RecipeListItemMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	order?: ModelTypes["FieldMeta"] | undefined,
+	list?: ModelTypes["FieldMeta"] | undefined,
+	recipe?: ModelTypes["FieldMeta"] | undefined
+};
+	["RecipeListWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	items?: ModelTypes["RecipeListItemWhere"] | undefined,
+	and?: Array<ModelTypes["RecipeListWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["RecipeListWhere"] | undefined> | undefined,
+	not?: ModelTypes["RecipeListWhere"] | undefined
+};
+	["RecipeListItemWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	order?: ModelTypes["IntCondition"] | undefined,
+	list?: ModelTypes["RecipeListWhere"] | undefined,
+	recipe?: ModelTypes["RecipeWhere"] | undefined,
+	and?: Array<ModelTypes["RecipeListItemWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["RecipeListItemWhere"] | undefined> | undefined,
+	not?: ModelTypes["RecipeListItemWhere"] | undefined
+};
+	["RecipeListItemOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	order?: ModelTypes["OrderDirection"] | undefined,
+	list?: ModelTypes["RecipeListOrderBy"] | undefined,
+	recipe?: ModelTypes["RecipeOrderBy"] | undefined
+};
+	["RecipeListOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined
+};
+	["RecipeListItemConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["RecipeListItemEdge"]>
+};
+	["RecipeListItemEdge"]: {
+		node: ModelTypes["RecipeListItem"]
+};
+	["RecipeListUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	items?: ModelTypes["RecipeListItemUniqueWhere"] | undefined
+};
+	["RecipeListItemUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined
+};
+	["RecipeListConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["RecipeListEdge"]>
+};
+	["RecipeListEdge"]: {
+		node: ModelTypes["RecipeList"]
+};
+	["RecipeListCreateInput"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	items?: Array<ModelTypes["RecipeListCreateItemsEntityRelationInput"]> | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListCreateItemsEntityRelationInput"]: {
+	connect?: ModelTypes["RecipeListItemUniqueWhere"] | undefined,
+	create?: ModelTypes["RecipeListItemWithoutListCreateInput"] | undefined,
+	alias?: string | undefined
+};
+	["RecipeListItemWithoutListCreateInput"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	order?: number | undefined,
+	recipe?: ModelTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemCreateRecipeEntityRelationInput"]: {
+	connect?: ModelTypes["RecipeUniqueWhere"] | undefined,
+	create?: ModelTypes["RecipeCreateInput"] | undefined
+};
+	["RecipeListUpdateInput"]: {
+	items?: Array<ModelTypes["RecipeListUpdateItemsEntityRelationInput"]> | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListUpdateItemsEntityRelationInput"]: {
+	create?: ModelTypes["RecipeListItemWithoutListCreateInput"] | undefined,
+	update?: ModelTypes["RecipeListUpdateItemsRelationInput"] | undefined,
+	upsert?: ModelTypes["RecipeListUpsertItemsRelationInput"] | undefined,
+	connect?: ModelTypes["RecipeListItemUniqueWhere"] | undefined,
+	disconnect?: ModelTypes["RecipeListItemUniqueWhere"] | undefined,
+	delete?: ModelTypes["RecipeListItemUniqueWhere"] | undefined,
+	alias?: string | undefined
+};
+	["RecipeListUpdateItemsRelationInput"]: {
+	by?: ModelTypes["RecipeListItemUniqueWhere"] | undefined,
+	data?: ModelTypes["RecipeListItemWithoutListUpdateInput"] | undefined
+};
+	["RecipeListItemWithoutListUpdateInput"]: {
+	order?: number | undefined,
+	recipe?: ModelTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpdateRecipeEntityRelationInput"]: {
+	create?: ModelTypes["RecipeCreateInput"] | undefined,
+	update?: ModelTypes["RecipeUpdateInput"] | undefined,
+	upsert?: ModelTypes["RecipeListItemUpsertRecipeRelationInput"] | undefined,
+	connect?: ModelTypes["RecipeUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["RecipeListItemUpsertRecipeRelationInput"]: {
+	update?: ModelTypes["RecipeUpdateInput"] | undefined,
+	create?: ModelTypes["RecipeCreateInput"] | undefined
+};
+	["RecipeListUpsertItemsRelationInput"]: {
+	by?: ModelTypes["RecipeListItemUniqueWhere"] | undefined,
+	update?: ModelTypes["RecipeListItemWithoutListUpdateInput"] | undefined,
+	create?: ModelTypes["RecipeListItemWithoutListCreateInput"] | undefined
+};
+	["RecipeListItemCreateInput"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	order?: number | undefined,
+	list?: ModelTypes["RecipeListItemCreateListEntityRelationInput"] | undefined,
+	recipe?: ModelTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemCreateListEntityRelationInput"]: {
+	connect?: ModelTypes["RecipeListUniqueWhere"] | undefined,
+	create?: ModelTypes["RecipeListWithoutItemsCreateInput"] | undefined
+};
+	["RecipeListWithoutItemsCreateInput"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpdateInput"]: {
+	order?: number | undefined,
+	list?: ModelTypes["RecipeListItemUpdateListEntityRelationInput"] | undefined,
+	recipe?: ModelTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpdateListEntityRelationInput"]: {
+	create?: ModelTypes["RecipeListWithoutItemsCreateInput"] | undefined,
+	update?: ModelTypes["RecipeListWithoutItemsUpdateInput"] | undefined,
+	upsert?: ModelTypes["RecipeListItemUpsertListRelationInput"] | undefined,
+	connect?: ModelTypes["RecipeListUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["RecipeListWithoutItemsUpdateInput"]: {
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpsertListRelationInput"]: {
+	update?: ModelTypes["RecipeListWithoutItemsUpdateInput"] | undefined,
+	create?: ModelTypes["RecipeListWithoutItemsCreateInput"] | undefined
+};
 	["QueryTransaction"]: {
 		getContent?: ModelTypes["Content"] | undefined,
 	listContent: Array<ModelTypes["Content"]>,
@@ -18206,7 +19313,17 @@ export type ModelTypes = {
 	listSeo: Array<ModelTypes["Seo"]>,
 	paginateSeo: ModelTypes["SeoConnection"],
 	validateCreateSeo: ModelTypes["_ValidationResult"],
-	validateUpdateSeo: ModelTypes["_ValidationResult"]
+	validateUpdateSeo: ModelTypes["_ValidationResult"],
+	getRecipeList?: ModelTypes["RecipeList"] | undefined,
+	listRecipeList: Array<ModelTypes["RecipeList"]>,
+	paginateRecipeList: ModelTypes["RecipeListConnection"],
+	validateCreateRecipeList: ModelTypes["_ValidationResult"],
+	validateUpdateRecipeList: ModelTypes["_ValidationResult"],
+	getRecipeListItem?: ModelTypes["RecipeListItem"] | undefined,
+	listRecipeListItem: Array<ModelTypes["RecipeListItem"]>,
+	paginateRecipeListItem: ModelTypes["RecipeListItemConnection"],
+	validateCreateRecipeListItem: ModelTypes["_ValidationResult"],
+	validateUpdateRecipeListItem: ModelTypes["_ValidationResult"]
 };
 	["Info"]: {
 		description?: string | undefined
@@ -18292,6 +19409,14 @@ export type ModelTypes = {
 	deleteSeo: ModelTypes["SeoDeleteResult"],
 	updateSeo: ModelTypes["SeoUpdateResult"],
 	upsertSeo: ModelTypes["SeoUpsertResult"],
+	createRecipeList: ModelTypes["RecipeListCreateResult"],
+	deleteRecipeList: ModelTypes["RecipeListDeleteResult"],
+	updateRecipeList: ModelTypes["RecipeListUpdateResult"],
+	upsertRecipeList: ModelTypes["RecipeListUpsertResult"],
+	createRecipeListItem: ModelTypes["RecipeListItemCreateResult"],
+	deleteRecipeListItem: ModelTypes["RecipeListItemDeleteResult"],
+	updateRecipeListItem: ModelTypes["RecipeListItemUpdateResult"],
+	upsertRecipeListItem: ModelTypes["RecipeListItemUpsertResult"],
 	transaction: ModelTypes["MutationTransaction"],
 	query: ModelTypes["Query"],
 	generateUploadUrl: ModelTypes["S3SignedUpload"],
@@ -18304,7 +19429,7 @@ export type ModelTypes = {
 	node?: ModelTypes["Content"] | undefined,
 	validation: ModelTypes["_ValidationResult"]
 };
-	["MutationResult"]: ModelTypes["ContentCreateResult"] | ModelTypes["ContentDeleteResult"] | ModelTypes["ContentUpdateResult"] | ModelTypes["ContentUpsertResult"] | ModelTypes["ContentBlockCreateResult"] | ModelTypes["ContentBlockDeleteResult"] | ModelTypes["ContentBlockUpdateResult"] | ModelTypes["ContentBlockUpsertResult"] | ModelTypes["ContentReferenceCreateResult"] | ModelTypes["ContentReferenceDeleteResult"] | ModelTypes["ContentReferenceUpdateResult"] | ModelTypes["ContentReferenceUpsertResult"] | ModelTypes["LinkCreateResult"] | ModelTypes["LinkDeleteResult"] | ModelTypes["LinkUpdateResult"] | ModelTypes["LinkUpsertResult"] | ModelTypes["LinkableCreateResult"] | ModelTypes["LinkableDeleteResult"] | ModelTypes["LinkableUpdateResult"] | ModelTypes["LinkableUpsertResult"] | ModelTypes["LocaleCreateResult"] | ModelTypes["LocaleDeleteResult"] | ModelTypes["LocaleUpdateResult"] | ModelTypes["LocaleUpsertResult"] | ModelTypes["RecipeCreateResult"] | ModelTypes["RecipeDeleteResult"] | ModelTypes["RecipeUpdateResult"] | ModelTypes["RecipeUpsertResult"] | ModelTypes["RecipeLocaleCreateResult"] | ModelTypes["RecipeLocaleDeleteResult"] | ModelTypes["RecipeLocaleUpdateResult"] | ModelTypes["RecipeLocaleUpsertResult"] | ModelTypes["ImageCreateResult"] | ModelTypes["ImageDeleteResult"] | ModelTypes["ImageUpdateResult"] | ModelTypes["ImageUpsertResult"] | ModelTypes["UserCreateResult"] | ModelTypes["UserDeleteResult"] | ModelTypes["UserUpdateResult"] | ModelTypes["UserUpsertResult"] | ModelTypes["StepCreateResult"] | ModelTypes["StepDeleteResult"] | ModelTypes["StepUpdateResult"] | ModelTypes["StepUpsertResult"] | ModelTypes["StepLocaleCreateResult"] | ModelTypes["StepLocaleDeleteResult"] | ModelTypes["StepLocaleUpdateResult"] | ModelTypes["StepLocaleUpsertResult"] | ModelTypes["PinnedRecipeCreateResult"] | ModelTypes["PinnedRecipeDeleteResult"] | ModelTypes["PinnedRecipeUpdateResult"] | ModelTypes["PinnedRecipeUpsertResult"] | ModelTypes["ImplemetationDateCreateResult"] | ModelTypes["ImplemetationDateDeleteResult"] | ModelTypes["ImplemetationDateUpdateResult"] | ModelTypes["ImplemetationDateUpsertResult"] | ModelTypes["ModificationDateCreateResult"] | ModelTypes["ModificationDateDeleteResult"] | ModelTypes["ModificationDateUpdateResult"] | ModelTypes["ModificationDateUpsertResult"] | ModelTypes["StepGroupCreateResult"] | ModelTypes["StepGroupDeleteResult"] | ModelTypes["StepGroupUpdateResult"] | ModelTypes["StepGroupUpsertResult"] | ModelTypes["StepGroupLocaleCreateResult"] | ModelTypes["StepGroupLocaleDeleteResult"] | ModelTypes["StepGroupLocaleUpdateResult"] | ModelTypes["StepGroupLocaleUpsertResult"] | ModelTypes["HomePageCreateResult"] | ModelTypes["HomePageDeleteResult"] | ModelTypes["HomePageUpdateResult"] | ModelTypes["HomePageUpsertResult"] | ModelTypes["HomePageLocaleCreateResult"] | ModelTypes["HomePageLocaleDeleteResult"] | ModelTypes["HomePageLocaleUpdateResult"] | ModelTypes["HomePageLocaleUpsertResult"] | ModelTypes["SeoCreateResult"] | ModelTypes["SeoDeleteResult"] | ModelTypes["SeoUpdateResult"] | ModelTypes["SeoUpsertResult"];
+	["MutationResult"]: ModelTypes["ContentCreateResult"] | ModelTypes["ContentDeleteResult"] | ModelTypes["ContentUpdateResult"] | ModelTypes["ContentUpsertResult"] | ModelTypes["ContentBlockCreateResult"] | ModelTypes["ContentBlockDeleteResult"] | ModelTypes["ContentBlockUpdateResult"] | ModelTypes["ContentBlockUpsertResult"] | ModelTypes["ContentReferenceCreateResult"] | ModelTypes["ContentReferenceDeleteResult"] | ModelTypes["ContentReferenceUpdateResult"] | ModelTypes["ContentReferenceUpsertResult"] | ModelTypes["LinkCreateResult"] | ModelTypes["LinkDeleteResult"] | ModelTypes["LinkUpdateResult"] | ModelTypes["LinkUpsertResult"] | ModelTypes["LinkableCreateResult"] | ModelTypes["LinkableDeleteResult"] | ModelTypes["LinkableUpdateResult"] | ModelTypes["LinkableUpsertResult"] | ModelTypes["LocaleCreateResult"] | ModelTypes["LocaleDeleteResult"] | ModelTypes["LocaleUpdateResult"] | ModelTypes["LocaleUpsertResult"] | ModelTypes["RecipeCreateResult"] | ModelTypes["RecipeDeleteResult"] | ModelTypes["RecipeUpdateResult"] | ModelTypes["RecipeUpsertResult"] | ModelTypes["RecipeLocaleCreateResult"] | ModelTypes["RecipeLocaleDeleteResult"] | ModelTypes["RecipeLocaleUpdateResult"] | ModelTypes["RecipeLocaleUpsertResult"] | ModelTypes["ImageCreateResult"] | ModelTypes["ImageDeleteResult"] | ModelTypes["ImageUpdateResult"] | ModelTypes["ImageUpsertResult"] | ModelTypes["UserCreateResult"] | ModelTypes["UserDeleteResult"] | ModelTypes["UserUpdateResult"] | ModelTypes["UserUpsertResult"] | ModelTypes["StepCreateResult"] | ModelTypes["StepDeleteResult"] | ModelTypes["StepUpdateResult"] | ModelTypes["StepUpsertResult"] | ModelTypes["StepLocaleCreateResult"] | ModelTypes["StepLocaleDeleteResult"] | ModelTypes["StepLocaleUpdateResult"] | ModelTypes["StepLocaleUpsertResult"] | ModelTypes["PinnedRecipeCreateResult"] | ModelTypes["PinnedRecipeDeleteResult"] | ModelTypes["PinnedRecipeUpdateResult"] | ModelTypes["PinnedRecipeUpsertResult"] | ModelTypes["ImplemetationDateCreateResult"] | ModelTypes["ImplemetationDateDeleteResult"] | ModelTypes["ImplemetationDateUpdateResult"] | ModelTypes["ImplemetationDateUpsertResult"] | ModelTypes["ModificationDateCreateResult"] | ModelTypes["ModificationDateDeleteResult"] | ModelTypes["ModificationDateUpdateResult"] | ModelTypes["ModificationDateUpsertResult"] | ModelTypes["StepGroupCreateResult"] | ModelTypes["StepGroupDeleteResult"] | ModelTypes["StepGroupUpdateResult"] | ModelTypes["StepGroupUpsertResult"] | ModelTypes["StepGroupLocaleCreateResult"] | ModelTypes["StepGroupLocaleDeleteResult"] | ModelTypes["StepGroupLocaleUpdateResult"] | ModelTypes["StepGroupLocaleUpsertResult"] | ModelTypes["HomePageCreateResult"] | ModelTypes["HomePageDeleteResult"] | ModelTypes["HomePageUpdateResult"] | ModelTypes["HomePageUpsertResult"] | ModelTypes["HomePageLocaleCreateResult"] | ModelTypes["HomePageLocaleDeleteResult"] | ModelTypes["HomePageLocaleUpdateResult"] | ModelTypes["HomePageLocaleUpsertResult"] | ModelTypes["SeoCreateResult"] | ModelTypes["SeoDeleteResult"] | ModelTypes["SeoUpdateResult"] | ModelTypes["SeoUpsertResult"] | ModelTypes["RecipeListCreateResult"] | ModelTypes["RecipeListDeleteResult"] | ModelTypes["RecipeListUpdateResult"] | ModelTypes["RecipeListUpsertResult"] | ModelTypes["RecipeListItemCreateResult"] | ModelTypes["RecipeListItemDeleteResult"] | ModelTypes["RecipeListItemUpdateResult"] | ModelTypes["RecipeListItemUpsertResult"];
 	["_MutationError"]: {
 		path: Array<ModelTypes["_PathFragment"]>,
 	paths: Array<Array<ModelTypes["_PathFragment"]>>,
@@ -18845,6 +19970,60 @@ export type ModelTypes = {
 	node?: ModelTypes["Seo"] | undefined,
 	validation: ModelTypes["_ValidationResult"]
 };
+	["RecipeListCreateResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeList"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
+	["RecipeListDeleteResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeList"] | undefined
+};
+	["RecipeListUpdateResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeList"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
+	["RecipeListUpsertResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeList"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
+	["RecipeListItemCreateResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeListItem"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
+	["RecipeListItemDeleteResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeListItem"] | undefined
+};
+	["RecipeListItemUpdateResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeListItem"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
+	["RecipeListItemUpsertResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["RecipeListItem"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
 	["MutationTransaction"]: {
 		ok: boolean,
 	errorMessage?: string | undefined,
@@ -18930,6 +20109,14 @@ export type ModelTypes = {
 	deleteSeo: ModelTypes["SeoDeleteResult"],
 	updateSeo: ModelTypes["SeoUpdateResult"],
 	upsertSeo: ModelTypes["SeoUpsertResult"],
+	createRecipeList: ModelTypes["RecipeListCreateResult"],
+	deleteRecipeList: ModelTypes["RecipeListDeleteResult"],
+	updateRecipeList: ModelTypes["RecipeListUpdateResult"],
+	upsertRecipeList: ModelTypes["RecipeListUpsertResult"],
+	createRecipeListItem: ModelTypes["RecipeListItemCreateResult"],
+	deleteRecipeListItem: ModelTypes["RecipeListItemDeleteResult"],
+	updateRecipeListItem: ModelTypes["RecipeListItemUpdateResult"],
+	upsertRecipeListItem: ModelTypes["RecipeListItemUpsertResult"],
 	query?: ModelTypes["Query"] | undefined
 };
 	["MutationTransactionOptions"]: {
@@ -19136,6 +20323,16 @@ export type GraphQLTypes = {
 	paginateSeo: GraphQLTypes["SeoConnection"],
 	validateCreateSeo: GraphQLTypes["_ValidationResult"],
 	validateUpdateSeo: GraphQLTypes["_ValidationResult"],
+	getRecipeList?: GraphQLTypes["RecipeList"] | undefined,
+	listRecipeList: Array<GraphQLTypes["RecipeList"]>,
+	paginateRecipeList: GraphQLTypes["RecipeListConnection"],
+	validateCreateRecipeList: GraphQLTypes["_ValidationResult"],
+	validateUpdateRecipeList: GraphQLTypes["_ValidationResult"],
+	getRecipeListItem?: GraphQLTypes["RecipeListItem"] | undefined,
+	listRecipeListItem: Array<GraphQLTypes["RecipeListItem"]>,
+	paginateRecipeListItem: GraphQLTypes["RecipeListItemConnection"],
+	validateCreateRecipeListItem: GraphQLTypes["_ValidationResult"],
+	validateUpdateRecipeListItem: GraphQLTypes["_ValidationResult"],
 	transaction?: GraphQLTypes["QueryTransaction"] | undefined,
 	_info?: GraphQLTypes["Info"] | undefined,
 	schema?: GraphQLTypes["_Schema"] | undefined,
@@ -19348,7 +20545,6 @@ export type GraphQLTypes = {
 };
 	["RecipeWhere"]: {
 		id?: GraphQLTypes["UUIDCondition"] | undefined,
-	order?: GraphQLTypes["IntCondition"] | undefined,
 	publishDate?: GraphQLTypes["DateCondition"] | undefined,
 	price?: GraphQLTypes["StringCondition"] | undefined,
 	locales?: GraphQLTypes["RecipeLocaleWhere"] | undefined,
@@ -19796,7 +20992,6 @@ export type GraphQLTypes = {
 	__typename: "Recipe",
 	_meta?: GraphQLTypes["RecipeMeta"] | undefined,
 	id: GraphQLTypes["UUID"],
-	order: number,
 	publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales: Array<GraphQLTypes["RecipeLocale"]>,
@@ -19816,7 +21011,6 @@ export type GraphQLTypes = {
 	["RecipeMeta"]: {
 	__typename: "RecipeMeta",
 	id?: GraphQLTypes["FieldMeta"] | undefined,
-	order?: GraphQLTypes["FieldMeta"] | undefined,
 	publishDate?: GraphQLTypes["FieldMeta"] | undefined,
 	price?: GraphQLTypes["FieldMeta"] | undefined,
 	locales?: GraphQLTypes["FieldMeta"] | undefined,
@@ -19838,7 +21032,6 @@ export type GraphQLTypes = {
 		_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
 	id?: GraphQLTypes["OrderDirection"] | undefined,
-	order?: GraphQLTypes["OrderDirection"] | undefined,
 	publishDate?: GraphQLTypes["OrderDirection"] | undefined,
 	price?: GraphQLTypes["OrderDirection"] | undefined,
 	mainImage?: GraphQLTypes["ImageOrderBy"] | undefined,
@@ -20672,7 +21865,6 @@ export type GraphQLTypes = {
 };
 	["RecipeWithoutLocalesCreateInput"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	mainImage?: GraphQLTypes["RecipeCreateMainImageEntityRelationInput"] | undefined,
@@ -20736,7 +21928,6 @@ export type GraphQLTypes = {
 };
 	["RecipeWithoutCreatedByCreateInput"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -20821,7 +22012,6 @@ export type GraphQLTypes = {
 };
 	["RecipeWithoutPinnedRecipesCreateInput"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -20966,7 +22156,6 @@ export type GraphQLTypes = {
 };
 	["RecipeWithoutStepsGroupsCreateInput"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -21179,8 +22368,7 @@ export type GraphQLTypes = {
 	delete?: boolean | undefined
 };
 	["RecipeWithoutLocalesUpdateInput"]: {
-		order?: number | undefined,
-	publishDate?: GraphQLTypes["Date"] | undefined,
+		publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	mainImage?: GraphQLTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined,
 	pinnedRecipes?: Array<GraphQLTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined,
@@ -21269,8 +22457,7 @@ export type GraphQLTypes = {
 	data?: GraphQLTypes["RecipeWithoutCreatedByUpdateInput"] | undefined
 };
 	["RecipeWithoutCreatedByUpdateInput"]: {
-		order?: number | undefined,
-	publishDate?: GraphQLTypes["Date"] | undefined,
+		publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
 	mainImage?: GraphQLTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined,
@@ -21383,8 +22570,7 @@ export type GraphQLTypes = {
 	delete?: boolean | undefined
 };
 	["RecipeWithoutPinnedRecipesUpdateInput"]: {
-		order?: number | undefined,
-	publishDate?: GraphQLTypes["Date"] | undefined,
+		publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
 	mainImage?: GraphQLTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined,
@@ -21596,8 +22782,7 @@ export type GraphQLTypes = {
 	delete?: boolean | undefined
 };
 	["RecipeWithoutStepsGroupsUpdateInput"]: {
-		order?: number | undefined,
-	publishDate?: GraphQLTypes["Date"] | undefined,
+		publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
 	mainImage?: GraphQLTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined,
@@ -21950,7 +23135,6 @@ export type GraphQLTypes = {
 };
 	["RecipeCreateInput"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
-	order?: number | undefined,
 	publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeCreateLocalesEntityRelationInput"]> | undefined,
@@ -21961,8 +23145,7 @@ export type GraphQLTypes = {
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateInput"]: {
-		order?: number | undefined,
-	publishDate?: GraphQLTypes["Date"] | undefined,
+		publishDate?: GraphQLTypes["Date"] | undefined,
 	price?: string | undefined,
 	locales?: Array<GraphQLTypes["RecipeUpdateLocalesEntityRelationInput"]> | undefined,
 	mainImage?: GraphQLTypes["RecipeUpdateMainImageEntityRelationInput"] | undefined,
@@ -22208,6 +23391,182 @@ export type GraphQLTypes = {
 	__typename: "SeoEdge",
 	node: GraphQLTypes["Seo"]
 };
+	["RecipeList"]: {
+	__typename: "RecipeList",
+	_meta?: GraphQLTypes["RecipeListMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	items: Array<GraphQLTypes["RecipeListItem"]>,
+	paginateItems: GraphQLTypes["RecipeListItemConnection"]
+};
+	["RecipeListMeta"]: {
+	__typename: "RecipeListMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	items?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["RecipeListItem"]: {
+	__typename: "RecipeListItem",
+	_meta?: GraphQLTypes["RecipeListItemMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	order: number,
+	list?: GraphQLTypes["RecipeList"] | undefined,
+	recipe?: GraphQLTypes["Recipe"] | undefined
+};
+	["RecipeListItemMeta"]: {
+	__typename: "RecipeListItemMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	order?: GraphQLTypes["FieldMeta"] | undefined,
+	list?: GraphQLTypes["FieldMeta"] | undefined,
+	recipe?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["RecipeListWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	items?: GraphQLTypes["RecipeListItemWhere"] | undefined,
+	and?: Array<GraphQLTypes["RecipeListWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["RecipeListWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["RecipeListWhere"] | undefined
+};
+	["RecipeListItemWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	order?: GraphQLTypes["IntCondition"] | undefined,
+	list?: GraphQLTypes["RecipeListWhere"] | undefined,
+	recipe?: GraphQLTypes["RecipeWhere"] | undefined,
+	and?: Array<GraphQLTypes["RecipeListItemWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["RecipeListItemWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["RecipeListItemWhere"] | undefined
+};
+	["RecipeListItemOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	order?: GraphQLTypes["OrderDirection"] | undefined,
+	list?: GraphQLTypes["RecipeListOrderBy"] | undefined,
+	recipe?: GraphQLTypes["RecipeOrderBy"] | undefined
+};
+	["RecipeListOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined
+};
+	["RecipeListItemConnection"]: {
+	__typename: "RecipeListItemConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["RecipeListItemEdge"]>
+};
+	["RecipeListItemEdge"]: {
+	__typename: "RecipeListItemEdge",
+	node: GraphQLTypes["RecipeListItem"]
+};
+	["RecipeListUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	items?: GraphQLTypes["RecipeListItemUniqueWhere"] | undefined
+};
+	["RecipeListItemUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined
+};
+	["RecipeListConnection"]: {
+	__typename: "RecipeListConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["RecipeListEdge"]>
+};
+	["RecipeListEdge"]: {
+	__typename: "RecipeListEdge",
+	node: GraphQLTypes["RecipeList"]
+};
+	["RecipeListCreateInput"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	items?: Array<GraphQLTypes["RecipeListCreateItemsEntityRelationInput"]> | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListCreateItemsEntityRelationInput"]: {
+		connect?: GraphQLTypes["RecipeListItemUniqueWhere"] | undefined,
+	create?: GraphQLTypes["RecipeListItemWithoutListCreateInput"] | undefined,
+	alias?: string | undefined
+};
+	["RecipeListItemWithoutListCreateInput"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	order?: number | undefined,
+	recipe?: GraphQLTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemCreateRecipeEntityRelationInput"]: {
+		connect?: GraphQLTypes["RecipeUniqueWhere"] | undefined,
+	create?: GraphQLTypes["RecipeCreateInput"] | undefined
+};
+	["RecipeListUpdateInput"]: {
+		items?: Array<GraphQLTypes["RecipeListUpdateItemsEntityRelationInput"]> | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListUpdateItemsEntityRelationInput"]: {
+		create?: GraphQLTypes["RecipeListItemWithoutListCreateInput"] | undefined,
+	update?: GraphQLTypes["RecipeListUpdateItemsRelationInput"] | undefined,
+	upsert?: GraphQLTypes["RecipeListUpsertItemsRelationInput"] | undefined,
+	connect?: GraphQLTypes["RecipeListItemUniqueWhere"] | undefined,
+	disconnect?: GraphQLTypes["RecipeListItemUniqueWhere"] | undefined,
+	delete?: GraphQLTypes["RecipeListItemUniqueWhere"] | undefined,
+	alias?: string | undefined
+};
+	["RecipeListUpdateItemsRelationInput"]: {
+		by?: GraphQLTypes["RecipeListItemUniqueWhere"] | undefined,
+	data?: GraphQLTypes["RecipeListItemWithoutListUpdateInput"] | undefined
+};
+	["RecipeListItemWithoutListUpdateInput"]: {
+		order?: number | undefined,
+	recipe?: GraphQLTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpdateRecipeEntityRelationInput"]: {
+		create?: GraphQLTypes["RecipeCreateInput"] | undefined,
+	update?: GraphQLTypes["RecipeUpdateInput"] | undefined,
+	upsert?: GraphQLTypes["RecipeListItemUpsertRecipeRelationInput"] | undefined,
+	connect?: GraphQLTypes["RecipeUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["RecipeListItemUpsertRecipeRelationInput"]: {
+		update?: GraphQLTypes["RecipeUpdateInput"] | undefined,
+	create?: GraphQLTypes["RecipeCreateInput"] | undefined
+};
+	["RecipeListUpsertItemsRelationInput"]: {
+		by?: GraphQLTypes["RecipeListItemUniqueWhere"] | undefined,
+	update?: GraphQLTypes["RecipeListItemWithoutListUpdateInput"] | undefined,
+	create?: GraphQLTypes["RecipeListItemWithoutListCreateInput"] | undefined
+};
+	["RecipeListItemCreateInput"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	order?: number | undefined,
+	list?: GraphQLTypes["RecipeListItemCreateListEntityRelationInput"] | undefined,
+	recipe?: GraphQLTypes["RecipeListItemCreateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemCreateListEntityRelationInput"]: {
+		connect?: GraphQLTypes["RecipeListUniqueWhere"] | undefined,
+	create?: GraphQLTypes["RecipeListWithoutItemsCreateInput"] | undefined
+};
+	["RecipeListWithoutItemsCreateInput"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpdateInput"]: {
+		order?: number | undefined,
+	list?: GraphQLTypes["RecipeListItemUpdateListEntityRelationInput"] | undefined,
+	recipe?: GraphQLTypes["RecipeListItemUpdateRecipeEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpdateListEntityRelationInput"]: {
+		create?: GraphQLTypes["RecipeListWithoutItemsCreateInput"] | undefined,
+	update?: GraphQLTypes["RecipeListWithoutItemsUpdateInput"] | undefined,
+	upsert?: GraphQLTypes["RecipeListItemUpsertListRelationInput"] | undefined,
+	connect?: GraphQLTypes["RecipeListUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["RecipeListWithoutItemsUpdateInput"]: {
+		_dummy_field_?: boolean | undefined
+};
+	["RecipeListItemUpsertListRelationInput"]: {
+		update?: GraphQLTypes["RecipeListWithoutItemsUpdateInput"] | undefined,
+	create?: GraphQLTypes["RecipeListWithoutItemsCreateInput"] | undefined
+};
 	["QueryTransaction"]: {
 	__typename: "QueryTransaction",
 	getContent?: GraphQLTypes["Content"] | undefined,
@@ -22312,7 +23671,17 @@ export type GraphQLTypes = {
 	listSeo: Array<GraphQLTypes["Seo"]>,
 	paginateSeo: GraphQLTypes["SeoConnection"],
 	validateCreateSeo: GraphQLTypes["_ValidationResult"],
-	validateUpdateSeo: GraphQLTypes["_ValidationResult"]
+	validateUpdateSeo: GraphQLTypes["_ValidationResult"],
+	getRecipeList?: GraphQLTypes["RecipeList"] | undefined,
+	listRecipeList: Array<GraphQLTypes["RecipeList"]>,
+	paginateRecipeList: GraphQLTypes["RecipeListConnection"],
+	validateCreateRecipeList: GraphQLTypes["_ValidationResult"],
+	validateUpdateRecipeList: GraphQLTypes["_ValidationResult"],
+	getRecipeListItem?: GraphQLTypes["RecipeListItem"] | undefined,
+	listRecipeListItem: Array<GraphQLTypes["RecipeListItem"]>,
+	paginateRecipeListItem: GraphQLTypes["RecipeListItemConnection"],
+	validateCreateRecipeListItem: GraphQLTypes["_ValidationResult"],
+	validateUpdateRecipeListItem: GraphQLTypes["_ValidationResult"]
 };
 	["Info"]: {
 	__typename: "Info",
@@ -22400,6 +23769,14 @@ export type GraphQLTypes = {
 	deleteSeo: GraphQLTypes["SeoDeleteResult"],
 	updateSeo: GraphQLTypes["SeoUpdateResult"],
 	upsertSeo: GraphQLTypes["SeoUpsertResult"],
+	createRecipeList: GraphQLTypes["RecipeListCreateResult"],
+	deleteRecipeList: GraphQLTypes["RecipeListDeleteResult"],
+	updateRecipeList: GraphQLTypes["RecipeListUpdateResult"],
+	upsertRecipeList: GraphQLTypes["RecipeListUpsertResult"],
+	createRecipeListItem: GraphQLTypes["RecipeListItemCreateResult"],
+	deleteRecipeListItem: GraphQLTypes["RecipeListItemDeleteResult"],
+	updateRecipeListItem: GraphQLTypes["RecipeListItemUpdateResult"],
+	upsertRecipeListItem: GraphQLTypes["RecipeListItemUpsertResult"],
 	transaction: GraphQLTypes["MutationTransaction"],
 	query: GraphQLTypes["Query"],
 	generateUploadUrl: GraphQLTypes["S3SignedUpload"],
@@ -22414,7 +23791,7 @@ export type GraphQLTypes = {
 	validation: GraphQLTypes["_ValidationResult"]
 };
 	["MutationResult"]: {
-	__typename:"ContentCreateResult" | "ContentDeleteResult" | "ContentUpdateResult" | "ContentUpsertResult" | "ContentBlockCreateResult" | "ContentBlockDeleteResult" | "ContentBlockUpdateResult" | "ContentBlockUpsertResult" | "ContentReferenceCreateResult" | "ContentReferenceDeleteResult" | "ContentReferenceUpdateResult" | "ContentReferenceUpsertResult" | "LinkCreateResult" | "LinkDeleteResult" | "LinkUpdateResult" | "LinkUpsertResult" | "LinkableCreateResult" | "LinkableDeleteResult" | "LinkableUpdateResult" | "LinkableUpsertResult" | "LocaleCreateResult" | "LocaleDeleteResult" | "LocaleUpdateResult" | "LocaleUpsertResult" | "RecipeCreateResult" | "RecipeDeleteResult" | "RecipeUpdateResult" | "RecipeUpsertResult" | "RecipeLocaleCreateResult" | "RecipeLocaleDeleteResult" | "RecipeLocaleUpdateResult" | "RecipeLocaleUpsertResult" | "ImageCreateResult" | "ImageDeleteResult" | "ImageUpdateResult" | "ImageUpsertResult" | "UserCreateResult" | "UserDeleteResult" | "UserUpdateResult" | "UserUpsertResult" | "StepCreateResult" | "StepDeleteResult" | "StepUpdateResult" | "StepUpsertResult" | "StepLocaleCreateResult" | "StepLocaleDeleteResult" | "StepLocaleUpdateResult" | "StepLocaleUpsertResult" | "PinnedRecipeCreateResult" | "PinnedRecipeDeleteResult" | "PinnedRecipeUpdateResult" | "PinnedRecipeUpsertResult" | "ImplemetationDateCreateResult" | "ImplemetationDateDeleteResult" | "ImplemetationDateUpdateResult" | "ImplemetationDateUpsertResult" | "ModificationDateCreateResult" | "ModificationDateDeleteResult" | "ModificationDateUpdateResult" | "ModificationDateUpsertResult" | "StepGroupCreateResult" | "StepGroupDeleteResult" | "StepGroupUpdateResult" | "StepGroupUpsertResult" | "StepGroupLocaleCreateResult" | "StepGroupLocaleDeleteResult" | "StepGroupLocaleUpdateResult" | "StepGroupLocaleUpsertResult" | "HomePageCreateResult" | "HomePageDeleteResult" | "HomePageUpdateResult" | "HomePageUpsertResult" | "HomePageLocaleCreateResult" | "HomePageLocaleDeleteResult" | "HomePageLocaleUpdateResult" | "HomePageLocaleUpsertResult" | "SeoCreateResult" | "SeoDeleteResult" | "SeoUpdateResult" | "SeoUpsertResult",
+	__typename:"ContentCreateResult" | "ContentDeleteResult" | "ContentUpdateResult" | "ContentUpsertResult" | "ContentBlockCreateResult" | "ContentBlockDeleteResult" | "ContentBlockUpdateResult" | "ContentBlockUpsertResult" | "ContentReferenceCreateResult" | "ContentReferenceDeleteResult" | "ContentReferenceUpdateResult" | "ContentReferenceUpsertResult" | "LinkCreateResult" | "LinkDeleteResult" | "LinkUpdateResult" | "LinkUpsertResult" | "LinkableCreateResult" | "LinkableDeleteResult" | "LinkableUpdateResult" | "LinkableUpsertResult" | "LocaleCreateResult" | "LocaleDeleteResult" | "LocaleUpdateResult" | "LocaleUpsertResult" | "RecipeCreateResult" | "RecipeDeleteResult" | "RecipeUpdateResult" | "RecipeUpsertResult" | "RecipeLocaleCreateResult" | "RecipeLocaleDeleteResult" | "RecipeLocaleUpdateResult" | "RecipeLocaleUpsertResult" | "ImageCreateResult" | "ImageDeleteResult" | "ImageUpdateResult" | "ImageUpsertResult" | "UserCreateResult" | "UserDeleteResult" | "UserUpdateResult" | "UserUpsertResult" | "StepCreateResult" | "StepDeleteResult" | "StepUpdateResult" | "StepUpsertResult" | "StepLocaleCreateResult" | "StepLocaleDeleteResult" | "StepLocaleUpdateResult" | "StepLocaleUpsertResult" | "PinnedRecipeCreateResult" | "PinnedRecipeDeleteResult" | "PinnedRecipeUpdateResult" | "PinnedRecipeUpsertResult" | "ImplemetationDateCreateResult" | "ImplemetationDateDeleteResult" | "ImplemetationDateUpdateResult" | "ImplemetationDateUpsertResult" | "ModificationDateCreateResult" | "ModificationDateDeleteResult" | "ModificationDateUpdateResult" | "ModificationDateUpsertResult" | "StepGroupCreateResult" | "StepGroupDeleteResult" | "StepGroupUpdateResult" | "StepGroupUpsertResult" | "StepGroupLocaleCreateResult" | "StepGroupLocaleDeleteResult" | "StepGroupLocaleUpdateResult" | "StepGroupLocaleUpsertResult" | "HomePageCreateResult" | "HomePageDeleteResult" | "HomePageUpdateResult" | "HomePageUpsertResult" | "HomePageLocaleCreateResult" | "HomePageLocaleDeleteResult" | "HomePageLocaleUpdateResult" | "HomePageLocaleUpsertResult" | "SeoCreateResult" | "SeoDeleteResult" | "SeoUpdateResult" | "SeoUpsertResult" | "RecipeListCreateResult" | "RecipeListDeleteResult" | "RecipeListUpdateResult" | "RecipeListUpsertResult" | "RecipeListItemCreateResult" | "RecipeListItemDeleteResult" | "RecipeListItemUpdateResult" | "RecipeListItemUpsertResult",
 	ok: boolean,
 	errorMessage?: string | undefined,
 	errors: Array<GraphQLTypes["_MutationError"]>
@@ -22498,6 +23875,14 @@ export type GraphQLTypes = {
 	['...on SeoDeleteResult']: '__union' & GraphQLTypes["SeoDeleteResult"];
 	['...on SeoUpdateResult']: '__union' & GraphQLTypes["SeoUpdateResult"];
 	['...on SeoUpsertResult']: '__union' & GraphQLTypes["SeoUpsertResult"];
+	['...on RecipeListCreateResult']: '__union' & GraphQLTypes["RecipeListCreateResult"];
+	['...on RecipeListDeleteResult']: '__union' & GraphQLTypes["RecipeListDeleteResult"];
+	['...on RecipeListUpdateResult']: '__union' & GraphQLTypes["RecipeListUpdateResult"];
+	['...on RecipeListUpsertResult']: '__union' & GraphQLTypes["RecipeListUpsertResult"];
+	['...on RecipeListItemCreateResult']: '__union' & GraphQLTypes["RecipeListItemCreateResult"];
+	['...on RecipeListItemDeleteResult']: '__union' & GraphQLTypes["RecipeListItemDeleteResult"];
+	['...on RecipeListItemUpdateResult']: '__union' & GraphQLTypes["RecipeListItemUpdateResult"];
+	['...on RecipeListItemUpsertResult']: '__union' & GraphQLTypes["RecipeListItemUpsertResult"];
 };
 	["_MutationError"]: {
 	__typename: "_MutationError",
@@ -23119,6 +24504,68 @@ export type GraphQLTypes = {
 	node?: GraphQLTypes["Seo"] | undefined,
 	validation: GraphQLTypes["_ValidationResult"]
 };
+	["RecipeListCreateResult"]: {
+	__typename: "RecipeListCreateResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeList"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
+	["RecipeListDeleteResult"]: {
+	__typename: "RecipeListDeleteResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeList"] | undefined
+};
+	["RecipeListUpdateResult"]: {
+	__typename: "RecipeListUpdateResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeList"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
+	["RecipeListUpsertResult"]: {
+	__typename: "RecipeListUpsertResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeList"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
+	["RecipeListItemCreateResult"]: {
+	__typename: "RecipeListItemCreateResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeListItem"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
+	["RecipeListItemDeleteResult"]: {
+	__typename: "RecipeListItemDeleteResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeListItem"] | undefined
+};
+	["RecipeListItemUpdateResult"]: {
+	__typename: "RecipeListItemUpdateResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeListItem"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
+	["RecipeListItemUpsertResult"]: {
+	__typename: "RecipeListItemUpsertResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["RecipeListItem"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
 	["MutationTransaction"]: {
 	__typename: "MutationTransaction",
 	ok: boolean,
@@ -23205,6 +24652,14 @@ export type GraphQLTypes = {
 	deleteSeo: GraphQLTypes["SeoDeleteResult"],
 	updateSeo: GraphQLTypes["SeoUpdateResult"],
 	upsertSeo: GraphQLTypes["SeoUpsertResult"],
+	createRecipeList: GraphQLTypes["RecipeListCreateResult"],
+	deleteRecipeList: GraphQLTypes["RecipeListDeleteResult"],
+	updateRecipeList: GraphQLTypes["RecipeListUpdateResult"],
+	upsertRecipeList: GraphQLTypes["RecipeListUpsertResult"],
+	createRecipeListItem: GraphQLTypes["RecipeListItemCreateResult"],
+	deleteRecipeListItem: GraphQLTypes["RecipeListItemDeleteResult"],
+	updateRecipeListItem: GraphQLTypes["RecipeListItemUpdateResult"],
+	upsertRecipeListItem: GraphQLTypes["RecipeListItemUpsertResult"],
 	query?: GraphQLTypes["Query"] | undefined
 };
 	["MutationTransactionOptions"]: {
@@ -23757,6 +25212,30 @@ type ZEUS_VARIABLES = {
 	["HomePageUpsertLocalesRelationInput"]: ValueTypes["HomePageUpsertLocalesRelationInput"];
 	["HomePageLocaleCreateInput"]: ValueTypes["HomePageLocaleCreateInput"];
 	["HomePageLocaleUpdateInput"]: ValueTypes["HomePageLocaleUpdateInput"];
+	["RecipeListWhere"]: ValueTypes["RecipeListWhere"];
+	["RecipeListItemWhere"]: ValueTypes["RecipeListItemWhere"];
+	["RecipeListItemOrderBy"]: ValueTypes["RecipeListItemOrderBy"];
+	["RecipeListOrderBy"]: ValueTypes["RecipeListOrderBy"];
+	["RecipeListUniqueWhere"]: ValueTypes["RecipeListUniqueWhere"];
+	["RecipeListItemUniqueWhere"]: ValueTypes["RecipeListItemUniqueWhere"];
+	["RecipeListCreateInput"]: ValueTypes["RecipeListCreateInput"];
+	["RecipeListCreateItemsEntityRelationInput"]: ValueTypes["RecipeListCreateItemsEntityRelationInput"];
+	["RecipeListItemWithoutListCreateInput"]: ValueTypes["RecipeListItemWithoutListCreateInput"];
+	["RecipeListItemCreateRecipeEntityRelationInput"]: ValueTypes["RecipeListItemCreateRecipeEntityRelationInput"];
+	["RecipeListUpdateInput"]: ValueTypes["RecipeListUpdateInput"];
+	["RecipeListUpdateItemsEntityRelationInput"]: ValueTypes["RecipeListUpdateItemsEntityRelationInput"];
+	["RecipeListUpdateItemsRelationInput"]: ValueTypes["RecipeListUpdateItemsRelationInput"];
+	["RecipeListItemWithoutListUpdateInput"]: ValueTypes["RecipeListItemWithoutListUpdateInput"];
+	["RecipeListItemUpdateRecipeEntityRelationInput"]: ValueTypes["RecipeListItemUpdateRecipeEntityRelationInput"];
+	["RecipeListItemUpsertRecipeRelationInput"]: ValueTypes["RecipeListItemUpsertRecipeRelationInput"];
+	["RecipeListUpsertItemsRelationInput"]: ValueTypes["RecipeListUpsertItemsRelationInput"];
+	["RecipeListItemCreateInput"]: ValueTypes["RecipeListItemCreateInput"];
+	["RecipeListItemCreateListEntityRelationInput"]: ValueTypes["RecipeListItemCreateListEntityRelationInput"];
+	["RecipeListWithoutItemsCreateInput"]: ValueTypes["RecipeListWithoutItemsCreateInput"];
+	["RecipeListItemUpdateInput"]: ValueTypes["RecipeListItemUpdateInput"];
+	["RecipeListItemUpdateListEntityRelationInput"]: ValueTypes["RecipeListItemUpdateListEntityRelationInput"];
+	["RecipeListWithoutItemsUpdateInput"]: ValueTypes["RecipeListWithoutItemsUpdateInput"];
+	["RecipeListItemUpsertListRelationInput"]: ValueTypes["RecipeListItemUpsertListRelationInput"];
 	["_MutationErrorType"]: ValueTypes["_MutationErrorType"];
 	["MutationTransactionOptions"]: ValueTypes["MutationTransactionOptions"];
 	["Json"]: ValueTypes["Json"];
