@@ -1,0 +1,15 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "removeField",
+			"entityName": "HomePageLocale",
+			"fieldName": "mainRecipe"
+		},
+		{
+			"modification": "removeField",
+			"entityName": "HomePageLocale",
+			"fieldName": "recipeCarousel"
+		}
+	]
+}
