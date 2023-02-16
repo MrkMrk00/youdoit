@@ -1,0 +1,41 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createColumn",
+			"entityName": "RecipeLocale",
+			"field": {
+				"name": "tileDescription",
+				"columnName": "tile_description",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/RecipeLocale/operations/create/tileDescription",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/RecipeLocale/operations/update/tileDescription",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/RecipeLocale/operations/read/tileDescription",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/RecipeLocale/operations/read/tileDescription",
+					"value": true
+				}
+			]
+		}
+	]
+}

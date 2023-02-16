@@ -28,6 +28,7 @@ export const Recipe = Component((_, enviroment) => {
 			<ImageField field="mainImage" label="Main image" />
 			<LocaleSideDimension>
 				<TextField field="title" label="Title" />
+				<RichTextField field="tileDescription" label="Tile description" />
 				<RichTextField field="description" label="Description" />
 			</LocaleSideDimension>
 			<Repeater field="stepsGroups" label="Step groups" sortableBy="order">

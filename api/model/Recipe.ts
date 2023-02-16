@@ -25,5 +25,6 @@ export class RecipeLocale {
 	locale = d.manyHasOne(Locale, 'recipes').cascadeOnDelete().notNull()
 
 	title = d.stringColumn()
+	tileDescription = d.stringColumn()
 	description = d.stringColumn()
 }
