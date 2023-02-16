@@ -10,8 +10,6 @@ export default () => (
 		}}
 		redirectOnSuccess="recipeEdit(id: $entity.id)"
 		setOnCreate="(publishDate = 'now')"
-		orderField="order"
-		newOrderFieldValue={0}
 	>
 		<Recipe />
 	</CreatePage>

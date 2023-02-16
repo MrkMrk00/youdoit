@@ -8,7 +8,6 @@ import { User } from './User'
 
 @acl.allow(publicRole, { read: true })
 export class Recipe {
-	order = d.intColumn().notNull()
 	locales = d.oneHasMany(RecipeLocale, 'base')
 
 	createdBy = d.manyHasOne(User, 'createdRecipes').cascadeOnDelete().notNull()
@@ -16,8 +15,6 @@ export class Recipe {
 
 	publishDate = d.dateColumn()
 	price = d.stringColumn()
-	// steps = d.oneHasMany() @TODO
-	// author = d.manyHasOne() @TODO
 	mainImage = d.manyHasOne(Image)
 	stepsGroups = d.oneHasMany(StepGroup, 'recipe')
 }

@@ -4,6 +4,7 @@ import { Linkable } from './Linkable'
 import { Locale } from './Locale'
 import { One } from './One'
 import { Recipe } from './Recipe'
+import { RecipeList } from './RecipeList'
 import { Seo } from './Seo'
 
 @acl.allow(publicRole, { read: true })
@@ -19,6 +20,8 @@ export class HomePageLocale {
 	locale = d.manyHasOne(Locale, 'homePage').cascadeOnDelete().notNull()
 
 	mainRecipe = d.manyHasOne(Recipe)
+	recipeCarousel = d.oneHasOne(RecipeList)
+
 	title = d.stringColumn()
 	link = d.oneHasOneInverse(Linkable, 'homePage').notNull()
 	seo = d.oneHasOne(Seo)
