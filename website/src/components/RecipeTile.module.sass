@@ -12,7 +12,7 @@
 			font-weight: 800
 			font-size: 15px
 			line-height: 20px
-		.content
+		.contentIn
 			justify-content: center
 	&.is_carousel
 		min-width: 11.25rem
@@ -22,14 +22,27 @@
 			font-weight: 800
 			font-size: 1.5625rem
 			line-height: math.div(35, 25)
-		.content
+		.contentIn
 			justify-content: flex-end
+	&.is_withDescription
+		border: 1px solid #E3E3E3
+		.image
+			aspect-ratio: 390 / 180
+		.title
+			font-weight: 800
+			font-size: 1.5625rem
+			line-height: 2.1875rem
+		.contentIn
+			top: auto
+
+.content
+	position: relative
 
 .image
 	position: relative
 	aspect-ratio: 1
 
-.content
+.contentIn
 	position: absolute
 	top: 0
 	bottom: 0
@@ -42,3 +55,7 @@
 .price
 	display: flex
 	margin-top: 0.625rem
+
+.tileDescription
+	color: #000
+	padding: 0.9375rem 1.25rem 1.25rem 1.25rem

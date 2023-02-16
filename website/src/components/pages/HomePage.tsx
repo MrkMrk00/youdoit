@@ -4,7 +4,6 @@ import type { RecipeResult } from '../../data/RecipeFragment'
 import { Container } from '../Container'
 import { RecipeCarousel } from '../RecipeCarousel'
 import { RecipeTile } from '../RecipeTile'
-import { RecipeTileWithDescription } from '../RecipeTileWithDescription'
 import styles from './HomePage.module.sass'
 
 export interface HomePageProps {
@@ -22,9 +21,9 @@ export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes }
 					<div>{homePage.title}</div>
 				</div>
 				<div className={styles.recipes}>
-					<RecipeTile tile={mainRecipe} type="main" />
+					<RecipeTile tile={recipes[1]} type="main" />
 					<RecipeCarousel tiles={otherRecipes} />
-					<RecipeTileWithDescription tile={mainRecipe} />
+					<RecipeTile tile={mainRecipe} type="withDescription" />
 				</div>
 			</div>
 		</Container>
