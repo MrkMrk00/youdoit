@@ -1,0 +1,49 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "removeField",
+			"entityName": "Recipe",
+			"fieldName": "homePageMainRecipe"
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "HomePageLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "mainRecipe",
+				"target": "Recipe",
+				"joiningColumn": {
+					"columnName": "main_recipe_id",
+					"onDelete": "restrict"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePageLocale/operations/create/mainRecipe",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePageLocale/operations/update/mainRecipe",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/HomePageLocale/operations/read/mainRecipe",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/HomePageLocale/operations/read/mainRecipe",
+					"value": true
+				}
+			]
+		}
+	]
+}

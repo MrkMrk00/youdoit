@@ -13,6 +13,7 @@ export interface HomePageProps {
 
 export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes }) => {
 	const [mainRecipe, ...otherRecipes] = recipes
+
 	return (
 		<Container>
 			<div className={styles.wrapper}>

@@ -4,7 +4,6 @@ import { LocaleSideDimension } from './LocaleSideDimensions'
 import { StepGroup } from './StepGroup'
 
 export const Recipe = Component((_, enviroment) => {
-	console.log(enviroment)
 	return (
 		<>
 			<SelectField
