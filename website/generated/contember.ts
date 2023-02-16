@@ -596,6 +596,7 @@ export const AllTypesProps: Record<string,any> = {
 		description:"StringCondition",
 		base:"RecipeWhere",
 		locale:"LocaleWhere",
+		tileDescription:"StringCondition",
 		and:"RecipeLocaleWhere",
 		or:"RecipeLocaleWhere",
 		not:"RecipeLocaleWhere"
@@ -1064,7 +1065,8 @@ export const AllTypesProps: Record<string,any> = {
 		title:"OrderDirection",
 		description:"OrderDirection",
 		base:"RecipeOrderBy",
-		locale:"LocaleOrderBy"
+		locale:"LocaleOrderBy",
+		tileDescription:"OrderDirection"
 	},
 	RecipeOrderBy:{
 		id:"OrderDirection",
@@ -3771,7 +3773,7 @@ export const AllTypesProps: Record<string,any> = {
 			options:"MutationTransactionOptions"
 		},
 		generateUploadUrl:{
-
+			acl:"S3Acl"
 		},
 		generateReadUrl:{
 
@@ -4182,7 +4184,8 @@ export const AllTypesProps: Record<string,any> = {
 	Json: `scalar.Json` as const,
 	_OnDeleteBehaviour: "enum" as const,
 	_RelationSide: "enum" as const,
-	_OrderByDirection: "enum" as const
+	_OrderByDirection: "enum" as const,
+	S3Acl: "enum" as const
 }
 
 export const ReturnTypes: Record<string,any> = {
@@ -4456,14 +4459,16 @@ export const ReturnTypes: Record<string,any> = {
 		title:"String",
 		description:"String",
 		base:"Recipe",
-		locale:"Locale"
+		locale:"Locale",
+		tileDescription:"String"
 	},
 	RecipeLocaleMeta:{
 		id:"FieldMeta",
 		title:"FieldMeta",
 		description:"FieldMeta",
 		base:"FieldMeta",
-		locale:"FieldMeta"
+		locale:"FieldMeta",
+		tileDescription:"FieldMeta"
 	},
 	Recipe:{
 		_meta:"RecipeMeta",
@@ -7142,6 +7147,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	description?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
 	base?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>,
+	tileDescription?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["RecipeLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["RecipeLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>
@@ -7581,6 +7587,7 @@ paginateHomePage?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | n
 	description?:boolean | `@${string}`,
 base?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
 locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["Locale"]],
+	tileDescription?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["RecipeLocaleMeta"]: AliasType<{
@@ -7589,6 +7596,7 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	description?:ValueTypes["FieldMeta"],
 	base?:ValueTypes["FieldMeta"],
 	locale?:ValueTypes["FieldMeta"],
+	tileDescription?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Recipe"]: AliasType<{
@@ -7629,7 +7637,8 @@ paginateStepsGroups?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | nul
 	title?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	description?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	base?: ValueTypes["RecipeOrderBy"] | undefined | null | Variable<any, string>,
-	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>
+	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>,
+	tileDescription?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
 	["RecipeOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -8459,6 +8468,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	description?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
+	tileDescription?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeLocaleCreateBaseEntityRelationInput"]: {
@@ -8548,6 +8558,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	description?: string | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	tileDescription?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeLocaleCreateLocaleEntityRelationInput"]: {
@@ -8960,6 +8971,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	description?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
+	tileDescription?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeLocaleUpdateBaseEntityRelationInput"]: {
@@ -9084,6 +9096,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	description?: string | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	tileDescription?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeLocaleUpdateLocaleEntityRelationInput"]: {
@@ -9762,6 +9775,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	description?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	tileDescription?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeLocaleUpdateInput"]: {
@@ -9769,6 +9783,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	description?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	tileDescription?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["ImageConnection"]: AliasType<{
@@ -10380,7 +10395,7 @@ updateRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable
 upsertRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeListItemWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["RecipeListItemUpdateInput"] | Variable<any, string>,	create: ValueTypes["RecipeListItemCreateInput"] | Variable<any, string>},ValueTypes["RecipeListItemUpsertResult"]],
 transaction?: [{	options?: ValueTypes["MutationTransactionOptions"] | undefined | null | Variable<any, string>},ValueTypes["MutationTransaction"]],
 	query?:ValueTypes["Query"],
-generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
+generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>,	acl?: ValueTypes["S3Acl"] | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
 generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>},ValueTypes["S3SignedRead"]],
 		__typename?: boolean | `@${string}`
 }>;
@@ -11267,7 +11282,8 @@ upsertRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null | Variable<any, string>
 };
-	["Json"]:unknown;
+	/** Json custom scalar type */
+["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ValueTypes["_Enum"],
 	entities?:ValueTypes["_Entity"],
@@ -11379,6 +11395,7 @@ upsertRecipeListItem?: [{	by: ValueTypes["RecipeListItemUniqueWhere"] | Variable
 	value?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ValueTypes["S3Header"],
@@ -11713,6 +11730,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	description?: ResolverInputTypes["StringCondition"] | undefined | null,
 	base?: ResolverInputTypes["RecipeWhere"] | undefined | null,
 	locale?: ResolverInputTypes["LocaleWhere"] | undefined | null,
+	tileDescription?: ResolverInputTypes["StringCondition"] | undefined | null,
 	and?: Array<ResolverInputTypes["RecipeLocaleWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["RecipeLocaleWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null
@@ -12152,6 +12170,7 @@ paginateHomePage?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undef
 	description?:boolean | `@${string}`,
 base?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},ResolverInputTypes["Recipe"]],
 locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},ResolverInputTypes["Locale"]],
+	tileDescription?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["RecipeLocaleMeta"]: AliasType<{
@@ -12160,6 +12179,7 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	description?:ResolverInputTypes["FieldMeta"],
 	base?:ResolverInputTypes["FieldMeta"],
 	locale?:ResolverInputTypes["FieldMeta"],
+	tileDescription?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Recipe"]: AliasType<{
@@ -12200,7 +12220,8 @@ paginateStepsGroups?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefin
 	title?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	description?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	base?: ResolverInputTypes["RecipeOrderBy"] | undefined | null,
-	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null
+	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null,
+	tileDescription?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
 	["RecipeOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -13031,6 +13052,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	description?: string | undefined | null,
 	base?: ResolverInputTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined | null,
+	tileDescription?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeLocaleCreateBaseEntityRelationInput"]: {
@@ -13120,6 +13142,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	description?: string | undefined | null,
 	locale?: ResolverInputTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined | null,
+	tileDescription?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeLocaleCreateLocaleEntityRelationInput"]: {
@@ -13532,6 +13555,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	description?: string | undefined | null,
 	base?: ResolverInputTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined | null,
+	tileDescription?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeLocaleUpdateBaseEntityRelationInput"]: {
@@ -13656,6 +13680,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	description?: string | undefined | null,
 	locale?: ResolverInputTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined | null,
+	tileDescription?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeLocaleUpdateLocaleEntityRelationInput"]: {
@@ -14334,6 +14359,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	description?: string | undefined | null,
 	base?: ResolverInputTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined | null,
+	tileDescription?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeLocaleUpdateInput"]: {
@@ -14341,6 +14367,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	description?: string | undefined | null,
 	base?: ResolverInputTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined | null,
+	tileDescription?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["ImageConnection"]: AliasType<{
@@ -14952,7 +14979,7 @@ updateRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	f
 upsertRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	filter?: ResolverInputTypes["RecipeListItemWhere"] | undefined | null,	update: ResolverInputTypes["RecipeListItemUpdateInput"],	create: ResolverInputTypes["RecipeListItemCreateInput"]},ResolverInputTypes["RecipeListItemUpsertResult"]],
 transaction?: [{	options?: ResolverInputTypes["MutationTransactionOptions"] | undefined | null},ResolverInputTypes["MutationTransaction"]],
 	query?:ResolverInputTypes["Query"],
-generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null},ResolverInputTypes["S3SignedUpload"]],
+generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null,	acl?: ResolverInputTypes["S3Acl"] | undefined | null},ResolverInputTypes["S3SignedUpload"]],
 generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},ResolverInputTypes["S3SignedRead"]],
 		__typename?: boolean | `@${string}`
 }>;
@@ -15839,7 +15866,8 @@ upsertRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	f
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null
 };
-	["Json"]:unknown;
+	/** Json custom scalar type */
+["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ResolverInputTypes["_Enum"],
 	entities?:ResolverInputTypes["_Entity"],
@@ -15952,6 +15980,7 @@ upsertRecipeListItem?: [{	by: ResolverInputTypes["RecipeListItemUniqueWhere"],	f
 	value?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ResolverInputTypes["S3Header"],
@@ -16280,6 +16309,7 @@ export type ModelTypes = {
 	description?: ModelTypes["StringCondition"] | undefined,
 	base?: ModelTypes["RecipeWhere"] | undefined,
 	locale?: ModelTypes["LocaleWhere"] | undefined,
+	tileDescription?: ModelTypes["StringCondition"] | undefined,
 	and?: Array<ModelTypes["RecipeLocaleWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["RecipeLocaleWhere"] | undefined> | undefined,
 	not?: ModelTypes["RecipeLocaleWhere"] | undefined
@@ -16703,14 +16733,16 @@ export type ModelTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	base?: ModelTypes["Recipe"] | undefined,
-	locale?: ModelTypes["Locale"] | undefined
+	locale?: ModelTypes["Locale"] | undefined,
+	tileDescription?: string | undefined
 };
 	["RecipeLocaleMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
 	title?: ModelTypes["FieldMeta"] | undefined,
 	description?: ModelTypes["FieldMeta"] | undefined,
 	base?: ModelTypes["FieldMeta"] | undefined,
-	locale?: ModelTypes["FieldMeta"] | undefined
+	locale?: ModelTypes["FieldMeta"] | undefined,
+	tileDescription?: ModelTypes["FieldMeta"] | undefined
 };
 	["Recipe"]: {
 		_meta?: ModelTypes["RecipeMeta"] | undefined,
@@ -16748,7 +16780,8 @@ export type ModelTypes = {
 	title?: ModelTypes["OrderDirection"] | undefined,
 	description?: ModelTypes["OrderDirection"] | undefined,
 	base?: ModelTypes["RecipeOrderBy"] | undefined,
-	locale?: ModelTypes["LocaleOrderBy"] | undefined
+	locale?: ModelTypes["LocaleOrderBy"] | undefined,
+	tileDescription?: ModelTypes["OrderDirection"] | undefined
 };
 	["RecipeOrderBy"]: {
 	_random?: boolean | undefined,
@@ -17520,6 +17553,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	base?: ModelTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleCreateBaseEntityRelationInput"]: {
@@ -17609,6 +17643,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	locale?: ModelTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleCreateLocaleEntityRelationInput"]: {
@@ -18021,6 +18056,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	base?: ModelTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleUpdateBaseEntityRelationInput"]: {
@@ -18145,6 +18181,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	locale?: ModelTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleUpdateLocaleEntityRelationInput"]: {
@@ -18819,6 +18856,7 @@ export type ModelTypes = {
 	description?: string | undefined,
 	base?: ModelTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined,
 	locale?: ModelTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleUpdateInput"]: {
@@ -18826,6 +18864,7 @@ export type ModelTypes = {
 	description?: string | undefined,
 	base?: ModelTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined,
 	locale?: ModelTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["ImageConnection"]: {
@@ -20122,7 +20161,8 @@ export type ModelTypes = {
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined
 };
-	["Json"]:any;
+	/** Json custom scalar type */
+["Json"]:any;
 	["_Schema"]: {
 		enums: Array<ModelTypes["_Enum"]>,
 	entities: Array<ModelTypes["_Entity"]>
@@ -20206,6 +20246,7 @@ export type ModelTypes = {
 		key: string,
 	value: string
 };
+	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: {
 		url: string,
 	headers: Array<ModelTypes["S3Header"]>,
@@ -20539,6 +20580,7 @@ export type GraphQLTypes = {
 	description?: GraphQLTypes["StringCondition"] | undefined,
 	base?: GraphQLTypes["RecipeWhere"] | undefined,
 	locale?: GraphQLTypes["LocaleWhere"] | undefined,
+	tileDescription?: GraphQLTypes["StringCondition"] | undefined,
 	and?: Array<GraphQLTypes["RecipeLocaleWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["RecipeLocaleWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["RecipeLocaleWhere"] | undefined
@@ -20978,7 +21020,8 @@ export type GraphQLTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	base?: GraphQLTypes["Recipe"] | undefined,
-	locale?: GraphQLTypes["Locale"] | undefined
+	locale?: GraphQLTypes["Locale"] | undefined,
+	tileDescription?: string | undefined
 };
 	["RecipeLocaleMeta"]: {
 	__typename: "RecipeLocaleMeta",
@@ -20986,7 +21029,8 @@ export type GraphQLTypes = {
 	title?: GraphQLTypes["FieldMeta"] | undefined,
 	description?: GraphQLTypes["FieldMeta"] | undefined,
 	base?: GraphQLTypes["FieldMeta"] | undefined,
-	locale?: GraphQLTypes["FieldMeta"] | undefined
+	locale?: GraphQLTypes["FieldMeta"] | undefined,
+	tileDescription?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["Recipe"]: {
 	__typename: "Recipe",
@@ -21026,7 +21070,8 @@ export type GraphQLTypes = {
 	title?: GraphQLTypes["OrderDirection"] | undefined,
 	description?: GraphQLTypes["OrderDirection"] | undefined,
 	base?: GraphQLTypes["RecipeOrderBy"] | undefined,
-	locale?: GraphQLTypes["LocaleOrderBy"] | undefined
+	locale?: GraphQLTypes["LocaleOrderBy"] | undefined,
+	tileDescription?: GraphQLTypes["OrderDirection"] | undefined
 };
 	["RecipeOrderBy"]: {
 		_random?: boolean | undefined,
@@ -21857,6 +21902,7 @@ export type GraphQLTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	base?: GraphQLTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleCreateBaseEntityRelationInput"]: {
@@ -21946,6 +21992,7 @@ export type GraphQLTypes = {
 	title?: string | undefined,
 	description?: string | undefined,
 	locale?: GraphQLTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleCreateLocaleEntityRelationInput"]: {
@@ -22358,6 +22405,7 @@ export type GraphQLTypes = {
 		title?: string | undefined,
 	description?: string | undefined,
 	base?: GraphQLTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleUpdateBaseEntityRelationInput"]: {
@@ -22482,6 +22530,7 @@ export type GraphQLTypes = {
 		title?: string | undefined,
 	description?: string | undefined,
 	locale?: GraphQLTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleUpdateLocaleEntityRelationInput"]: {
@@ -23160,6 +23209,7 @@ export type GraphQLTypes = {
 	description?: string | undefined,
 	base?: GraphQLTypes["RecipeLocaleCreateBaseEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["RecipeLocaleCreateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleUpdateInput"]: {
@@ -23167,6 +23217,7 @@ export type GraphQLTypes = {
 	description?: string | undefined,
 	base?: GraphQLTypes["RecipeLocaleUpdateBaseEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["RecipeLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	tileDescription?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["ImageConnection"]: {
@@ -24665,7 +24716,8 @@ export type GraphQLTypes = {
 	["MutationTransactionOptions"]: {
 		deferForeignKeyConstraints?: boolean | undefined
 };
-	["Json"]: "scalar" & { name: "Json" };
+	/** Json custom scalar type */
+["Json"]: "scalar" & { name: "Json" };
 	["_Schema"]: {
 	__typename: "_Schema",
 	enums: Array<GraphQLTypes["_Enum"]>,
@@ -24778,6 +24830,7 @@ export type GraphQLTypes = {
 	key: string,
 	value: string
 };
+	["S3Acl"]: S3Acl;
 	["S3SignedRead"]: {
 	__typename: "S3SignedRead",
 	url: string,
@@ -24827,6 +24880,11 @@ export const enum _RelationSide {
 export const enum _OrderByDirection {
 	asc = "asc",
 	desc = "desc"
+}
+export const enum S3Acl {
+	PUBLIC_READ = "PUBLIC_READ",
+	PRIVATE = "PRIVATE",
+	NONE = "NONE"
 }
 
 type ZEUS_VARIABLES = {
@@ -25242,4 +25300,5 @@ type ZEUS_VARIABLES = {
 	["_OnDeleteBehaviour"]: ValueTypes["_OnDeleteBehaviour"];
 	["_RelationSide"]: ValueTypes["_RelationSide"];
 	["_OrderByDirection"]: ValueTypes["_OrderByDirection"];
+	["S3Acl"]: ValueTypes["S3Acl"];
 }
