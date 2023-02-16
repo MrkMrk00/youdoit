@@ -18,6 +18,7 @@ export const RecipeFragment = (locale: string) =>
 			{
 				title: true,
 				description: true,
+				tileDescription: true,
 			},
 		],
 	})
