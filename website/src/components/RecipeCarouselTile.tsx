@@ -2,13 +2,13 @@ import Image from 'next/image'
 import type { FunctionComponent } from 'react'
 import type { RecipeResult } from '../data/RecipeFragment'
 import { PriceTag } from './PriceTag'
-import styles from './RecipeTile.module.sass'
+import styles from './RecipeCarouselTile.module.sass'
 
-export type RecipeTileProps = {
+export type RecipeCarouselTileProps = {
 	tile: RecipeResult
 }
 
-export const RecipeTile: FunctionComponent<RecipeTileProps> = ({ tile }) => {
+export const RecipeCarouselTile: FunctionComponent<RecipeCarouselTileProps> = ({ tile }) => {
 	return (
 		<div className={styles.wrapper}>
 			{tile.mainImage?.url && (

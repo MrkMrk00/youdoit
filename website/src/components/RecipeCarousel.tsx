@@ -2,7 +2,7 @@ import type { FunctionComponent } from 'react'
 import { Fragment } from 'react'
 import type { RecipeResult } from '../data/RecipeFragment'
 import styles from './RecipeCarousel.module.sass'
-import { RecipeTile } from './RecipeTile'
+import { RecipeCarouselTile } from './RecipeCarouselTile'
 
 export type RecipeCarouselProps = {
 	tiles: RecipeResult[]
@@ -14,7 +14,7 @@ export const RecipeCarousel: FunctionComponent<RecipeCarouselProps> = ({ tiles }
 			{tiles.map((recipe) => {
 				return (
 					<Fragment key={recipe.id}>
-						<RecipeTile tile={recipe} />
+						<RecipeCarouselTile tile={recipe} />
 					</Fragment>
 				)
 			})}
