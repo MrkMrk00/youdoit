@@ -1,7 +1,10 @@
-import { OrderDirection } from '../../generated/contember'
+import { One, OrderDirection } from '../../generated/contember'
 import { Container } from '../components/Container'
 import { Layout } from '../components/Layout'
+import { CategoryPage } from '../components/pages/CategoryPage'
 import { HomePage } from '../components/pages/HomePage'
+import { Seo } from '../components/Seo'
+import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { RecipeFragment } from '../data/RecipeFragment'
 import { contember } from '../utilities/contember'
@@ -12,13 +15,13 @@ import { handleGetStaticPaths, handleGetStaticProps } from '../utilities/handler
 
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
-export default function ({ seo, homePage, recipes }: PageProps) {
-	console.log(seo)
+export default function ({ seo, homePage, homePageUrl, categoryPage, recipes }: PageProps) {
 	return (
 		<Layout>
-			{/* <Seo {...seo} /> */}
+			<Seo {...seo} />
 
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} />}
+			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
 			{/* {page && (
 				<>
 					<Container>
@@ -106,6 +109,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			{
 				url: true,
 				homePage: [{}, HomePageLocaleFragment()],
+				category: [{}, CategoryLocaleFragment(locale)],
 				// genericPage: [{}, GenericPageFragment()],
 				// redirect: [
 				// 	{},
@@ -116,6 +120,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 				// ],
 			},
 		],
+		getHomePageLocale: [{ by: { locale: { code: locale }, base: { unique: One.One } } }, { link: [{}, { url: true }] }],
 	})
 
 	// const redirectUrl = (() => {
@@ -140,11 +145,12 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		return (process.env.NEXT_PUBLIC_WEB_URL ?? '') + url
 	})()
 
-	console.log(data.getLinkable?.homePage)
 	if (!data.getLinkable) {
-		throw new Error('Page not found')
+		return {
+			notFound: true,
+		}
 	}
-	const { homePage } = data.getLinkable
+	const { homePage, category } = data.getLinkable
 
 	// if (!page) {
 	// 	return {
@@ -157,6 +163,8 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			// general: data.getGeneral,
 			// page,
 			homePage,
+			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
+			categoryPage: category,
 			recipes: data.listRecipe,
 			seo: {
 				canonicalUrl,
