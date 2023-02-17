@@ -2,6 +2,7 @@ import type { FunctionComponent } from 'react'
 import type { CategoryLocaleResult } from '../../data/CategoryLocaleFragment'
 import { BackButton } from '../BackButton'
 import { Container } from '../Container'
+import { RecommendedRecipes } from '../RecommendedRecipes'
 import { TileImage } from '../TileImage'
 import styles from './CategoryPage.module.sass'
 
@@ -24,7 +25,13 @@ export const CategoryPage: FunctionComponent<CategoryPageProps> = ({ categoryPag
 					</div>
 				</div>
 			)}
-			<Container>xxxx</Container>
+			<Container>
+				{categoryPage.base?.recipes && (
+					<div className={styles.recipes}>
+						<RecommendedRecipes recipes={categoryPage.base?.recipes} />
+					</div>
+				)}
+			</Container>
 		</div>
 	)
 }
