@@ -9,6 +9,7 @@ export const RecipeFragment = (locale: string) =>
 		id: true,
 		createdBy: [{}, { firstName: true, lastName: true }],
 		// pinnedRecipes: [{}, {}]
+		categories: [{}, { localesByLocale: [{ by: { locale: { code: locale } } }, { title: true }] }],
 		publishDate: true,
 		price: true,
 		mainImage: [{}, ImageFragment()],

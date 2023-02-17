@@ -18,6 +18,10 @@ export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile }) => {
 					</div>
 				)}
 				<div className={styles.contentIn}>
+					<div className={styles.categories}>
+						{/* Show only two first categories */}
+						{tile.categories?.map((category, index) => index <= 2 && category.localesByLocale?.title).join(', ')}
+					</div>
 					<div className={styles.title}>{tile.localesByLocale?.title}</div>
 					{tile.price && (
 						<div className={styles.price}>
