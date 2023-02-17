@@ -791,6 +791,7 @@ export const AllTypesProps: Record<string,any> = {
 		seo:"SeoWhere",
 		link:"LinkableWhere",
 		locale:"LocaleWhere",
+		description:"StringCondition",
 		and:"CategoryLocaleWhere",
 		or:"CategoryLocaleWhere",
 		not:"CategoryLocaleWhere"
@@ -912,7 +913,8 @@ export const AllTypesProps: Record<string,any> = {
 		base:"CategoryOrderBy",
 		seo:"SeoOrderBy",
 		link:"LinkableOrderBy",
-		locale:"LocaleOrderBy"
+		locale:"LocaleOrderBy",
+		description:"OrderDirection"
 	},
 	CategoryOrderBy:{
 		id:"OrderDirection",
@@ -4310,7 +4312,7 @@ export const AllTypesProps: Record<string,any> = {
 			options:"MutationTransactionOptions"
 		},
 		generateUploadUrl:{
-			acl:"S3Acl"
+
 		},
 		generateReadUrl:{
 
@@ -4757,8 +4759,7 @@ export const AllTypesProps: Record<string,any> = {
 	Json: `scalar.Json` as const,
 	_OnDeleteBehaviour: "enum" as const,
 	_RelationSide: "enum" as const,
-	_OrderByDirection: "enum" as const,
-	S3Acl: "enum" as const
+	_OrderByDirection: "enum" as const
 }
 
 export const ReturnTypes: Record<string,any> = {
@@ -5325,7 +5326,8 @@ export const ReturnTypes: Record<string,any> = {
 		base:"Category",
 		seo:"Seo",
 		link:"Linkable",
-		locale:"Locale"
+		locale:"Locale",
+		description:"String"
 	},
 	CategoryLocaleMeta:{
 		id:"FieldMeta",
@@ -5333,7 +5335,8 @@ export const ReturnTypes: Record<string,any> = {
 		base:"FieldMeta",
 		seo:"FieldMeta",
 		link:"FieldMeta",
-		locale:"FieldMeta"
+		locale:"FieldMeta",
+		description:"FieldMeta"
 	},
 	Seo:{
 		_meta:"SeoMeta",
@@ -8049,6 +8052,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	seo?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>,
+	description?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["CategoryLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["CategoryLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>
@@ -8204,7 +8208,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	base?: ValueTypes["CategoryOrderBy"] | undefined | null | Variable<any, string>,
 	seo?: ValueTypes["SeoOrderBy"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["LinkableOrderBy"] | undefined | null | Variable<any, string>,
-	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>
+	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>,
+	description?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
 	["CategoryOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -8814,6 +8819,7 @@ base?: [{	filter?: ValueTypes["CategoryWhere"] | undefined | null | Variable<any
 seo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>},ValueTypes["Seo"]],
 link?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>},ValueTypes["Linkable"]],
 locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["Locale"]],
+	description?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["CategoryLocaleMeta"]: AliasType<{
@@ -8823,6 +8829,7 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	seo?:ValueTypes["FieldMeta"],
 	link?:ValueTypes["FieldMeta"],
 	locale?:ValueTypes["FieldMeta"],
+	description?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Seo"]: AliasType<{
@@ -9687,6 +9694,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	seo?: ValueTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleCreateSeoEntityRelationInput"]: {
@@ -9765,6 +9773,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	base?: ValueTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	seo?: ValueTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleCreateBaseEntityRelationInput"]: {
@@ -9842,6 +9851,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	base?: ValueTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	seo?: ValueTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
@@ -10442,6 +10452,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	seo?: ValueTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleUpdateSeoEntityRelationInput"]: {
@@ -10557,6 +10568,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	base?: ValueTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	seo?: ValueTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleUpdateBaseEntityRelationInput"]: {
@@ -10666,6 +10678,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	base?: ValueTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	seo?: ValueTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["LocaleUpsertCategoriesRelationInput"]: {
@@ -11396,6 +11409,7 @@ recipe?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any
 	seo?: ValueTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleUpdateInput"]: {
@@ -11404,6 +11418,7 @@ recipe?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any
 	seo?: ValueTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["QueryTransaction"]: AliasType<{
@@ -11635,7 +11650,7 @@ updateCategoryLocale?: [{	by: ValueTypes["CategoryLocaleUniqueWhere"] | Variable
 upsertCategoryLocale?: [{	by: ValueTypes["CategoryLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>,	update: ValueTypes["CategoryLocaleUpdateInput"] | Variable<any, string>,	create: ValueTypes["CategoryLocaleCreateInput"] | Variable<any, string>},ValueTypes["CategoryLocaleUpsertResult"]],
 transaction?: [{	options?: ValueTypes["MutationTransactionOptions"] | undefined | null | Variable<any, string>},ValueTypes["MutationTransaction"]],
 	query?:ValueTypes["Query"],
-generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>,	acl?: ValueTypes["S3Acl"] | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
+generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
 generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>},ValueTypes["S3SignedRead"]],
 		__typename?: boolean | `@${string}`
 }>;
@@ -12600,8 +12615,7 @@ upsertCategoryLocale?: [{	by: ValueTypes["CategoryLocaleUniqueWhere"] | Variable
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null | Variable<any, string>
 };
-	/** Json custom scalar type */
-["Json"]:unknown;
+	["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ValueTypes["_Enum"],
 	entities?:ValueTypes["_Entity"],
@@ -12713,7 +12727,6 @@ upsertCategoryLocale?: [{	by: ValueTypes["CategoryLocaleUniqueWhere"] | Variable
 	value?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
-	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ValueTypes["S3Header"],
@@ -13219,6 +13232,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	seo?: ResolverInputTypes["SeoWhere"] | undefined | null,
 	link?: ResolverInputTypes["LinkableWhere"] | undefined | null,
 	locale?: ResolverInputTypes["LocaleWhere"] | undefined | null,
+	description?: ResolverInputTypes["StringCondition"] | undefined | null,
 	and?: Array<ResolverInputTypes["CategoryLocaleWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["CategoryLocaleWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null
@@ -13374,7 +13388,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	base?: ResolverInputTypes["CategoryOrderBy"] | undefined | null,
 	seo?: ResolverInputTypes["SeoOrderBy"] | undefined | null,
 	link?: ResolverInputTypes["LinkableOrderBy"] | undefined | null,
-	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null
+	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null,
+	description?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
 	["CategoryOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -13984,6 +13999,7 @@ base?: [{	filter?: ResolverInputTypes["CategoryWhere"] | undefined | null},Resol
 seo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null},ResolverInputTypes["Seo"]],
 link?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | null},ResolverInputTypes["Linkable"]],
 locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},ResolverInputTypes["Locale"]],
+	description?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["CategoryLocaleMeta"]: AliasType<{
@@ -13993,6 +14009,7 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	seo?:ResolverInputTypes["FieldMeta"],
 	link?:ResolverInputTypes["FieldMeta"],
 	locale?:ResolverInputTypes["FieldMeta"],
+	description?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Seo"]: AliasType<{
@@ -14858,6 +14875,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	seo?: ResolverInputTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null,
 	link?: ResolverInputTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryLocaleCreateSeoEntityRelationInput"]: {
@@ -14936,6 +14954,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	base?: ResolverInputTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined | null,
 	seo?: ResolverInputTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryLocaleCreateBaseEntityRelationInput"]: {
@@ -15013,6 +15032,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	base?: ResolverInputTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined | null,
 	seo?: ResolverInputTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null,
 	link?: ResolverInputTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
@@ -15613,6 +15633,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	seo?: ResolverInputTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null,
 	link?: ResolverInputTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryLocaleUpdateSeoEntityRelationInput"]: {
@@ -15728,6 +15749,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	base?: ResolverInputTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined | null,
 	seo?: ResolverInputTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryLocaleUpdateBaseEntityRelationInput"]: {
@@ -15837,6 +15859,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	base?: ResolverInputTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined | null,
 	seo?: ResolverInputTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null,
 	link?: ResolverInputTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["LocaleUpsertCategoriesRelationInput"]: {
@@ -16567,6 +16590,7 @@ recipe?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},Resol
 	seo?: ResolverInputTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined | null,
 	link?: ResolverInputTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryLocaleUpdateInput"]: {
@@ -16575,6 +16599,7 @@ recipe?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},Resol
 	seo?: ResolverInputTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined | null,
 	link?: ResolverInputTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["QueryTransaction"]: AliasType<{
@@ -16806,7 +16831,7 @@ updateCategoryLocale?: [{	by: ResolverInputTypes["CategoryLocaleUniqueWhere"],	f
 upsertCategoryLocale?: [{	by: ResolverInputTypes["CategoryLocaleUniqueWhere"],	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null,	update: ResolverInputTypes["CategoryLocaleUpdateInput"],	create: ResolverInputTypes["CategoryLocaleCreateInput"]},ResolverInputTypes["CategoryLocaleUpsertResult"]],
 transaction?: [{	options?: ResolverInputTypes["MutationTransactionOptions"] | undefined | null},ResolverInputTypes["MutationTransaction"]],
 	query?:ResolverInputTypes["Query"],
-generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null,	acl?: ResolverInputTypes["S3Acl"] | undefined | null},ResolverInputTypes["S3SignedUpload"]],
+generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null},ResolverInputTypes["S3SignedUpload"]],
 generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},ResolverInputTypes["S3SignedRead"]],
 		__typename?: boolean | `@${string}`
 }>;
@@ -17771,8 +17796,7 @@ upsertCategoryLocale?: [{	by: ResolverInputTypes["CategoryLocaleUniqueWhere"],	f
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null
 };
-	/** Json custom scalar type */
-["Json"]:unknown;
+	["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ResolverInputTypes["_Enum"],
 	entities?:ResolverInputTypes["_Entity"],
@@ -17885,7 +17909,6 @@ upsertCategoryLocale?: [{	by: ResolverInputTypes["CategoryLocaleUniqueWhere"],	f
 	value?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
-	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ResolverInputTypes["S3Header"],
@@ -18385,6 +18408,7 @@ export type ModelTypes = {
 	seo?: ModelTypes["SeoWhere"] | undefined,
 	link?: ModelTypes["LinkableWhere"] | undefined,
 	locale?: ModelTypes["LocaleWhere"] | undefined,
+	description?: ModelTypes["StringCondition"] | undefined,
 	and?: Array<ModelTypes["CategoryLocaleWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["CategoryLocaleWhere"] | undefined> | undefined,
 	not?: ModelTypes["CategoryLocaleWhere"] | undefined
@@ -18530,7 +18554,8 @@ export type ModelTypes = {
 	base?: ModelTypes["CategoryOrderBy"] | undefined,
 	seo?: ModelTypes["SeoOrderBy"] | undefined,
 	link?: ModelTypes["LinkableOrderBy"] | undefined,
-	locale?: ModelTypes["LocaleOrderBy"] | undefined
+	locale?: ModelTypes["LocaleOrderBy"] | undefined,
+	description?: ModelTypes["OrderDirection"] | undefined
 };
 	["CategoryOrderBy"]: {
 	_random?: boolean | undefined,
@@ -19096,7 +19121,8 @@ export type ModelTypes = {
 	base?: ModelTypes["Category"] | undefined,
 	seo?: ModelTypes["Seo"] | undefined,
 	link?: ModelTypes["Linkable"] | undefined,
-	locale?: ModelTypes["Locale"] | undefined
+	locale?: ModelTypes["Locale"] | undefined,
+	description?: string | undefined
 };
 	["CategoryLocaleMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
@@ -19104,7 +19130,8 @@ export type ModelTypes = {
 	base?: ModelTypes["FieldMeta"] | undefined,
 	seo?: ModelTypes["FieldMeta"] | undefined,
 	link?: ModelTypes["FieldMeta"] | undefined,
-	locale?: ModelTypes["FieldMeta"] | undefined
+	locale?: ModelTypes["FieldMeta"] | undefined,
+	description?: ModelTypes["FieldMeta"] | undefined
 };
 	["Seo"]: {
 		_meta?: ModelTypes["SeoMeta"] | undefined,
@@ -19938,6 +19965,7 @@ export type ModelTypes = {
 	seo?: ModelTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	link?: ModelTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	locale?: ModelTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleCreateSeoEntityRelationInput"]: {
@@ -20016,6 +20044,7 @@ export type ModelTypes = {
 	base?: ModelTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined,
 	seo?: ModelTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	locale?: ModelTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleCreateBaseEntityRelationInput"]: {
@@ -20093,6 +20122,7 @@ export type ModelTypes = {
 	base?: ModelTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined,
 	seo?: ModelTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	link?: ModelTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
@@ -20693,6 +20723,7 @@ export type ModelTypes = {
 	seo?: ModelTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	link?: ModelTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined,
 	locale?: ModelTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleUpdateSeoEntityRelationInput"]: {
@@ -20808,6 +20839,7 @@ export type ModelTypes = {
 	base?: ModelTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined,
 	seo?: ModelTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	locale?: ModelTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleUpdateBaseEntityRelationInput"]: {
@@ -20917,6 +20949,7 @@ export type ModelTypes = {
 	base?: ModelTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined,
 	seo?: ModelTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	link?: ModelTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["LocaleUpsertCategoriesRelationInput"]: {
@@ -21627,6 +21660,7 @@ export type ModelTypes = {
 	seo?: ModelTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	link?: ModelTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	locale?: ModelTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleUpdateInput"]: {
@@ -21635,6 +21669,7 @@ export type ModelTypes = {
 	seo?: ModelTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	link?: ModelTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined,
 	locale?: ModelTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["QueryTransaction"]: {
@@ -22629,8 +22664,7 @@ export type ModelTypes = {
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined
 };
-	/** Json custom scalar type */
-["Json"]:any;
+	["Json"]:any;
 	["_Schema"]: {
 		enums: Array<ModelTypes["_Enum"]>,
 	entities: Array<ModelTypes["_Entity"]>
@@ -22714,7 +22748,6 @@ export type ModelTypes = {
 		key: string,
 	value: string
 };
-	["S3Acl"]:S3Acl;
 	["S3SignedRead"]: {
 		url: string,
 	headers: Array<ModelTypes["S3Header"]>,
@@ -23219,6 +23252,7 @@ export type GraphQLTypes = {
 	seo?: GraphQLTypes["SeoWhere"] | undefined,
 	link?: GraphQLTypes["LinkableWhere"] | undefined,
 	locale?: GraphQLTypes["LocaleWhere"] | undefined,
+	description?: GraphQLTypes["StringCondition"] | undefined,
 	and?: Array<GraphQLTypes["CategoryLocaleWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["CategoryLocaleWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["CategoryLocaleWhere"] | undefined
@@ -23374,7 +23408,8 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["CategoryOrderBy"] | undefined,
 	seo?: GraphQLTypes["SeoOrderBy"] | undefined,
 	link?: GraphQLTypes["LinkableOrderBy"] | undefined,
-	locale?: GraphQLTypes["LocaleOrderBy"] | undefined
+	locale?: GraphQLTypes["LocaleOrderBy"] | undefined,
+	description?: GraphQLTypes["OrderDirection"] | undefined
 };
 	["CategoryOrderBy"]: {
 		_random?: boolean | undefined,
@@ -23984,7 +24019,8 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["Category"] | undefined,
 	seo?: GraphQLTypes["Seo"] | undefined,
 	link?: GraphQLTypes["Linkable"] | undefined,
-	locale?: GraphQLTypes["Locale"] | undefined
+	locale?: GraphQLTypes["Locale"] | undefined,
+	description?: string | undefined
 };
 	["CategoryLocaleMeta"]: {
 	__typename: "CategoryLocaleMeta",
@@ -23993,7 +24029,8 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["FieldMeta"] | undefined,
 	seo?: GraphQLTypes["FieldMeta"] | undefined,
 	link?: GraphQLTypes["FieldMeta"] | undefined,
-	locale?: GraphQLTypes["FieldMeta"] | undefined
+	locale?: GraphQLTypes["FieldMeta"] | undefined,
+	description?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["Seo"]: {
 	__typename: "Seo",
@@ -24858,6 +24895,7 @@ export type GraphQLTypes = {
 	seo?: GraphQLTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	link?: GraphQLTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleCreateSeoEntityRelationInput"]: {
@@ -24936,6 +24974,7 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined,
 	seo?: GraphQLTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleCreateBaseEntityRelationInput"]: {
@@ -25013,6 +25052,7 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["CategoryLocaleCreateBaseEntityRelationInput"] | undefined,
 	seo?: GraphQLTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	link?: GraphQLTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
@@ -25613,6 +25653,7 @@ export type GraphQLTypes = {
 	seo?: GraphQLTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	link?: GraphQLTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleUpdateSeoEntityRelationInput"]: {
@@ -25728,6 +25769,7 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined,
 	seo?: GraphQLTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleUpdateBaseEntityRelationInput"]: {
@@ -25837,6 +25879,7 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["CategoryLocaleUpdateBaseEntityRelationInput"] | undefined,
 	seo?: GraphQLTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	link?: GraphQLTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["LocaleUpsertCategoriesRelationInput"]: {
@@ -26567,6 +26610,7 @@ export type GraphQLTypes = {
 	seo?: GraphQLTypes["CategoryLocaleCreateSeoEntityRelationInput"] | undefined,
 	link?: GraphQLTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["CategoryLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleUpdateInput"]: {
@@ -26575,6 +26619,7 @@ export type GraphQLTypes = {
 	seo?: GraphQLTypes["CategoryLocaleUpdateSeoEntityRelationInput"] | undefined,
 	link?: GraphQLTypes["CategoryLocaleUpdateLinkEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["CategoryLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["QueryTransaction"]: {
@@ -27771,8 +27816,7 @@ export type GraphQLTypes = {
 	["MutationTransactionOptions"]: {
 		deferForeignKeyConstraints?: boolean | undefined
 };
-	/** Json custom scalar type */
-["Json"]: "scalar" & { name: "Json" };
+	["Json"]: "scalar" & { name: "Json" };
 	["_Schema"]: {
 	__typename: "_Schema",
 	enums: Array<GraphQLTypes["_Enum"]>,
@@ -27885,7 +27929,6 @@ export type GraphQLTypes = {
 	key: string,
 	value: string
 };
-	["S3Acl"]: S3Acl;
 	["S3SignedRead"]: {
 	__typename: "S3SignedRead",
 	url: string,
@@ -27935,11 +27978,6 @@ export const enum _RelationSide {
 export const enum _OrderByDirection {
 	asc = "asc",
 	desc = "desc"
-}
-export const enum S3Acl {
-	PUBLIC_READ = "PUBLIC_READ",
-	PRIVATE = "PRIVATE",
-	NONE = "NONE"
 }
 
 type ZEUS_VARIABLES = {
@@ -28418,5 +28456,4 @@ type ZEUS_VARIABLES = {
 	["_OnDeleteBehaviour"]: ValueTypes["_OnDeleteBehaviour"];
 	["_RelationSide"]: ValueTypes["_RelationSide"];
 	["_OrderByDirection"]: ValueTypes["_OrderByDirection"];
-	["S3Acl"]: ValueTypes["S3Acl"];
 }
