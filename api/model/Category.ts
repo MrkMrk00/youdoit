@@ -1,5 +1,6 @@
 import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-definition'
 import { publicRole } from './acl'
+import { Image } from './Image'
 import { Linkable } from './Linkable'
 import { Locale } from './Locale'
 import { Recipe } from './Recipe'
@@ -11,6 +12,7 @@ export class Category {
 	locales = d.oneHasMany(CategoryLocale, 'base')
 
 	recipes = d.manyHasManyInverse(Recipe, 'categories')
+	image = d.oneHasOne(Image)
 }
 
 @d.Unique('base', 'locale')

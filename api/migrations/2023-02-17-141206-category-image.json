@@ -1,0 +1,44 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createRelation",
+			"entityName": "Category",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "image",
+				"target": "Image",
+				"joiningColumn": {
+					"columnName": "image_id",
+					"onDelete": "restrict"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Category/operations/read/image",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Category/operations/create/image",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Category/operations/update/image",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Category/operations/read/image",
+					"value": true
+				}
+			]
+		}
+	]
+}
