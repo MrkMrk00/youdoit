@@ -1,4 +1,14 @@
-import { Component, DateTimeField, Field, Repeater, RichTextField, SelectField, TextField } from '@contember/admin'
+import {
+	Component,
+	DateTimeField,
+	Entity,
+	Field,
+	MultiSelectField,
+	Repeater,
+	RichTextField,
+	SelectField,
+	TextField,
+} from '@contember/admin'
 import { ImageField } from './ImageField'
 import { LocaleSideDimension } from './LocaleSideDimensions'
 import { StepGroup } from './StepGroup'
@@ -24,6 +34,23 @@ export const Recipe = Component((_, enviroment) => {
 				}
 			/>
 			<DateTimeField field="publishDate" label="Publish date" />
+			<MultiSelectField
+				field="categories"
+				label="Categories"
+				options="Category"
+				renderOption={(e) => (
+					<Entity accessor={e}>
+						<LocaleSideDimension>
+							<Field field="title" />
+						</LocaleSideDimension>
+					</Entity>
+				)}
+				optionsStaticRender={
+					<LocaleSideDimension>
+						<Field field="title" />
+					</LocaleSideDimension>
+				}
+			/>
 			<TextField field="price" label="Price" />
 			<ImageField field="mainImage" label="Main image" />
 			<LocaleSideDimension>
