@@ -29,6 +29,7 @@ export const CategoryLocaleFragment = (locale: string) =>
 			},
 		],
 		title: true,
+		link: [{}, { url: true }],
 		description: true,
 		seo: [{}, SeoFragment()],
 	})

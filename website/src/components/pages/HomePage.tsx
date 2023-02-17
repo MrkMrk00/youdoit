@@ -2,11 +2,11 @@ import type { FunctionComponent } from 'react'
 import type { CategoryLocaleResult } from '../../data/CategoryLocaleFragment'
 import type { HomePageLocaleResult } from '../../data/HomePageLocaleFragment'
 import type { RecipeResult } from '../../data/RecipeFragment'
+import { categoriesChunk } from '../../utilities/categoriesChunk'
 import { recipesChunk } from '../../utilities/recipesChunk'
 import { CategoryTile } from '../CategoryTile'
 import { Container } from '../Container'
 import { RecipeCarousel } from '../RecipeCarousel'
-import { RecipeTile } from '../RecipeTile'
 import { RecommendedRecipes } from '../RecommendedRecipes'
 import styles from './HomePage.module.sass'
 
@@ -17,9 +17,9 @@ export interface HomePageProps {
 }
 
 export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes, categories }) => {
-	const recipesGroups = recipesChunk(recipes, 10)
+	const recipesGroups = recipesChunk(recipes, 8)
 
-	console.log(categories)
+	const categoriesGroups = categoriesChunk(categories, 2)
 
 	return (
 		<Container>
@@ -27,19 +27,14 @@ export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes, 
 				<div>
 					<div>{homePage.title}</div>
 				</div>
-				{categories[0] && <CategoryTile tile={categories[0]} type="main" />}
-				{categories[0] && <CategoryTile tile={categories[0]} type="withDescription" />}
 				{recipesGroups.map((group, index) => {
-					const main = group.at(0)
-					const carousel = group.slice(1, 6)
-					const withDescription = group.at(6)
-					const recommendedRecipes = group.slice(7)
-
+					const carousel = group.slice(0, 5)
+					const recommendedRecipes = group.slice(5)
 					return (
 						<div className={styles.recipes} key={index}>
-							{main && <RecipeTile tile={main} type="main" />}
+							{categoriesGroups[index] && <CategoryTile tile={categoriesGroups[index][0]} type="main" />}
 							{carousel.length > 0 && <RecipeCarousel tiles={carousel} />}
-							{withDescription && <RecipeTile tile={withDescription} type="withDescription" />}
+							{categoriesGroups[index] && <CategoryTile tile={categoriesGroups[index][1]} type="withDescription" />}
 							{recommendedRecipes.length > 0 && <RecommendedRecipes recipes={recommendedRecipes} />}
 						</div>
 					)

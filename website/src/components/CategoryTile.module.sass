@@ -3,8 +3,14 @@
 .wrapper
 	position: relative
 	color: #FFF
+	background: #FFF
 	border-radius: 1.875rem
 	overflow: hidden
+	a:-webkit-any-link
+		color: inherit
+	&:hover
+		.image
+			transform: scale(1.05)
 	&.is_main
 		.image
 			aspect-ratio: 390 / 310
@@ -28,9 +34,14 @@
 .content
 	position: relative
 
+.imageWrapper
+	position: relative
+	overflow: hidden
+
 .image
 	position: relative
 	aspect-ratio: 1
+	transition: transform 0.5s ease-in-out
 
 .contentIn
 	position: absolute

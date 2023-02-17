@@ -1,5 +1,3 @@
-import { RichTextRenderer } from '@contember/react-client'
-import clsx from 'clsx'
 import type { FunctionComponent } from 'react'
 import type { RecipeResult } from '../data/RecipeFragment'
 import { PriceTag } from './PriceTag'
@@ -8,12 +6,11 @@ import { TileImage } from './TileImage'
 
 export interface RecipeTile {
 	tile: RecipeResult
-	type: 'main' | 'carousel' | 'withDescription'
 }
 
-export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile, type }) => {
+export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile }) => {
 	return (
-		<div className={clsx(styles.wrapper, styles[`is_${type}`])}>
+		<div className={styles.wrapper}>
 			<div className={styles.content}>
 				{tile.mainImage?.url && (
 					<div className={styles.image}>
@@ -29,11 +26,6 @@ export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile, type }) => {
 					)}
 				</div>
 			</div>
-			{tile.localesByLocale?.tileDescription && type === 'withDescription' && (
-				<div className={styles.tileDescription}>
-					<RichTextRenderer source={tile.localesByLocale?.tileDescription} />
-				</div>
-			)}
 		</div>
 	)
 }
