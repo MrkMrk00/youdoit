@@ -1,5 +1,6 @@
 import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-definition'
 import { publicRole } from './acl'
+import { CategoryLocale } from './Category'
 import { HomePageLocale } from './HomePage'
 import { RecipeLocale } from './Recipe'
 import { StepLocale } from './Step'
@@ -13,6 +14,7 @@ export class Locale {
 	homePage = d.oneHasMany(HomePageLocale, 'locale')
 
 	recipes = d.oneHasMany(RecipeLocale, 'locale')
+	categories = d.oneHasMany(CategoryLocale, 'locale')
 	stepsGroups = d.oneHasMany(StepGroupLocale, 'locale')
 	steps = d.oneHasMany(StepLocale, 'locale')
 }

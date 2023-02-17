@@ -1,0 +1,93 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createRelation",
+			"entityName": "CategoryLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "locale",
+				"target": "Locale",
+				"joiningColumn": {
+					"columnName": "locale_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "categories"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "categories",
+				"target": "CategoryLocale",
+				"ownedBy": "locale"
+			}
+		},
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "CategoryLocale",
+			"unique": {
+				"fields": [
+					"base",
+					"locale"
+				],
+				"name": "unique_CategoryLocale_base_locale_2d777e"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/create/categories",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/update/categories",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/read/categories",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/CategoryLocale/operations/read/locale",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/CategoryLocale/operations/create/locale",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/CategoryLocale/operations/update/locale",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/CategoryLocale",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"base": true,
+								"locale": true,
+								"link": true,
+								"title": true,
+								"seo": true
+							}
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Locale/operations/read/categories",
+					"value": true
+				}
+			]
+		}
+	]
+}
