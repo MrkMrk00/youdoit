@@ -21,5 +21,6 @@ export class CategoryLocale {
 
 	link = d.oneHasOneInverse(Linkable, 'category').notNull()
 	title = d.stringColumn()
+	description = d.stringColumn()
 	seo = d.oneHasOne(Seo)
 }
