@@ -10,12 +10,16 @@ import {
 	TextField,
 } from '@contember/admin'
 import { ImageField } from './ImageField'
+import { LinkUrlField } from './LinkUrlField'
 import { LocaleSideDimension } from './LocaleSideDimensions'
 import { StepGroup } from './StepGroup'
 
 export const Recipe = Component((_, enviroment) => {
 	return (
 		<>
+			<LocaleSideDimension>
+				<LinkUrlField derivedFrom="title" />
+			</LocaleSideDimension>
 			<SelectField
 				field="createdBy"
 				label="Created by"

@@ -14,7 +14,7 @@ export const RecipeCarousel: FunctionComponent<RecipeCarouselProps> = ({ tiles }
 			{tiles.map((recipe) => {
 				return (
 					<Fragment key={recipe.id}>
-						<RecipeTile tile={recipe} type="carousel" />
+						<RecipeTile tile={recipe} />
 					</Fragment>
 				)
 			})}

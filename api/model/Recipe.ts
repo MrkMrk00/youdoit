@@ -2,6 +2,7 @@ import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-d
 import { publicRole } from './acl'
 import { Category } from './Category'
 import { Image } from './Image'
+import { Linkable } from './Linkable'
 import { Locale } from './Locale'
 import { PinnedRecipe } from './PinnedRecipe'
 import { StepGroup } from './StepGroup'
@@ -27,6 +28,7 @@ export class RecipeLocale {
 	base = d.manyHasOne(Recipe, 'locales').notNull().cascadeOnDelete()
 	locale = d.manyHasOne(Locale, 'recipes').cascadeOnDelete().notNull()
 
+	link = d.oneHasOneInverse(Linkable, 'recipe').notNull()
 	title = d.stringColumn()
 	tileDescription = d.stringColumn()
 	description = d.stringColumn()
