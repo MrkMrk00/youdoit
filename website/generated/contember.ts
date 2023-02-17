@@ -780,6 +780,7 @@ export const AllTypesProps: Record<string,any> = {
 		order:"IntCondition",
 		locales:"CategoryLocaleWhere",
 		recipes:"RecipeWhere",
+		image:"ImageWhere",
 		and:"CategoryWhere",
 		or:"CategoryWhere",
 		not:"CategoryWhere"
@@ -918,7 +919,17 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	CategoryOrderBy:{
 		id:"OrderDirection",
-		order:"OrderDirection"
+		order:"OrderDirection",
+		image:"ImageOrderBy"
+	},
+	ImageOrderBy:{
+		id:"OrderDirection",
+		url:"OrderDirection",
+		width:"OrderDirection",
+		height:"OrderDirection",
+		size:"OrderDirection",
+		type:"OrderDirection",
+		alt:"OrderDirection"
 	},
 	SeoOrderBy:{
 		id:"OrderDirection",
@@ -929,15 +940,6 @@ export const AllTypesProps: Record<string,any> = {
 		noIndex:"OrderDirection",
 		noFollow:"OrderDirection",
 		ogImage:"ImageOrderBy"
-	},
-	ImageOrderBy:{
-		id:"OrderDirection",
-		url:"OrderDirection",
-		width:"OrderDirection",
-		height:"OrderDirection",
-		size:"OrderDirection",
-		type:"OrderDirection",
-		alt:"OrderDirection"
 	},
 	HomePageLocalesByLocaleUniqueWhere:{
 		locale:"LocaleUniqueWhere"
@@ -1019,14 +1021,15 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	CategoryUniqueWhere:{
 		id:"UUID",
-		locales:"CategoryLocaleUniqueWhere"
+		locales:"CategoryLocaleUniqueWhere",
+		image:"ImageUniqueWhere"
+	},
+	ImageUniqueWhere:{
+		id:"UUID"
 	},
 	SeoUniqueWhere:{
 		id:"UUID",
 		ogImage:"ImageUniqueWhere"
-	},
-	ImageUniqueWhere:{
-		id:"UUID"
 	},
 	HomePageLocalesByLinkUniqueWhere:{
 		link:"LinkableUniqueWhere"
@@ -1447,6 +1450,9 @@ export const AllTypesProps: Record<string,any> = {
 		recipes:{
 			filter:"RecipeWhere",
 			orderBy:"RecipeOrderBy"
+		},
+		image:{
+			filter:"ImageWhere"
 		},
 		localesByLocale:{
 			by:"CategoryLocalesByLocaleUniqueWhere",
@@ -2060,7 +2066,8 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	CategoryWithoutRecipesCreateInput:{
 		id:"UUID",
-		locales:"CategoryCreateLocalesEntityRelationInput"
+		locales:"CategoryCreateLocalesEntityRelationInput",
+		image:"CategoryCreateImageEntityRelationInput"
 	},
 	CategoryCreateLocalesEntityRelationInput:{
 		connect:"CategoryLocaleUniqueWhere",
@@ -2137,7 +2144,8 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	CategoryWithoutLocalesCreateInput:{
 		id:"UUID",
-		recipes:"CategoryCreateRecipesEntityRelationInput"
+		recipes:"CategoryCreateRecipesEntityRelationInput",
+		image:"CategoryCreateImageEntityRelationInput"
 	},
 	CategoryCreateRecipesEntityRelationInput:{
 		connect:"RecipeUniqueWhere",
@@ -2189,6 +2197,10 @@ export const AllTypesProps: Record<string,any> = {
 		base:"CategoryLocaleCreateBaseEntityRelationInput",
 		seo:"CategoryLocaleCreateSeoEntityRelationInput",
 		link:"CategoryLocaleCreateLinkEntityRelationInput"
+	},
+	CategoryCreateImageEntityRelationInput:{
+		connect:"ImageUniqueWhere",
+		create:"ImageCreateInput"
 	},
 	HomePageLocaleCreateSeoEntityRelationInput:{
 		connect:"SeoUniqueWhere",
@@ -2656,7 +2668,8 @@ export const AllTypesProps: Record<string,any> = {
 		data:"CategoryWithoutRecipesUpdateInput"
 	},
 	CategoryWithoutRecipesUpdateInput:{
-		locales:"CategoryUpdateLocalesEntityRelationInput"
+		locales:"CategoryUpdateLocalesEntityRelationInput",
+		image:"CategoryUpdateImageEntityRelationInput"
 	},
 	CategoryUpdateLocalesEntityRelationInput:{
 		create:"CategoryLocaleWithoutBaseCreateInput",
@@ -2767,7 +2780,8 @@ export const AllTypesProps: Record<string,any> = {
 		connect:"CategoryUniqueWhere"
 	},
 	CategoryWithoutLocalesUpdateInput:{
-		recipes:"CategoryUpdateRecipesEntityRelationInput"
+		recipes:"CategoryUpdateRecipesEntityRelationInput",
+		image:"CategoryUpdateImageEntityRelationInput"
 	},
 	CategoryUpdateRecipesEntityRelationInput:{
 		create:"RecipeWithoutCategoriesCreateInput",
@@ -2872,6 +2886,16 @@ export const AllTypesProps: Record<string,any> = {
 		by:"RecipeUniqueWhere",
 		update:"RecipeWithoutCategoriesUpdateInput",
 		create:"RecipeWithoutCategoriesCreateInput"
+	},
+	CategoryUpdateImageEntityRelationInput:{
+		create:"ImageCreateInput",
+		update:"ImageUpdateInput",
+		upsert:"CategoryUpsertImageRelationInput",
+		connect:"ImageUniqueWhere"
+	},
+	CategoryUpsertImageRelationInput:{
+		update:"ImageUpdateInput",
+		create:"ImageCreateInput"
 	},
 	CategoryLocaleUpsertBaseRelationInput:{
 		update:"CategoryWithoutLocalesUpdateInput",
@@ -3386,11 +3410,13 @@ export const AllTypesProps: Record<string,any> = {
 	CategoryCreateInput:{
 		id:"UUID",
 		locales:"CategoryCreateLocalesEntityRelationInput",
-		recipes:"CategoryCreateRecipesEntityRelationInput"
+		recipes:"CategoryCreateRecipesEntityRelationInput",
+		image:"CategoryCreateImageEntityRelationInput"
 	},
 	CategoryUpdateInput:{
 		locales:"CategoryUpdateLocalesEntityRelationInput",
-		recipes:"CategoryUpdateRecipesEntityRelationInput"
+		recipes:"CategoryUpdateRecipesEntityRelationInput",
+		image:"CategoryUpdateImageEntityRelationInput"
 	},
 	CategoryLocaleCreateInput:{
 		id:"UUID",
@@ -5307,6 +5333,7 @@ export const ReturnTypes: Record<string,any> = {
 		order:"Int",
 		locales:"CategoryLocale",
 		recipes:"Recipe",
+		image:"Image",
 		localesByLocale:"CategoryLocale",
 		localesBySeo:"CategoryLocale",
 		localesByLink:"CategoryLocale",
@@ -5317,7 +5344,8 @@ export const ReturnTypes: Record<string,any> = {
 		id:"FieldMeta",
 		order:"FieldMeta",
 		locales:"FieldMeta",
-		recipes:"FieldMeta"
+		recipes:"FieldMeta",
+		image:"FieldMeta"
 	},
 	CategoryLocale:{
 		_meta:"CategoryLocaleMeta",
@@ -8041,6 +8069,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	order?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
 	locales?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>,
 	recipes?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,
+	image?: ValueTypes["ImageWhere"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["CategoryWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["CategoryWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["CategoryWhere"] | undefined | null | Variable<any, string>
@@ -8215,7 +8244,19 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	_random?: boolean | undefined | null | Variable<any, string>,
 	_randomSeeded?: number | undefined | null | Variable<any, string>,
 	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	order?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+	order?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	image?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>
+};
+	["ImageOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	url?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	width?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	height?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	size?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	type?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	alt?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
 	["SeoOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -8228,17 +8269,6 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	noIndex?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	noFollow?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	ogImage?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>
-};
-	["ImageOrderBy"]: {
-	_random?: boolean | undefined | null | Variable<any, string>,
-	_randomSeeded?: number | undefined | null | Variable<any, string>,
-	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	url?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	width?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	height?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	size?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	type?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	alt?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>
@@ -8322,14 +8352,15 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 };
 	["CategoryUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
-	locales?: ValueTypes["CategoryLocaleUniqueWhere"] | undefined | null | Variable<any, string>
+	locales?: ValueTypes["CategoryLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
+	image?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["ImageUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>
 };
 	["SeoUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
 	ogImage?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>
-};
-	["ImageUniqueWhere"]: {
-	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>
@@ -8797,6 +8828,7 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	order?:boolean | `@${string}`,
 locales?: [{	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["CategoryLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["CategoryLocale"]],
 recipes?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
+image?: [{	filter?: ValueTypes["ImageWhere"] | undefined | null | Variable<any, string>},ValueTypes["Image"]],
 localesByLocale?: [{	by: ValueTypes["CategoryLocalesByLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["CategoryLocale"]],
 localesBySeo?: [{	by: ValueTypes["CategoryLocalesBySeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["CategoryLocale"]],
 localesByLink?: [{	by: ValueTypes["CategoryLocalesByLinkUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["CategoryLocale"]],
@@ -8809,6 +8841,7 @@ paginateRecipes?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Var
 	order?:ValueTypes["FieldMeta"],
 	locales?:ValueTypes["FieldMeta"],
 	recipes?:ValueTypes["FieldMeta"],
+	image?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["CategoryLocale"]: AliasType<{
@@ -9681,6 +9714,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
 	order?: number | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	image?: ValueTypes["CategoryCreateImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryCreateLocalesEntityRelationInput"]: {
@@ -9784,6 +9818,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
 	order?: number | undefined | null | Variable<any, string>,
 	recipes?: Array<ValueTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	image?: ValueTypes["CategoryCreateImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryCreateRecipesEntityRelationInput"]: {
@@ -9853,6 +9888,10 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	link?: ValueTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
 	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["CategoryCreateImageEntityRelationInput"]: {
+	connect?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["ImageCreateInput"] | undefined | null | Variable<any, string>
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
 	connect?: ValueTypes["SeoUniqueWhere"] | undefined | null | Variable<any, string>,
@@ -10432,6 +10471,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["CategoryWithoutRecipesUpdateInput"]: {
 	order?: number | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	image?: ValueTypes["CategoryUpdateImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryUpdateLocalesEntityRelationInput"]: {
@@ -10581,6 +10621,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["CategoryWithoutLocalesUpdateInput"]: {
 	order?: number | undefined | null | Variable<any, string>,
 	recipes?: Array<ValueTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	image?: ValueTypes["CategoryUpdateImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryUpdateRecipesEntityRelationInput"]: {
@@ -10704,6 +10745,18 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	by?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>,
 	update?: ValueTypes["RecipeWithoutCategoriesUpdateInput"] | undefined | null | Variable<any, string>,
 	create?: ValueTypes["RecipeWithoutCategoriesCreateInput"] | undefined | null | Variable<any, string>
+};
+	["CategoryUpdateImageEntityRelationInput"]: {
+	create?: ValueTypes["ImageCreateInput"] | undefined | null | Variable<any, string>,
+	update?: ValueTypes["ImageUpdateInput"] | undefined | null | Variable<any, string>,
+	upsert?: ValueTypes["CategoryUpsertImageRelationInput"] | undefined | null | Variable<any, string>,
+	connect?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>,
+	disconnect?: boolean | undefined | null | Variable<any, string>,
+	delete?: boolean | undefined | null | Variable<any, string>
+};
+	["CategoryUpsertImageRelationInput"]: {
+	update?: ValueTypes["ImageUpdateInput"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["ImageCreateInput"] | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleUpsertBaseRelationInput"]: {
 	update?: ValueTypes["CategoryWithoutLocalesUpdateInput"] | undefined | null | Variable<any, string>,
@@ -11394,12 +11447,14 @@ recipe?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any
 	order?: number | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	recipes?: Array<ValueTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	image?: ValueTypes["CategoryCreateImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryUpdateInput"]: {
 	order?: number | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	recipes?: Array<ValueTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	image?: ValueTypes["CategoryUpdateImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleCreateInput"]: {
@@ -13221,6 +13276,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	order?: ResolverInputTypes["IntCondition"] | undefined | null,
 	locales?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null,
 	recipes?: ResolverInputTypes["RecipeWhere"] | undefined | null,
+	image?: ResolverInputTypes["ImageWhere"] | undefined | null,
 	and?: Array<ResolverInputTypes["CategoryWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["CategoryWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["CategoryWhere"] | undefined | null
@@ -13395,7 +13451,19 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	_random?: boolean | undefined | null,
 	_randomSeeded?: number | undefined | null,
 	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	order?: ResolverInputTypes["OrderDirection"] | undefined | null
+	order?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	image?: ResolverInputTypes["ImageOrderBy"] | undefined | null
+};
+	["ImageOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	url?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	width?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	height?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	size?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	type?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	alt?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
 	["SeoOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -13408,17 +13476,6 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	noIndex?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	noFollow?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	ogImage?: ResolverInputTypes["ImageOrderBy"] | undefined | null
-};
-	["ImageOrderBy"]: {
-	_random?: boolean | undefined | null,
-	_randomSeeded?: number | undefined | null,
-	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	url?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	width?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	height?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	size?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	type?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	alt?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null
@@ -13502,14 +13559,15 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 };
 	["CategoryUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
-	locales?: ResolverInputTypes["CategoryLocaleUniqueWhere"] | undefined | null
+	locales?: ResolverInputTypes["CategoryLocaleUniqueWhere"] | undefined | null,
+	image?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null
+};
+	["ImageUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null
 };
 	["SeoUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
 	ogImage?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null
-};
-	["ImageUniqueWhere"]: {
-	id?: ResolverInputTypes["UUID"] | undefined | null
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null
@@ -13977,6 +14035,7 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	order?:boolean | `@${string}`,
 locales?: [{	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["CategoryLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["CategoryLocale"]],
 recipes?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Recipe"]],
+image?: [{	filter?: ResolverInputTypes["ImageWhere"] | undefined | null},ResolverInputTypes["Image"]],
 localesByLocale?: [{	by: ResolverInputTypes["CategoryLocalesByLocaleUniqueWhere"],	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null},ResolverInputTypes["CategoryLocale"]],
 localesBySeo?: [{	by: ResolverInputTypes["CategoryLocalesBySeoUniqueWhere"],	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null},ResolverInputTypes["CategoryLocale"]],
 localesByLink?: [{	by: ResolverInputTypes["CategoryLocalesByLinkUniqueWhere"],	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null},ResolverInputTypes["CategoryLocale"]],
@@ -13989,6 +14048,7 @@ paginateRecipes?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | nu
 	order?:ResolverInputTypes["FieldMeta"],
 	locales?:ResolverInputTypes["FieldMeta"],
 	recipes?:ResolverInputTypes["FieldMeta"],
+	image?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["CategoryLocale"]: AliasType<{
@@ -14862,6 +14922,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	id?: ResolverInputTypes["UUID"] | undefined | null,
 	order?: number | undefined | null,
 	locales?: Array<ResolverInputTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined | null,
+	image?: ResolverInputTypes["CategoryCreateImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryCreateLocalesEntityRelationInput"]: {
@@ -14965,6 +15026,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	id?: ResolverInputTypes["UUID"] | undefined | null,
 	order?: number | undefined | null,
 	recipes?: Array<ResolverInputTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined | null,
+	image?: ResolverInputTypes["CategoryCreateImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryCreateRecipesEntityRelationInput"]: {
@@ -15034,6 +15096,10 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	link?: ResolverInputTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null,
 	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
+};
+	["CategoryCreateImageEntityRelationInput"]: {
+	connect?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null,
+	create?: ResolverInputTypes["ImageCreateInput"] | undefined | null
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
 	connect?: ResolverInputTypes["SeoUniqueWhere"] | undefined | null,
@@ -15613,6 +15679,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["CategoryWithoutRecipesUpdateInput"]: {
 	order?: number | undefined | null,
 	locales?: Array<ResolverInputTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined | null,
+	image?: ResolverInputTypes["CategoryUpdateImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryUpdateLocalesEntityRelationInput"]: {
@@ -15762,6 +15829,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["CategoryWithoutLocalesUpdateInput"]: {
 	order?: number | undefined | null,
 	recipes?: Array<ResolverInputTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined | null,
+	image?: ResolverInputTypes["CategoryUpdateImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryUpdateRecipesEntityRelationInput"]: {
@@ -15885,6 +15953,18 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	by?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null,
 	update?: ResolverInputTypes["RecipeWithoutCategoriesUpdateInput"] | undefined | null,
 	create?: ResolverInputTypes["RecipeWithoutCategoriesCreateInput"] | undefined | null
+};
+	["CategoryUpdateImageEntityRelationInput"]: {
+	create?: ResolverInputTypes["ImageCreateInput"] | undefined | null,
+	update?: ResolverInputTypes["ImageUpdateInput"] | undefined | null,
+	upsert?: ResolverInputTypes["CategoryUpsertImageRelationInput"] | undefined | null,
+	connect?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null,
+	disconnect?: boolean | undefined | null,
+	delete?: boolean | undefined | null
+};
+	["CategoryUpsertImageRelationInput"]: {
+	update?: ResolverInputTypes["ImageUpdateInput"] | undefined | null,
+	create?: ResolverInputTypes["ImageCreateInput"] | undefined | null
 };
 	["CategoryLocaleUpsertBaseRelationInput"]: {
 	update?: ResolverInputTypes["CategoryWithoutLocalesUpdateInput"] | undefined | null,
@@ -16575,12 +16655,14 @@ recipe?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},Resol
 	order?: number | undefined | null,
 	locales?: Array<ResolverInputTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined | null,
 	recipes?: Array<ResolverInputTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined | null,
+	image?: ResolverInputTypes["CategoryCreateImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryUpdateInput"]: {
 	order?: number | undefined | null,
 	locales?: Array<ResolverInputTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined | null,
 	recipes?: Array<ResolverInputTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined | null,
+	image?: ResolverInputTypes["CategoryUpdateImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["CategoryLocaleCreateInput"]: {
@@ -18397,6 +18479,7 @@ export type ModelTypes = {
 	order?: ModelTypes["IntCondition"] | undefined,
 	locales?: ModelTypes["CategoryLocaleWhere"] | undefined,
 	recipes?: ModelTypes["RecipeWhere"] | undefined,
+	image?: ModelTypes["ImageWhere"] | undefined,
 	and?: Array<ModelTypes["CategoryWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["CategoryWhere"] | undefined> | undefined,
 	not?: ModelTypes["CategoryWhere"] | undefined
@@ -18561,7 +18644,19 @@ export type ModelTypes = {
 	_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
 	id?: ModelTypes["OrderDirection"] | undefined,
-	order?: ModelTypes["OrderDirection"] | undefined
+	order?: ModelTypes["OrderDirection"] | undefined,
+	image?: ModelTypes["ImageOrderBy"] | undefined
+};
+	["ImageOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	url?: ModelTypes["OrderDirection"] | undefined,
+	width?: ModelTypes["OrderDirection"] | undefined,
+	height?: ModelTypes["OrderDirection"] | undefined,
+	size?: ModelTypes["OrderDirection"] | undefined,
+	type?: ModelTypes["OrderDirection"] | undefined,
+	alt?: ModelTypes["OrderDirection"] | undefined
 };
 	["SeoOrderBy"]: {
 	_random?: boolean | undefined,
@@ -18574,17 +18669,6 @@ export type ModelTypes = {
 	noIndex?: ModelTypes["OrderDirection"] | undefined,
 	noFollow?: ModelTypes["OrderDirection"] | undefined,
 	ogImage?: ModelTypes["ImageOrderBy"] | undefined
-};
-	["ImageOrderBy"]: {
-	_random?: boolean | undefined,
-	_randomSeeded?: number | undefined,
-	id?: ModelTypes["OrderDirection"] | undefined,
-	url?: ModelTypes["OrderDirection"] | undefined,
-	width?: ModelTypes["OrderDirection"] | undefined,
-	height?: ModelTypes["OrderDirection"] | undefined,
-	size?: ModelTypes["OrderDirection"] | undefined,
-	type?: ModelTypes["OrderDirection"] | undefined,
-	alt?: ModelTypes["OrderDirection"] | undefined
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ModelTypes["LocaleUniqueWhere"] | undefined
@@ -18668,14 +18752,15 @@ export type ModelTypes = {
 };
 	["CategoryUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
-	locales?: ModelTypes["CategoryLocaleUniqueWhere"] | undefined
+	locales?: ModelTypes["CategoryLocaleUniqueWhere"] | undefined,
+	image?: ModelTypes["ImageUniqueWhere"] | undefined
+};
+	["ImageUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined
 };
 	["SeoUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
 	ogImage?: ModelTypes["ImageUniqueWhere"] | undefined
-};
-	["ImageUniqueWhere"]: {
-	id?: ModelTypes["UUID"] | undefined
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ModelTypes["LinkableUniqueWhere"] | undefined
@@ -19102,6 +19187,7 @@ export type ModelTypes = {
 	order: number,
 	locales: Array<ModelTypes["CategoryLocale"]>,
 	recipes: Array<ModelTypes["Recipe"]>,
+	image?: ModelTypes["Image"] | undefined,
 	localesByLocale?: ModelTypes["CategoryLocale"] | undefined,
 	localesBySeo?: ModelTypes["CategoryLocale"] | undefined,
 	localesByLink?: ModelTypes["CategoryLocale"] | undefined,
@@ -19112,7 +19198,8 @@ export type ModelTypes = {
 		id?: ModelTypes["FieldMeta"] | undefined,
 	order?: ModelTypes["FieldMeta"] | undefined,
 	locales?: ModelTypes["FieldMeta"] | undefined,
-	recipes?: ModelTypes["FieldMeta"] | undefined
+	recipes?: ModelTypes["FieldMeta"] | undefined,
+	image?: ModelTypes["FieldMeta"] | undefined
 };
 	["CategoryLocale"]: {
 		_meta?: ModelTypes["CategoryLocaleMeta"] | undefined,
@@ -19952,6 +20039,7 @@ export type ModelTypes = {
 	id?: ModelTypes["UUID"] | undefined,
 	order?: number | undefined,
 	locales?: Array<ModelTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined,
+	image?: ModelTypes["CategoryCreateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryCreateLocalesEntityRelationInput"]: {
@@ -20055,6 +20143,7 @@ export type ModelTypes = {
 	id?: ModelTypes["UUID"] | undefined,
 	order?: number | undefined,
 	recipes?: Array<ModelTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined,
+	image?: ModelTypes["CategoryCreateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryCreateRecipesEntityRelationInput"]: {
@@ -20124,6 +20213,10 @@ export type ModelTypes = {
 	link?: ModelTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
+};
+	["CategoryCreateImageEntityRelationInput"]: {
+	connect?: ModelTypes["ImageUniqueWhere"] | undefined,
+	create?: ModelTypes["ImageCreateInput"] | undefined
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
 	connect?: ModelTypes["SeoUniqueWhere"] | undefined,
@@ -20703,6 +20796,7 @@ export type ModelTypes = {
 	["CategoryWithoutRecipesUpdateInput"]: {
 	order?: number | undefined,
 	locales?: Array<ModelTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined,
+	image?: ModelTypes["CategoryUpdateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryUpdateLocalesEntityRelationInput"]: {
@@ -20852,6 +20946,7 @@ export type ModelTypes = {
 	["CategoryWithoutLocalesUpdateInput"]: {
 	order?: number | undefined,
 	recipes?: Array<ModelTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined,
+	image?: ModelTypes["CategoryUpdateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryUpdateRecipesEntityRelationInput"]: {
@@ -20975,6 +21070,18 @@ export type ModelTypes = {
 	by?: ModelTypes["RecipeUniqueWhere"] | undefined,
 	update?: ModelTypes["RecipeWithoutCategoriesUpdateInput"] | undefined,
 	create?: ModelTypes["RecipeWithoutCategoriesCreateInput"] | undefined
+};
+	["CategoryUpdateImageEntityRelationInput"]: {
+	create?: ModelTypes["ImageCreateInput"] | undefined,
+	update?: ModelTypes["ImageUpdateInput"] | undefined,
+	upsert?: ModelTypes["CategoryUpsertImageRelationInput"] | undefined,
+	connect?: ModelTypes["ImageUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["CategoryUpsertImageRelationInput"]: {
+	update?: ModelTypes["ImageUpdateInput"] | undefined,
+	create?: ModelTypes["ImageCreateInput"] | undefined
 };
 	["CategoryLocaleUpsertBaseRelationInput"]: {
 	update?: ModelTypes["CategoryWithoutLocalesUpdateInput"] | undefined,
@@ -21645,12 +21752,14 @@ export type ModelTypes = {
 	order?: number | undefined,
 	locales?: Array<ModelTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined,
 	recipes?: Array<ModelTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined,
+	image?: ModelTypes["CategoryCreateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryUpdateInput"]: {
 	order?: number | undefined,
 	locales?: Array<ModelTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined,
 	recipes?: Array<ModelTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined,
+	image?: ModelTypes["CategoryUpdateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleCreateInput"]: {
@@ -23241,6 +23350,7 @@ export type GraphQLTypes = {
 	order?: GraphQLTypes["IntCondition"] | undefined,
 	locales?: GraphQLTypes["CategoryLocaleWhere"] | undefined,
 	recipes?: GraphQLTypes["RecipeWhere"] | undefined,
+	image?: GraphQLTypes["ImageWhere"] | undefined,
 	and?: Array<GraphQLTypes["CategoryWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["CategoryWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["CategoryWhere"] | undefined
@@ -23415,7 +23525,19 @@ export type GraphQLTypes = {
 		_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
 	id?: GraphQLTypes["OrderDirection"] | undefined,
-	order?: GraphQLTypes["OrderDirection"] | undefined
+	order?: GraphQLTypes["OrderDirection"] | undefined,
+	image?: GraphQLTypes["ImageOrderBy"] | undefined
+};
+	["ImageOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	url?: GraphQLTypes["OrderDirection"] | undefined,
+	width?: GraphQLTypes["OrderDirection"] | undefined,
+	height?: GraphQLTypes["OrderDirection"] | undefined,
+	size?: GraphQLTypes["OrderDirection"] | undefined,
+	type?: GraphQLTypes["OrderDirection"] | undefined,
+	alt?: GraphQLTypes["OrderDirection"] | undefined
 };
 	["SeoOrderBy"]: {
 		_random?: boolean | undefined,
@@ -23428,17 +23550,6 @@ export type GraphQLTypes = {
 	noIndex?: GraphQLTypes["OrderDirection"] | undefined,
 	noFollow?: GraphQLTypes["OrderDirection"] | undefined,
 	ogImage?: GraphQLTypes["ImageOrderBy"] | undefined
-};
-	["ImageOrderBy"]: {
-		_random?: boolean | undefined,
-	_randomSeeded?: number | undefined,
-	id?: GraphQLTypes["OrderDirection"] | undefined,
-	url?: GraphQLTypes["OrderDirection"] | undefined,
-	width?: GraphQLTypes["OrderDirection"] | undefined,
-	height?: GraphQLTypes["OrderDirection"] | undefined,
-	size?: GraphQLTypes["OrderDirection"] | undefined,
-	type?: GraphQLTypes["OrderDirection"] | undefined,
-	alt?: GraphQLTypes["OrderDirection"] | undefined
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 		locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined
@@ -23522,14 +23633,15 @@ export type GraphQLTypes = {
 };
 	["CategoryUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
-	locales?: GraphQLTypes["CategoryLocaleUniqueWhere"] | undefined
+	locales?: GraphQLTypes["CategoryLocaleUniqueWhere"] | undefined,
+	image?: GraphQLTypes["ImageUniqueWhere"] | undefined
+};
+	["ImageUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined
 };
 	["SeoUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
 	ogImage?: GraphQLTypes["ImageUniqueWhere"] | undefined
-};
-	["ImageUniqueWhere"]: {
-		id?: GraphQLTypes["UUID"] | undefined
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 		link?: GraphQLTypes["LinkableUniqueWhere"] | undefined
@@ -23998,6 +24110,7 @@ export type GraphQLTypes = {
 	order: number,
 	locales: Array<GraphQLTypes["CategoryLocale"]>,
 	recipes: Array<GraphQLTypes["Recipe"]>,
+	image?: GraphQLTypes["Image"] | undefined,
 	localesByLocale?: GraphQLTypes["CategoryLocale"] | undefined,
 	localesBySeo?: GraphQLTypes["CategoryLocale"] | undefined,
 	localesByLink?: GraphQLTypes["CategoryLocale"] | undefined,
@@ -24009,7 +24122,8 @@ export type GraphQLTypes = {
 	id?: GraphQLTypes["FieldMeta"] | undefined,
 	order?: GraphQLTypes["FieldMeta"] | undefined,
 	locales?: GraphQLTypes["FieldMeta"] | undefined,
-	recipes?: GraphQLTypes["FieldMeta"] | undefined
+	recipes?: GraphQLTypes["FieldMeta"] | undefined,
+	image?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["CategoryLocale"]: {
 	__typename: "CategoryLocale",
@@ -24882,6 +24996,7 @@ export type GraphQLTypes = {
 		id?: GraphQLTypes["UUID"] | undefined,
 	order?: number | undefined,
 	locales?: Array<GraphQLTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined,
+	image?: GraphQLTypes["CategoryCreateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryCreateLocalesEntityRelationInput"]: {
@@ -24985,6 +25100,7 @@ export type GraphQLTypes = {
 		id?: GraphQLTypes["UUID"] | undefined,
 	order?: number | undefined,
 	recipes?: Array<GraphQLTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined,
+	image?: GraphQLTypes["CategoryCreateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryCreateRecipesEntityRelationInput"]: {
@@ -25054,6 +25170,10 @@ export type GraphQLTypes = {
 	link?: GraphQLTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
+};
+	["CategoryCreateImageEntityRelationInput"]: {
+		connect?: GraphQLTypes["ImageUniqueWhere"] | undefined,
+	create?: GraphQLTypes["ImageCreateInput"] | undefined
 };
 	["HomePageLocaleCreateSeoEntityRelationInput"]: {
 		connect?: GraphQLTypes["SeoUniqueWhere"] | undefined,
@@ -25633,6 +25753,7 @@ export type GraphQLTypes = {
 	["CategoryWithoutRecipesUpdateInput"]: {
 		order?: number | undefined,
 	locales?: Array<GraphQLTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined,
+	image?: GraphQLTypes["CategoryUpdateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryUpdateLocalesEntityRelationInput"]: {
@@ -25782,6 +25903,7 @@ export type GraphQLTypes = {
 	["CategoryWithoutLocalesUpdateInput"]: {
 		order?: number | undefined,
 	recipes?: Array<GraphQLTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined,
+	image?: GraphQLTypes["CategoryUpdateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryUpdateRecipesEntityRelationInput"]: {
@@ -25905,6 +26027,18 @@ export type GraphQLTypes = {
 		by?: GraphQLTypes["RecipeUniqueWhere"] | undefined,
 	update?: GraphQLTypes["RecipeWithoutCategoriesUpdateInput"] | undefined,
 	create?: GraphQLTypes["RecipeWithoutCategoriesCreateInput"] | undefined
+};
+	["CategoryUpdateImageEntityRelationInput"]: {
+		create?: GraphQLTypes["ImageCreateInput"] | undefined,
+	update?: GraphQLTypes["ImageUpdateInput"] | undefined,
+	upsert?: GraphQLTypes["CategoryUpsertImageRelationInput"] | undefined,
+	connect?: GraphQLTypes["ImageUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["CategoryUpsertImageRelationInput"]: {
+		update?: GraphQLTypes["ImageUpdateInput"] | undefined,
+	create?: GraphQLTypes["ImageCreateInput"] | undefined
 };
 	["CategoryLocaleUpsertBaseRelationInput"]: {
 		update?: GraphQLTypes["CategoryWithoutLocalesUpdateInput"] | undefined,
@@ -26595,12 +26729,14 @@ export type GraphQLTypes = {
 	order?: number | undefined,
 	locales?: Array<GraphQLTypes["CategoryCreateLocalesEntityRelationInput"]> | undefined,
 	recipes?: Array<GraphQLTypes["CategoryCreateRecipesEntityRelationInput"]> | undefined,
+	image?: GraphQLTypes["CategoryCreateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryUpdateInput"]: {
 		order?: number | undefined,
 	locales?: Array<GraphQLTypes["CategoryUpdateLocalesEntityRelationInput"]> | undefined,
 	recipes?: Array<GraphQLTypes["CategoryUpdateRecipesEntityRelationInput"]> | undefined,
+	image?: GraphQLTypes["CategoryUpdateImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["CategoryLocaleCreateInput"]: {
@@ -28023,8 +28159,8 @@ type ZEUS_VARIABLES = {
 	["LinkableOrderBy"]: ValueTypes["LinkableOrderBy"];
 	["CategoryLocaleOrderBy"]: ValueTypes["CategoryLocaleOrderBy"];
 	["CategoryOrderBy"]: ValueTypes["CategoryOrderBy"];
-	["SeoOrderBy"]: ValueTypes["SeoOrderBy"];
 	["ImageOrderBy"]: ValueTypes["ImageOrderBy"];
+	["SeoOrderBy"]: ValueTypes["SeoOrderBy"];
 	["HomePageLocalesByLocaleUniqueWhere"]: ValueTypes["HomePageLocalesByLocaleUniqueWhere"];
 	["LocaleUniqueWhere"]: ValueTypes["LocaleUniqueWhere"];
 	["RecipeLocaleUniqueWhere"]: ValueTypes["RecipeLocaleUniqueWhere"];
@@ -28041,8 +28177,8 @@ type ZEUS_VARIABLES = {
 	["LinkableUniqueWhere"]: ValueTypes["LinkableUniqueWhere"];
 	["CategoryLocaleUniqueWhere"]: ValueTypes["CategoryLocaleUniqueWhere"];
 	["CategoryUniqueWhere"]: ValueTypes["CategoryUniqueWhere"];
-	["SeoUniqueWhere"]: ValueTypes["SeoUniqueWhere"];
 	["ImageUniqueWhere"]: ValueTypes["ImageUniqueWhere"];
+	["SeoUniqueWhere"]: ValueTypes["SeoUniqueWhere"];
 	["HomePageLocalesByLinkUniqueWhere"]: ValueTypes["HomePageLocalesByLinkUniqueWhere"];
 	["HomePageLocalesBySeoUniqueWhere"]: ValueTypes["HomePageLocalesBySeoUniqueWhere"];
 	["RecipeLocaleOrderBy"]: ValueTypes["RecipeLocaleOrderBy"];
@@ -28218,6 +28354,7 @@ type ZEUS_VARIABLES = {
 	["LocaleWithoutStepsGroupsCreateInput"]: ValueTypes["LocaleWithoutStepsGroupsCreateInput"];
 	["LocaleCreateCategoriesEntityRelationInput"]: ValueTypes["LocaleCreateCategoriesEntityRelationInput"];
 	["CategoryLocaleWithoutLocaleCreateInput"]: ValueTypes["CategoryLocaleWithoutLocaleCreateInput"];
+	["CategoryCreateImageEntityRelationInput"]: ValueTypes["CategoryCreateImageEntityRelationInput"];
 	["HomePageLocaleCreateSeoEntityRelationInput"]: ValueTypes["HomePageLocaleCreateSeoEntityRelationInput"];
 	["StepCreateGroupEntityRelationInput"]: ValueTypes["StepCreateGroupEntityRelationInput"];
 	["StepGroupWithoutStepsCreateInput"]: ValueTypes["StepGroupWithoutStepsCreateInput"];
@@ -28347,6 +28484,8 @@ type ZEUS_VARIABLES = {
 	["StepGroupUpsertLocalesRelationInput"]: ValueTypes["StepGroupUpsertLocalesRelationInput"];
 	["RecipeUpsertStepsGroupsRelationInput"]: ValueTypes["RecipeUpsertStepsGroupsRelationInput"];
 	["CategoryUpsertRecipesRelationInput"]: ValueTypes["CategoryUpsertRecipesRelationInput"];
+	["CategoryUpdateImageEntityRelationInput"]: ValueTypes["CategoryUpdateImageEntityRelationInput"];
+	["CategoryUpsertImageRelationInput"]: ValueTypes["CategoryUpsertImageRelationInput"];
 	["CategoryLocaleUpsertBaseRelationInput"]: ValueTypes["CategoryLocaleUpsertBaseRelationInput"];
 	["LinkableUpsertCategoryRelationInput"]: ValueTypes["LinkableUpsertCategoryRelationInput"];
 	["HomePageLocaleUpsertLinkRelationInput"]: ValueTypes["HomePageLocaleUpsertLinkRelationInput"];
