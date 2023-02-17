@@ -1,0 +1,280 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "Category",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "category",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "CategoryLocale",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "category_locale",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Category",
+			"field": {
+				"name": "order",
+				"columnName": "order",
+				"columnType": "integer",
+				"nullable": false,
+				"type": "Integer"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "CategoryLocale",
+			"field": {
+				"name": "title",
+				"columnName": "title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "CategoryLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "base",
+				"target": "Category",
+				"joiningColumn": {
+					"columnName": "base_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "locales"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "locales",
+				"target": "CategoryLocale",
+				"ownedBy": "base"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "CategoryLocale",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "seo",
+				"target": "Seo",
+				"joiningColumn": {
+					"columnName": "seo_id",
+					"onDelete": "restrict"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "Linkable",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "category",
+				"target": "CategoryLocale",
+				"joiningColumn": {
+					"columnName": "category_id",
+					"onDelete": "cascade"
+				},
+				"nullable": true,
+				"inversedBy": "link"
+			},
+			"inverseSide": {
+				"type": "OneHasOne",
+				"name": "link",
+				"target": "Linkable",
+				"ownedBy": "category",
+				"nullable": false
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "Recipe",
+			"owningSide": {
+				"type": "ManyHasMany",
+				"name": "categories",
+				"target": "Category",
+				"joiningTable": {
+					"tableName": "recipe_categories",
+					"joiningColumn": {
+						"columnName": "recipe_id",
+						"onDelete": "cascade"
+					},
+					"inverseJoiningColumn": {
+						"columnName": "category_id",
+						"onDelete": "cascade"
+					},
+					"eventLog": {
+						"enabled": true
+					}
+				},
+				"inversedBy": "recipes"
+			},
+			"inverseSide": {
+				"type": "ManyHasMany",
+				"name": "recipes",
+				"target": "Recipe",
+				"ownedBy": "categories"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Category",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"order": true,
+								"locales": true,
+								"recipes": true
+							},
+							"create": {
+								"id": true,
+								"order": true,
+								"locales": true,
+								"recipes": true
+							},
+							"update": {
+								"id": true,
+								"order": true,
+								"locales": true,
+								"recipes": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/CategoryLocale",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"base": true,
+								"link": true,
+								"title": true,
+								"seo": true
+							},
+							"create": {
+								"id": true,
+								"base": true,
+								"link": true,
+								"title": true,
+								"seo": true
+							},
+							"update": {
+								"id": true,
+								"base": true,
+								"link": true,
+								"title": true,
+								"seo": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Linkable/operations/create/category",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Linkable/operations/update/category",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Linkable/operations/read/category",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/create/categories",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/update/categories",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Recipe/operations/read/categories",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Category",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"order": true,
+								"locales": true,
+								"recipes": true
+							}
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Linkable/operations/read/category",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Recipe/operations/read/categories",
+					"value": true
+				}
+			]
+		}
+	]
+}

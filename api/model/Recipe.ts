@@ -1,5 +1,6 @@
 import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-definition'
 import { publicRole } from './acl'
+import { Category } from './Category'
 import { Image } from './Image'
 import { Locale } from './Locale'
 import { PinnedRecipe } from './PinnedRecipe'
@@ -12,6 +13,8 @@ export class Recipe {
 
 	createdBy = d.manyHasOne(User, 'createdRecipes').cascadeOnDelete().notNull()
 	pinnedRecipes = d.oneHasMany(PinnedRecipe, 'derivedBy')
+
+	categories = d.manyHasMany(Category, 'recipes')
 
 	publishDate = d.dateColumn()
 	price = d.stringColumn()

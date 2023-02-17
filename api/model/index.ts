@@ -1,4 +1,5 @@
 export * from './acl'
+export * from './Category'
 export * from './Content'
 export * from './HomePage'
 export * from './Image'
