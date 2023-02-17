@@ -15,12 +15,12 @@ import { handleGetStaticPaths, handleGetStaticProps } from '../utilities/handler
 
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
-export default function ({ seo, homePage, homePageUrl, categoryPage, recipes }: PageProps) {
+export default function ({ seo, homePage, homePageUrl, categoryPage, recipes, categories }: PageProps) {
 	return (
 		<Layout>
 			<Seo {...seo} />
 
-			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} />}
+			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
 			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
 			{/* {page && (
 				<>
@@ -101,6 +101,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		// 	},
 		// 	GeneralFragment(),
 		// ],
+		listCategoryLocale: [{ orderBy: [{ base: { order: OrderDirection.asc } }] }, CategoryLocaleFragment(locale)],
 		listRecipe: [{ orderBy: [{ publishDate: OrderDirection.desc }] }, RecipeFragment(locale)],
 		getLinkable: [
 			{
@@ -165,6 +166,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			homePage,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
 			categoryPage: category,
+			categories: data.listCategoryLocale,
 			recipes: data.listRecipe,
 			seo: {
 				canonicalUrl,
