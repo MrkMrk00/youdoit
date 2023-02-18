@@ -18,6 +18,7 @@ export const RecipeLocaleFragment = (locale: string) =>
 				publishDate: true,
 				price: true,
 				mainImage: [{}, ImageFragment()],
+				tileImage: [{}, ImageFragment()],
 				stepsGroups: [{}, StepGroupFragment(locale)],
 			},
 		],

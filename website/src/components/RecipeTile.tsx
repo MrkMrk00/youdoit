@@ -12,9 +12,9 @@ export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.content}>
-				{tile.base?.mainImage && (
+				{tile.base?.tileImage && (
 					<div className={styles.image}>
-						<TileImage image={tile.base?.mainImage} fill objectFit="cover" />
+						<TileImage image={tile.base?.tileImage} fill objectFit="cover" />
 					</div>
 				)}
 				<div className={styles.contentIn}>
