@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import type { StepGroupResult } from '../data/StepGroupFragment'
 import { Step } from './Step'
 import styles from './StepGroup.module.sass'
+import { StepGroupButton } from './StepGroupButton'
 
 export interface StepGroupProps {
 	group: StepGroupResult
@@ -28,6 +29,11 @@ export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index }) =
 					)
 				})}
 			</div>
+			{group.localesByLocale?.buttonTitle && (
+				<div className={styles.button}>
+					<StepGroupButton buttonTitle={group.localesByLocale?.buttonTitle} />
+				</div>
+			)}
 		</div>
 	)
 }
