@@ -31,7 +31,7 @@ export default function ({
 
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
 			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
-			{recipeDetailPage && <RecipeDetailPage recipeDetailPage={recipeDetailPage} />}
+			{recipeDetailPage && <RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={homePageUrl} />}
 			{/* {page && (
 				<>
 					<Container>
