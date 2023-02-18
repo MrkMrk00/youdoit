@@ -3,6 +3,7 @@ import { Container } from '../components/Container'
 import { Layout } from '../components/Layout'
 import { CategoryPage } from '../components/pages/CategoryPage'
 import { HomePage } from '../components/pages/HomePage'
+import { RecipeDetailPage } from '../components/pages/RecipeDetailPage'
 import { Seo } from '../components/Seo'
 import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
@@ -15,13 +16,22 @@ import { handleGetStaticPaths, handleGetStaticProps } from '../utilities/handler
 
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
-export default function ({ seo, homePage, homePageUrl, categoryPage, recipes, categories }: PageProps) {
+export default function ({
+	seo,
+	homePage,
+	homePageUrl,
+	categoryPage,
+	recipeDetailPage,
+	recipes,
+	categories,
+}: PageProps) {
 	return (
 		<Layout>
 			<Seo {...seo} />
 
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
 			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
+			{recipeDetailPage && <RecipeDetailPage recipeDetailPage={recipeDetailPage} />}
 			{/* {page && (
 				<>
 					<Container>
@@ -111,6 +121,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 				url: true,
 				homePage: [{}, HomePageLocaleFragment()],
 				category: [{}, CategoryLocaleFragment(locale)],
+				recipe: [{}, RecipeLocaleFragment(locale)],
 				// genericPage: [{}, GenericPageFragment()],
 				// redirect: [
 				// 	{},
@@ -151,7 +162,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			notFound: true,
 		}
 	}
-	const { homePage, category } = data.getLinkable
+	const { homePage, category, recipe } = data.getLinkable
 
 	// if (!page) {
 	// 	return {
@@ -166,6 +177,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			homePage,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
 			categoryPage: category,
+			recipeDetailPage: recipe,
 			categories: data.listCategoryLocale,
 			recipes: data.listRecipeLocale,
 			seo: {
