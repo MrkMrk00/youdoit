@@ -8,9 +8,12 @@ export interface StepProps {
 
 export const Step: FunctionComponent<StepProps> = ({ step }) => {
 	return (
-		<label className={styles.wrapper}>
-			<input type="checkbox" className={styles.checkbox} />
-			{step.localesByLocale?.title}
+		<label className={styles.checkbox}>
+			<input type="checkbox" className={styles.input} />
+			<div className={styles.label}>
+				{step.localesByLocale?.title}
+				<span className={styles.tick} />
+			</div>
 		</label>
 	)
 }

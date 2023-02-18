@@ -1,11 +1,82 @@
-.wrapper
-	color: #424242
-	font-weight: 400
-	font-size: 16px
-	line-height: 26px
-	display: flex
-	align-items: flex-start
+@use 'sass:math'
+
+$font-size-px: 16px
+$font-size: 1em
+$line-height: math.div(26, 16)
+$input-size: math.div(22em, 16)
+$label-top-bottom-padding: .4em
+$tick-width: 0.8em
+$tick-height: .4em
+$tick-border-width: math.div(2em, 16)
+
+@keyframes checkbox-tick
+	0%
+		width: $tick-border-width
+		height: 0
+	#{math.div((100 * $tick-height), ($tick-width + $tick-height))}%
+		width: $tick-border-width
+		height: $tick-height
+	100%
+		width: $tick-width
+		height: $tick-height
 
 .checkbox
-	margin-right: .5rem
-	margin-top: .5rem
+	position: relative
+	line-height: $line-height
+
+.input
+	position: absolute
+	width: $input-size
+	height: $input-size
+	opacity: 0
+	pointer-events: none
+	margin: 0
+
+.label
+	display: flex
+	padding: $label-top-bottom-padding 0 $label-top-bottom-padding $input-size + 1em
+	font-size: $font-size
+	color: #424242
+	user-select: none
+
+	$box-offset-top: math.div((1em * $line-height), 2) + $label-top-bottom-padding
+
+	&::before // custom checkbox input
+		position: absolute
+		top: $box-offset-top
+		left: 0
+		width: $input-size
+		height: $input-size
+		content: ''
+		display: block
+		border-radius: math.div(2em, 16)
+		transform: translateY(-50%)
+		border: math.div(2em, 16) solid #E5E5E5
+		transition: box-shadow .2s ease
+
+	.tick
+		$tick-offset-top: $box-offset-top + math.div($tick-height, 2) - math.div(1em, 16)
+		$tick-offset-left: math.div(5em, 16)
+		position: absolute
+		top: $tick-offset-top
+		left: $tick-offset-left
+		width: $tick-width
+		height: $tick-height
+		content: ''
+		border-bottom: $tick-border-width solid #424242
+		border-left: $tick-border-width solid #424242
+		transform-origin: top left
+		transform: rotate(-55deg)
+		opacity: 0
+
+.input:focus ~ .label::before
+	box-shadow: 0 0 math.div(1em, 16) math.div(1em, 16) rgba(#000, .2)
+
+.label
+	.input:checked ~ & .tick
+		opacity: 1
+		animation: checkbox-tick .2s
+
+.input:disabled ~ .label
+	opacity: .5
+	cursor: not-allowed
