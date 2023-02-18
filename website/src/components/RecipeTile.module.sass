@@ -6,6 +6,11 @@
 	border-radius: 1.875rem
 	overflow: hidden
 	min-width: 11.25rem
+	a:-webkit-any-link
+		color: inherit
+	&:hover
+		.image
+			transform: scale(1.05)
 
 .content
 	position: relative
@@ -13,6 +18,7 @@
 .image
 	position: relative
 	aspect-ratio: 180 / 300
+	transition: transform .3s ease-in-out
 
 .title
 	font-weight: 800

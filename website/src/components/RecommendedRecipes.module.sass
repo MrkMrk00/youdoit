@@ -3,6 +3,8 @@
 
 .list
 	display: grid
+	a:-webkit-any-link
+		color: inherit
 
 .tile
 	display: flex
@@ -12,18 +14,25 @@
 	padding: .9375rem 0
 	&:last-child
 		border-bottom: none
+	&:hover
+		.image
+			transform: scale(1.05)
 
 .tileIn
 	display: flex
 	align-items: center
 	gap: .625rem
 
-.image
+.imageWrapper
 	position: relative
-	aspect-ratio: 1
 	min-width: 6.5625rem
 	border-radius: 1.25rem
 	overflow: hidden
+
+.image
+	position: relative
+	aspect-ratio: 1
+	transition: transform .3s ease-in-out
 
 .title
 	line-height: math.div(28, 25)

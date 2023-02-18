@@ -22,6 +22,7 @@ export const RecipeLocaleFragment = (locale: string) =>
 				stepsGroups: [{}, StepGroupFragment(locale)],
 			},
 		],
+		link: [{}, { url: true }],
 		title: true,
 		description: true,
 		tileDescription: true,
