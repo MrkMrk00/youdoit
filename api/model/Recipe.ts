@@ -20,6 +20,7 @@ export class Recipe {
 	publishDate = d.dateColumn()
 	price = d.stringColumn()
 	mainImage = d.manyHasOne(Image)
+	tileImage = d.manyHasOne(Image)
 	stepsGroups = d.oneHasMany(StepGroup, 'recipe')
 }
 @d.Unique('base', 'locale')

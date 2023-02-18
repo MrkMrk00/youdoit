@@ -1,4 +1,5 @@
 import {
+	Box,
 	Component,
 	DateTimeField,
 	Entity,
@@ -56,10 +57,15 @@ export const Recipe = Component((_, enviroment) => {
 				}
 			/>
 			<TextField field="price" label="Price" />
+			<Box heading="Tile">
+				<ImageField field="tileImage" label="Tile image" />
+				<LocaleSideDimension>
+					<RichTextField field="tileDescription" label="Tile description" />
+				</LocaleSideDimension>
+			</Box>
 			<ImageField field="mainImage" label="Main image" />
 			<LocaleSideDimension>
 				<TextField field="title" label="Title" />
-				<RichTextField field="tileDescription" label="Tile description" />
 				<RichTextField field="description" label="Description" />
 			</LocaleSideDimension>
 			<Repeater field="stepsGroups" label="Step groups" sortableBy="order">
