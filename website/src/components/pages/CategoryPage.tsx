@@ -1,5 +1,6 @@
 import type { FunctionComponent } from 'react'
 import type { CategoryLocaleResult } from '../../data/CategoryLocaleFragment'
+import { isDefined } from '../../utilities/isDefined'
 import { BackButton } from '../BackButton'
 import { Container } from '../Container'
 import { RecommendedRecipes } from '../RecommendedRecipes'
@@ -26,9 +27,11 @@ export const CategoryPage: FunctionComponent<CategoryPageProps> = ({ categoryPag
 				</div>
 			)}
 			<Container>
-				{categoryPage.base?.recipes && (
+				{(categoryPage.base?.recipes ?? []).length > 0 && (
 					<div className={styles.recipes}>
-						<RecommendedRecipes recipes={categoryPage.base?.recipes} />
+						<RecommendedRecipes
+							recipes={(categoryPage.base?.recipes ?? []).map((recipe) => recipe.localesByLocale).filter(isDefined)}
+						/>
 					</div>
 				)}
 			</Container>

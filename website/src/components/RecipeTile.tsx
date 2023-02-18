@@ -1,31 +1,31 @@
 import type { FunctionComponent } from 'react'
-import type { RecipeResult } from '../data/RecipeFragment'
+import type { RecipeLocaleResult } from '../data/RecipeLocaleFragment'
 import { PriceTag } from './PriceTag'
 import styles from './RecipeTile.module.sass'
 import { TileImage } from './TileImage'
 
 export interface RecipeTile {
-	tile: RecipeResult
+	tile: RecipeLocaleResult
 }
 
 export const RecipeTile: FunctionComponent<RecipeTile> = ({ tile }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.content}>
-				{tile.mainImage?.url && (
+				{tile.base?.mainImage && (
 					<div className={styles.image}>
-						<TileImage image={tile.mainImage} fill objectFit="cover" />
+						<TileImage image={tile.base?.mainImage} fill objectFit="cover" />
 					</div>
 				)}
 				<div className={styles.contentIn}>
 					<div className={styles.categories}>
 						{/* Show only two first categories */}
-						{tile.categories?.map((category, index) => index <= 2 && category.localesByLocale?.title).join(', ')}
+						{tile.base?.categories.map((category, index) => index <= 2 && category.localesByLocale?.title).join(', ')}
 					</div>
-					<div className={styles.title}>{tile.localesByLocale?.title}</div>
-					{tile.price && (
+					<div className={styles.title}>{tile.title}</div>
+					{tile.base?.price && (
 						<div className={styles.price}>
-							<PriceTag price={tile.price} />
+							<PriceTag price={tile.base.price} />
 						</div>
 					)}
 				</div>

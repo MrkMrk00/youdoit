@@ -6,7 +6,7 @@ import { HomePage } from '../components/pages/HomePage'
 import { Seo } from '../components/Seo'
 import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
-import { RecipeFragment } from '../data/RecipeFragment'
+import { RecipeLocaleFragment } from '../data/RecipeLocaleFragment'
 import { contember } from '../utilities/contember'
 import { scalarResolver } from '../utilities/createScalarResolver'
 import { getLinkableUrlFromContext } from '../utilities/getLinkableUrlFromContext'
@@ -102,7 +102,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		// 	GeneralFragment(),
 		// ],
 		listCategoryLocale: [{ orderBy: [{ base: { order: OrderDirection.asc } }] }, CategoryLocaleFragment(locale)],
-		listRecipe: [{ orderBy: [{ publishDate: OrderDirection.desc }] }, RecipeFragment(locale)],
+		listRecipeLocale: [{ orderBy: [{ base: { publishDate: OrderDirection.desc } }] }, RecipeLocaleFragment(locale)],
 		getLinkable: [
 			{
 				by: { url },
@@ -167,7 +167,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
 			categoryPage: category,
 			categories: data.listCategoryLocale,
-			recipes: data.listRecipe,
+			recipes: data.listRecipeLocale,
 			seo: {
 				canonicalUrl,
 				// seo: {

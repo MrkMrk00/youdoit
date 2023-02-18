@@ -1,11 +1,11 @@
 import type { FunctionComponent } from 'react'
-import type { RecipeResult } from '../data/RecipeFragment'
+import type { RecipeLocaleResult } from '../data/RecipeLocaleFragment'
 import { PriceTag } from './PriceTag'
 import styles from './RecommendedRecipes.module.sass'
 import { TileImage } from './TileImage'
 
 export interface RecommendedRecipesProps {
-	recipes: RecipeResult[]
+	recipes: RecipeLocaleResult[]
 }
 
 export const RecommendedRecipes: FunctionComponent<RecommendedRecipesProps> = ({ recipes }) => {
@@ -15,16 +15,16 @@ export const RecommendedRecipes: FunctionComponent<RecommendedRecipesProps> = ({
 				return (
 					<div key={recipe.id} className={styles.tile}>
 						<div className={styles.tileIn}>
-							{recipe.mainImage && (
+							{recipe.base?.mainImage && (
 								<div className={styles.image}>
-									<TileImage image={recipe.mainImage} fill objectFit="cover" />
+									<TileImage image={recipe.base.mainImage} fill objectFit="cover" />
 								</div>
 							)}
-							<div className={styles.title}>{recipe.localesByLocale?.title}</div>
+							<div className={styles.title}>{recipe.title}</div>
 						</div>
-						{recipe.price && (
+						{recipe.base?.price && (
 							<div className={styles.price}>
-								<PriceTag price={recipe.price} />
+								<PriceTag price={recipe.base?.price} />
 							</div>
 						)}
 					</div>

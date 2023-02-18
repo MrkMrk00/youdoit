@@ -1,7 +1,7 @@
 import type { FunctionComponent } from 'react'
 import type { CategoryLocaleResult } from '../../data/CategoryLocaleFragment'
 import type { HomePageLocaleResult } from '../../data/HomePageLocaleFragment'
-import type { RecipeResult } from '../../data/RecipeFragment'
+import type { RecipeLocaleResult } from '../../data/RecipeLocaleFragment'
 import { categoriesChunk } from '../../utilities/categoriesChunk'
 import { recipesChunk } from '../../utilities/recipesChunk'
 import { CategoryTile } from '../CategoryTile'
@@ -12,7 +12,7 @@ import styles from './HomePage.module.sass'
 
 export interface HomePageProps {
 	homePage: HomePageLocaleResult
-	recipes: RecipeResult[]
+	recipes: RecipeLocaleResult[]
 	categories: CategoryLocaleResult[]
 }
 

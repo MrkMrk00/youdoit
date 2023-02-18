@@ -1,9 +1,9 @@
 import type { GraphQLTypes, InputType } from '../../generated/contember'
-import { Selector } from '../../generated/contember'
+import { OrderDirection, Selector } from '../../generated/contember'
 import type { scalarResolver } from '../utilities/createScalarResolver'
 import { ImageFragment } from './ImageFragment'
 import { LocaleFragment } from './LocaleFragment'
-import { RecipeFragment } from './RecipeFragment'
+import { RecipeLocaleFragment } from './RecipeLocaleFragment'
 import { SeoFragment } from './SeoFragment'
 
 export const CategoryLocaleFragment = (locale: string) =>
@@ -25,7 +25,10 @@ export const CategoryLocaleFragment = (locale: string) =>
 					},
 				],
 				image: [{}, ImageFragment()],
-				recipes: [{}, RecipeFragment(locale)],
+				recipes: [
+					{ orderBy: [{ publishDate: OrderDirection.desc }] },
+					{ localesByLocale: [{ by: { locale: { code: locale } } }, RecipeLocaleFragment(locale)] },
+				],
 			},
 		],
 		title: true,

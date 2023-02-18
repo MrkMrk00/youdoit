@@ -1,6 +1,6 @@
-import type { RecipeResult } from '../data/RecipeFragment'
+import type { RecipeLocaleResult } from '../data/RecipeLocaleFragment'
 
-export function recipesChunk(arr: RecipeResult[], itemsInChunk: number) {
+export function recipesChunk(arr: RecipeLocaleResult[], itemsInChunk: number) {
 	return arr?.reduce((resultArr, item, index) => {
 		if (index % itemsInChunk === 0) {
 			resultArr.push([])
@@ -9,5 +9,5 @@ export function recipesChunk(arr: RecipeResult[], itemsInChunk: number) {
 			resultArr[resultArr.length - 1].push(item)
 		}
 		return resultArr
-	}, [] as RecipeResult[][])
+	}, [] as RecipeLocaleResult[][])
 }
