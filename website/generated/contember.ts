@@ -653,6 +653,7 @@ export const AllTypesProps: Record<string,any> = {
 		createdBy:"UserWhere",
 		stepsGroups:"StepGroupWhere",
 		categories:"CategoryWhere",
+		tileImage:"ImageWhere",
 		and:"RecipeWhere",
 		or:"RecipeWhere",
 		not:"RecipeWhere"
@@ -961,7 +962,8 @@ export const AllTypesProps: Record<string,any> = {
 		publishDate:"OrderDirection",
 		price:"OrderDirection",
 		mainImage:"ImageOrderBy",
-		createdBy:"UserOrderBy"
+		createdBy:"UserOrderBy",
+		tileImage:"ImageOrderBy"
 	},
 	UserOrderBy:{
 		id:"OrderDirection",
@@ -1183,6 +1185,9 @@ export const AllTypesProps: Record<string,any> = {
 		categories:{
 			filter:"CategoryWhere",
 			orderBy:"CategoryOrderBy"
+		},
+		tileImage:{
+			filter:"ImageWhere"
 		},
 		localesByLocale:{
 			by:"RecipeLocalesByLocaleUniqueWhere",
@@ -1853,7 +1858,8 @@ export const AllTypesProps: Record<string,any> = {
 		pinnedRecipes:"RecipeCreatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeCreateCreatedByEntityRelationInput",
 		stepsGroups:"RecipeCreateStepsGroupsEntityRelationInput",
-		categories:"RecipeCreateCategoriesEntityRelationInput"
+		categories:"RecipeCreateCategoriesEntityRelationInput",
+		tileImage:"RecipeCreateTileImageEntityRelationInput"
 	},
 	RecipeCreateMainImageEntityRelationInput:{
 		connect:"ImageUniqueWhere",
@@ -1901,7 +1907,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeCreateMainImageEntityRelationInput",
 		pinnedRecipes:"RecipeCreatePinnedRecipesEntityRelationInput",
 		stepsGroups:"RecipeCreateStepsGroupsEntityRelationInput",
-		categories:"RecipeCreateCategoriesEntityRelationInput"
+		categories:"RecipeCreateCategoriesEntityRelationInput",
+		tileImage:"RecipeCreateTileImageEntityRelationInput"
 	},
 	RecipeCreateLocalesEntityRelationInput:{
 		connect:"RecipeLocaleUniqueWhere",
@@ -1971,7 +1978,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeCreateMainImageEntityRelationInput",
 		createdBy:"RecipeCreateCreatedByEntityRelationInput",
 		stepsGroups:"RecipeCreateStepsGroupsEntityRelationInput",
-		categories:"RecipeCreateCategoriesEntityRelationInput"
+		categories:"RecipeCreateCategoriesEntityRelationInput",
+		tileImage:"RecipeCreateTileImageEntityRelationInput"
 	},
 	RecipeCreateCreatedByEntityRelationInput:{
 		connect:"UserUniqueWhere",
@@ -2087,7 +2095,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeCreateMainImageEntityRelationInput",
 		pinnedRecipes:"RecipeCreatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeCreateCreatedByEntityRelationInput",
-		categories:"RecipeCreateCategoriesEntityRelationInput"
+		categories:"RecipeCreateCategoriesEntityRelationInput",
+		tileImage:"RecipeCreateTileImageEntityRelationInput"
 	},
 	RecipeCreateCategoriesEntityRelationInput:{
 		connect:"CategoryUniqueWhere",
@@ -2198,7 +2207,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeCreateMainImageEntityRelationInput",
 		pinnedRecipes:"RecipeCreatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeCreateCreatedByEntityRelationInput",
-		stepsGroups:"RecipeCreateStepsGroupsEntityRelationInput"
+		stepsGroups:"RecipeCreateStepsGroupsEntityRelationInput",
+		tileImage:"RecipeCreateTileImageEntityRelationInput"
 	},
 	RecipeCreateStepsGroupsEntityRelationInput:{
 		connect:"StepGroupUniqueWhere",
@@ -2237,6 +2247,10 @@ export const AllTypesProps: Record<string,any> = {
 		base:"CategoryLocaleCreateBaseEntityRelationInput",
 		seo:"CategoryLocaleCreateSeoEntityRelationInput",
 		link:"CategoryLocaleCreateLinkEntityRelationInput"
+	},
+	RecipeCreateTileImageEntityRelationInput:{
+		connect:"ImageUniqueWhere",
+		create:"ImageCreateInput"
 	},
 	CategoryCreateImageEntityRelationInput:{
 		connect:"ImageUniqueWhere",
@@ -2362,7 +2376,8 @@ export const AllTypesProps: Record<string,any> = {
 		pinnedRecipes:"RecipeUpdatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeUpdateCreatedByEntityRelationInput",
 		stepsGroups:"RecipeUpdateStepsGroupsEntityRelationInput",
-		categories:"RecipeUpdateCategoriesEntityRelationInput"
+		categories:"RecipeUpdateCategoriesEntityRelationInput",
+		tileImage:"RecipeUpdateTileImageEntityRelationInput"
 	},
 	RecipeUpdateMainImageEntityRelationInput:{
 		create:"ImageCreateInput",
@@ -2432,7 +2447,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeUpdateMainImageEntityRelationInput",
 		pinnedRecipes:"RecipeUpdatePinnedRecipesEntityRelationInput",
 		stepsGroups:"RecipeUpdateStepsGroupsEntityRelationInput",
-		categories:"RecipeUpdateCategoriesEntityRelationInput"
+		categories:"RecipeUpdateCategoriesEntityRelationInput",
+		tileImage:"RecipeUpdateTileImageEntityRelationInput"
 	},
 	RecipeUpdateLocalesEntityRelationInput:{
 		create:"RecipeLocaleWithoutBaseCreateInput",
@@ -2527,7 +2543,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeUpdateMainImageEntityRelationInput",
 		createdBy:"RecipeUpdateCreatedByEntityRelationInput",
 		stepsGroups:"RecipeUpdateStepsGroupsEntityRelationInput",
-		categories:"RecipeUpdateCategoriesEntityRelationInput"
+		categories:"RecipeUpdateCategoriesEntityRelationInput",
+		tileImage:"RecipeUpdateTileImageEntityRelationInput"
 	},
 	RecipeUpdateCreatedByEntityRelationInput:{
 		create:"UserWithoutCreatedRecipesCreateInput",
@@ -2705,7 +2722,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeUpdateMainImageEntityRelationInput",
 		pinnedRecipes:"RecipeUpdatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeUpdateCreatedByEntityRelationInput",
-		categories:"RecipeUpdateCategoriesEntityRelationInput"
+		categories:"RecipeUpdateCategoriesEntityRelationInput",
+		tileImage:"RecipeUpdateTileImageEntityRelationInput"
 	},
 	RecipeUpdateCategoriesEntityRelationInput:{
 		create:"CategoryWithoutRecipesCreateInput",
@@ -2869,7 +2887,8 @@ export const AllTypesProps: Record<string,any> = {
 		mainImage:"RecipeUpdateMainImageEntityRelationInput",
 		pinnedRecipes:"RecipeUpdatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeUpdateCreatedByEntityRelationInput",
-		stepsGroups:"RecipeUpdateStepsGroupsEntityRelationInput"
+		stepsGroups:"RecipeUpdateStepsGroupsEntityRelationInput",
+		tileImage:"RecipeUpdateTileImageEntityRelationInput"
 	},
 	RecipeUpdateStepsGroupsEntityRelationInput:{
 		create:"StepGroupWithoutRecipeCreateInput",
@@ -2949,6 +2968,16 @@ export const AllTypesProps: Record<string,any> = {
 		by:"StepGroupUniqueWhere",
 		update:"StepGroupWithoutRecipeUpdateInput",
 		create:"StepGroupWithoutRecipeCreateInput"
+	},
+	RecipeUpdateTileImageEntityRelationInput:{
+		create:"ImageCreateInput",
+		update:"ImageUpdateInput",
+		upsert:"RecipeUpsertTileImageRelationInput",
+		connect:"ImageUniqueWhere"
+	},
+	RecipeUpsertTileImageRelationInput:{
+		update:"ImageUpdateInput",
+		create:"ImageCreateInput"
 	},
 	CategoryUpsertRecipesRelationInput:{
 		by:"RecipeUniqueWhere",
@@ -3199,7 +3228,8 @@ export const AllTypesProps: Record<string,any> = {
 		pinnedRecipes:"RecipeCreatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeCreateCreatedByEntityRelationInput",
 		stepsGroups:"RecipeCreateStepsGroupsEntityRelationInput",
-		categories:"RecipeCreateCategoriesEntityRelationInput"
+		categories:"RecipeCreateCategoriesEntityRelationInput",
+		tileImage:"RecipeCreateTileImageEntityRelationInput"
 	},
 	RecipeUpdateInput:{
 		publishDate:"Date",
@@ -3208,7 +3238,8 @@ export const AllTypesProps: Record<string,any> = {
 		pinnedRecipes:"RecipeUpdatePinnedRecipesEntityRelationInput",
 		createdBy:"RecipeUpdateCreatedByEntityRelationInput",
 		stepsGroups:"RecipeUpdateStepsGroupsEntityRelationInput",
-		categories:"RecipeUpdateCategoriesEntityRelationInput"
+		categories:"RecipeUpdateCategoriesEntityRelationInput",
+		tileImage:"RecipeUpdateTileImageEntityRelationInput"
 	},
 	RecipeLocaleCreateInput:{
 		id:"UUID",
@@ -5189,6 +5220,7 @@ export const ReturnTypes: Record<string,any> = {
 		createdBy:"User",
 		stepsGroups:"StepGroup",
 		categories:"Category",
+		tileImage:"Image",
 		localesByLocale:"RecipeLocale",
 		localesByLink:"RecipeLocale",
 		pinnedRecipesByImplementationDate:"PinnedRecipe",
@@ -5209,7 +5241,8 @@ export const ReturnTypes: Record<string,any> = {
 		pinnedRecipes:"FieldMeta",
 		createdBy:"FieldMeta",
 		stepsGroups:"FieldMeta",
-		categories:"FieldMeta"
+		categories:"FieldMeta",
+		tileImage:"FieldMeta"
 	},
 	Image:{
 		_meta:"ImageMeta",
@@ -8029,6 +8062,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	createdBy?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>,
 	stepsGroups?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>,
 	categories?: ValueTypes["CategoryWhere"] | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["ImageWhere"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["RecipeWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["RecipeWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>
@@ -8384,7 +8418,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	publishDate?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	price?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	mainImage?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>,
-	createdBy?: ValueTypes["UserOrderBy"] | undefined | null | Variable<any, string>
+	createdBy?: ValueTypes["UserOrderBy"] | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>
 };
 	["UserOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -8578,6 +8613,7 @@ pinnedRecipes?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null |
 createdBy?: [{	filter?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>},ValueTypes["User"]],
 stepsGroups?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepGroupOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 categories?: [{	filter?: ValueTypes["CategoryWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["CategoryOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Category"]],
+tileImage?: [{	filter?: ValueTypes["ImageWhere"] | undefined | null | Variable<any, string>},ValueTypes["Image"]],
 localesByLocale?: [{	by: ValueTypes["RecipeLocalesByLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
 localesByLink?: [{	by: ValueTypes["RecipeLocalesByLinkUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
 pinnedRecipesByImplementationDate?: [{	by: ValueTypes["RecipePinnedRecipesByImplementationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
@@ -8600,6 +8636,7 @@ paginateCategories?: [{	filter?: ValueTypes["CategoryWhere"] | undefined | null 
 	createdBy?:ValueTypes["FieldMeta"],
 	stepsGroups?:ValueTypes["FieldMeta"],
 	categories?:ValueTypes["FieldMeta"],
+	tileImage?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Image"]: AliasType<{
@@ -9517,6 +9554,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	createdBy?: ValueTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeCreateMainImageEntityRelationInput"]: {
@@ -9581,6 +9619,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	pinnedRecipes?: Array<ValueTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeCreateLocalesEntityRelationInput"]: {
@@ -9669,6 +9708,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	createdBy?: ValueTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeCreateCreatedByEntityRelationInput"]: {
@@ -9815,6 +9855,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	pinnedRecipes?: Array<ValueTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	createdBy?: ValueTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeCreateCategoriesEntityRelationInput"]: {
@@ -9962,6 +10003,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	pinnedRecipes?: Array<ValueTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	createdBy?: ValueTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeCreateStepsGroupsEntityRelationInput"]: {
@@ -10015,6 +10057,10 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	link?: ValueTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null | Variable<any, string>,
 	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeCreateTileImageEntityRelationInput"]: {
+	connect?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["ImageCreateInput"] | undefined | null | Variable<any, string>
 };
 	["CategoryCreateImageEntityRelationInput"]: {
 	connect?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>,
@@ -10173,6 +10219,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	createdBy?: ValueTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeUpdateMainImageEntityRelationInput"]: {
@@ -10263,6 +10310,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	pinnedRecipes?: Array<ValueTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeUpdateLocalesEntityRelationInput"]: {
@@ -10380,6 +10428,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	createdBy?: ValueTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeUpdateCreatedByEntityRelationInput"]: {
@@ -10594,6 +10643,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	pinnedRecipes?: Array<ValueTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	createdBy?: ValueTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeUpdateCategoriesEntityRelationInput"]: {
@@ -10808,6 +10858,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	pinnedRecipes?: Array<ValueTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	createdBy?: ValueTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeUpdateStepsGroupsEntityRelationInput"]: {
@@ -10903,6 +10954,18 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	by?: ValueTypes["StepGroupUniqueWhere"] | undefined | null | Variable<any, string>,
 	update?: ValueTypes["StepGroupWithoutRecipeUpdateInput"] | undefined | null | Variable<any, string>,
 	create?: ValueTypes["StepGroupWithoutRecipeCreateInput"] | undefined | null | Variable<any, string>
+};
+	["RecipeUpdateTileImageEntityRelationInput"]: {
+	create?: ValueTypes["ImageCreateInput"] | undefined | null | Variable<any, string>,
+	update?: ValueTypes["ImageUpdateInput"] | undefined | null | Variable<any, string>,
+	upsert?: ValueTypes["RecipeUpsertTileImageRelationInput"] | undefined | null | Variable<any, string>,
+	connect?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>,
+	disconnect?: boolean | undefined | null | Variable<any, string>,
+	delete?: boolean | undefined | null | Variable<any, string>
+};
+	["RecipeUpsertTileImageRelationInput"]: {
+	update?: ValueTypes["ImageUpdateInput"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["ImageCreateInput"] | undefined | null | Variable<any, string>
 };
 	["CategoryUpsertRecipesRelationInput"]: {
 	by?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>,
@@ -11195,6 +11258,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	createdBy?: ValueTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeUpdateInput"]: {
@@ -11206,6 +11270,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	createdBy?: ValueTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	stepsGroups?: Array<ValueTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	categories?: Array<ValueTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	tileImage?: ValueTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["RecipeLocaleCreateInput"]: {
@@ -13330,6 +13395,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	createdBy?: ResolverInputTypes["UserWhere"] | undefined | null,
 	stepsGroups?: ResolverInputTypes["StepGroupWhere"] | undefined | null,
 	categories?: ResolverInputTypes["CategoryWhere"] | undefined | null,
+	tileImage?: ResolverInputTypes["ImageWhere"] | undefined | null,
 	and?: Array<ResolverInputTypes["RecipeWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["RecipeWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["RecipeWhere"] | undefined | null
@@ -13685,7 +13751,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	publishDate?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	price?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	mainImage?: ResolverInputTypes["ImageOrderBy"] | undefined | null,
-	createdBy?: ResolverInputTypes["UserOrderBy"] | undefined | null
+	createdBy?: ResolverInputTypes["UserOrderBy"] | undefined | null,
+	tileImage?: ResolverInputTypes["ImageOrderBy"] | undefined | null
 };
 	["UserOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -13879,6 +13946,7 @@ pinnedRecipes?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined 
 createdBy?: [{	filter?: ResolverInputTypes["UserWhere"] | undefined | null},ResolverInputTypes["User"]],
 stepsGroups?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepGroupOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["StepGroup"]],
 categories?: [{	filter?: ResolverInputTypes["CategoryWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["CategoryOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Category"]],
+tileImage?: [{	filter?: ResolverInputTypes["ImageWhere"] | undefined | null},ResolverInputTypes["Image"]],
 localesByLocale?: [{	by: ResolverInputTypes["RecipeLocalesByLocaleUniqueWhere"],	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
 localesByLink?: [{	by: ResolverInputTypes["RecipeLocalesByLinkUniqueWhere"],	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
 pinnedRecipesByImplementationDate?: [{	by: ResolverInputTypes["RecipePinnedRecipesByImplementationDateUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
@@ -13901,6 +13969,7 @@ paginateCategories?: [{	filter?: ResolverInputTypes["CategoryWhere"] | undefined
 	createdBy?:ResolverInputTypes["FieldMeta"],
 	stepsGroups?:ResolverInputTypes["FieldMeta"],
 	categories?:ResolverInputTypes["FieldMeta"],
+	tileImage?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Image"]: AliasType<{
@@ -14819,6 +14888,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	createdBy?: ResolverInputTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeCreateMainImageEntityRelationInput"]: {
@@ -14883,6 +14953,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	pinnedRecipes?: Array<ResolverInputTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeCreateLocalesEntityRelationInput"]: {
@@ -14971,6 +15042,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	createdBy?: ResolverInputTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeCreateCreatedByEntityRelationInput"]: {
@@ -15117,6 +15189,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	pinnedRecipes?: Array<ResolverInputTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined | null,
 	createdBy?: ResolverInputTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeCreateCategoriesEntityRelationInput"]: {
@@ -15264,6 +15337,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	pinnedRecipes?: Array<ResolverInputTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined | null,
 	createdBy?: ResolverInputTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeCreateStepsGroupsEntityRelationInput"]: {
@@ -15317,6 +15391,10 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	link?: ResolverInputTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined | null,
 	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
+};
+	["RecipeCreateTileImageEntityRelationInput"]: {
+	connect?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null,
+	create?: ResolverInputTypes["ImageCreateInput"] | undefined | null
 };
 	["CategoryCreateImageEntityRelationInput"]: {
 	connect?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null,
@@ -15475,6 +15553,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	createdBy?: ResolverInputTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeUpdateMainImageEntityRelationInput"]: {
@@ -15565,6 +15644,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	pinnedRecipes?: Array<ResolverInputTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeUpdateLocalesEntityRelationInput"]: {
@@ -15682,6 +15762,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	createdBy?: ResolverInputTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeUpdateCreatedByEntityRelationInput"]: {
@@ -15896,6 +15977,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	pinnedRecipes?: Array<ResolverInputTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined | null,
 	createdBy?: ResolverInputTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeUpdateCategoriesEntityRelationInput"]: {
@@ -16110,6 +16192,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	pinnedRecipes?: Array<ResolverInputTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined | null,
 	createdBy?: ResolverInputTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeUpdateStepsGroupsEntityRelationInput"]: {
@@ -16205,6 +16288,18 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	by?: ResolverInputTypes["StepGroupUniqueWhere"] | undefined | null,
 	update?: ResolverInputTypes["StepGroupWithoutRecipeUpdateInput"] | undefined | null,
 	create?: ResolverInputTypes["StepGroupWithoutRecipeCreateInput"] | undefined | null
+};
+	["RecipeUpdateTileImageEntityRelationInput"]: {
+	create?: ResolverInputTypes["ImageCreateInput"] | undefined | null,
+	update?: ResolverInputTypes["ImageUpdateInput"] | undefined | null,
+	upsert?: ResolverInputTypes["RecipeUpsertTileImageRelationInput"] | undefined | null,
+	connect?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null,
+	disconnect?: boolean | undefined | null,
+	delete?: boolean | undefined | null
+};
+	["RecipeUpsertTileImageRelationInput"]: {
+	update?: ResolverInputTypes["ImageUpdateInput"] | undefined | null,
+	create?: ResolverInputTypes["ImageCreateInput"] | undefined | null
 };
 	["CategoryUpsertRecipesRelationInput"]: {
 	by?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null,
@@ -16497,6 +16592,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	createdBy?: ResolverInputTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeCreateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeUpdateInput"]: {
@@ -16508,6 +16604,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	createdBy?: ResolverInputTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined | null,
 	stepsGroups?: Array<ResolverInputTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined | null,
 	categories?: Array<ResolverInputTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined | null,
+	tileImage?: ResolverInputTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["RecipeLocaleCreateInput"]: {
@@ -18627,6 +18724,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["UserWhere"] | undefined,
 	stepsGroups?: ModelTypes["StepGroupWhere"] | undefined,
 	categories?: ModelTypes["CategoryWhere"] | undefined,
+	tileImage?: ModelTypes["ImageWhere"] | undefined,
 	and?: Array<ModelTypes["RecipeWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["RecipeWhere"] | undefined> | undefined,
 	not?: ModelTypes["RecipeWhere"] | undefined
@@ -18972,7 +19070,8 @@ export type ModelTypes = {
 	publishDate?: ModelTypes["OrderDirection"] | undefined,
 	price?: ModelTypes["OrderDirection"] | undefined,
 	mainImage?: ModelTypes["ImageOrderBy"] | undefined,
-	createdBy?: ModelTypes["UserOrderBy"] | undefined
+	createdBy?: ModelTypes["UserOrderBy"] | undefined,
+	tileImage?: ModelTypes["ImageOrderBy"] | undefined
 };
 	["UserOrderBy"]: {
 	_random?: boolean | undefined,
@@ -19159,6 +19258,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["User"] | undefined,
 	stepsGroups: Array<ModelTypes["StepGroup"]>,
 	categories: Array<ModelTypes["Category"]>,
+	tileImage?: ModelTypes["Image"] | undefined,
 	localesByLocale?: ModelTypes["RecipeLocale"] | undefined,
 	localesByLink?: ModelTypes["RecipeLocale"] | undefined,
 	pinnedRecipesByImplementationDate?: ModelTypes["PinnedRecipe"] | undefined,
@@ -19179,7 +19279,8 @@ export type ModelTypes = {
 	pinnedRecipes?: ModelTypes["FieldMeta"] | undefined,
 	createdBy?: ModelTypes["FieldMeta"] | undefined,
 	stepsGroups?: ModelTypes["FieldMeta"] | undefined,
-	categories?: ModelTypes["FieldMeta"] | undefined
+	categories?: ModelTypes["FieldMeta"] | undefined,
+	tileImage?: ModelTypes["FieldMeta"] | undefined
 };
 	["Image"]: {
 		_meta?: ModelTypes["ImageMeta"] | undefined,
@@ -20030,6 +20131,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateMainImageEntityRelationInput"]: {
@@ -20094,6 +20196,7 @@ export type ModelTypes = {
 	pinnedRecipes?: Array<ModelTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateLocalesEntityRelationInput"]: {
@@ -20182,6 +20285,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateCreatedByEntityRelationInput"]: {
@@ -20328,6 +20432,7 @@ export type ModelTypes = {
 	pinnedRecipes?: Array<ModelTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: ModelTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	categories?: Array<ModelTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateCategoriesEntityRelationInput"]: {
@@ -20475,6 +20580,7 @@ export type ModelTypes = {
 	pinnedRecipes?: Array<ModelTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: ModelTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateStepsGroupsEntityRelationInput"]: {
@@ -20528,6 +20634,10 @@ export type ModelTypes = {
 	link?: ModelTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
+};
+	["RecipeCreateTileImageEntityRelationInput"]: {
+	connect?: ModelTypes["ImageUniqueWhere"] | undefined,
+	create?: ModelTypes["ImageCreateInput"] | undefined
 };
 	["CategoryCreateImageEntityRelationInput"]: {
 	connect?: ModelTypes["ImageUniqueWhere"] | undefined,
@@ -20686,6 +20796,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateMainImageEntityRelationInput"]: {
@@ -20776,6 +20887,7 @@ export type ModelTypes = {
 	pinnedRecipes?: Array<ModelTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateLocalesEntityRelationInput"]: {
@@ -20893,6 +21005,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateCreatedByEntityRelationInput"]: {
@@ -21107,6 +21220,7 @@ export type ModelTypes = {
 	pinnedRecipes?: Array<ModelTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: ModelTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	categories?: Array<ModelTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateCategoriesEntityRelationInput"]: {
@@ -21321,6 +21435,7 @@ export type ModelTypes = {
 	pinnedRecipes?: Array<ModelTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: ModelTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateStepsGroupsEntityRelationInput"]: {
@@ -21416,6 +21531,18 @@ export type ModelTypes = {
 	by?: ModelTypes["StepGroupUniqueWhere"] | undefined,
 	update?: ModelTypes["StepGroupWithoutRecipeUpdateInput"] | undefined,
 	create?: ModelTypes["StepGroupWithoutRecipeCreateInput"] | undefined
+};
+	["RecipeUpdateTileImageEntityRelationInput"]: {
+	create?: ModelTypes["ImageCreateInput"] | undefined,
+	update?: ModelTypes["ImageUpdateInput"] | undefined,
+	upsert?: ModelTypes["RecipeUpsertTileImageRelationInput"] | undefined,
+	connect?: ModelTypes["ImageUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["RecipeUpsertTileImageRelationInput"]: {
+	update?: ModelTypes["ImageUpdateInput"] | undefined,
+	create?: ModelTypes["ImageCreateInput"] | undefined
 };
 	["CategoryUpsertRecipesRelationInput"]: {
 	by?: ModelTypes["RecipeUniqueWhere"] | undefined,
@@ -21704,6 +21831,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateInput"]: {
@@ -21715,6 +21843,7 @@ export type ModelTypes = {
 	createdBy?: ModelTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<ModelTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<ModelTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: ModelTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleCreateInput"]: {
@@ -23592,6 +23721,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["UserWhere"] | undefined,
 	stepsGroups?: GraphQLTypes["StepGroupWhere"] | undefined,
 	categories?: GraphQLTypes["CategoryWhere"] | undefined,
+	tileImage?: GraphQLTypes["ImageWhere"] | undefined,
 	and?: Array<GraphQLTypes["RecipeWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["RecipeWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["RecipeWhere"] | undefined
@@ -23947,7 +24077,8 @@ export type GraphQLTypes = {
 	publishDate?: GraphQLTypes["OrderDirection"] | undefined,
 	price?: GraphQLTypes["OrderDirection"] | undefined,
 	mainImage?: GraphQLTypes["ImageOrderBy"] | undefined,
-	createdBy?: GraphQLTypes["UserOrderBy"] | undefined
+	createdBy?: GraphQLTypes["UserOrderBy"] | undefined,
+	tileImage?: GraphQLTypes["ImageOrderBy"] | undefined
 };
 	["UserOrderBy"]: {
 		_random?: boolean | undefined,
@@ -24142,6 +24273,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["User"] | undefined,
 	stepsGroups: Array<GraphQLTypes["StepGroup"]>,
 	categories: Array<GraphQLTypes["Category"]>,
+	tileImage?: GraphQLTypes["Image"] | undefined,
 	localesByLocale?: GraphQLTypes["RecipeLocale"] | undefined,
 	localesByLink?: GraphQLTypes["RecipeLocale"] | undefined,
 	pinnedRecipesByImplementationDate?: GraphQLTypes["PinnedRecipe"] | undefined,
@@ -24163,7 +24295,8 @@ export type GraphQLTypes = {
 	pinnedRecipes?: GraphQLTypes["FieldMeta"] | undefined,
 	createdBy?: GraphQLTypes["FieldMeta"] | undefined,
 	stepsGroups?: GraphQLTypes["FieldMeta"] | undefined,
-	categories?: GraphQLTypes["FieldMeta"] | undefined
+	categories?: GraphQLTypes["FieldMeta"] | undefined,
+	tileImage?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["Image"]: {
 	__typename: "Image",
@@ -25081,6 +25214,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateMainImageEntityRelationInput"]: {
@@ -25145,6 +25279,7 @@ export type GraphQLTypes = {
 	pinnedRecipes?: Array<GraphQLTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateLocalesEntityRelationInput"]: {
@@ -25233,6 +25368,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateCreatedByEntityRelationInput"]: {
@@ -25379,6 +25515,7 @@ export type GraphQLTypes = {
 	pinnedRecipes?: Array<GraphQLTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: GraphQLTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	categories?: Array<GraphQLTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateCategoriesEntityRelationInput"]: {
@@ -25526,6 +25663,7 @@ export type GraphQLTypes = {
 	pinnedRecipes?: Array<GraphQLTypes["RecipeCreatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: GraphQLTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeCreateStepsGroupsEntityRelationInput"]: {
@@ -25579,6 +25717,10 @@ export type GraphQLTypes = {
 	link?: GraphQLTypes["CategoryLocaleCreateLinkEntityRelationInput"] | undefined,
 	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
+};
+	["RecipeCreateTileImageEntityRelationInput"]: {
+		connect?: GraphQLTypes["ImageUniqueWhere"] | undefined,
+	create?: GraphQLTypes["ImageCreateInput"] | undefined
 };
 	["CategoryCreateImageEntityRelationInput"]: {
 		connect?: GraphQLTypes["ImageUniqueWhere"] | undefined,
@@ -25737,6 +25879,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateMainImageEntityRelationInput"]: {
@@ -25827,6 +25970,7 @@ export type GraphQLTypes = {
 	pinnedRecipes?: Array<GraphQLTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateLocalesEntityRelationInput"]: {
@@ -25944,6 +26088,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateCreatedByEntityRelationInput"]: {
@@ -26158,6 +26303,7 @@ export type GraphQLTypes = {
 	pinnedRecipes?: Array<GraphQLTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: GraphQLTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	categories?: Array<GraphQLTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateCategoriesEntityRelationInput"]: {
@@ -26372,6 +26518,7 @@ export type GraphQLTypes = {
 	pinnedRecipes?: Array<GraphQLTypes["RecipeUpdatePinnedRecipesEntityRelationInput"]> | undefined,
 	createdBy?: GraphQLTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateStepsGroupsEntityRelationInput"]: {
@@ -26467,6 +26614,18 @@ export type GraphQLTypes = {
 		by?: GraphQLTypes["StepGroupUniqueWhere"] | undefined,
 	update?: GraphQLTypes["StepGroupWithoutRecipeUpdateInput"] | undefined,
 	create?: GraphQLTypes["StepGroupWithoutRecipeCreateInput"] | undefined
+};
+	["RecipeUpdateTileImageEntityRelationInput"]: {
+		create?: GraphQLTypes["ImageCreateInput"] | undefined,
+	update?: GraphQLTypes["ImageUpdateInput"] | undefined,
+	upsert?: GraphQLTypes["RecipeUpsertTileImageRelationInput"] | undefined,
+	connect?: GraphQLTypes["ImageUniqueWhere"] | undefined,
+	disconnect?: boolean | undefined,
+	delete?: boolean | undefined
+};
+	["RecipeUpsertTileImageRelationInput"]: {
+		update?: GraphQLTypes["ImageUpdateInput"] | undefined,
+	create?: GraphQLTypes["ImageCreateInput"] | undefined
 };
 	["CategoryUpsertRecipesRelationInput"]: {
 		by?: GraphQLTypes["RecipeUniqueWhere"] | undefined,
@@ -26759,6 +26918,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["RecipeCreateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeCreateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeCreateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeCreateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeUpdateInput"]: {
@@ -26770,6 +26930,7 @@ export type GraphQLTypes = {
 	createdBy?: GraphQLTypes["RecipeUpdateCreatedByEntityRelationInput"] | undefined,
 	stepsGroups?: Array<GraphQLTypes["RecipeUpdateStepsGroupsEntityRelationInput"]> | undefined,
 	categories?: Array<GraphQLTypes["RecipeUpdateCategoriesEntityRelationInput"]> | undefined,
+	tileImage?: GraphQLTypes["RecipeUpdateTileImageEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["RecipeLocaleCreateInput"]: {
@@ -28830,6 +28991,7 @@ type ZEUS_VARIABLES = {
 	["LocaleWithoutStepsGroupsCreateInput"]: ValueTypes["LocaleWithoutStepsGroupsCreateInput"];
 	["LocaleCreateCategoriesEntityRelationInput"]: ValueTypes["LocaleCreateCategoriesEntityRelationInput"];
 	["CategoryLocaleWithoutLocaleCreateInput"]: ValueTypes["CategoryLocaleWithoutLocaleCreateInput"];
+	["RecipeCreateTileImageEntityRelationInput"]: ValueTypes["RecipeCreateTileImageEntityRelationInput"];
 	["CategoryCreateImageEntityRelationInput"]: ValueTypes["CategoryCreateImageEntityRelationInput"];
 	["HomePageLocaleCreateSeoEntityRelationInput"]: ValueTypes["HomePageLocaleCreateSeoEntityRelationInput"];
 	["StepCreateGroupEntityRelationInput"]: ValueTypes["StepCreateGroupEntityRelationInput"];
@@ -28964,6 +29126,8 @@ type ZEUS_VARIABLES = {
 	["StepGroupLocaleUpsertLocaleRelationInput"]: ValueTypes["StepGroupLocaleUpsertLocaleRelationInput"];
 	["StepGroupUpsertLocalesRelationInput"]: ValueTypes["StepGroupUpsertLocalesRelationInput"];
 	["RecipeUpsertStepsGroupsRelationInput"]: ValueTypes["RecipeUpsertStepsGroupsRelationInput"];
+	["RecipeUpdateTileImageEntityRelationInput"]: ValueTypes["RecipeUpdateTileImageEntityRelationInput"];
+	["RecipeUpsertTileImageRelationInput"]: ValueTypes["RecipeUpsertTileImageRelationInput"];
 	["CategoryUpsertRecipesRelationInput"]: ValueTypes["CategoryUpsertRecipesRelationInput"];
 	["CategoryUpdateImageEntityRelationInput"]: ValueTypes["CategoryUpdateImageEntityRelationInput"];
 	["CategoryUpsertImageRelationInput"]: ValueTypes["CategoryUpsertImageRelationInput"];
