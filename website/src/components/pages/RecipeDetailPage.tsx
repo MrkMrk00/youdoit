@@ -1,6 +1,9 @@
 import type { FunctionComponent } from 'react'
+import { Fragment } from 'react'
 import type { RecipeLocaleResult } from '../../data/RecipeLocaleFragment'
+import { Container } from '../Container'
 import { DetailHeader } from '../DetailHeader'
+import { StepGroup } from '../StepGroup'
 import styles from './RecipeDetailPage.module.sass'
 
 export interface RecipeDetailPageProps {
@@ -25,6 +28,17 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 				description={recipeDetailPage.description}
 				author={author}
 			/>
+			<Container>
+				<div className={styles.stepGroupList}>
+					{recipeDetailPage.base?.stepsGroups.map((group, index) => {
+						return (
+							<Fragment key={group.id}>
+								<StepGroup group={group} index={index + 1} />
+							</Fragment>
+						)
+					})}
+				</div>
+			</Container>
 		</div>
 	)
 }
