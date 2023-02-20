@@ -1,15 +1,13 @@
 # App
 
-> [Steps before first deployment](burn-after-reading.md)
-
 ## Administration
 
-- [Contember](https://XXX.eu.contember.cloud/)
+- [Contember](https://youdoit.eu.contember.cloud)
 
 ## Website
 
-- [Beta](https://XXX-beta.vercel.app/)
-- [Production](https://XXX.vercel.app/)
+- [Beta](https://youdoit-beta.vercel.app/)
+- [Production](https://youdoit.vercel.app/)
 
 ## Development
 
