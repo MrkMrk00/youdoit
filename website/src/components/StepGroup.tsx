@@ -2,9 +2,9 @@ import type { FunctionComponent } from 'react'
 import { Fragment } from 'react'
 import type { StepGroupResult } from '../data/StepGroupFragment'
 import { Icon } from './Icon'
-import { Step } from './Step'
 import styles from './StepGroup.module.sass'
 import { StepGroupButton } from './StepGroupButton'
+import { StepItem } from './StepItem'
 
 export interface StepGroupProps {
 	group: StepGroupResult
@@ -26,10 +26,10 @@ export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index }) =
 				</div>
 			</div>
 			<div className={styles.stepList}>
-				{group.steps.map((step) => {
+				{group.items.map((item) => {
 					return (
-						<Fragment key={step.id}>
-							<Step step={step} />
+						<Fragment key={item.id}>
+							<StepItem item={item} />
 						</Fragment>
 					)
 				})}

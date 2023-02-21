@@ -1,12 +1,12 @@
 import type { GraphQLTypes, InputType } from '../../generated/contember'
-import { Selector } from '../../generated/contember'
+import { OrderDirection, Selector } from '../../generated/contember'
 import type { scalarResolver } from '../utilities/createScalarResolver'
-import { StepFragment } from './StepFragment'
+import { StepGroupItemFragment } from './StepGroupItemFragment'
 
 export const StepGroupFragment = (locale: string) =>
 	Selector('StepGroup')({
 		id: true,
-		steps: [{}, StepFragment(locale)],
+		items: [{ orderBy: [{ order: OrderDirection.asc }] }, StepGroupItemFragment(locale)],
 		localesByLocale: [
 			{ by: { locale: { code: locale } } },
 			{
