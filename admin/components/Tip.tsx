@@ -1,11 +1,11 @@
 import { Component, HasOne, TextField } from '@contember/admin'
 import { LocaleSideDimension } from './LocaleSideDimensions'
 
-interface StepProps {
+interface TipProps {
 	field: string
 }
 
-export const Step = Component<StepProps>((props) => {
+export const Tip = Component<TipProps>((props) => {
 	return (
 		<HasOne field={props.field}>
 			<LocaleSideDimension>
