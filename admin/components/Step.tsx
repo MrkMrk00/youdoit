@@ -1,4 +1,4 @@
-import { Component, HasOne, TextField } from '@contember/admin'
+import { CheckboxField, Component, HasOne, TextField } from '@contember/admin'
 import { LocaleSideDimension } from './LocaleSideDimensions'
 
 interface StepProps {
@@ -9,6 +9,7 @@ export const Step = Component<StepProps>((props) => {
 	return (
 		<HasOne field={props.field}>
 			<LocaleSideDimension>
+				<CheckboxField field="isChecked" label="Is checked" defaultValue={false} />
 				<TextField field="title" label="Title" />
 			</LocaleSideDimension>
 		</HasOne>

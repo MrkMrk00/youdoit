@@ -17,5 +17,6 @@ export class StepLocale {
 	base = d.manyHasOne(Step, 'locales').cascadeOnDelete().notNull()
 	locale = d.manyHasOne(Locale, 'steps').cascadeOnDelete().notNull()
 
+	isChecked = d.boolColumn().notNull().default(false)
 	title = d.stringColumn()
 }

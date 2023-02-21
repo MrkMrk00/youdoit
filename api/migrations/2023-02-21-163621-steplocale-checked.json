@@ -1,0 +1,16 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "updateColumnDefinition",
+			"entityName": "StepLocale",
+			"fieldName": "isChecked",
+			"definition": {
+				"columnType": "boolean",
+				"nullable": false,
+				"type": "Bool",
+				"default": false
+			}
+		}
+	]
+}
