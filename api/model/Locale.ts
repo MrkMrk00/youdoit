@@ -5,6 +5,7 @@ import { HomePageLocale } from './HomePage'
 import { RecipeLocale } from './Recipe'
 import { StepLocale } from './Step'
 import { StepGroupLocale } from './StepGroup'
+import { TipLocale } from './Tip'
 
 @acl.allow(publicRole, { read: true })
 export class Locale {
@@ -17,4 +18,5 @@ export class Locale {
 	categories = d.oneHasMany(CategoryLocale, 'locale')
 	stepsGroups = d.oneHasMany(StepGroupLocale, 'locale')
 	steps = d.oneHasMany(StepLocale, 'locale')
+	tips = d.oneHasMany(TipLocale, 'locale')
 }

@@ -2,7 +2,7 @@ import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-d
 import { publicRole } from './acl'
 import { Locale } from './Locale'
 import { Recipe } from './Recipe'
-import { Step } from './Step'
+import { StepGroupItem } from './StepGroupItem'
 
 @acl.allow(publicRole, { read: true })
 export class StepGroup {
@@ -11,7 +11,7 @@ export class StepGroup {
 	order = d.intColumn().notNull()
 
 	// gallery = @TODO
-	steps = d.oneHasMany(Step, 'group').orderBy('order')
+	items = d.oneHasMany(StepGroupItem, 'group').orderBy('order')
 }
 
 @d.Unique('base', 'locale')

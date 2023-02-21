@@ -3,13 +3,10 @@ import { publicRole } from './acl'
 import { ImplemetationDate } from './ImplementationDate'
 import { Locale } from './Locale'
 import { ModificationDate } from './ModificationDate'
-import { StepGroup } from './StepGroup'
 
 @acl.allow(publicRole, { read: true })
 export class Step {
-	group = d.manyHasOne(StepGroup, 'steps').cascadeOnDelete().notNull()
 	locales = d.oneHasMany(StepLocale, 'base')
-	order = d.intColumn().notNull()
 	implementationDate = d.oneHasMany(ImplemetationDate, 'step')
 	modificationDate = d.oneHasMany(ModificationDate, 'step')
 }

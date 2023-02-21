@@ -1,0 +1,395 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "removeField",
+			"entityName": "Step",
+			"fieldName": "order"
+		},
+		{
+			"modification": "removeField",
+			"entityName": "Step",
+			"fieldName": "group"
+		},
+		{
+			"modification": "createEnum",
+			"enumName": "StepGroupItemType",
+			"values": [
+				"step",
+				"tip"
+			]
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "StepGroupItem",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "step_group_item",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "Tip",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "tip",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "TipLocale",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "tip_locale",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "StepGroupItem",
+			"field": {
+				"name": "type",
+				"columnName": "type",
+				"columnType": "StepGroupItemType",
+				"nullable": false,
+				"type": "Enum"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "StepGroupItem",
+			"field": {
+				"name": "order",
+				"columnName": "order",
+				"columnType": "integer",
+				"nullable": false,
+				"type": "Integer",
+				"default": 0
+			},
+			"fillValue": 0
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "TipLocale",
+			"field": {
+				"name": "title",
+				"columnName": "title",
+				"columnType": "text",
+				"nullable": true,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepGroupItem",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "group",
+				"target": "StepGroup",
+				"joiningColumn": {
+					"columnName": "group_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "items"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "items",
+				"target": "StepGroupItem",
+				"ownedBy": "group",
+				"orderBy": [
+					{
+						"path": [
+							"order"
+						],
+						"direction": "asc"
+					}
+				]
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepGroupItem",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "step",
+				"target": "Step",
+				"joiningColumn": {
+					"columnName": "step_id",
+					"onDelete": "set null"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepGroupItem",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "tip",
+				"target": "Tip",
+				"joiningColumn": {
+					"columnName": "tip_id",
+					"onDelete": "set null"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "TipLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "base",
+				"target": "Tip",
+				"joiningColumn": {
+					"columnName": "base_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "locales"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "locales",
+				"target": "TipLocale",
+				"ownedBy": "base"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "TipLocale",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "locale",
+				"target": "Locale",
+				"joiningColumn": {
+					"columnName": "locale_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "tips"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "tips",
+				"target": "TipLocale",
+				"ownedBy": "locale"
+			}
+		},
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "TipLocale",
+			"unique": {
+				"fields": [
+					"base",
+					"locale"
+				],
+				"name": "unique_TipLocale_base_locale_f8a7ea"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepGroupItem",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"type": true,
+								"group": true,
+								"order": true,
+								"step": true,
+								"tip": true
+							},
+							"create": {
+								"id": true,
+								"type": true,
+								"group": true,
+								"order": true,
+								"step": true,
+								"tip": true
+							},
+							"update": {
+								"id": true,
+								"type": true,
+								"group": true,
+								"order": true,
+								"step": true,
+								"tip": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Tip",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"locales": true
+							},
+							"create": {
+								"id": true,
+								"locales": true
+							},
+							"update": {
+								"id": true,
+								"locales": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/TipLocale",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true
+							},
+							"create": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true
+							},
+							"update": {
+								"id": true,
+								"base": true,
+								"locale": true,
+								"title": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/create/tips",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/update/tips",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Locale/operations/read/tips",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepGroup/operations/create/items",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepGroup/operations/update/items",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepGroup/operations/read/items",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Tip",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"locales": true
+							}
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/TipLocale",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"base": true,
+								"locale": true,
+								"title": true
+							}
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Locale/operations/read/tips",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/StepGroup/operations/read/items",
+					"value": true
+				}
+			]
+		}
+	]
+}
