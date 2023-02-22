@@ -21,5 +21,6 @@ export class StepGroupLocale {
 	locale = d.manyHasOne(Locale, 'stepsGroups').cascadeOnDelete().notNull()
 
 	title = d.stringColumn()
+	description = d.stringColumn()
 	buttonTitle = d.stringColumn()
 }
