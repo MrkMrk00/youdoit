@@ -16,12 +16,16 @@
 		"check-scripts": "tsc --project scripts --noEmit",
 		"check": "npm run check-admin && npm run check-api && npm run check-website && npm run check-scripts",
 		"fix": "next lint website --fix",
+		"import-database": "ts-node scripts/import-database.ts",
 		"build": "concurrently npm:build-admin npm:build-api npm:build-website",
 		"build-admin": "tsc --project admin && vite build admin",
 		"build-api": "tsc --project api",
 		"build-website": "tsc --project website && next build website"
 	},
 	"dependencies": {
+		"@types/inquirer": "^9.0.3",
+		"chalk": "^5.2.0",
+		"inquirer": "^9.1.4",
 		"next": "^13",
 		"react": "^18",
 		"react-dom": "^18"
