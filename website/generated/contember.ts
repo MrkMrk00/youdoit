@@ -836,6 +836,7 @@ export const AllTypesProps: Record<string,any> = {
 		buttonTitle:"StringCondition",
 		base:"StepGroupWhere",
 		locale:"LocaleWhere",
+		description:"StringCondition",
 		and:"StepGroupLocaleWhere",
 		or:"StepGroupLocaleWhere",
 		not:"StepGroupLocaleWhere"
@@ -1565,7 +1566,8 @@ export const AllTypesProps: Record<string,any> = {
 		title:"OrderDirection",
 		buttonTitle:"OrderDirection",
 		base:"StepGroupOrderBy",
-		locale:"LocaleOrderBy"
+		locale:"LocaleOrderBy",
+		description:"OrderDirection"
 	},
 	StepGroupOrderBy:{
 		id:"OrderDirection",
@@ -5945,14 +5947,16 @@ export const ReturnTypes: Record<string,any> = {
 		title:"String",
 		buttonTitle:"String",
 		base:"StepGroup",
-		locale:"Locale"
+		locale:"Locale",
+		description:"String"
 	},
 	StepGroupLocaleMeta:{
 		id:"FieldMeta",
 		title:"FieldMeta",
 		buttonTitle:"FieldMeta",
 		base:"FieldMeta",
-		locale:"FieldMeta"
+		locale:"FieldMeta",
+		description:"FieldMeta"
 	},
 	StepGroupItem:{
 		_meta:"StepGroupItemMeta",
@@ -8928,6 +8932,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	buttonTitle?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
 	base?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>,
+	description?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["StepGroupLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["StepGroupLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["StepGroupLocaleWhere"] | undefined | null | Variable<any, string>
@@ -9690,6 +9695,7 @@ paginateItems?: [{	filter?: ValueTypes["StepGroupItemWhere"] | undefined | null 
 	buttonTitle?:boolean | `@${string}`,
 base?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["Locale"]],
+	description?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["StepGroupLocaleMeta"]: AliasType<{
@@ -9698,6 +9704,7 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	buttonTitle?:ValueTypes["FieldMeta"],
 	base?:ValueTypes["FieldMeta"],
 	locale?:ValueTypes["FieldMeta"],
+	description?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["StepGroupLocaleOrderBy"]: {
@@ -9707,7 +9714,8 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	title?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	buttonTitle?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	base?: ValueTypes["StepGroupOrderBy"] | undefined | null | Variable<any, string>,
-	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>
+	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>,
+	description?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
 	["StepGroupOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -10661,6 +10669,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	buttonTitle?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepGroupLocaleCreateBaseEntityRelationInput"]: {
@@ -10861,6 +10870,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	buttonTitle?: string | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepGroupLocaleCreateLocaleEntityRelationInput"]: {
@@ -11470,6 +11480,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	buttonTitle?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepGroupLocaleUpdateBaseEntityRelationInput"]: {
@@ -11755,6 +11766,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	title?: string | undefined | null | Variable<any, string>,
 	buttonTitle?: string | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepGroupLocaleUpdateLocaleEntityRelationInput"]: {
@@ -12437,6 +12449,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	buttonTitle?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepGroupLocaleUpdateInput"]: {
@@ -12444,6 +12457,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	buttonTitle?: string | undefined | null | Variable<any, string>,
 	base?: ValueTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined | null | Variable<any, string>,
+	description?: string | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["HomePageConnection"]: AliasType<{
@@ -14145,8 +14159,7 @@ upsertTipLocale?: [{	by: ValueTypes["TipLocaleUniqueWhere"] | Variable<any, stri
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null | Variable<any, string>
 };
-	/** Json custom scalar type */
-["Json"]:unknown;
+	["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ValueTypes["_Enum"],
 	entities?:ValueTypes["_Entity"],
@@ -14777,6 +14790,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	buttonTitle?: ResolverInputTypes["StringCondition"] | undefined | null,
 	base?: ResolverInputTypes["StepGroupWhere"] | undefined | null,
 	locale?: ResolverInputTypes["LocaleWhere"] | undefined | null,
+	description?: ResolverInputTypes["StringCondition"] | undefined | null,
 	and?: Array<ResolverInputTypes["StepGroupLocaleWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["StepGroupLocaleWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["StepGroupLocaleWhere"] | undefined | null
@@ -15539,6 +15553,7 @@ paginateItems?: [{	filter?: ResolverInputTypes["StepGroupItemWhere"] | undefined
 	buttonTitle?:boolean | `@${string}`,
 base?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null},ResolverInputTypes["StepGroup"]],
 locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},ResolverInputTypes["Locale"]],
+	description?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["StepGroupLocaleMeta"]: AliasType<{
@@ -15547,6 +15562,7 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	buttonTitle?:ResolverInputTypes["FieldMeta"],
 	base?:ResolverInputTypes["FieldMeta"],
 	locale?:ResolverInputTypes["FieldMeta"],
+	description?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["StepGroupLocaleOrderBy"]: {
@@ -15556,7 +15572,8 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	title?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	buttonTitle?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	base?: ResolverInputTypes["StepGroupOrderBy"] | undefined | null,
-	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null
+	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null,
+	description?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
 	["StepGroupOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -16511,6 +16528,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	buttonTitle?: string | undefined | null,
 	base?: ResolverInputTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepGroupLocaleCreateBaseEntityRelationInput"]: {
@@ -16711,6 +16729,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	buttonTitle?: string | undefined | null,
 	locale?: ResolverInputTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepGroupLocaleCreateLocaleEntityRelationInput"]: {
@@ -17320,6 +17339,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	buttonTitle?: string | undefined | null,
 	base?: ResolverInputTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepGroupLocaleUpdateBaseEntityRelationInput"]: {
@@ -17605,6 +17625,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	title?: string | undefined | null,
 	buttonTitle?: string | undefined | null,
 	locale?: ResolverInputTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepGroupLocaleUpdateLocaleEntityRelationInput"]: {
@@ -18287,6 +18308,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	buttonTitle?: string | undefined | null,
 	base?: ResolverInputTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepGroupLocaleUpdateInput"]: {
@@ -18294,6 +18316,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	buttonTitle?: string | undefined | null,
 	base?: ResolverInputTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined | null,
 	locale?: ResolverInputTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined | null,
+	description?: string | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["HomePageConnection"]: AliasType<{
@@ -19995,8 +20018,7 @@ upsertTipLocale?: [{	by: ResolverInputTypes["TipLocaleUniqueWhere"],	filter?: Re
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined | null
 };
-	/** Json custom scalar type */
-["Json"]:unknown;
+	["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ResolverInputTypes["_Enum"],
 	entities?:ResolverInputTypes["_Entity"],
@@ -20622,6 +20644,7 @@ export type ModelTypes = {
 	buttonTitle?: ModelTypes["StringCondition"] | undefined,
 	base?: ModelTypes["StepGroupWhere"] | undefined,
 	locale?: ModelTypes["LocaleWhere"] | undefined,
+	description?: ModelTypes["StringCondition"] | undefined,
 	and?: Array<ModelTypes["StepGroupLocaleWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["StepGroupLocaleWhere"] | undefined> | undefined,
 	not?: ModelTypes["StepGroupLocaleWhere"] | undefined
@@ -21338,14 +21361,16 @@ export type ModelTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	base?: ModelTypes["StepGroup"] | undefined,
-	locale?: ModelTypes["Locale"] | undefined
+	locale?: ModelTypes["Locale"] | undefined,
+	description?: string | undefined
 };
 	["StepGroupLocaleMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
 	title?: ModelTypes["FieldMeta"] | undefined,
 	buttonTitle?: ModelTypes["FieldMeta"] | undefined,
 	base?: ModelTypes["FieldMeta"] | undefined,
-	locale?: ModelTypes["FieldMeta"] | undefined
+	locale?: ModelTypes["FieldMeta"] | undefined,
+	description?: ModelTypes["FieldMeta"] | undefined
 };
 	["StepGroupLocaleOrderBy"]: {
 	_random?: boolean | undefined,
@@ -21354,7 +21379,8 @@ export type ModelTypes = {
 	title?: ModelTypes["OrderDirection"] | undefined,
 	buttonTitle?: ModelTypes["OrderDirection"] | undefined,
 	base?: ModelTypes["StepGroupOrderBy"] | undefined,
-	locale?: ModelTypes["LocaleOrderBy"] | undefined
+	locale?: ModelTypes["LocaleOrderBy"] | undefined,
+	description?: ModelTypes["OrderDirection"] | undefined
 };
 	["StepGroupOrderBy"]: {
 	_random?: boolean | undefined,
@@ -22262,6 +22288,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	base?: ModelTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleCreateBaseEntityRelationInput"]: {
@@ -22462,6 +22489,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	locale?: ModelTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleCreateLocaleEntityRelationInput"]: {
@@ -23071,6 +23099,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	base?: ModelTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleUpdateBaseEntityRelationInput"]: {
@@ -23356,6 +23385,7 @@ export type ModelTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	locale?: ModelTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleUpdateLocaleEntityRelationInput"]: {
@@ -24028,6 +24058,7 @@ export type ModelTypes = {
 	buttonTitle?: string | undefined,
 	base?: ModelTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined,
 	locale?: ModelTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleUpdateInput"]: {
@@ -24035,6 +24066,7 @@ export type ModelTypes = {
 	buttonTitle?: string | undefined,
 	base?: ModelTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined,
 	locale?: ModelTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["HomePageConnection"]: {
@@ -25496,8 +25528,7 @@ export type ModelTypes = {
 	["MutationTransactionOptions"]: {
 	deferForeignKeyConstraints?: boolean | undefined
 };
-	/** Json custom scalar type */
-["Json"]:any;
+	["Json"]:any;
 	["_Schema"]: {
 		enums: Array<ModelTypes["_Enum"]>,
 	entities: Array<ModelTypes["_Entity"]>
@@ -26099,6 +26130,7 @@ export type GraphQLTypes = {
 	buttonTitle?: GraphQLTypes["StringCondition"] | undefined,
 	base?: GraphQLTypes["StepGroupWhere"] | undefined,
 	locale?: GraphQLTypes["LocaleWhere"] | undefined,
+	description?: GraphQLTypes["StringCondition"] | undefined,
 	and?: Array<GraphQLTypes["StepGroupLocaleWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["StepGroupLocaleWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["StepGroupLocaleWhere"] | undefined
@@ -26861,7 +26893,8 @@ export type GraphQLTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	base?: GraphQLTypes["StepGroup"] | undefined,
-	locale?: GraphQLTypes["Locale"] | undefined
+	locale?: GraphQLTypes["Locale"] | undefined,
+	description?: string | undefined
 };
 	["StepGroupLocaleMeta"]: {
 	__typename: "StepGroupLocaleMeta",
@@ -26869,7 +26902,8 @@ export type GraphQLTypes = {
 	title?: GraphQLTypes["FieldMeta"] | undefined,
 	buttonTitle?: GraphQLTypes["FieldMeta"] | undefined,
 	base?: GraphQLTypes["FieldMeta"] | undefined,
-	locale?: GraphQLTypes["FieldMeta"] | undefined
+	locale?: GraphQLTypes["FieldMeta"] | undefined,
+	description?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["StepGroupLocaleOrderBy"]: {
 		_random?: boolean | undefined,
@@ -26878,7 +26912,8 @@ export type GraphQLTypes = {
 	title?: GraphQLTypes["OrderDirection"] | undefined,
 	buttonTitle?: GraphQLTypes["OrderDirection"] | undefined,
 	base?: GraphQLTypes["StepGroupOrderBy"] | undefined,
-	locale?: GraphQLTypes["LocaleOrderBy"] | undefined
+	locale?: GraphQLTypes["LocaleOrderBy"] | undefined,
+	description?: GraphQLTypes["OrderDirection"] | undefined
 };
 	["StepGroupOrderBy"]: {
 		_random?: boolean | undefined,
@@ -27833,6 +27868,7 @@ export type GraphQLTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	base?: GraphQLTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleCreateBaseEntityRelationInput"]: {
@@ -28033,6 +28069,7 @@ export type GraphQLTypes = {
 	title?: string | undefined,
 	buttonTitle?: string | undefined,
 	locale?: GraphQLTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleCreateLocaleEntityRelationInput"]: {
@@ -28642,6 +28679,7 @@ export type GraphQLTypes = {
 		title?: string | undefined,
 	buttonTitle?: string | undefined,
 	base?: GraphQLTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleUpdateBaseEntityRelationInput"]: {
@@ -28927,6 +28965,7 @@ export type GraphQLTypes = {
 		title?: string | undefined,
 	buttonTitle?: string | undefined,
 	locale?: GraphQLTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleUpdateLocaleEntityRelationInput"]: {
@@ -29609,6 +29648,7 @@ export type GraphQLTypes = {
 	buttonTitle?: string | undefined,
 	base?: GraphQLTypes["StepGroupLocaleCreateBaseEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["StepGroupLocaleCreateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupLocaleUpdateInput"]: {
@@ -29616,6 +29656,7 @@ export type GraphQLTypes = {
 	buttonTitle?: string | undefined,
 	base?: GraphQLTypes["StepGroupLocaleUpdateBaseEntityRelationInput"] | undefined,
 	locale?: GraphQLTypes["StepGroupLocaleUpdateLocaleEntityRelationInput"] | undefined,
+	description?: string | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["HomePageConnection"]: {
@@ -31317,8 +31358,7 @@ export type GraphQLTypes = {
 	["MutationTransactionOptions"]: {
 		deferForeignKeyConstraints?: boolean | undefined
 };
-	/** Json custom scalar type */
-["Json"]: "scalar" & { name: "Json" };
+	["Json"]: "scalar" & { name: "Json" };
 	["_Schema"]: {
 	__typename: "_Schema",
 	enums: Array<GraphQLTypes["_Enum"]>,
