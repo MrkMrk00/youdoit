@@ -1,3 +1,4 @@
+import { RichTextRenderer } from '@contember/react-client'
 import type { FunctionComponent } from 'react'
 import { Fragment } from 'react'
 import type { StepGroupResult } from '../data/StepGroupFragment'
@@ -25,6 +26,11 @@ export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index }) =
 					</div>
 				</div>
 			</div>
+			{group.localesByLocale?.description && (
+				<div className={styles.description}>
+					<RichTextRenderer source={group.localesByLocale?.description} />
+				</div>
+			)}
 			<div className={styles.stepList}>
 				{group.items.map((item) => {
 					return (

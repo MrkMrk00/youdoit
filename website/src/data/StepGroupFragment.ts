@@ -11,6 +11,7 @@ export const StepGroupFragment = (locale: string) =>
 			{ by: { locale: { code: locale } } },
 			{
 				title: true,
+				description: true,
 				buttonTitle: true,
 			},
 		],
