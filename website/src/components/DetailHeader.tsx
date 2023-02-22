@@ -33,9 +33,11 @@ export const DetailHeader: FunctionComponent<DetailHeaderProps> = ({
 					<div className={clsx(styles.imageContent, description && styles.has_description)}>
 						{allRecipesLink && <BackButton link={allRecipesLink} />}
 						<div>
-							<div className={styles.author}>
-								<RecipeAuthor {...author} />
-							</div>
+							{author && (
+								<div className={styles.author}>
+									<RecipeAuthor {...author} />
+								</div>
+							)}
 							<div className={styles.title}>{title}</div>
 							{description && (
 								<div className={styles.description}>
