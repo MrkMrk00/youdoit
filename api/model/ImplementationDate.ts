@@ -5,8 +5,8 @@ import { Step } from './Step'
 
 @acl.allow(publicRole, { read: true })
 export class ImplemetationDate {
-	pinnedRecipes = d.manyHasOne(PinnedRecipe, 'implementationDate').cascadeOnDelete().notNull()
+	pinnedRecipe = d.manyHasOne(PinnedRecipe, 'implementationDate').cascadeOnDelete().notNull()
 	step = d.manyHasOne(Step, 'implementationDate').cascadeOnDelete().notNull()
 
-	date = d.dateTimeColumn()
+	date = d.dateTimeColumn().default('now')
 }

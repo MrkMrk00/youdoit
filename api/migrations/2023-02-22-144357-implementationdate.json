@@ -1,0 +1,255 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "removeEntity",
+			"entityName": "ModificationDate"
+		},
+		{
+			"modification": "removeField",
+			"entityName": "ImplemetationDate",
+			"fieldName": "pinnedRecipes"
+		},
+		{
+			"modification": "removeField",
+			"entityName": "StepLocale",
+			"fieldName": "isChecked"
+		},
+		{
+			"modification": "updateColumnDefinition",
+			"entityName": "ImplemetationDate",
+			"fieldName": "date",
+			"definition": {
+				"columnType": "timestamptz",
+				"nullable": true,
+				"type": "DateTime",
+				"default": "now"
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "StepModification",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "step_modification",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "StepModification",
+			"field": {
+				"name": "date",
+				"columnName": "date",
+				"columnType": "timestamptz",
+				"nullable": true,
+				"type": "DateTime"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "ImplemetationDate",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "pinnedRecipe",
+				"target": "PinnedRecipe",
+				"joiningColumn": {
+					"columnName": "pinned_recipe_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "implementationDate"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "implementationDate",
+				"target": "ImplemetationDate",
+				"ownedBy": "pinnedRecipe"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepModification",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "pinnedRecipe",
+				"target": "PinnedRecipe",
+				"joiningColumn": {
+					"columnName": "pinned_recipe_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "modification"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "modification",
+				"target": "StepModification",
+				"ownedBy": "pinnedRecipe"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "StepModification",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "step",
+				"target": "StepLocale",
+				"joiningColumn": {
+					"columnName": "step_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "modificationDate"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "modificationDate",
+				"target": "StepModification",
+				"ownedBy": "step"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepModification",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"pinnedRecipe": true,
+								"step": true,
+								"date": true
+							},
+							"create": {
+								"id": true,
+								"pinnedRecipe": true,
+								"step": true,
+								"date": true
+							},
+							"update": {
+								"id": true,
+								"pinnedRecipe": true,
+								"step": true,
+								"date": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepLocale/operations/create/modificationDate",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepLocale/operations/update/modificationDate",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/StepLocale/operations/read/modificationDate",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/PinnedRecipe/operations/create/implementationDate",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/PinnedRecipe/operations/create/modification",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/PinnedRecipe/operations/update/implementationDate",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/PinnedRecipe/operations/update/modification",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/PinnedRecipe/operations/read/implementationDate",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/PinnedRecipe/operations/read/modification",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/ImplemetationDate/operations/create/pinnedRecipe",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/ImplemetationDate/operations/update/pinnedRecipe",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/ImplemetationDate/operations/read/pinnedRecipe",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/StepModification",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"pinnedRecipe": true,
+								"step": true,
+								"date": true
+							}
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/ImplemetationDate/operations/read/pinnedRecipe",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/PinnedRecipe/operations/read/implementationDate",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/PinnedRecipe/operations/read/modification",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/StepLocale/operations/read/modificationDate",
+					"value": true
+				}
+			]
+		}
+	]
+}
