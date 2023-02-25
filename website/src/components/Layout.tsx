@@ -1,12 +1,15 @@
+import clsx from 'clsx'
 import type { FunctionComponent, ReactNode } from 'react'
 import { Icon } from './Icon'
 import styles from './Layout.module.sass'
 
 export type LayoutProps = {
 	children: ReactNode
+	homePageUrl: string | null
+	currentPageUrl?: string
 }
 
-export const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
+export const Layout: FunctionComponent<LayoutProps> = ({ children, homePageUrl, currentPageUrl }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.content}>{children}</div>
@@ -17,7 +20,7 @@ export const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
 				<div className={styles.appleIcon}>
 					<Icon name="apple" />
 				</div>
-				<div className={styles.marketIcon}>
+				<div className={clsx(styles.marketIcon, homePageUrl === currentPageUrl && styles.isActive)}>
 					<Icon name="market" />
 				</div>
 			</div>

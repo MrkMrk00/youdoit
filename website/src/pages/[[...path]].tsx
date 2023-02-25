@@ -20,13 +20,14 @@ export default function ({
 	seo,
 	homePage,
 	homePageUrl,
+	currentUrlPage,
 	categoryPage,
 	recipeDetailPage,
 	recipes,
 	categories,
 }: PageProps) {
 	return (
-		<Layout>
+		<Layout homePageUrl={homePageUrl} currentPageUrl={currentUrlPage}>
 			<Seo {...seo} />
 
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
@@ -176,6 +177,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			// page,
 			homePage,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
+			currentUrlPage: data.getLinkable.url,
 			categoryPage: category,
 			recipeDetailPage: recipe,
 			categories: data.listCategoryLocale,
