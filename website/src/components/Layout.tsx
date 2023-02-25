@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import Link from 'next/link'
 import type { FunctionComponent, ReactNode } from 'react'
 import { Icon } from './Icon'
 import styles from './Layout.module.sass'
@@ -20,10 +21,27 @@ export const Layout: FunctionComponent<LayoutProps> = ({ children, homePageUrl, 
 				<div className={styles.appleIcon}>
 					<Icon name="apple" />
 				</div>
-				<div className={clsx(styles.marketIcon, homePageUrl === currentPageUrl && styles.isActive)}>
-					<Icon name="market" />
-				</div>
+				{homePageUrl ? (
+					<Link href={homePageUrl}>
+						<MarketIcon currentPageUrl={currentPageUrl} iconUrl={homePageUrl} />
+					</Link>
+				) : (
+					<MarketIcon currentPageUrl={currentPageUrl} iconUrl={homePageUrl} />
+				)}
 			</div>
+		</div>
+	)
+}
+
+type IconProps = {
+	currentPageUrl?: string
+	iconUrl: string | null
+}
+
+const MarketIcon: FunctionComponent<IconProps> = ({ currentPageUrl, iconUrl }) => {
+	return (
+		<div className={clsx(styles.marketIcon, iconUrl === currentPageUrl && styles.isActive)}>
+			<Icon name="market" />
 		</div>
 	)
 }
