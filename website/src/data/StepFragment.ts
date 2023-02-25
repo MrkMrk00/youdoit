@@ -9,7 +9,6 @@ export const StepFragment = (locale: string) =>
 			{ by: { locale: { code: locale } } },
 			{
 				title: true,
-				isChecked: true,
 			},
 		],
 	})
