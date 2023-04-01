@@ -836,6 +836,8 @@ export const AllTypesProps: Record<string,any> = {
 		id:"UUIDCondition",
 		locales:"StepLocaleWhere",
 		implementationDate:"ImplemetationDateWhere",
+		hasTimer:"BooleanCondition",
+		timerCount:"IntCondition",
 		and:"StepWhere",
 		or:"StepWhere",
 		not:"StepWhere"
@@ -873,6 +875,11 @@ export const AllTypesProps: Record<string,any> = {
 		gte:"DateTime"
 	},
 	DateTime: `scalar.DateTime` as const,
+	BooleanCondition:{
+		and:"BooleanCondition",
+		or:"BooleanCondition",
+		not:"BooleanCondition"
+	},
 	StepGroupWhere:{
 		id:"UUIDCondition",
 		order:"IntCondition",
@@ -969,11 +976,6 @@ export const AllTypesProps: Record<string,any> = {
 		and:"SeoWhere",
 		or:"SeoWhere",
 		not:"SeoWhere"
-	},
-	BooleanCondition:{
-		and:"BooleanCondition",
-		or:"BooleanCondition",
-		not:"BooleanCondition"
 	},
 	TipGroupWhere:{
 		id:"UUIDCondition",
@@ -1654,7 +1656,9 @@ export const AllTypesProps: Record<string,any> = {
 		locale:"LocaleOrderBy"
 	},
 	StepOrderBy:{
-		id:"OrderDirection"
+		id:"OrderDirection",
+		hasTimer:"OrderDirection",
+		timerCount:"OrderDirection"
 	},
 	ImplemetationDateOrderBy:{
 		id:"OrderDirection",
@@ -6575,6 +6579,8 @@ export const ReturnTypes: Record<string,any> = {
 		id:"UUID",
 		locales:"StepLocale",
 		implementationDate:"ImplemetationDate",
+		hasTimer:"Boolean",
+		timerCount:"Int",
 		localesByLocale:"StepLocale",
 		localesByModificationDate:"StepLocale",
 		paginateLocales:"StepLocaleConnection",
@@ -6583,7 +6589,9 @@ export const ReturnTypes: Record<string,any> = {
 	StepMeta:{
 		id:"FieldMeta",
 		locales:"FieldMeta",
-		implementationDate:"FieldMeta"
+		implementationDate:"FieldMeta",
+		hasTimer:"FieldMeta",
+		timerCount:"FieldMeta"
 	},
 	StepLocale:{
 		_meta:"StepLocaleMeta",
@@ -9792,6 +9800,8 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
 	locales?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>,
 	implementationDate?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,
+	hasTimer?: ValueTypes["BooleanCondition"] | undefined | null | Variable<any, string>,
+	timerCount?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["StepWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["StepWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>
@@ -9831,6 +9841,21 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	gte?: ValueTypes["DateTime"] | undefined | null | Variable<any, string>
 };
 	["DateTime"]:unknown;
+	["BooleanCondition"]: {
+	and?: Array<ValueTypes["BooleanCondition"]> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["BooleanCondition"]> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["BooleanCondition"] | undefined | null | Variable<any, string>,
+	null?: boolean | undefined | null | Variable<any, string>,
+	isNull?: boolean | undefined | null | Variable<any, string>,
+	eq?: boolean | undefined | null | Variable<any, string>,
+	notEq?: boolean | undefined | null | Variable<any, string>,
+	in?: Array<boolean> | undefined | null | Variable<any, string>,
+	notIn?: Array<boolean> | undefined | null | Variable<any, string>,
+	lt?: boolean | undefined | null | Variable<any, string>,
+	lte?: boolean | undefined | null | Variable<any, string>,
+	gt?: boolean | undefined | null | Variable<any, string>,
+	gte?: boolean | undefined | null | Variable<any, string>
+};
 	["StepGroupWhere"]: {
 	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
 	order?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
@@ -9929,21 +9954,6 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	and?: Array<ValueTypes["SeoWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["SeoWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>
-};
-	["BooleanCondition"]: {
-	and?: Array<ValueTypes["BooleanCondition"]> | undefined | null | Variable<any, string>,
-	or?: Array<ValueTypes["BooleanCondition"]> | undefined | null | Variable<any, string>,
-	not?: ValueTypes["BooleanCondition"] | undefined | null | Variable<any, string>,
-	null?: boolean | undefined | null | Variable<any, string>,
-	isNull?: boolean | undefined | null | Variable<any, string>,
-	eq?: boolean | undefined | null | Variable<any, string>,
-	notEq?: boolean | undefined | null | Variable<any, string>,
-	in?: Array<boolean> | undefined | null | Variable<any, string>,
-	notIn?: Array<boolean> | undefined | null | Variable<any, string>,
-	lt?: boolean | undefined | null | Variable<any, string>,
-	lte?: boolean | undefined | null | Variable<any, string>,
-	gt?: boolean | undefined | null | Variable<any, string>,
-	gte?: boolean | undefined | null | Variable<any, string>
 };
 	["TipGroupWhere"]: {
 	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
@@ -10549,6 +10559,8 @@ pinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | 
 	id?:boolean | `@${string}`,
 locales?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["StepLocale"]],
 implementationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
+	hasTimer?:boolean | `@${string}`,
+	timerCount?:boolean | `@${string}`,
 localesByLocale?: [{	by: ValueTypes["StepLocalesByLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepLocale"]],
 localesByModificationDate?: [{	by: ValueTypes["StepLocalesByModificationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepLocale"]],
 paginateLocales?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepLocaleConnection"]],
@@ -10559,6 +10571,8 @@ paginateImplementationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | 
 	id?:ValueTypes["FieldMeta"],
 	locales?:ValueTypes["FieldMeta"],
 	implementationDate?:ValueTypes["FieldMeta"],
+	hasTimer?:ValueTypes["FieldMeta"],
+	timerCount?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["StepLocale"]: AliasType<{
@@ -10613,7 +10627,9 @@ step?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<a
 	["StepOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
 	_randomSeeded?: number | undefined | null | Variable<any, string>,
-	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	hasTimer?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	timerCount?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
 	["StepModificationConnection"]: AliasType<{
 	pageInfo?:ValueTypes["PageInfo"],
@@ -11661,6 +11677,8 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["StepWithoutLocalesCreateInput"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
 	implementationDate?: Array<ValueTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	hasTimer?: boolean | undefined | null | Variable<any, string>,
+	timerCount?: number | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepCreateImplementationDateEntityRelationInput"]: {
@@ -11745,6 +11763,8 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["StepWithoutImplementationDateCreateInput"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["StepCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	hasTimer?: boolean | undefined | null | Variable<any, string>,
+	timerCount?: number | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepCreateLocalesEntityRelationInput"]: {
@@ -12153,6 +12173,8 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
 	locales?: Array<ValueTypes["StepCreateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	implementationDate?: Array<ValueTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	hasTimer?: boolean | undefined | null | Variable<any, string>,
+	timerCount?: number | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepGroupItemCreateTipEntityRelationInput"]: {
@@ -12531,6 +12553,8 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["StepWithoutLocalesUpdateInput"]: {
 	implementationDate?: Array<ValueTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	hasTimer?: boolean | undefined | null | Variable<any, string>,
+	timerCount?: number | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepUpdateImplementationDateEntityRelationInput"]: {
@@ -12644,6 +12668,8 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["StepWithoutImplementationDateUpdateInput"]: {
 	locales?: Array<ValueTypes["StepUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	hasTimer?: boolean | undefined | null | Variable<any, string>,
+	timerCount?: number | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepUpdateLocalesEntityRelationInput"]: {
@@ -13273,6 +13299,8 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["StepUpdateInput"]: {
 	locales?: Array<ValueTypes["StepUpdateLocalesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	implementationDate?: Array<ValueTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	hasTimer?: boolean | undefined | null | Variable<any, string>,
+	timerCount?: number | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["StepGroupItemUpsertStepRelationInput"]: {
@@ -16349,6 +16377,8 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
 	locales?: ResolverInputTypes["StepLocaleWhere"] | undefined | null,
 	implementationDate?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,
+	hasTimer?: ResolverInputTypes["BooleanCondition"] | undefined | null,
+	timerCount?: ResolverInputTypes["IntCondition"] | undefined | null,
 	and?: Array<ResolverInputTypes["StepWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["StepWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["StepWhere"] | undefined | null
@@ -16388,6 +16418,21 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	gte?: ResolverInputTypes["DateTime"] | undefined | null
 };
 	["DateTime"]:unknown;
+	["BooleanCondition"]: {
+	and?: Array<ResolverInputTypes["BooleanCondition"]> | undefined | null,
+	or?: Array<ResolverInputTypes["BooleanCondition"]> | undefined | null,
+	not?: ResolverInputTypes["BooleanCondition"] | undefined | null,
+	null?: boolean | undefined | null,
+	isNull?: boolean | undefined | null,
+	eq?: boolean | undefined | null,
+	notEq?: boolean | undefined | null,
+	in?: Array<boolean> | undefined | null,
+	notIn?: Array<boolean> | undefined | null,
+	lt?: boolean | undefined | null,
+	lte?: boolean | undefined | null,
+	gt?: boolean | undefined | null,
+	gte?: boolean | undefined | null
+};
 	["StepGroupWhere"]: {
 	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
 	order?: ResolverInputTypes["IntCondition"] | undefined | null,
@@ -16486,21 +16531,6 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	and?: Array<ResolverInputTypes["SeoWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["SeoWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["SeoWhere"] | undefined | null
-};
-	["BooleanCondition"]: {
-	and?: Array<ResolverInputTypes["BooleanCondition"]> | undefined | null,
-	or?: Array<ResolverInputTypes["BooleanCondition"]> | undefined | null,
-	not?: ResolverInputTypes["BooleanCondition"] | undefined | null,
-	null?: boolean | undefined | null,
-	isNull?: boolean | undefined | null,
-	eq?: boolean | undefined | null,
-	notEq?: boolean | undefined | null,
-	in?: Array<boolean> | undefined | null,
-	notIn?: Array<boolean> | undefined | null,
-	lt?: boolean | undefined | null,
-	lte?: boolean | undefined | null,
-	gt?: boolean | undefined | null,
-	gte?: boolean | undefined | null
 };
 	["TipGroupWhere"]: {
 	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
@@ -17106,6 +17136,8 @@ pinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined |
 	id?:boolean | `@${string}`,
 locales?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["StepLocale"]],
 implementationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["ImplemetationDate"]],
+	hasTimer?:boolean | `@${string}`,
+	timerCount?:boolean | `@${string}`,
 localesByLocale?: [{	by: ResolverInputTypes["StepLocalesByLocaleUniqueWhere"],	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},ResolverInputTypes["StepLocale"]],
 localesByModificationDate?: [{	by: ResolverInputTypes["StepLocalesByModificationDateUniqueWhere"],	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},ResolverInputTypes["StepLocale"]],
 paginateLocales?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepLocaleConnection"]],
@@ -17116,6 +17148,8 @@ paginateImplementationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWh
 	id?:ResolverInputTypes["FieldMeta"],
 	locales?:ResolverInputTypes["FieldMeta"],
 	implementationDate?:ResolverInputTypes["FieldMeta"],
+	hasTimer?:ResolverInputTypes["FieldMeta"],
+	timerCount?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["StepLocale"]: AliasType<{
@@ -17170,7 +17204,9 @@ step?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},Res
 	["StepOrderBy"]: {
 	_random?: boolean | undefined | null,
 	_randomSeeded?: number | undefined | null,
-	id?: ResolverInputTypes["OrderDirection"] | undefined | null
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	hasTimer?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	timerCount?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
 	["StepModificationConnection"]: AliasType<{
 	pageInfo?:ResolverInputTypes["PageInfo"],
@@ -18219,6 +18255,8 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["StepWithoutLocalesCreateInput"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
 	implementationDate?: Array<ResolverInputTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined | null,
+	hasTimer?: boolean | undefined | null,
+	timerCount?: number | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepCreateImplementationDateEntityRelationInput"]: {
@@ -18303,6 +18341,8 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["StepWithoutImplementationDateCreateInput"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
 	locales?: Array<ResolverInputTypes["StepCreateLocalesEntityRelationInput"]> | undefined | null,
+	hasTimer?: boolean | undefined | null,
+	timerCount?: number | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepCreateLocalesEntityRelationInput"]: {
@@ -18711,6 +18751,8 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	id?: ResolverInputTypes["UUID"] | undefined | null,
 	locales?: Array<ResolverInputTypes["StepCreateLocalesEntityRelationInput"]> | undefined | null,
 	implementationDate?: Array<ResolverInputTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined | null,
+	hasTimer?: boolean | undefined | null,
+	timerCount?: number | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepGroupItemCreateTipEntityRelationInput"]: {
@@ -19089,6 +19131,8 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["StepWithoutLocalesUpdateInput"]: {
 	implementationDate?: Array<ResolverInputTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined | null,
+	hasTimer?: boolean | undefined | null,
+	timerCount?: number | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepUpdateImplementationDateEntityRelationInput"]: {
@@ -19202,6 +19246,8 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["StepWithoutImplementationDateUpdateInput"]: {
 	locales?: Array<ResolverInputTypes["StepUpdateLocalesEntityRelationInput"]> | undefined | null,
+	hasTimer?: boolean | undefined | null,
+	timerCount?: number | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepUpdateLocalesEntityRelationInput"]: {
@@ -19831,6 +19877,8 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["StepUpdateInput"]: {
 	locales?: Array<ResolverInputTypes["StepUpdateLocalesEntityRelationInput"]> | undefined | null,
 	implementationDate?: Array<ResolverInputTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined | null,
+	hasTimer?: boolean | undefined | null,
+	timerCount?: number | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["StepGroupItemUpsertStepRelationInput"]: {
@@ -22902,6 +22950,8 @@ export type ModelTypes = {
 	id?: ModelTypes["UUIDCondition"] | undefined,
 	locales?: ModelTypes["StepLocaleWhere"] | undefined,
 	implementationDate?: ModelTypes["ImplemetationDateWhere"] | undefined,
+	hasTimer?: ModelTypes["BooleanCondition"] | undefined,
+	timerCount?: ModelTypes["IntCondition"] | undefined,
 	and?: Array<ModelTypes["StepWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["StepWhere"] | undefined> | undefined,
 	not?: ModelTypes["StepWhere"] | undefined
@@ -22941,6 +22991,21 @@ export type ModelTypes = {
 	gte?: ModelTypes["DateTime"] | undefined
 };
 	["DateTime"]:any;
+	["BooleanCondition"]: {
+	and?: Array<ModelTypes["BooleanCondition"]> | undefined,
+	or?: Array<ModelTypes["BooleanCondition"]> | undefined,
+	not?: ModelTypes["BooleanCondition"] | undefined,
+	null?: boolean | undefined,
+	isNull?: boolean | undefined,
+	eq?: boolean | undefined,
+	notEq?: boolean | undefined,
+	in?: Array<boolean> | undefined,
+	notIn?: Array<boolean> | undefined,
+	lt?: boolean | undefined,
+	lte?: boolean | undefined,
+	gt?: boolean | undefined,
+	gte?: boolean | undefined
+};
 	["StepGroupWhere"]: {
 	id?: ModelTypes["UUIDCondition"] | undefined,
 	order?: ModelTypes["IntCondition"] | undefined,
@@ -23039,21 +23104,6 @@ export type ModelTypes = {
 	and?: Array<ModelTypes["SeoWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["SeoWhere"] | undefined> | undefined,
 	not?: ModelTypes["SeoWhere"] | undefined
-};
-	["BooleanCondition"]: {
-	and?: Array<ModelTypes["BooleanCondition"]> | undefined,
-	or?: Array<ModelTypes["BooleanCondition"]> | undefined,
-	not?: ModelTypes["BooleanCondition"] | undefined,
-	null?: boolean | undefined,
-	isNull?: boolean | undefined,
-	eq?: boolean | undefined,
-	notEq?: boolean | undefined,
-	in?: Array<boolean> | undefined,
-	notIn?: Array<boolean> | undefined,
-	lt?: boolean | undefined,
-	lte?: boolean | undefined,
-	gt?: boolean | undefined,
-	gte?: boolean | undefined
 };
 	["TipGroupWhere"]: {
 	id?: ModelTypes["UUIDCondition"] | undefined,
@@ -23628,6 +23678,8 @@ export type ModelTypes = {
 	id: ModelTypes["UUID"],
 	locales: Array<ModelTypes["StepLocale"]>,
 	implementationDate: Array<ModelTypes["ImplemetationDate"]>,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	localesByLocale?: ModelTypes["StepLocale"] | undefined,
 	localesByModificationDate?: ModelTypes["StepLocale"] | undefined,
 	paginateLocales: ModelTypes["StepLocaleConnection"],
@@ -23636,7 +23688,9 @@ export type ModelTypes = {
 	["StepMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
 	locales?: ModelTypes["FieldMeta"] | undefined,
-	implementationDate?: ModelTypes["FieldMeta"] | undefined
+	implementationDate?: ModelTypes["FieldMeta"] | undefined,
+	hasTimer?: ModelTypes["FieldMeta"] | undefined,
+	timerCount?: ModelTypes["FieldMeta"] | undefined
 };
 	["StepLocale"]: {
 		_meta?: ModelTypes["StepLocaleMeta"] | undefined,
@@ -23686,7 +23740,9 @@ export type ModelTypes = {
 	["StepOrderBy"]: {
 	_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
-	id?: ModelTypes["OrderDirection"] | undefined
+	id?: ModelTypes["OrderDirection"] | undefined,
+	hasTimer?: ModelTypes["OrderDirection"] | undefined,
+	timerCount?: ModelTypes["OrderDirection"] | undefined
 };
 	["StepModificationConnection"]: {
 		pageInfo: ModelTypes["PageInfo"],
@@ -24666,6 +24722,8 @@ export type ModelTypes = {
 	["StepWithoutLocalesCreateInput"]: {
 	id?: ModelTypes["UUID"] | undefined,
 	implementationDate?: Array<ModelTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepCreateImplementationDateEntityRelationInput"]: {
@@ -24750,6 +24808,8 @@ export type ModelTypes = {
 	["StepWithoutImplementationDateCreateInput"]: {
 	id?: ModelTypes["UUID"] | undefined,
 	locales?: Array<ModelTypes["StepCreateLocalesEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepCreateLocalesEntityRelationInput"]: {
@@ -25158,6 +25218,8 @@ export type ModelTypes = {
 	id?: ModelTypes["UUID"] | undefined,
 	locales?: Array<ModelTypes["StepCreateLocalesEntityRelationInput"]> | undefined,
 	implementationDate?: Array<ModelTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupItemCreateTipEntityRelationInput"]: {
@@ -25536,6 +25598,8 @@ export type ModelTypes = {
 };
 	["StepWithoutLocalesUpdateInput"]: {
 	implementationDate?: Array<ModelTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepUpdateImplementationDateEntityRelationInput"]: {
@@ -25649,6 +25713,8 @@ export type ModelTypes = {
 };
 	["StepWithoutImplementationDateUpdateInput"]: {
 	locales?: Array<ModelTypes["StepUpdateLocalesEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepUpdateLocalesEntityRelationInput"]: {
@@ -26278,6 +26344,8 @@ export type ModelTypes = {
 	["StepUpdateInput"]: {
 	locales?: Array<ModelTypes["StepUpdateLocalesEntityRelationInput"]> | undefined,
 	implementationDate?: Array<ModelTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupItemUpsertStepRelationInput"]: {
@@ -29051,6 +29119,8 @@ export type GraphQLTypes = {
 		id?: GraphQLTypes["UUIDCondition"] | undefined,
 	locales?: GraphQLTypes["StepLocaleWhere"] | undefined,
 	implementationDate?: GraphQLTypes["ImplemetationDateWhere"] | undefined,
+	hasTimer?: GraphQLTypes["BooleanCondition"] | undefined,
+	timerCount?: GraphQLTypes["IntCondition"] | undefined,
 	and?: Array<GraphQLTypes["StepWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["StepWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["StepWhere"] | undefined
@@ -29090,6 +29160,21 @@ export type GraphQLTypes = {
 	gte?: GraphQLTypes["DateTime"] | undefined
 };
 	["DateTime"]: "scalar" & { name: "DateTime" };
+	["BooleanCondition"]: {
+		and?: Array<GraphQLTypes["BooleanCondition"]> | undefined,
+	or?: Array<GraphQLTypes["BooleanCondition"]> | undefined,
+	not?: GraphQLTypes["BooleanCondition"] | undefined,
+	null?: boolean | undefined,
+	isNull?: boolean | undefined,
+	eq?: boolean | undefined,
+	notEq?: boolean | undefined,
+	in?: Array<boolean> | undefined,
+	notIn?: Array<boolean> | undefined,
+	lt?: boolean | undefined,
+	lte?: boolean | undefined,
+	gt?: boolean | undefined,
+	gte?: boolean | undefined
+};
 	["StepGroupWhere"]: {
 		id?: GraphQLTypes["UUIDCondition"] | undefined,
 	order?: GraphQLTypes["IntCondition"] | undefined,
@@ -29188,21 +29273,6 @@ export type GraphQLTypes = {
 	and?: Array<GraphQLTypes["SeoWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["SeoWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["SeoWhere"] | undefined
-};
-	["BooleanCondition"]: {
-		and?: Array<GraphQLTypes["BooleanCondition"]> | undefined,
-	or?: Array<GraphQLTypes["BooleanCondition"]> | undefined,
-	not?: GraphQLTypes["BooleanCondition"] | undefined,
-	null?: boolean | undefined,
-	isNull?: boolean | undefined,
-	eq?: boolean | undefined,
-	notEq?: boolean | undefined,
-	in?: Array<boolean> | undefined,
-	notIn?: Array<boolean> | undefined,
-	lt?: boolean | undefined,
-	lte?: boolean | undefined,
-	gt?: boolean | undefined,
-	gte?: boolean | undefined
 };
 	["TipGroupWhere"]: {
 		id?: GraphQLTypes["UUIDCondition"] | undefined,
@@ -29809,6 +29879,8 @@ export type GraphQLTypes = {
 	id: GraphQLTypes["UUID"],
 	locales: Array<GraphQLTypes["StepLocale"]>,
 	implementationDate: Array<GraphQLTypes["ImplemetationDate"]>,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	localesByLocale?: GraphQLTypes["StepLocale"] | undefined,
 	localesByModificationDate?: GraphQLTypes["StepLocale"] | undefined,
 	paginateLocales: GraphQLTypes["StepLocaleConnection"],
@@ -29818,7 +29890,9 @@ export type GraphQLTypes = {
 	__typename: "StepMeta",
 	id?: GraphQLTypes["FieldMeta"] | undefined,
 	locales?: GraphQLTypes["FieldMeta"] | undefined,
-	implementationDate?: GraphQLTypes["FieldMeta"] | undefined
+	implementationDate?: GraphQLTypes["FieldMeta"] | undefined,
+	hasTimer?: GraphQLTypes["FieldMeta"] | undefined,
+	timerCount?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["StepLocale"]: {
 	__typename: "StepLocale",
@@ -29872,7 +29946,9 @@ export type GraphQLTypes = {
 	["StepOrderBy"]: {
 		_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
-	id?: GraphQLTypes["OrderDirection"] | undefined
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	hasTimer?: GraphQLTypes["OrderDirection"] | undefined,
+	timerCount?: GraphQLTypes["OrderDirection"] | undefined
 };
 	["StepModificationConnection"]: {
 	__typename: "StepModificationConnection",
@@ -30921,6 +30997,8 @@ export type GraphQLTypes = {
 	["StepWithoutLocalesCreateInput"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
 	implementationDate?: Array<GraphQLTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepCreateImplementationDateEntityRelationInput"]: {
@@ -31005,6 +31083,8 @@ export type GraphQLTypes = {
 	["StepWithoutImplementationDateCreateInput"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
 	locales?: Array<GraphQLTypes["StepCreateLocalesEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepCreateLocalesEntityRelationInput"]: {
@@ -31413,6 +31493,8 @@ export type GraphQLTypes = {
 		id?: GraphQLTypes["UUID"] | undefined,
 	locales?: Array<GraphQLTypes["StepCreateLocalesEntityRelationInput"]> | undefined,
 	implementationDate?: Array<GraphQLTypes["StepCreateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupItemCreateTipEntityRelationInput"]: {
@@ -31791,6 +31873,8 @@ export type GraphQLTypes = {
 };
 	["StepWithoutLocalesUpdateInput"]: {
 		implementationDate?: Array<GraphQLTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepUpdateImplementationDateEntityRelationInput"]: {
@@ -31904,6 +31988,8 @@ export type GraphQLTypes = {
 };
 	["StepWithoutImplementationDateUpdateInput"]: {
 		locales?: Array<GraphQLTypes["StepUpdateLocalesEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepUpdateLocalesEntityRelationInput"]: {
@@ -32533,6 +32619,8 @@ export type GraphQLTypes = {
 	["StepUpdateInput"]: {
 		locales?: Array<GraphQLTypes["StepUpdateLocalesEntityRelationInput"]> | undefined,
 	implementationDate?: Array<GraphQLTypes["StepUpdateImplementationDateEntityRelationInput"]> | undefined,
+	hasTimer?: boolean | undefined,
+	timerCount?: number | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["StepGroupItemUpsertStepRelationInput"]: {
@@ -35236,6 +35324,7 @@ type ZEUS_VARIABLES = {
 	["StepModificationWhere"]: ValueTypes["StepModificationWhere"];
 	["DateTimeCondition"]: ValueTypes["DateTimeCondition"];
 	["DateTime"]: ValueTypes["DateTime"];
+	["BooleanCondition"]: ValueTypes["BooleanCondition"];
 	["StepGroupWhere"]: ValueTypes["StepGroupWhere"];
 	["StepGroupLocaleWhere"]: ValueTypes["StepGroupLocaleWhere"];
 	["StepGroupItemWhere"]: ValueTypes["StepGroupItemWhere"];
@@ -35246,7 +35335,6 @@ type ZEUS_VARIABLES = {
 	["CategoryWhere"]: ValueTypes["CategoryWhere"];
 	["CategoryLocaleWhere"]: ValueTypes["CategoryLocaleWhere"];
 	["SeoWhere"]: ValueTypes["SeoWhere"];
-	["BooleanCondition"]: ValueTypes["BooleanCondition"];
 	["TipGroupWhere"]: ValueTypes["TipGroupWhere"];
 	["TipGroupItemWhere"]: ValueTypes["TipGroupItemWhere"];
 	["TipGroupLocaleWhere"]: ValueTypes["TipGroupLocaleWhere"];
