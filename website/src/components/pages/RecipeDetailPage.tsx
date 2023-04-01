@@ -5,6 +5,7 @@ import { Container } from '../Container'
 import { DetailHeader } from '../DetailHeader'
 import { StepGroup } from '../StepGroup'
 import { Timer } from '../Timer'
+import { TipGroup } from '../TipGroup'
 import styles from './RecipeDetailPage.module.sass'
 
 export interface RecipeDetailPageProps {
@@ -31,6 +32,15 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 			/>
 			<Container>
 				<Timer startButtonTitle="Tapni pro spuštění" secondsToSet={120} />
+				<div>
+					{recipeDetailPage.base?.tipGroups.map((group) => {
+						return (
+							<Fragment key={group.id}>
+								<TipGroup group={group} />
+							</Fragment>
+						)
+					})}
+				</div>
 				<div className={styles.stepGroupList}>
 					{recipeDetailPage.base?.stepsGroups.map((group, index) => {
 						return (
