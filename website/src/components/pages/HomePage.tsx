@@ -25,7 +25,7 @@ export const HomePage: FunctionComponent<HomePageProps> = ({ homePage, recipes, 
 		<Container>
 			<div className={styles.wrapper}>
 				<div>
-					<div>{homePage.title}xxx</div>
+					<div className={styles.title}>{homePage.title}</div>
 				</div>
 				{recipesGroups.map((group, index) => {
 					const carousel = group.slice(0, 5)
