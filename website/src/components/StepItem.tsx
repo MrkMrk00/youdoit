@@ -1,6 +1,7 @@
 import type { FunctionComponent } from 'react'
 import type { StepGroupItemResult } from '../data/StepGroupItemFragment'
 import { Icon } from './Icon'
+import { Step } from './Step'
 import styles from './StepItem.module.sass'
 
 export interface StepItemProps {
@@ -10,15 +11,7 @@ export interface StepItemProps {
 export const StepItem: FunctionComponent<StepItemProps> = ({ item }) => {
 	switch (item.type) {
 		case 'step':
-			return (
-				<label className={styles.checkbox}>
-					<input type="checkbox" className={styles.input} />
-					<div className={styles.label}>
-						{item.step?.localesByLocale?.title}
-						<span className={styles.tick} />
-					</div>
-				</label>
-			)
+			return item.step ? <Step step={item.step} /> : null
 		case 'tip':
 			return (
 				<div className={styles.tipWrapper}>

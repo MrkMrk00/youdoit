@@ -5,6 +5,8 @@ import type { scalarResolver } from '../utilities/createScalarResolver'
 export const StepFragment = (locale: string) =>
 	Selector('Step')({
 		id: true,
+		hasTimer: true,
+		timerCount: true,
 		localesByLocale: [
 			{ by: { locale: { code: locale } } },
 			{
