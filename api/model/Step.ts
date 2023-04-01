@@ -8,6 +8,8 @@ import { StepModification } from './StepModification'
 export class Step {
 	locales = d.oneHasMany(StepLocale, 'base')
 	implementationDate = d.oneHasMany(ImplemetationDate, 'step')
+	hasTimer = d.boolColumn()
+	timerCount = d.intColumn()
 }
 
 @d.Unique('base', 'locale')

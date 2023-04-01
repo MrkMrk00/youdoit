@@ -1,0 +1,82 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "removeField",
+			"entityName": "StepLocale",
+			"fieldName": "hasTimer"
+		},
+		{
+			"modification": "removeField",
+			"entityName": "StepLocale",
+			"fieldName": "timerCount"
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Step",
+			"field": {
+				"name": "hasTimer",
+				"columnName": "has_timer",
+				"columnType": "boolean",
+				"nullable": true,
+				"type": "Bool"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "Step",
+			"field": {
+				"name": "timerCount",
+				"columnName": "timer_count",
+				"columnType": "integer",
+				"nullable": true,
+				"type": "Integer"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Step/operations/create/hasTimer",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Step/operations/create/timerCount",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Step/operations/update/hasTimer",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Step/operations/update/timerCount",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Step/operations/read/hasTimer",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Step/operations/read/timerCount",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Step/operations/read/hasTimer",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Step/operations/read/timerCount",
+					"value": true
+				}
+			]
+		}
+	]
+}
