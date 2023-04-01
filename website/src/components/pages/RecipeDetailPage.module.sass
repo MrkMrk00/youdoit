@@ -1,4 +1,25 @@
-.content
+.wrapper
+	position: relative
+
+.header
+	z-index: 10
+
+.overlay
+	position: absolute
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+	background: rgba(255, 255, 255, 0.8)
+	z-index: 1
+	pointer-events: none
+
+.stepGroup
+	z-index: 0
+	&.isActive
+		z-index: 2
+
+.contentIn
 	margin-top: 1.875rem
 
 .tipGroupList
