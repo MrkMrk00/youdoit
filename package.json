@@ -24,11 +24,13 @@
 	},
 	"dependencies": {
 		"@types/inquirer": "^9.0.3",
+		"@types/react-modal": "^3.13.1",
 		"chalk": "^5.2.0",
 		"inquirer": "^9.1.4",
 		"next": "^13",
 		"react": "^18",
 		"react-dom": "^18",
+		"react-modal": "^3.16.1",
 		"use-countdown-control": "^0.1.0"
 	},
 	"devDependencies": {
