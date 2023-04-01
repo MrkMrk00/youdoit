@@ -21,7 +21,7 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 	}
 
 	return (
-		<div className={styles.wrapper}>
+		<div>
 			<DetailHeader
 				allRecipesLink={allRecipesLink}
 				image={recipeDetailPage.base?.mainImage}
@@ -30,23 +30,26 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 				author={author}
 			/>
 			<Container>
-				<div>
-					{recipeDetailPage.base?.tipGroups.map((group) => {
-						return (
-							<Fragment key={group.id}>
-								<TipGroup group={group} />
-							</Fragment>
-						)
-					})}
-				</div>
-				<div className={styles.stepGroupList}>
-					{recipeDetailPage.base?.stepsGroups.map((group, index) => {
-						return (
-							<Fragment key={group.id}>
-								<StepGroup group={group} index={index + 1} />
-							</Fragment>
-						)
-					})}
+				<div className={styles.content}>
+					<div className={styles.tipGroupList}>
+						{recipeDetailPage.base?.tipGroups.map((group) => {
+							return (
+								<Fragment key={group.id}>
+									<TipGroup group={group} />
+								</Fragment>
+							)
+						})}
+					</div>
+
+					<div className={styles.stepGroupList}>
+						{recipeDetailPage.base?.stepsGroups.map((group, index) => {
+							return (
+								<Fragment key={group.id}>
+									<StepGroup group={group} index={index + 1} />
+								</Fragment>
+							)
+						})}
+					</div>
 				</div>
 			</Container>
 		</div>
