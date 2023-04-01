@@ -6,6 +6,7 @@ import { Linkable } from './Linkable'
 import { Locale } from './Locale'
 import { PinnedRecipe } from './PinnedRecipe'
 import { StepGroup } from './StepGroup'
+import { TipGroup } from './TipGroup'
 import { User } from './User'
 
 @acl.allow(publicRole, { read: true })
@@ -22,7 +23,7 @@ export class Recipe {
 	mainImage = d.manyHasOne(Image)
 	tileImage = d.manyHasOne(Image)
 	stepsGroups = d.oneHasMany(StepGroup, 'recipe')
-	tipGroups = d.oneHasMany(StepGroup, 'recipe')
+	tipGroups = d.oneHasMany(TipGroup, 'recipe')
 }
 @d.Unique('base', 'locale')
 @acl.allow(publicRole, { read: true })
