@@ -9,7 +9,7 @@ export type TimerProps = {
 }
 
 export const Timer: FunctionComponent<TimerProps> = ({ startButtonTitle, secondsToSet }) => {
-	const { start, pause, resume, stop, time, isRunning } = useCountdownControl(60)
+	const { start, pause, resume, stop, time, isRunning } = useCountdownControl(secondsToSet)
 
 	const niceTime = useMemo(() => {
 		const p = (number: number) => number.toString().padStart(2, '0')
