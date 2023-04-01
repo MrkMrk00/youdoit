@@ -18,7 +18,7 @@ export const LinkUrlField = Component<LinkUrlFieldProps>(
 			field="link.url"
 			derivedFrom={derivedFrom}
 			label={label}
-			unpersistedHardPrefix={(environment) => environment.getVariableOrElse('WEB_URL', '')}
+			unpersistedHardPrefix={(environment) => environment.getVariableOrElse('NEXT_PUBLIC_WEB_URL', '')}
 			persistedHardPrefix={(environment) => {
 				const locale = environment.getVariableOrElse<string, string>('currentLocaleCode', 'en')
 				const languagePrefix = locale === 'cs' ? '' : `${locale}/`
