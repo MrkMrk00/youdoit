@@ -16,6 +16,8 @@ export const Timer: FunctionComponent<TimerProps> = ({ startButtonTitle, seconds
 		return `${p(time.days)}:${p(time.hours)}:${p(time.minutes)}:${p(time.seconds)}`
 	}, [time])
 
+	console.log(parseInt(secondsToSet.toString(), 10))
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.content}>

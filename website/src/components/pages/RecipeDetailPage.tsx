@@ -30,7 +30,7 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 				author={author}
 			/>
 			<Container>
-				<Timer startButtonTitle="Tapni pro spuštění" secondsToSet={60} />
+				<Timer startButtonTitle="Tapni pro spuštění" secondsToSet={120} />
 				<div className={styles.stepGroupList}>
 					{recipeDetailPage.base?.stepsGroups.map((group, index) => {
 						return (
