@@ -4,7 +4,7 @@ import type { scalarResolver } from '../utilities/createScalarResolver'
 import { ImageFragment } from './ImageFragment'
 import { LocaleFragment } from './LocaleFragment'
 import { StepGroupFragment } from './StepGroupFragment'
-import { TipGroupFragment } from './TipGroupfragment'
+import { TipGroupFragment } from './TipGroupFragment'
 
 export const RecipeLocaleFragment = (locale: string) =>
 	Selector('RecipeLocale')({

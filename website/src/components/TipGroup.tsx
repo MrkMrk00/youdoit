@@ -1,5 +1,6 @@
 import type { FunctionComponent } from 'react'
 import { useState } from 'react'
+import type { TipGroupResult } from '../data/TipGroupFragment'
 import { Icon } from './Icon'
 import styles from './TipGroup.module.sass'
 import { TipModal } from './TipModal'
