@@ -31,30 +31,6 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 
 	const [activeStep, setActiveStep] = useState<number | null>(0)
 
-	const mutation = useMutation(
-		async () => {
-			const data = await contember('mutation', { scalars: scalarResolver })({
-				createPinnedRecipe: [
-					{
-						data: {
-							user: { connect: { email: hardcodedUserEmail } },
-							derivedBy: { connect: { id: recipeDetailPage.base?.id } }, //@TODO investigate why ? is needed
-						},
-					},
-					{ ok: true, errorMessage: true, node: { id: true } },
-				],
-			})
-			return data.createPinnedRecipe.node?.id
-		},
-		{
-			onSuccess: (id) => {
-				router.push({ pathname: router.asPath, query: { pinnedId: id } })
-			},
-		},
-	)
-
-	useMirrorLoading(mutation.isLoading)
-
 	const pinnedId = useMemo(() => {
 		const id = router.query.pinnedId
 		if (typeof id === 'string') {
@@ -76,6 +52,65 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 
 	useMirrorLoading(pinnedData.isLoading)
 
+	const createPinnedMutation = useMutation(
+		async () => {
+			const data = await contember('mutation', { scalars: scalarResolver })({
+				createPinnedRecipe: [
+					{
+						data: {
+							user: { connect: { email: hardcodedUserEmail } },
+							derivedBy: { connect: { id: recipeDetailPage.base?.id } }, //@TODO investigate why ? is needed
+						},
+					},
+					{ ok: true, errorMessage: true, node: { id: true } },
+				],
+			})
+			return data.createPinnedRecipe.node?.id
+		},
+		{
+			onSuccess: (id) => {
+				router.push({ pathname: router.asPath, query: { pinnedId: id } })
+			},
+		},
+	)
+	useMirrorLoading(createPinnedMutation.isLoading)
+
+	const updateStepImplementationMutation = useMutation(
+		async ({ checked, stepId }: { checked: boolean; stepId: string }) => {
+			if (checked) {
+				await contember('mutation', { scalars: scalarResolver })({
+					createImplemetationDate: [
+						{
+							data: {
+								pinnedRecipe: { connect: { id: pinnedId } },
+								step: { connect: { id: stepId } },
+							},
+						},
+						{ ok: true, errorMessage: true },
+					],
+				})
+			} else {
+				await contember('mutation', { scalars: scalarResolver })({
+					deleteImplemetationDate: [
+						{
+							by: {
+								pinnedRecipe: { id: pinnedId },
+								step: { id: stepId },
+							},
+						},
+						{ ok: true, errorMessage: true },
+					],
+				})
+			}
+		},
+		{
+			onSuccess: () => {
+				pinnedData.refetch()
+			},
+		},
+	)
+	useMirrorLoading(updateStepImplementationMutation.isLoading)
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -93,9 +128,9 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 					<button
 						type="button"
 						onClick={() => {
-							mutation.mutate()
+							createPinnedMutation.mutate()
 						}}
-						disabled={mutation.isLoading}
+						disabled={createPinnedMutation.isLoading}
 					>
 						Add to favourites
 					</button>
@@ -114,6 +149,9 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 								return (
 									<div className={clsx(styles.stepGroup, isActive && styles.isActive)} key={group.id}>
 										<StepGroup
+											onChange={(checked, stepId) => {
+												updateStepImplementationMutation.mutate({ checked, stepId })
+											}}
 											disabled={readOnly}
 											group={group}
 											index={index + 1}

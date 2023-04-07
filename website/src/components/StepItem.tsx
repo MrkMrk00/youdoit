@@ -1,25 +1,34 @@
 import type { FunctionComponent } from 'react'
-import type { StepGroupItemResult } from '../data/StepGroupItemFragment'
 import { Icon } from './Icon'
+import type { StepProps } from './Step'
 import { Step } from './Step'
 import styles from './StepItem.module.sass'
 
-export interface StepItemProps {
-	item: StepGroupItemResult
-	disabled: boolean
+type StepType = {
+	type: 'step'
+	props: StepProps
 }
 
-export const StepItem: FunctionComponent<StepItemProps> = ({ item, disabled }) => {
+type TipType = {
+	type: 'tip'
+	props: { title: string }
+}
+
+export interface StepItemProps {
+	item: StepType | TipType
+}
+
+export const StepItem: FunctionComponent<StepItemProps> = ({ item }) => {
 	switch (item.type) {
 		case 'step':
-			return item.step ? <Step step={item.step} disabled={disabled} /> : null
+			return <Step {...item.props} />
 		case 'tip':
 			return (
 				<div className={styles.tipWrapper}>
 					<div className={styles.bulb}>
 						<Icon name="bulb" />
 					</div>
-					<div className={styles.tipTitle}>{item.tip?.localesByLocale?.title}</div>
+					<div className={styles.tipTitle}>{item.props.title}</div>
 				</div>
 			)
 	}
