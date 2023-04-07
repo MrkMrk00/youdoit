@@ -8,6 +8,7 @@ import type { RecipeLocaleResult } from '../../data/RecipeLocaleFragment'
 import { contember } from '../../utilities/contember'
 import { scalarResolver } from '../../utilities/createScalarResolver'
 import { hardcodedUserEmail } from '../../utilities/hardcodedUserEmail'
+import { isDefined } from '../../utilities/isDefined'
 import { Container } from '../Container'
 import { DetailHeader } from '../DetailHeader'
 import { StepGroup } from '../StepGroup'
@@ -43,12 +44,20 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 			return null
 		}
 		const data = await contember('query', { scalars: scalarResolver })({
-			getPinnedRecipe: [{ by: { id: pinnedId } }, { id: true }],
+			getPinnedRecipe: [
+				{ by: { id: pinnedId } },
+				{ id: true, implementationDates: [{}, { step: [{}, { id: true }] }] },
+			],
 		})
 		return data.getPinnedRecipe
 	})
 
 	const readOnly = !pinnedData.data
+
+	const fullfilledStep = useMemo(
+		() => pinnedData.data?.implementationDates.map((date) => date.step?.id).filter(isDefined) ?? [],
+		[pinnedData.data?.implementationDates],
+	)
 
 	useMirrorLoading(pinnedData.isLoading)
 
@@ -149,6 +158,7 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 								return (
 									<div className={clsx(styles.stepGroup, isActive && styles.isActive)} key={group.id}>
 										<StepGroup
+											fullFilledSteps={fullfilledStep}
 											onChange={(checked, stepId) => {
 												updateStepImplementationMutation.mutate({ checked, stepId })
 											}}

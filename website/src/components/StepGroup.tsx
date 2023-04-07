@@ -14,9 +14,17 @@ export interface StepGroupProps {
 	onNextStep: () => void
 	disabled: boolean
 	onChange: (checked: boolean, id: string) => void
+	fullFilledSteps: string[]
 }
 
-export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index, onNextStep, disabled, onChange }) => {
+export const StepGroup: FunctionComponent<StepGroupProps> = ({
+	group,
+	index,
+	onNextStep,
+	disabled,
+	onChange,
+	fullFilledSteps,
+}) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.header}>
@@ -53,7 +61,7 @@ export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index, onN
 										}
 										onChange(checked, item.step.id)
 									},
-									checked: false, //@TODO
+									checked: fullFilledSteps.some((stepId) => stepId === item.step?.id),
 								},
 							}
 						}
