@@ -376,6 +376,30 @@ export const AllTypesProps: Record<string,any> = {
 		paginateTipGroupLocale:{
 			filter:"TipGroupLocaleWhere",
 			orderBy:"TipGroupLocaleOrderBy"
+		},
+		getPinnedRecipesPage:{
+			by:"PinnedRecipesPageUniqueWhere",
+			filter:"PinnedRecipesPageWhere"
+		},
+		listPinnedRecipesPage:{
+			filter:"PinnedRecipesPageWhere",
+			orderBy:"PinnedRecipesPageOrderBy"
+		},
+		paginatePinnedRecipesPage:{
+			filter:"PinnedRecipesPageWhere",
+			orderBy:"PinnedRecipesPageOrderBy"
+		},
+		getPinnedRecipesPageLocale:{
+			by:"PinnedRecipesPageLocaleUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
+		listPinnedRecipesPageLocale:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
+		},
+		paginatePinnedRecipesPageLocale:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
 		}
 	},
 	Content:{
@@ -488,6 +512,7 @@ export const AllTypesProps: Record<string,any> = {
 		homePage:"HomePageLocaleWhere",
 		category:"CategoryLocaleWhere",
 		recipe:"RecipeLocaleWhere",
+		pinnedRecipesPage:"PinnedRecipesPageLocaleWhere",
 		and:"LinkableWhere",
 		or:"LinkableWhere",
 		not:"LinkableWhere"
@@ -536,6 +561,7 @@ export const AllTypesProps: Record<string,any> = {
 		categories:"CategoryLocaleWhere",
 		tips:"TipLocaleWhere",
 		tipGroups:"TipGroupLocaleWhere",
+		pinnedRecipesPage:"PinnedRecipesPageLocaleWhere",
 		and:"LocaleWhere",
 		or:"LocaleWhere",
 		not:"LocaleWhere"
@@ -799,6 +825,25 @@ export const AllTypesProps: Record<string,any> = {
 		or:"TipGroupLocaleWhere",
 		not:"TipGroupLocaleWhere"
 	},
+	PinnedRecipesPageLocaleWhere:{
+		id:"UUIDCondition",
+		title:"StringCondition",
+		link:"LinkableWhere",
+		base:"PinnedRecipesPageWhere",
+		locale:"LocaleWhere",
+		seo:"SeoWhere",
+		and:"PinnedRecipesPageLocaleWhere",
+		or:"PinnedRecipesPageLocaleWhere",
+		not:"PinnedRecipesPageLocaleWhere"
+	},
+	PinnedRecipesPageWhere:{
+		id:"UUIDCondition",
+		unique:"OneCondition",
+		locales:"PinnedRecipesPageLocaleWhere",
+		and:"PinnedRecipesPageWhere",
+		or:"PinnedRecipesPageWhere",
+		not:"PinnedRecipesPageWhere"
+	},
 	ContentReference:{
 		block:{
 			filter:"ContentBlockWhere"
@@ -833,6 +878,9 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		recipe:{
 			filter:"RecipeLocaleWhere"
+		},
+		pinnedRecipesPage:{
+			filter:"PinnedRecipesPageLocaleWhere"
 		}
 	},
 	HomePageLocale:{
@@ -894,7 +942,8 @@ export const AllTypesProps: Record<string,any> = {
 		url:"OrderDirection",
 		homePage:"HomePageLocaleOrderBy",
 		category:"CategoryLocaleOrderBy",
-		recipe:"RecipeLocaleOrderBy"
+		recipe:"RecipeLocaleOrderBy",
+		pinnedRecipesPage:"PinnedRecipesPageLocaleOrderBy"
 	},
 	CategoryLocaleOrderBy:{
 		id:"OrderDirection",
@@ -953,6 +1002,18 @@ export const AllTypesProps: Record<string,any> = {
 		email:"OrderDirection",
 		image:"ImageOrderBy"
 	},
+	PinnedRecipesPageLocaleOrderBy:{
+		id:"OrderDirection",
+		title:"OrderDirection",
+		link:"LinkableOrderBy",
+		base:"PinnedRecipesPageOrderBy",
+		locale:"LocaleOrderBy",
+		seo:"SeoOrderBy"
+	},
+	PinnedRecipesPageOrderBy:{
+		id:"OrderDirection",
+		unique:"OrderDirection"
+	},
 	HomePageLocalesByLocaleUniqueWhere:{
 		locale:"LocaleUniqueWhere"
 	},
@@ -964,7 +1025,8 @@ export const AllTypesProps: Record<string,any> = {
 		homePage:"HomePageLocaleUniqueWhere",
 		categories:"CategoryLocaleUniqueWhere",
 		tips:"TipLocaleUniqueWhere",
-		tipGroups:"TipGroupLocaleUniqueWhere"
+		tipGroups:"TipGroupLocaleUniqueWhere",
+		pinnedRecipesPage:"PinnedRecipesPageLocaleUniqueWhere"
 	},
 	RecipeLocaleUniqueWhere:{
 		id:"UUID",
@@ -1045,7 +1107,8 @@ export const AllTypesProps: Record<string,any> = {
 		id:"UUID",
 		homePage:"HomePageLocaleUniqueWhere",
 		category:"CategoryLocaleUniqueWhere",
-		recipe:"RecipeLocaleUniqueWhere"
+		recipe:"RecipeLocaleUniqueWhere",
+		pinnedRecipesPage:"PinnedRecipesPageLocaleUniqueWhere"
 	},
 	HomePageLocaleUniqueWhere:{
 		id:"UUID",
@@ -1077,6 +1140,18 @@ export const AllTypesProps: Record<string,any> = {
 		id:"UUID",
 		locales:"CategoryLocaleUniqueWhere",
 		image:"ImageUniqueWhere"
+	},
+	PinnedRecipesPageLocaleUniqueWhere:{
+		id:"UUID",
+		base:"PinnedRecipesPageUniqueWhere",
+		locale:"LocaleUniqueWhere",
+		link:"LinkableUniqueWhere",
+		seo:"SeoUniqueWhere"
+	},
+	PinnedRecipesPageUniqueWhere:{
+		id:"UUID",
+		unique:"One",
+		locales:"PinnedRecipesPageLocaleUniqueWhere"
 	},
 	HomePageLocalesByLinkUniqueWhere:{
 		link:"LinkableUniqueWhere"
@@ -1112,6 +1187,10 @@ export const AllTypesProps: Record<string,any> = {
 		tipGroups:{
 			filter:"TipGroupLocaleWhere",
 			orderBy:"TipGroupLocaleOrderBy"
+		},
+		pinnedRecipesPage:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
 		},
 		recipesByBase:{
 			by:"LocaleRecipesByBaseUniqueWhere",
@@ -1165,6 +1244,18 @@ export const AllTypesProps: Record<string,any> = {
 			by:"LocaleTipGroupsByBaseUniqueWhere",
 			filter:"TipGroupLocaleWhere"
 		},
+		pinnedRecipesPageByBase:{
+			by:"LocalePinnedRecipesPageByBaseUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
+		pinnedRecipesPageByLink:{
+			by:"LocalePinnedRecipesPageByLinkUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
+		pinnedRecipesPageBySeo:{
+			by:"LocalePinnedRecipesPageBySeoUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
 		paginateRecipes:{
 			filter:"RecipeLocaleWhere",
 			orderBy:"RecipeLocaleOrderBy"
@@ -1192,6 +1283,10 @@ export const AllTypesProps: Record<string,any> = {
 		paginateTipGroups:{
 			filter:"TipGroupLocaleWhere",
 			orderBy:"TipGroupLocaleOrderBy"
+		},
+		paginatePinnedRecipesPage:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
 		}
 	},
 	RecipeLocale:{
@@ -1751,6 +1846,51 @@ export const AllTypesProps: Record<string,any> = {
 	RecipeTipGroupsByLocalesUniqueWhere:{
 		locales:"TipGroupLocaleUniqueWhere"
 	},
+	PinnedRecipesPageLocale:{
+		link:{
+			filter:"LinkableWhere"
+		},
+		base:{
+			filter:"PinnedRecipesPageWhere"
+		},
+		locale:{
+			filter:"LocaleWhere"
+		},
+		seo:{
+			filter:"SeoWhere"
+		}
+	},
+	PinnedRecipesPage:{
+		locales:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
+		},
+		localesByLocale:{
+			by:"PinnedRecipesPageLocalesByLocaleUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
+		localesByLink:{
+			by:"PinnedRecipesPageLocalesByLinkUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
+		localesBySeo:{
+			by:"PinnedRecipesPageLocalesBySeoUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
+		paginateLocales:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
+		}
+	},
+	PinnedRecipesPageLocalesByLocaleUniqueWhere:{
+		locale:"LocaleUniqueWhere"
+	},
+	PinnedRecipesPageLocalesByLinkUniqueWhere:{
+		link:"LinkableUniqueWhere"
+	},
+	PinnedRecipesPageLocalesBySeoUniqueWhere:{
+		seo:"SeoUniqueWhere"
+	},
 	LocaleRecipesByBaseUniqueWhere:{
 		base:"RecipeUniqueWhere"
 	},
@@ -1789,6 +1929,15 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	LocaleTipGroupsByBaseUniqueWhere:{
 		base:"TipGroupUniqueWhere"
+	},
+	LocalePinnedRecipesPageByBaseUniqueWhere:{
+		base:"PinnedRecipesPageUniqueWhere"
+	},
+	LocalePinnedRecipesPageByLinkUniqueWhere:{
+		link:"LinkableUniqueWhere"
+	},
+	LocalePinnedRecipesPageBySeoUniqueWhere:{
+		seo:"SeoUniqueWhere"
 	},
 	ContentReferenceLinkableItemOrderBy:{
 		id:"OrderDirection",
@@ -2314,6 +2463,30 @@ export const AllTypesProps: Record<string,any> = {
 		paginateTipGroupLocale:{
 			filter:"TipGroupLocaleWhere",
 			orderBy:"TipGroupLocaleOrderBy"
+		},
+		getPinnedRecipesPage:{
+			by:"PinnedRecipesPageUniqueWhere",
+			filter:"PinnedRecipesPageWhere"
+		},
+		listPinnedRecipesPage:{
+			filter:"PinnedRecipesPageWhere",
+			orderBy:"PinnedRecipesPageOrderBy"
+		},
+		paginatePinnedRecipesPage:{
+			filter:"PinnedRecipesPageWhere",
+			orderBy:"PinnedRecipesPageOrderBy"
+		},
+		getPinnedRecipesPageLocale:{
+			by:"PinnedRecipesPageLocaleUniqueWhere",
+			filter:"PinnedRecipesPageLocaleWhere"
+		},
+		listPinnedRecipesPageLocale:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
+		},
+		paginatePinnedRecipesPageLocale:{
+			filter:"PinnedRecipesPageLocaleWhere",
+			orderBy:"PinnedRecipesPageLocaleOrderBy"
 		}
 	},
 	Mutation:{
@@ -2449,6 +2622,12 @@ export const ReturnTypes: Record<string,any> = {
 		getTipGroupLocale:"TipGroupLocale",
 		listTipGroupLocale:"TipGroupLocale",
 		paginateTipGroupLocale:"TipGroupLocaleConnection",
+		getPinnedRecipesPage:"PinnedRecipesPage",
+		listPinnedRecipesPage:"PinnedRecipesPage",
+		paginatePinnedRecipesPage:"PinnedRecipesPageConnection",
+		getPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
+		listPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
+		paginatePinnedRecipesPageLocale:"PinnedRecipesPageLocaleConnection",
 		transaction:"QueryTransaction",
 		_info:"Info",
 		schema:"_Schema",
@@ -2523,14 +2702,16 @@ export const ReturnTypes: Record<string,any> = {
 		url:"String",
 		homePage:"HomePageLocale",
 		category:"CategoryLocale",
-		recipe:"RecipeLocale"
+		recipe:"RecipeLocale",
+		pinnedRecipesPage:"PinnedRecipesPageLocale"
 	},
 	LinkableMeta:{
 		id:"FieldMeta",
 		url:"FieldMeta",
 		homePage:"FieldMeta",
 		category:"FieldMeta",
-		recipe:"FieldMeta"
+		recipe:"FieldMeta",
+		pinnedRecipesPage:"FieldMeta"
 	},
 	HomePageLocale:{
 		_meta:"HomePageLocaleMeta",
@@ -2586,6 +2767,7 @@ export const ReturnTypes: Record<string,any> = {
 		categories:"CategoryLocale",
 		tips:"TipLocale",
 		tipGroups:"TipGroupLocale",
+		pinnedRecipesPage:"PinnedRecipesPageLocale",
 		recipesByBase:"RecipeLocale",
 		recipesByLink:"RecipeLocale",
 		stepsByBase:"StepLocale",
@@ -2599,13 +2781,17 @@ export const ReturnTypes: Record<string,any> = {
 		categoriesByLink:"CategoryLocale",
 		tipsByBase:"TipLocale",
 		tipGroupsByBase:"TipGroupLocale",
+		pinnedRecipesPageByBase:"PinnedRecipesPageLocale",
+		pinnedRecipesPageByLink:"PinnedRecipesPageLocale",
+		pinnedRecipesPageBySeo:"PinnedRecipesPageLocale",
 		paginateRecipes:"RecipeLocaleConnection",
 		paginateSteps:"StepLocaleConnection",
 		paginateStepsGroups:"StepGroupLocaleConnection",
 		paginateHomePage:"HomePageLocaleConnection",
 		paginateCategories:"CategoryLocaleConnection",
 		paginateTips:"TipLocaleConnection",
-		paginateTipGroups:"TipGroupLocaleConnection"
+		paginateTipGroups:"TipGroupLocaleConnection",
+		paginatePinnedRecipesPage:"PinnedRecipesPageLocaleConnection"
 	},
 	LocaleMeta:{
 		id:"FieldMeta",
@@ -2617,7 +2803,8 @@ export const ReturnTypes: Record<string,any> = {
 		homePage:"FieldMeta",
 		categories:"FieldMeta",
 		tips:"FieldMeta",
-		tipGroups:"FieldMeta"
+		tipGroups:"FieldMeta",
+		pinnedRecipesPage:"FieldMeta"
 	},
 	RecipeLocale:{
 		_meta:"RecipeLocaleMeta",
@@ -3094,6 +3281,45 @@ export const ReturnTypes: Record<string,any> = {
 	TipGroupEdge:{
 		node:"TipGroup"
 	},
+	PinnedRecipesPageLocale:{
+		_meta:"PinnedRecipesPageLocaleMeta",
+		id:"UUID",
+		title:"String",
+		link:"Linkable",
+		base:"PinnedRecipesPage",
+		locale:"Locale",
+		seo:"Seo"
+	},
+	PinnedRecipesPageLocaleMeta:{
+		id:"FieldMeta",
+		title:"FieldMeta",
+		link:"FieldMeta",
+		base:"FieldMeta",
+		locale:"FieldMeta",
+		seo:"FieldMeta"
+	},
+	PinnedRecipesPage:{
+		_meta:"PinnedRecipesPageMeta",
+		id:"UUID",
+		unique:"One",
+		locales:"PinnedRecipesPageLocale",
+		localesByLocale:"PinnedRecipesPageLocale",
+		localesByLink:"PinnedRecipesPageLocale",
+		localesBySeo:"PinnedRecipesPageLocale",
+		paginateLocales:"PinnedRecipesPageLocaleConnection"
+	},
+	PinnedRecipesPageMeta:{
+		id:"FieldMeta",
+		unique:"FieldMeta",
+		locales:"FieldMeta"
+	},
+	PinnedRecipesPageLocaleConnection:{
+		pageInfo:"PageInfo",
+		edges:"PinnedRecipesPageLocaleEdge"
+	},
+	PinnedRecipesPageLocaleEdge:{
+		node:"PinnedRecipesPageLocale"
+	},
 	ContentReferenceLinkableItemConnection:{
 		pageInfo:"PageInfo",
 		edges:"ContentReferenceLinkableItemEdge"
@@ -3259,6 +3485,13 @@ export const ReturnTypes: Record<string,any> = {
 	TipEdge:{
 		node:"Tip"
 	},
+	PinnedRecipesPageConnection:{
+		pageInfo:"PageInfo",
+		edges:"PinnedRecipesPageEdge"
+	},
+	PinnedRecipesPageEdge:{
+		node:"PinnedRecipesPage"
+	},
 	QueryTransaction:{
 		getContent:"Content",
 		listContent:"Content",
@@ -3353,7 +3586,13 @@ export const ReturnTypes: Record<string,any> = {
 		paginateTipGroupItem:"TipGroupItemConnection",
 		getTipGroupLocale:"TipGroupLocale",
 		listTipGroupLocale:"TipGroupLocale",
-		paginateTipGroupLocale:"TipGroupLocaleConnection"
+		paginateTipGroupLocale:"TipGroupLocaleConnection",
+		getPinnedRecipesPage:"PinnedRecipesPage",
+		listPinnedRecipesPage:"PinnedRecipesPage",
+		paginatePinnedRecipesPage:"PinnedRecipesPageConnection",
+		getPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
+		listPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
+		paginatePinnedRecipesPageLocale:"PinnedRecipesPageLocaleConnection"
 	},
 	Info:{
 		description:"String"
@@ -4430,6 +4669,12 @@ paginateTipGroupItem?: [{	filter?: ValueTypes["TipGroupItemWhere"] | undefined |
 getTipGroupLocale?: [{	by: ValueTypes["TipGroupLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocale"]],
 listTipGroupLocale?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipGroupLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocale"]],
 paginateTipGroupLocale?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipGroupLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocaleConnection"]],
+getPinnedRecipesPage?: [{	by: ValueTypes["PinnedRecipesPageUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPage"]],
+listPinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPage"]],
+paginatePinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageConnection"]],
+getPinnedRecipesPageLocale?: [{	by: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+listPinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+paginatePinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocaleConnection"]],
 	transaction?:ValueTypes["QueryTransaction"],
 	_info?:ValueTypes["Info"],
 	schema?:ValueTypes["_Schema"],
@@ -4582,6 +4827,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	homePage?: ValueTypes["HomePageLocaleWhere"] | undefined | null | Variable<any, string>,
 	category?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>,
 	recipe?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>,
+	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["LinkableWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["LinkableWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>
@@ -4632,6 +4878,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	categories?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>,
 	tips?: ValueTypes["TipLocaleWhere"] | undefined | null | Variable<any, string>,
 	tipGroups?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>,
+	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["LocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["LocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>
@@ -4911,6 +5158,25 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	or?: Array<ValueTypes["TipGroupLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>
 };
+	["PinnedRecipesPageLocaleWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	title?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>,
+	base?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>,
+	locale?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>,
+	seo?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipesPageWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	unique?: ValueTypes["OneCondition"] | undefined | null | Variable<any, string>,
+	locales?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["PinnedRecipesPageWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["PinnedRecipesPageWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>
+};
 	["ContentReference"]: AliasType<{
 	_meta?:ValueTypes["ContentReferenceMeta"],
 	id?:boolean | `@${string}`,
@@ -4950,6 +5216,7 @@ reference?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined | null |
 homePage?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["HomePageLocale"]],
 category?: [{	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["CategoryLocale"]],
 recipe?: [{	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
+pinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["LinkableMeta"]: AliasType<{
@@ -4958,6 +5225,7 @@ recipe?: [{	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variab
 	homePage?:ValueTypes["FieldMeta"],
 	category?:ValueTypes["FieldMeta"],
 	recipe?:ValueTypes["FieldMeta"],
+	pinnedRecipesPage?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["HomePageLocale"]: AliasType<{
@@ -5027,7 +5295,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	url?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	homePage?: ValueTypes["HomePageLocaleOrderBy"] | undefined | null | Variable<any, string>,
 	category?: ValueTypes["CategoryLocaleOrderBy"] | undefined | null | Variable<any, string>,
-	recipe?: ValueTypes["RecipeLocaleOrderBy"] | undefined | null | Variable<any, string>
+	recipe?: ValueTypes["RecipeLocaleOrderBy"] | undefined | null | Variable<any, string>,
+	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleOrderBy"] | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -5100,6 +5369,22 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	email?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	image?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>
 };
+	["PinnedRecipesPageLocaleOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	title?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["LinkableOrderBy"] | undefined | null | Variable<any, string>,
+	base?: ValueTypes["PinnedRecipesPageOrderBy"] | undefined | null | Variable<any, string>,
+	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>,
+	seo?: ValueTypes["SeoOrderBy"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipesPageOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	unique?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+};
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>
 };
@@ -5112,7 +5397,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	homePage?: ValueTypes["HomePageLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
 	categories?: ValueTypes["CategoryLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
 	tips?: ValueTypes["TipLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
-	tipGroups?: ValueTypes["TipGroupLocaleUniqueWhere"] | undefined | null | Variable<any, string>
+	tipGroups?: ValueTypes["TipGroupLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
+	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null | Variable<any, string>
 };
 	["RecipeLocaleUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
@@ -5194,7 +5480,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	url?: string | undefined | null | Variable<any, string>,
 	homePage?: ValueTypes["HomePageLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
 	category?: ValueTypes["CategoryLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
-	recipe?: ValueTypes["RecipeLocaleUniqueWhere"] | undefined | null | Variable<any, string>
+	recipe?: ValueTypes["RecipeLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
+	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null | Variable<any, string>
 };
 	["HomePageLocaleUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
@@ -5227,6 +5514,18 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	locales?: ValueTypes["CategoryLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
 	image?: ValueTypes["ImageUniqueWhere"] | undefined | null | Variable<any, string>
 };
+	["PinnedRecipesPageLocaleUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	base?: ValueTypes["PinnedRecipesPageUniqueWhere"] | undefined | null | Variable<any, string>,
+	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>,
+	seo?: ValueTypes["SeoUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipesPageUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	unique?: ValueTypes["One"] | undefined | null | Variable<any, string>,
+	locales?: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null | Variable<any, string>
+};
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>
 };
@@ -5258,6 +5557,7 @@ homePage?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | null | Va
 categories?: [{	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["CategoryLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["CategoryLocale"]],
 tips?: [{	filter?: ValueTypes["TipLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TipLocale"]],
 tipGroups?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipGroupLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocale"]],
+pinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 recipesByBase?: [{	by: ValueTypes["LocaleRecipesByBaseUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
 recipesByLink?: [{	by: ValueTypes["LocaleRecipesByLinkUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
 stepsByBase?: [{	by: ValueTypes["LocaleStepsByBaseUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepLocale"]],
@@ -5271,6 +5571,9 @@ categoriesBySeo?: [{	by: ValueTypes["LocaleCategoriesBySeoUniqueWhere"] | Variab
 categoriesByLink?: [{	by: ValueTypes["LocaleCategoriesByLinkUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["CategoryLocale"]],
 tipsByBase?: [{	by: ValueTypes["LocaleTipsByBaseUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TipLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["TipLocale"]],
 tipGroupsByBase?: [{	by: ValueTypes["LocaleTipGroupsByBaseUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocale"]],
+pinnedRecipesPageByBase?: [{	by: ValueTypes["LocalePinnedRecipesPageByBaseUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+pinnedRecipesPageByLink?: [{	by: ValueTypes["LocalePinnedRecipesPageByLinkUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+pinnedRecipesPageBySeo?: [{	by: ValueTypes["LocalePinnedRecipesPageBySeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 paginateRecipes?: [{	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RecipeLocaleConnection"]],
 paginateSteps?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepLocaleConnection"]],
 paginateStepsGroups?: [{	filter?: ValueTypes["StepGroupLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepGroupLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepGroupLocaleConnection"]],
@@ -5278,6 +5581,7 @@ paginateHomePage?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | n
 paginateCategories?: [{	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["CategoryLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["CategoryLocaleConnection"]],
 paginateTips?: [{	filter?: ValueTypes["TipLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TipLocaleConnection"]],
 paginateTipGroups?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipGroupLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocaleConnection"]],
+paginatePinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocaleConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["LocaleMeta"]: AliasType<{
@@ -5291,6 +5595,7 @@ paginateTipGroups?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | 
 	categories?:ValueTypes["FieldMeta"],
 	tips?:ValueTypes["FieldMeta"],
 	tipGroups?:ValueTypes["FieldMeta"],
+	pinnedRecipesPage?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["RecipeLocale"]: AliasType<{
@@ -6021,6 +6326,60 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	node?:ValueTypes["TipGroup"],
 		__typename?: boolean | `@${string}`
 }>;
+	["PinnedRecipesPageLocale"]: AliasType<{
+	_meta?:ValueTypes["PinnedRecipesPageLocaleMeta"],
+	id?:boolean | `@${string}`,
+	title?:boolean | `@${string}`,
+link?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>},ValueTypes["Linkable"]],
+base?: [{	filter?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPage"]],
+locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["Locale"]],
+seo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>},ValueTypes["Seo"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageLocaleMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	title?:ValueTypes["FieldMeta"],
+	link?:ValueTypes["FieldMeta"],
+	base?:ValueTypes["FieldMeta"],
+	locale?:ValueTypes["FieldMeta"],
+	seo?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPage"]: AliasType<{
+	_meta?:ValueTypes["PinnedRecipesPageMeta"],
+	id?:boolean | `@${string}`,
+	unique?:boolean | `@${string}`,
+locales?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+localesByLocale?: [{	by: ValueTypes["PinnedRecipesPageLocalesByLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+localesByLink?: [{	by: ValueTypes["PinnedRecipesPageLocalesByLinkUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+localesBySeo?: [{	by: ValueTypes["PinnedRecipesPageLocalesBySeoUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+paginateLocales?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocaleConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	unique?:ValueTypes["FieldMeta"],
+	locales?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageLocalesByLocaleUniqueWhere"]: {
+	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipesPageLocalesByLinkUniqueWhere"]: {
+	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipesPageLocalesBySeoUniqueWhere"]: {
+	seo?: ValueTypes["SeoUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipesPageLocaleConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["PinnedRecipesPageLocaleEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageLocaleEdge"]: AliasType<{
+	node?:ValueTypes["PinnedRecipesPageLocale"],
+		__typename?: boolean | `@${string}`
+}>;
 	["LocaleRecipesByBaseUniqueWhere"]: {
 	base?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>
 };
@@ -6059,6 +6418,15 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 };
 	["LocaleTipGroupsByBaseUniqueWhere"]: {
 	base?: ValueTypes["TipGroupUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["LocalePinnedRecipesPageByBaseUniqueWhere"]: {
+	base?: ValueTypes["PinnedRecipesPageUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["LocalePinnedRecipesPageByLinkUniqueWhere"]: {
+	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
+	seo?: ValueTypes["SeoUniqueWhere"] | undefined | null | Variable<any, string>
 };
 	["ContentReferenceLinkableItemOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -6410,6 +6778,15 @@ recipe?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any
 	node?:ValueTypes["Tip"],
 		__typename?: boolean | `@${string}`
 }>;
+	["PinnedRecipesPageConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["PinnedRecipesPageEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageEdge"]: AliasType<{
+	node?:ValueTypes["PinnedRecipesPage"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ValueTypes["ContentUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>},ValueTypes["Content"]],
 listContent?: [{	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ContentOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Content"]],
@@ -6505,6 +6882,12 @@ paginateTipGroupItem?: [{	filter?: ValueTypes["TipGroupItemWhere"] | undefined |
 getTipGroupLocale?: [{	by: ValueTypes["TipGroupLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocale"]],
 listTipGroupLocale?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipGroupLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocale"]],
 paginateTipGroupLocale?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipGroupLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TipGroupLocaleConnection"]],
+getPinnedRecipesPage?: [{	by: ValueTypes["PinnedRecipesPageUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPage"]],
+listPinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPage"]],
+paginatePinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageConnection"]],
+getPinnedRecipesPageLocale?: [{	by: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+listPinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
+paginatePinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocaleConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -6784,6 +7167,12 @@ paginateTipGroupItem?: [{	filter?: ResolverInputTypes["TipGroupItemWhere"] | und
 getTipGroupLocale?: [{	by: ResolverInputTypes["TipGroupLocaleUniqueWhere"],	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null},ResolverInputTypes["TipGroupLocale"]],
 listTipGroupLocale?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipGroupLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TipGroupLocale"]],
 paginateTipGroupLocale?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipGroupLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TipGroupLocaleConnection"]],
+getPinnedRecipesPage?: [{	by: ResolverInputTypes["PinnedRecipesPageUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPage"]],
+listPinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPage"]],
+paginatePinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageConnection"]],
+getPinnedRecipesPageLocale?: [{	by: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+listPinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+paginatePinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocaleConnection"]],
 	transaction?:ResolverInputTypes["QueryTransaction"],
 	_info?:ResolverInputTypes["Info"],
 	schema?:ResolverInputTypes["_Schema"],
@@ -6936,6 +7325,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	homePage?: ResolverInputTypes["HomePageLocaleWhere"] | undefined | null,
 	category?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null,
 	recipe?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null,
+	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,
 	and?: Array<ResolverInputTypes["LinkableWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["LinkableWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["LinkableWhere"] | undefined | null
@@ -6986,6 +7376,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	categories?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null,
 	tips?: ResolverInputTypes["TipLocaleWhere"] | undefined | null,
 	tipGroups?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null,
+	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,
 	and?: Array<ResolverInputTypes["LocaleWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["LocaleWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["LocaleWhere"] | undefined | null
@@ -7265,6 +7656,25 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	or?: Array<ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null
 };
+	["PinnedRecipesPageLocaleWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	title?: ResolverInputTypes["StringCondition"] | undefined | null,
+	link?: ResolverInputTypes["LinkableWhere"] | undefined | null,
+	base?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null,
+	locale?: ResolverInputTypes["LocaleWhere"] | undefined | null,
+	seo?: ResolverInputTypes["SeoWhere"] | undefined | null,
+	and?: Array<ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null
+};
+	["PinnedRecipesPageWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	unique?: ResolverInputTypes["OneCondition"] | undefined | null,
+	locales?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,
+	and?: Array<ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null
+};
 	["ContentReference"]: AliasType<{
 	_meta?:ResolverInputTypes["ContentReferenceMeta"],
 	id?:boolean | `@${string}`,
@@ -7304,6 +7714,7 @@ reference?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | undefined 
 homePage?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefined | null},ResolverInputTypes["HomePageLocale"]],
 category?: [{	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null},ResolverInputTypes["CategoryLocale"]],
 recipe?: [{	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
+pinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["LinkableMeta"]: AliasType<{
@@ -7312,6 +7723,7 @@ recipe?: [{	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null}
 	homePage?:ResolverInputTypes["FieldMeta"],
 	category?:ResolverInputTypes["FieldMeta"],
 	recipe?:ResolverInputTypes["FieldMeta"],
+	pinnedRecipesPage?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["HomePageLocale"]: AliasType<{
@@ -7381,7 +7793,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	url?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	homePage?: ResolverInputTypes["HomePageLocaleOrderBy"] | undefined | null,
 	category?: ResolverInputTypes["CategoryLocaleOrderBy"] | undefined | null,
-	recipe?: ResolverInputTypes["RecipeLocaleOrderBy"] | undefined | null
+	recipe?: ResolverInputTypes["RecipeLocaleOrderBy"] | undefined | null,
+	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"] | undefined | null
 };
 	["CategoryLocaleOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -7454,6 +7867,22 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	email?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	image?: ResolverInputTypes["ImageOrderBy"] | undefined | null
 };
+	["PinnedRecipesPageLocaleOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	title?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	link?: ResolverInputTypes["LinkableOrderBy"] | undefined | null,
+	base?: ResolverInputTypes["PinnedRecipesPageOrderBy"] | undefined | null,
+	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null,
+	seo?: ResolverInputTypes["SeoOrderBy"] | undefined | null
+};
+	["PinnedRecipesPageOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	unique?: ResolverInputTypes["OrderDirection"] | undefined | null
+};
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null
 };
@@ -7466,7 +7895,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	homePage?: ResolverInputTypes["HomePageLocaleUniqueWhere"] | undefined | null,
 	categories?: ResolverInputTypes["CategoryLocaleUniqueWhere"] | undefined | null,
 	tips?: ResolverInputTypes["TipLocaleUniqueWhere"] | undefined | null,
-	tipGroups?: ResolverInputTypes["TipGroupLocaleUniqueWhere"] | undefined | null
+	tipGroups?: ResolverInputTypes["TipGroupLocaleUniqueWhere"] | undefined | null,
+	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null
 };
 	["RecipeLocaleUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
@@ -7548,7 +7978,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	url?: string | undefined | null,
 	homePage?: ResolverInputTypes["HomePageLocaleUniqueWhere"] | undefined | null,
 	category?: ResolverInputTypes["CategoryLocaleUniqueWhere"] | undefined | null,
-	recipe?: ResolverInputTypes["RecipeLocaleUniqueWhere"] | undefined | null
+	recipe?: ResolverInputTypes["RecipeLocaleUniqueWhere"] | undefined | null,
+	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null
 };
 	["HomePageLocaleUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
@@ -7581,6 +8012,18 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	locales?: ResolverInputTypes["CategoryLocaleUniqueWhere"] | undefined | null,
 	image?: ResolverInputTypes["ImageUniqueWhere"] | undefined | null
 };
+	["PinnedRecipesPageLocaleUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	base?: ResolverInputTypes["PinnedRecipesPageUniqueWhere"] | undefined | null,
+	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null,
+	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null,
+	seo?: ResolverInputTypes["SeoUniqueWhere"] | undefined | null
+};
+	["PinnedRecipesPageUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	unique?: ResolverInputTypes["One"] | undefined | null,
+	locales?: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null
+};
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null
 };
@@ -7612,6 +8055,7 @@ homePage?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefined | n
 categories?: [{	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["CategoryLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["CategoryLocale"]],
 tips?: [{	filter?: ResolverInputTypes["TipLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TipLocale"]],
 tipGroups?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipGroupLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TipGroupLocale"]],
+pinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 recipesByBase?: [{	by: ResolverInputTypes["LocaleRecipesByBaseUniqueWhere"],	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
 recipesByLink?: [{	by: ResolverInputTypes["LocaleRecipesByLinkUniqueWhere"],	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
 stepsByBase?: [{	by: ResolverInputTypes["LocaleStepsByBaseUniqueWhere"],	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},ResolverInputTypes["StepLocale"]],
@@ -7625,6 +8069,9 @@ categoriesBySeo?: [{	by: ResolverInputTypes["LocaleCategoriesBySeoUniqueWhere"],
 categoriesByLink?: [{	by: ResolverInputTypes["LocaleCategoriesByLinkUniqueWhere"],	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null},ResolverInputTypes["CategoryLocale"]],
 tipsByBase?: [{	by: ResolverInputTypes["LocaleTipsByBaseUniqueWhere"],	filter?: ResolverInputTypes["TipLocaleWhere"] | undefined | null},ResolverInputTypes["TipLocale"]],
 tipGroupsByBase?: [{	by: ResolverInputTypes["LocaleTipGroupsByBaseUniqueWhere"],	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null},ResolverInputTypes["TipGroupLocale"]],
+pinnedRecipesPageByBase?: [{	by: ResolverInputTypes["LocalePinnedRecipesPageByBaseUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+pinnedRecipesPageByLink?: [{	by: ResolverInputTypes["LocalePinnedRecipesPageByLinkUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+pinnedRecipesPageBySeo?: [{	by: ResolverInputTypes["LocalePinnedRecipesPageBySeoUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 paginateRecipes?: [{	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RecipeLocaleConnection"]],
 paginateSteps?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepLocaleConnection"]],
 paginateStepsGroups?: [{	filter?: ResolverInputTypes["StepGroupLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepGroupLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepGroupLocaleConnection"]],
@@ -7632,6 +8079,7 @@ paginateHomePage?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undef
 paginateCategories?: [{	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["CategoryLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["CategoryLocaleConnection"]],
 paginateTips?: [{	filter?: ResolverInputTypes["TipLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TipLocaleConnection"]],
 paginateTipGroups?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipGroupLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TipGroupLocaleConnection"]],
+paginatePinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocaleConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["LocaleMeta"]: AliasType<{
@@ -7645,6 +8093,7 @@ paginateTipGroups?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | unde
 	categories?:ResolverInputTypes["FieldMeta"],
 	tips?:ResolverInputTypes["FieldMeta"],
 	tipGroups?:ResolverInputTypes["FieldMeta"],
+	pinnedRecipesPage?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["RecipeLocale"]: AliasType<{
@@ -8375,6 +8824,60 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	node?:ResolverInputTypes["TipGroup"],
 		__typename?: boolean | `@${string}`
 }>;
+	["PinnedRecipesPageLocale"]: AliasType<{
+	_meta?:ResolverInputTypes["PinnedRecipesPageLocaleMeta"],
+	id?:boolean | `@${string}`,
+	title?:boolean | `@${string}`,
+link?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | null},ResolverInputTypes["Linkable"]],
+base?: [{	filter?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPage"]],
+locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},ResolverInputTypes["Locale"]],
+seo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null},ResolverInputTypes["Seo"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageLocaleMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	title?:ResolverInputTypes["FieldMeta"],
+	link?:ResolverInputTypes["FieldMeta"],
+	base?:ResolverInputTypes["FieldMeta"],
+	locale?:ResolverInputTypes["FieldMeta"],
+	seo?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPage"]: AliasType<{
+	_meta?:ResolverInputTypes["PinnedRecipesPageMeta"],
+	id?:boolean | `@${string}`,
+	unique?:boolean | `@${string}`,
+locales?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+localesByLocale?: [{	by: ResolverInputTypes["PinnedRecipesPageLocalesByLocaleUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+localesByLink?: [{	by: ResolverInputTypes["PinnedRecipesPageLocalesByLinkUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+localesBySeo?: [{	by: ResolverInputTypes["PinnedRecipesPageLocalesBySeoUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+paginateLocales?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocaleConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	unique?:ResolverInputTypes["FieldMeta"],
+	locales?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageLocalesByLocaleUniqueWhere"]: {
+	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null
+};
+	["PinnedRecipesPageLocalesByLinkUniqueWhere"]: {
+	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null
+};
+	["PinnedRecipesPageLocalesBySeoUniqueWhere"]: {
+	seo?: ResolverInputTypes["SeoUniqueWhere"] | undefined | null
+};
+	["PinnedRecipesPageLocaleConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["PinnedRecipesPageLocaleEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageLocaleEdge"]: AliasType<{
+	node?:ResolverInputTypes["PinnedRecipesPageLocale"],
+		__typename?: boolean | `@${string}`
+}>;
 	["LocaleRecipesByBaseUniqueWhere"]: {
 	base?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null
 };
@@ -8413,6 +8916,15 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 };
 	["LocaleTipGroupsByBaseUniqueWhere"]: {
 	base?: ResolverInputTypes["TipGroupUniqueWhere"] | undefined | null
+};
+	["LocalePinnedRecipesPageByBaseUniqueWhere"]: {
+	base?: ResolverInputTypes["PinnedRecipesPageUniqueWhere"] | undefined | null
+};
+	["LocalePinnedRecipesPageByLinkUniqueWhere"]: {
+	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null
+};
+	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
+	seo?: ResolverInputTypes["SeoUniqueWhere"] | undefined | null
 };
 	["ContentReferenceLinkableItemOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -8765,6 +9277,15 @@ recipe?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},Resol
 	node?:ResolverInputTypes["Tip"],
 		__typename?: boolean | `@${string}`
 }>;
+	["PinnedRecipesPageConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["PinnedRecipesPageEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipesPageEdge"]: AliasType<{
+	node?:ResolverInputTypes["PinnedRecipesPage"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ResolverInputTypes["ContentUniqueWhere"],	filter?: ResolverInputTypes["ContentWhere"] | undefined | null},ResolverInputTypes["Content"]],
 listContent?: [{	filter?: ResolverInputTypes["ContentWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ContentOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Content"]],
@@ -8860,6 +9381,12 @@ paginateTipGroupItem?: [{	filter?: ResolverInputTypes["TipGroupItemWhere"] | und
 getTipGroupLocale?: [{	by: ResolverInputTypes["TipGroupLocaleUniqueWhere"],	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null},ResolverInputTypes["TipGroupLocale"]],
 listTipGroupLocale?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipGroupLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TipGroupLocale"]],
 paginateTipGroupLocale?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipGroupLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TipGroupLocaleConnection"]],
+getPinnedRecipesPage?: [{	by: ResolverInputTypes["PinnedRecipesPageUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPage"]],
+listPinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPage"]],
+paginatePinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageConnection"]],
+getPinnedRecipesPageLocale?: [{	by: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+listPinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
+paginatePinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocaleConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -9140,6 +9667,12 @@ export type ModelTypes = {
 	getTipGroupLocale?: ModelTypes["TipGroupLocale"] | undefined,
 	listTipGroupLocale: Array<ModelTypes["TipGroupLocale"]>,
 	paginateTipGroupLocale: ModelTypes["TipGroupLocaleConnection"],
+	getPinnedRecipesPage?: ModelTypes["PinnedRecipesPage"] | undefined,
+	listPinnedRecipesPage: Array<ModelTypes["PinnedRecipesPage"]>,
+	paginatePinnedRecipesPage: ModelTypes["PinnedRecipesPageConnection"],
+	getPinnedRecipesPageLocale?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
+	listPinnedRecipesPageLocale: Array<ModelTypes["PinnedRecipesPageLocale"]>,
+	paginatePinnedRecipesPageLocale: ModelTypes["PinnedRecipesPageLocaleConnection"],
 	transaction?: ModelTypes["QueryTransaction"] | undefined,
 	_info?: ModelTypes["Info"] | undefined,
 	schema?: ModelTypes["_Schema"] | undefined,
@@ -9286,6 +9819,7 @@ export type ModelTypes = {
 	homePage?: ModelTypes["HomePageLocaleWhere"] | undefined,
 	category?: ModelTypes["CategoryLocaleWhere"] | undefined,
 	recipe?: ModelTypes["RecipeLocaleWhere"] | undefined,
+	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleWhere"] | undefined,
 	and?: Array<ModelTypes["LinkableWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["LinkableWhere"] | undefined> | undefined,
 	not?: ModelTypes["LinkableWhere"] | undefined
@@ -9336,6 +9870,7 @@ export type ModelTypes = {
 	categories?: ModelTypes["CategoryLocaleWhere"] | undefined,
 	tips?: ModelTypes["TipLocaleWhere"] | undefined,
 	tipGroups?: ModelTypes["TipGroupLocaleWhere"] | undefined,
+	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleWhere"] | undefined,
 	and?: Array<ModelTypes["LocaleWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["LocaleWhere"] | undefined> | undefined,
 	not?: ModelTypes["LocaleWhere"] | undefined
@@ -9615,6 +10150,25 @@ export type ModelTypes = {
 	or?: Array<ModelTypes["TipGroupLocaleWhere"] | undefined> | undefined,
 	not?: ModelTypes["TipGroupLocaleWhere"] | undefined
 };
+	["PinnedRecipesPageLocaleWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	title?: ModelTypes["StringCondition"] | undefined,
+	link?: ModelTypes["LinkableWhere"] | undefined,
+	base?: ModelTypes["PinnedRecipesPageWhere"] | undefined,
+	locale?: ModelTypes["LocaleWhere"] | undefined,
+	seo?: ModelTypes["SeoWhere"] | undefined,
+	and?: Array<ModelTypes["PinnedRecipesPageLocaleWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["PinnedRecipesPageLocaleWhere"] | undefined> | undefined,
+	not?: ModelTypes["PinnedRecipesPageLocaleWhere"] | undefined
+};
+	["PinnedRecipesPageWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	unique?: ModelTypes["OneCondition"] | undefined,
+	locales?: ModelTypes["PinnedRecipesPageLocaleWhere"] | undefined,
+	and?: Array<ModelTypes["PinnedRecipesPageWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["PinnedRecipesPageWhere"] | undefined> | undefined,
+	not?: ModelTypes["PinnedRecipesPageWhere"] | undefined
+};
 	["ContentReference"]: {
 		_meta?: ModelTypes["ContentReferenceMeta"] | undefined,
 	id: ModelTypes["UUID"],
@@ -9649,14 +10203,16 @@ export type ModelTypes = {
 	url: string,
 	homePage?: ModelTypes["HomePageLocale"] | undefined,
 	category?: ModelTypes["CategoryLocale"] | undefined,
-	recipe?: ModelTypes["RecipeLocale"] | undefined
+	recipe?: ModelTypes["RecipeLocale"] | undefined,
+	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocale"] | undefined
 };
 	["LinkableMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
 	url?: ModelTypes["FieldMeta"] | undefined,
 	homePage?: ModelTypes["FieldMeta"] | undefined,
 	category?: ModelTypes["FieldMeta"] | undefined,
-	recipe?: ModelTypes["FieldMeta"] | undefined
+	recipe?: ModelTypes["FieldMeta"] | undefined,
+	pinnedRecipesPage?: ModelTypes["FieldMeta"] | undefined
 };
 	["HomePageLocale"]: {
 		_meta?: ModelTypes["HomePageLocaleMeta"] | undefined,
@@ -9721,7 +10277,8 @@ export type ModelTypes = {
 	url?: ModelTypes["OrderDirection"] | undefined,
 	homePage?: ModelTypes["HomePageLocaleOrderBy"] | undefined,
 	category?: ModelTypes["CategoryLocaleOrderBy"] | undefined,
-	recipe?: ModelTypes["RecipeLocaleOrderBy"] | undefined
+	recipe?: ModelTypes["RecipeLocaleOrderBy"] | undefined,
+	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleOrderBy"] | undefined
 };
 	["CategoryLocaleOrderBy"]: {
 	_random?: boolean | undefined,
@@ -9794,6 +10351,22 @@ export type ModelTypes = {
 	email?: ModelTypes["OrderDirection"] | undefined,
 	image?: ModelTypes["ImageOrderBy"] | undefined
 };
+	["PinnedRecipesPageLocaleOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	title?: ModelTypes["OrderDirection"] | undefined,
+	link?: ModelTypes["LinkableOrderBy"] | undefined,
+	base?: ModelTypes["PinnedRecipesPageOrderBy"] | undefined,
+	locale?: ModelTypes["LocaleOrderBy"] | undefined,
+	seo?: ModelTypes["SeoOrderBy"] | undefined
+};
+	["PinnedRecipesPageOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	unique?: ModelTypes["OrderDirection"] | undefined
+};
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ModelTypes["LocaleUniqueWhere"] | undefined
 };
@@ -9806,7 +10379,8 @@ export type ModelTypes = {
 	homePage?: ModelTypes["HomePageLocaleUniqueWhere"] | undefined,
 	categories?: ModelTypes["CategoryLocaleUniqueWhere"] | undefined,
 	tips?: ModelTypes["TipLocaleUniqueWhere"] | undefined,
-	tipGroups?: ModelTypes["TipGroupLocaleUniqueWhere"] | undefined
+	tipGroups?: ModelTypes["TipGroupLocaleUniqueWhere"] | undefined,
+	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined
 };
 	["RecipeLocaleUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
@@ -9888,7 +10462,8 @@ export type ModelTypes = {
 	url?: string | undefined,
 	homePage?: ModelTypes["HomePageLocaleUniqueWhere"] | undefined,
 	category?: ModelTypes["CategoryLocaleUniqueWhere"] | undefined,
-	recipe?: ModelTypes["RecipeLocaleUniqueWhere"] | undefined
+	recipe?: ModelTypes["RecipeLocaleUniqueWhere"] | undefined,
+	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined
 };
 	["HomePageLocaleUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
@@ -9921,6 +10496,18 @@ export type ModelTypes = {
 	locales?: ModelTypes["CategoryLocaleUniqueWhere"] | undefined,
 	image?: ModelTypes["ImageUniqueWhere"] | undefined
 };
+	["PinnedRecipesPageLocaleUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	base?: ModelTypes["PinnedRecipesPageUniqueWhere"] | undefined,
+	locale?: ModelTypes["LocaleUniqueWhere"] | undefined,
+	link?: ModelTypes["LinkableUniqueWhere"] | undefined,
+	seo?: ModelTypes["SeoUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	unique?: ModelTypes["One"] | undefined,
+	locales?: ModelTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined
+};
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ModelTypes["LinkableUniqueWhere"] | undefined
 };
@@ -9949,6 +10536,7 @@ export type ModelTypes = {
 	categories: Array<ModelTypes["CategoryLocale"]>,
 	tips: Array<ModelTypes["TipLocale"]>,
 	tipGroups: Array<ModelTypes["TipGroupLocale"]>,
+	pinnedRecipesPage: Array<ModelTypes["PinnedRecipesPageLocale"]>,
 	recipesByBase?: ModelTypes["RecipeLocale"] | undefined,
 	recipesByLink?: ModelTypes["RecipeLocale"] | undefined,
 	stepsByBase?: ModelTypes["StepLocale"] | undefined,
@@ -9962,13 +10550,17 @@ export type ModelTypes = {
 	categoriesByLink?: ModelTypes["CategoryLocale"] | undefined,
 	tipsByBase?: ModelTypes["TipLocale"] | undefined,
 	tipGroupsByBase?: ModelTypes["TipGroupLocale"] | undefined,
+	pinnedRecipesPageByBase?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
+	pinnedRecipesPageByLink?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
+	pinnedRecipesPageBySeo?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
 	paginateRecipes: ModelTypes["RecipeLocaleConnection"],
 	paginateSteps: ModelTypes["StepLocaleConnection"],
 	paginateStepsGroups: ModelTypes["StepGroupLocaleConnection"],
 	paginateHomePage: ModelTypes["HomePageLocaleConnection"],
 	paginateCategories: ModelTypes["CategoryLocaleConnection"],
 	paginateTips: ModelTypes["TipLocaleConnection"],
-	paginateTipGroups: ModelTypes["TipGroupLocaleConnection"]
+	paginateTipGroups: ModelTypes["TipGroupLocaleConnection"],
+	paginatePinnedRecipesPage: ModelTypes["PinnedRecipesPageLocaleConnection"]
 };
 	["LocaleMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
@@ -9980,7 +10572,8 @@ export type ModelTypes = {
 	homePage?: ModelTypes["FieldMeta"] | undefined,
 	categories?: ModelTypes["FieldMeta"] | undefined,
 	tips?: ModelTypes["FieldMeta"] | undefined,
-	tipGroups?: ModelTypes["FieldMeta"] | undefined
+	tipGroups?: ModelTypes["FieldMeta"] | undefined,
+	pinnedRecipesPage?: ModelTypes["FieldMeta"] | undefined
 };
 	["RecipeLocale"]: {
 		_meta?: ModelTypes["RecipeLocaleMeta"] | undefined,
@@ -10640,6 +11233,54 @@ export type ModelTypes = {
 	["TipGroupEdge"]: {
 		node: ModelTypes["TipGroup"]
 };
+	["PinnedRecipesPageLocale"]: {
+		_meta?: ModelTypes["PinnedRecipesPageLocaleMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	title?: string | undefined,
+	link?: ModelTypes["Linkable"] | undefined,
+	base?: ModelTypes["PinnedRecipesPage"] | undefined,
+	locale?: ModelTypes["Locale"] | undefined,
+	seo?: ModelTypes["Seo"] | undefined
+};
+	["PinnedRecipesPageLocaleMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	title?: ModelTypes["FieldMeta"] | undefined,
+	link?: ModelTypes["FieldMeta"] | undefined,
+	base?: ModelTypes["FieldMeta"] | undefined,
+	locale?: ModelTypes["FieldMeta"] | undefined,
+	seo?: ModelTypes["FieldMeta"] | undefined
+};
+	["PinnedRecipesPage"]: {
+		_meta?: ModelTypes["PinnedRecipesPageMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	unique: ModelTypes["One"],
+	locales: Array<ModelTypes["PinnedRecipesPageLocale"]>,
+	localesByLocale?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
+	localesByLink?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
+	localesBySeo?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
+	paginateLocales: ModelTypes["PinnedRecipesPageLocaleConnection"]
+};
+	["PinnedRecipesPageMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	unique?: ModelTypes["FieldMeta"] | undefined,
+	locales?: ModelTypes["FieldMeta"] | undefined
+};
+	["PinnedRecipesPageLocalesByLocaleUniqueWhere"]: {
+	locale?: ModelTypes["LocaleUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageLocalesByLinkUniqueWhere"]: {
+	link?: ModelTypes["LinkableUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageLocalesBySeoUniqueWhere"]: {
+	seo?: ModelTypes["SeoUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageLocaleConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["PinnedRecipesPageLocaleEdge"]>
+};
+	["PinnedRecipesPageLocaleEdge"]: {
+		node: ModelTypes["PinnedRecipesPageLocale"]
+};
 	["LocaleRecipesByBaseUniqueWhere"]: {
 	base?: ModelTypes["RecipeUniqueWhere"] | undefined
 };
@@ -10678,6 +11319,15 @@ export type ModelTypes = {
 };
 	["LocaleTipGroupsByBaseUniqueWhere"]: {
 	base?: ModelTypes["TipGroupUniqueWhere"] | undefined
+};
+	["LocalePinnedRecipesPageByBaseUniqueWhere"]: {
+	base?: ModelTypes["PinnedRecipesPageUniqueWhere"] | undefined
+};
+	["LocalePinnedRecipesPageByLinkUniqueWhere"]: {
+	link?: ModelTypes["LinkableUniqueWhere"] | undefined
+};
+	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
+	seo?: ModelTypes["SeoUniqueWhere"] | undefined
 };
 	["ContentReferenceLinkableItemOrderBy"]: {
 	_random?: boolean | undefined,
@@ -10985,6 +11635,13 @@ export type ModelTypes = {
 	["TipEdge"]: {
 		node: ModelTypes["Tip"]
 };
+	["PinnedRecipesPageConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["PinnedRecipesPageEdge"]>
+};
+	["PinnedRecipesPageEdge"]: {
+		node: ModelTypes["PinnedRecipesPage"]
+};
 	["QueryTransaction"]: {
 		getContent?: ModelTypes["Content"] | undefined,
 	listContent: Array<ModelTypes["Content"]>,
@@ -11079,7 +11736,13 @@ export type ModelTypes = {
 	paginateTipGroupItem: ModelTypes["TipGroupItemConnection"],
 	getTipGroupLocale?: ModelTypes["TipGroupLocale"] | undefined,
 	listTipGroupLocale: Array<ModelTypes["TipGroupLocale"]>,
-	paginateTipGroupLocale: ModelTypes["TipGroupLocaleConnection"]
+	paginateTipGroupLocale: ModelTypes["TipGroupLocaleConnection"],
+	getPinnedRecipesPage?: ModelTypes["PinnedRecipesPage"] | undefined,
+	listPinnedRecipesPage: Array<ModelTypes["PinnedRecipesPage"]>,
+	paginatePinnedRecipesPage: ModelTypes["PinnedRecipesPageConnection"],
+	getPinnedRecipesPageLocale?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
+	listPinnedRecipesPageLocale: Array<ModelTypes["PinnedRecipesPageLocale"]>,
+	paginatePinnedRecipesPageLocale: ModelTypes["PinnedRecipesPageLocaleConnection"]
 };
 	["Info"]: {
 		description?: string | undefined
@@ -11317,6 +11980,12 @@ export type GraphQLTypes = {
 	getTipGroupLocale?: GraphQLTypes["TipGroupLocale"] | undefined,
 	listTipGroupLocale: Array<GraphQLTypes["TipGroupLocale"]>,
 	paginateTipGroupLocale: GraphQLTypes["TipGroupLocaleConnection"],
+	getPinnedRecipesPage?: GraphQLTypes["PinnedRecipesPage"] | undefined,
+	listPinnedRecipesPage: Array<GraphQLTypes["PinnedRecipesPage"]>,
+	paginatePinnedRecipesPage: GraphQLTypes["PinnedRecipesPageConnection"],
+	getPinnedRecipesPageLocale?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
+	listPinnedRecipesPageLocale: Array<GraphQLTypes["PinnedRecipesPageLocale"]>,
+	paginatePinnedRecipesPageLocale: GraphQLTypes["PinnedRecipesPageLocaleConnection"],
 	transaction?: GraphQLTypes["QueryTransaction"] | undefined,
 	_info?: GraphQLTypes["Info"] | undefined,
 	schema?: GraphQLTypes["_Schema"] | undefined,
@@ -11468,6 +12137,7 @@ export type GraphQLTypes = {
 	homePage?: GraphQLTypes["HomePageLocaleWhere"] | undefined,
 	category?: GraphQLTypes["CategoryLocaleWhere"] | undefined,
 	recipe?: GraphQLTypes["RecipeLocaleWhere"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleWhere"] | undefined,
 	and?: Array<GraphQLTypes["LinkableWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["LinkableWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["LinkableWhere"] | undefined
@@ -11518,6 +12188,7 @@ export type GraphQLTypes = {
 	categories?: GraphQLTypes["CategoryLocaleWhere"] | undefined,
 	tips?: GraphQLTypes["TipLocaleWhere"] | undefined,
 	tipGroups?: GraphQLTypes["TipGroupLocaleWhere"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleWhere"] | undefined,
 	and?: Array<GraphQLTypes["LocaleWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["LocaleWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["LocaleWhere"] | undefined
@@ -11797,6 +12468,25 @@ export type GraphQLTypes = {
 	or?: Array<GraphQLTypes["TipGroupLocaleWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["TipGroupLocaleWhere"] | undefined
 };
+	["PinnedRecipesPageLocaleWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	title?: GraphQLTypes["StringCondition"] | undefined,
+	link?: GraphQLTypes["LinkableWhere"] | undefined,
+	base?: GraphQLTypes["PinnedRecipesPageWhere"] | undefined,
+	locale?: GraphQLTypes["LocaleWhere"] | undefined,
+	seo?: GraphQLTypes["SeoWhere"] | undefined,
+	and?: Array<GraphQLTypes["PinnedRecipesPageLocaleWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["PinnedRecipesPageLocaleWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["PinnedRecipesPageLocaleWhere"] | undefined
+};
+	["PinnedRecipesPageWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	unique?: GraphQLTypes["OneCondition"] | undefined,
+	locales?: GraphQLTypes["PinnedRecipesPageLocaleWhere"] | undefined,
+	and?: Array<GraphQLTypes["PinnedRecipesPageWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["PinnedRecipesPageWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["PinnedRecipesPageWhere"] | undefined
+};
 	["ContentReference"]: {
 	__typename: "ContentReference",
 	_meta?: GraphQLTypes["ContentReferenceMeta"] | undefined,
@@ -11836,7 +12526,8 @@ export type GraphQLTypes = {
 	url: string,
 	homePage?: GraphQLTypes["HomePageLocale"] | undefined,
 	category?: GraphQLTypes["CategoryLocale"] | undefined,
-	recipe?: GraphQLTypes["RecipeLocale"] | undefined
+	recipe?: GraphQLTypes["RecipeLocale"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined
 };
 	["LinkableMeta"]: {
 	__typename: "LinkableMeta",
@@ -11844,7 +12535,8 @@ export type GraphQLTypes = {
 	url?: GraphQLTypes["FieldMeta"] | undefined,
 	homePage?: GraphQLTypes["FieldMeta"] | undefined,
 	category?: GraphQLTypes["FieldMeta"] | undefined,
-	recipe?: GraphQLTypes["FieldMeta"] | undefined
+	recipe?: GraphQLTypes["FieldMeta"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["HomePageLocale"]: {
 	__typename: "HomePageLocale",
@@ -11913,7 +12605,8 @@ export type GraphQLTypes = {
 	url?: GraphQLTypes["OrderDirection"] | undefined,
 	homePage?: GraphQLTypes["HomePageLocaleOrderBy"] | undefined,
 	category?: GraphQLTypes["CategoryLocaleOrderBy"] | undefined,
-	recipe?: GraphQLTypes["RecipeLocaleOrderBy"] | undefined
+	recipe?: GraphQLTypes["RecipeLocaleOrderBy"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleOrderBy"] | undefined
 };
 	["CategoryLocaleOrderBy"]: {
 		_random?: boolean | undefined,
@@ -11986,6 +12679,22 @@ export type GraphQLTypes = {
 	email?: GraphQLTypes["OrderDirection"] | undefined,
 	image?: GraphQLTypes["ImageOrderBy"] | undefined
 };
+	["PinnedRecipesPageLocaleOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	title?: GraphQLTypes["OrderDirection"] | undefined,
+	link?: GraphQLTypes["LinkableOrderBy"] | undefined,
+	base?: GraphQLTypes["PinnedRecipesPageOrderBy"] | undefined,
+	locale?: GraphQLTypes["LocaleOrderBy"] | undefined,
+	seo?: GraphQLTypes["SeoOrderBy"] | undefined
+};
+	["PinnedRecipesPageOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	unique?: GraphQLTypes["OrderDirection"] | undefined
+};
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 		locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined
 };
@@ -11998,7 +12707,8 @@ export type GraphQLTypes = {
 	homePage?: GraphQLTypes["HomePageLocaleUniqueWhere"] | undefined,
 	categories?: GraphQLTypes["CategoryLocaleUniqueWhere"] | undefined,
 	tips?: GraphQLTypes["TipLocaleUniqueWhere"] | undefined,
-	tipGroups?: GraphQLTypes["TipGroupLocaleUniqueWhere"] | undefined
+	tipGroups?: GraphQLTypes["TipGroupLocaleUniqueWhere"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined
 };
 	["RecipeLocaleUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
@@ -12080,7 +12790,8 @@ export type GraphQLTypes = {
 	url?: string | undefined,
 	homePage?: GraphQLTypes["HomePageLocaleUniqueWhere"] | undefined,
 	category?: GraphQLTypes["CategoryLocaleUniqueWhere"] | undefined,
-	recipe?: GraphQLTypes["RecipeLocaleUniqueWhere"] | undefined
+	recipe?: GraphQLTypes["RecipeLocaleUniqueWhere"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined
 };
 	["HomePageLocaleUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
@@ -12112,6 +12823,18 @@ export type GraphQLTypes = {
 		id?: GraphQLTypes["UUID"] | undefined,
 	locales?: GraphQLTypes["CategoryLocaleUniqueWhere"] | undefined,
 	image?: GraphQLTypes["ImageUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageLocaleUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	base?: GraphQLTypes["PinnedRecipesPageUniqueWhere"] | undefined,
+	locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined,
+	link?: GraphQLTypes["LinkableUniqueWhere"] | undefined,
+	seo?: GraphQLTypes["SeoUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	unique?: GraphQLTypes["One"] | undefined,
+	locales?: GraphQLTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 		link?: GraphQLTypes["LinkableUniqueWhere"] | undefined
@@ -12145,6 +12868,7 @@ export type GraphQLTypes = {
 	categories: Array<GraphQLTypes["CategoryLocale"]>,
 	tips: Array<GraphQLTypes["TipLocale"]>,
 	tipGroups: Array<GraphQLTypes["TipGroupLocale"]>,
+	pinnedRecipesPage: Array<GraphQLTypes["PinnedRecipesPageLocale"]>,
 	recipesByBase?: GraphQLTypes["RecipeLocale"] | undefined,
 	recipesByLink?: GraphQLTypes["RecipeLocale"] | undefined,
 	stepsByBase?: GraphQLTypes["StepLocale"] | undefined,
@@ -12158,13 +12882,17 @@ export type GraphQLTypes = {
 	categoriesByLink?: GraphQLTypes["CategoryLocale"] | undefined,
 	tipsByBase?: GraphQLTypes["TipLocale"] | undefined,
 	tipGroupsByBase?: GraphQLTypes["TipGroupLocale"] | undefined,
+	pinnedRecipesPageByBase?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
+	pinnedRecipesPageByLink?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
+	pinnedRecipesPageBySeo?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
 	paginateRecipes: GraphQLTypes["RecipeLocaleConnection"],
 	paginateSteps: GraphQLTypes["StepLocaleConnection"],
 	paginateStepsGroups: GraphQLTypes["StepGroupLocaleConnection"],
 	paginateHomePage: GraphQLTypes["HomePageLocaleConnection"],
 	paginateCategories: GraphQLTypes["CategoryLocaleConnection"],
 	paginateTips: GraphQLTypes["TipLocaleConnection"],
-	paginateTipGroups: GraphQLTypes["TipGroupLocaleConnection"]
+	paginateTipGroups: GraphQLTypes["TipGroupLocaleConnection"],
+	paginatePinnedRecipesPage: GraphQLTypes["PinnedRecipesPageLocaleConnection"]
 };
 	["LocaleMeta"]: {
 	__typename: "LocaleMeta",
@@ -12177,7 +12905,8 @@ export type GraphQLTypes = {
 	homePage?: GraphQLTypes["FieldMeta"] | undefined,
 	categories?: GraphQLTypes["FieldMeta"] | undefined,
 	tips?: GraphQLTypes["FieldMeta"] | undefined,
-	tipGroups?: GraphQLTypes["FieldMeta"] | undefined
+	tipGroups?: GraphQLTypes["FieldMeta"] | undefined,
+	pinnedRecipesPage?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["RecipeLocale"]: {
 	__typename: "RecipeLocale",
@@ -12907,6 +13636,60 @@ export type GraphQLTypes = {
 	__typename: "TipGroupEdge",
 	node: GraphQLTypes["TipGroup"]
 };
+	["PinnedRecipesPageLocale"]: {
+	__typename: "PinnedRecipesPageLocale",
+	_meta?: GraphQLTypes["PinnedRecipesPageLocaleMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	title?: string | undefined,
+	link?: GraphQLTypes["Linkable"] | undefined,
+	base?: GraphQLTypes["PinnedRecipesPage"] | undefined,
+	locale?: GraphQLTypes["Locale"] | undefined,
+	seo?: GraphQLTypes["Seo"] | undefined
+};
+	["PinnedRecipesPageLocaleMeta"]: {
+	__typename: "PinnedRecipesPageLocaleMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	title?: GraphQLTypes["FieldMeta"] | undefined,
+	link?: GraphQLTypes["FieldMeta"] | undefined,
+	base?: GraphQLTypes["FieldMeta"] | undefined,
+	locale?: GraphQLTypes["FieldMeta"] | undefined,
+	seo?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["PinnedRecipesPage"]: {
+	__typename: "PinnedRecipesPage",
+	_meta?: GraphQLTypes["PinnedRecipesPageMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	unique: GraphQLTypes["One"],
+	locales: Array<GraphQLTypes["PinnedRecipesPageLocale"]>,
+	localesByLocale?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
+	localesByLink?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
+	localesBySeo?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
+	paginateLocales: GraphQLTypes["PinnedRecipesPageLocaleConnection"]
+};
+	["PinnedRecipesPageMeta"]: {
+	__typename: "PinnedRecipesPageMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	unique?: GraphQLTypes["FieldMeta"] | undefined,
+	locales?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["PinnedRecipesPageLocalesByLocaleUniqueWhere"]: {
+		locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageLocalesByLinkUniqueWhere"]: {
+		link?: GraphQLTypes["LinkableUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageLocalesBySeoUniqueWhere"]: {
+		seo?: GraphQLTypes["SeoUniqueWhere"] | undefined
+};
+	["PinnedRecipesPageLocaleConnection"]: {
+	__typename: "PinnedRecipesPageLocaleConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["PinnedRecipesPageLocaleEdge"]>
+};
+	["PinnedRecipesPageLocaleEdge"]: {
+	__typename: "PinnedRecipesPageLocaleEdge",
+	node: GraphQLTypes["PinnedRecipesPageLocale"]
+};
 	["LocaleRecipesByBaseUniqueWhere"]: {
 		base?: GraphQLTypes["RecipeUniqueWhere"] | undefined
 };
@@ -12945,6 +13728,15 @@ export type GraphQLTypes = {
 };
 	["LocaleTipGroupsByBaseUniqueWhere"]: {
 		base?: GraphQLTypes["TipGroupUniqueWhere"] | undefined
+};
+	["LocalePinnedRecipesPageByBaseUniqueWhere"]: {
+		base?: GraphQLTypes["PinnedRecipesPageUniqueWhere"] | undefined
+};
+	["LocalePinnedRecipesPageByLinkUniqueWhere"]: {
+		link?: GraphQLTypes["LinkableUniqueWhere"] | undefined
+};
+	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
+		seo?: GraphQLTypes["SeoUniqueWhere"] | undefined
 };
 	["ContentReferenceLinkableItemOrderBy"]: {
 		_random?: boolean | undefined,
@@ -13297,6 +14089,15 @@ export type GraphQLTypes = {
 	__typename: "TipEdge",
 	node: GraphQLTypes["Tip"]
 };
+	["PinnedRecipesPageConnection"]: {
+	__typename: "PinnedRecipesPageConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["PinnedRecipesPageEdge"]>
+};
+	["PinnedRecipesPageEdge"]: {
+	__typename: "PinnedRecipesPageEdge",
+	node: GraphQLTypes["PinnedRecipesPage"]
+};
 	["QueryTransaction"]: {
 	__typename: "QueryTransaction",
 	getContent?: GraphQLTypes["Content"] | undefined,
@@ -13392,7 +14193,13 @@ export type GraphQLTypes = {
 	paginateTipGroupItem: GraphQLTypes["TipGroupItemConnection"],
 	getTipGroupLocale?: GraphQLTypes["TipGroupLocale"] | undefined,
 	listTipGroupLocale: Array<GraphQLTypes["TipGroupLocale"]>,
-	paginateTipGroupLocale: GraphQLTypes["TipGroupLocaleConnection"]
+	paginateTipGroupLocale: GraphQLTypes["TipGroupLocaleConnection"],
+	getPinnedRecipesPage?: GraphQLTypes["PinnedRecipesPage"] | undefined,
+	listPinnedRecipesPage: Array<GraphQLTypes["PinnedRecipesPage"]>,
+	paginatePinnedRecipesPage: GraphQLTypes["PinnedRecipesPageConnection"],
+	getPinnedRecipesPageLocale?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
+	listPinnedRecipesPageLocale: Array<GraphQLTypes["PinnedRecipesPageLocale"]>,
+	paginatePinnedRecipesPageLocale: GraphQLTypes["PinnedRecipesPageLocaleConnection"]
 };
 	["Info"]: {
 	__typename: "Info",
@@ -13663,6 +14470,8 @@ type ZEUS_VARIABLES = {
 	["TipGroupWhere"]: ValueTypes["TipGroupWhere"];
 	["TipGroupItemWhere"]: ValueTypes["TipGroupItemWhere"];
 	["TipGroupLocaleWhere"]: ValueTypes["TipGroupLocaleWhere"];
+	["PinnedRecipesPageLocaleWhere"]: ValueTypes["PinnedRecipesPageLocaleWhere"];
+	["PinnedRecipesPageWhere"]: ValueTypes["PinnedRecipesPageWhere"];
 	["HomePageLocaleOrderBy"]: ValueTypes["HomePageLocaleOrderBy"];
 	["OrderDirection"]: ValueTypes["OrderDirection"];
 	["HomePageOrderBy"]: ValueTypes["HomePageOrderBy"];
@@ -13675,6 +14484,8 @@ type ZEUS_VARIABLES = {
 	["RecipeLocaleOrderBy"]: ValueTypes["RecipeLocaleOrderBy"];
 	["RecipeOrderBy"]: ValueTypes["RecipeOrderBy"];
 	["UserOrderBy"]: ValueTypes["UserOrderBy"];
+	["PinnedRecipesPageLocaleOrderBy"]: ValueTypes["PinnedRecipesPageLocaleOrderBy"];
+	["PinnedRecipesPageOrderBy"]: ValueTypes["PinnedRecipesPageOrderBy"];
 	["HomePageLocalesByLocaleUniqueWhere"]: ValueTypes["HomePageLocalesByLocaleUniqueWhere"];
 	["LocaleUniqueWhere"]: ValueTypes["LocaleUniqueWhere"];
 	["RecipeLocaleUniqueWhere"]: ValueTypes["RecipeLocaleUniqueWhere"];
@@ -13699,6 +14510,8 @@ type ZEUS_VARIABLES = {
 	["ImageUniqueWhere"]: ValueTypes["ImageUniqueWhere"];
 	["CategoryLocaleUniqueWhere"]: ValueTypes["CategoryLocaleUniqueWhere"];
 	["CategoryUniqueWhere"]: ValueTypes["CategoryUniqueWhere"];
+	["PinnedRecipesPageLocaleUniqueWhere"]: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"];
+	["PinnedRecipesPageUniqueWhere"]: ValueTypes["PinnedRecipesPageUniqueWhere"];
 	["HomePageLocalesByLinkUniqueWhere"]: ValueTypes["HomePageLocalesByLinkUniqueWhere"];
 	["HomePageLocalesBySeoUniqueWhere"]: ValueTypes["HomePageLocalesBySeoUniqueWhere"];
 	["PinnedRecipeOrderBy"]: ValueTypes["PinnedRecipeOrderBy"];
@@ -13741,6 +14554,9 @@ type ZEUS_VARIABLES = {
 	["RecipeStepsGroupsByItemsUniqueWhere"]: ValueTypes["RecipeStepsGroupsByItemsUniqueWhere"];
 	["RecipeTipGroupsByItemsUniqueWhere"]: ValueTypes["RecipeTipGroupsByItemsUniqueWhere"];
 	["RecipeTipGroupsByLocalesUniqueWhere"]: ValueTypes["RecipeTipGroupsByLocalesUniqueWhere"];
+	["PinnedRecipesPageLocalesByLocaleUniqueWhere"]: ValueTypes["PinnedRecipesPageLocalesByLocaleUniqueWhere"];
+	["PinnedRecipesPageLocalesByLinkUniqueWhere"]: ValueTypes["PinnedRecipesPageLocalesByLinkUniqueWhere"];
+	["PinnedRecipesPageLocalesBySeoUniqueWhere"]: ValueTypes["PinnedRecipesPageLocalesBySeoUniqueWhere"];
 	["LocaleRecipesByBaseUniqueWhere"]: ValueTypes["LocaleRecipesByBaseUniqueWhere"];
 	["LocaleRecipesByLinkUniqueWhere"]: ValueTypes["LocaleRecipesByLinkUniqueWhere"];
 	["LocaleStepsByBaseUniqueWhere"]: ValueTypes["LocaleStepsByBaseUniqueWhere"];
@@ -13754,6 +14570,9 @@ type ZEUS_VARIABLES = {
 	["LocaleCategoriesByLinkUniqueWhere"]: ValueTypes["LocaleCategoriesByLinkUniqueWhere"];
 	["LocaleTipsByBaseUniqueWhere"]: ValueTypes["LocaleTipsByBaseUniqueWhere"];
 	["LocaleTipGroupsByBaseUniqueWhere"]: ValueTypes["LocaleTipGroupsByBaseUniqueWhere"];
+	["LocalePinnedRecipesPageByBaseUniqueWhere"]: ValueTypes["LocalePinnedRecipesPageByBaseUniqueWhere"];
+	["LocalePinnedRecipesPageByLinkUniqueWhere"]: ValueTypes["LocalePinnedRecipesPageByLinkUniqueWhere"];
+	["LocalePinnedRecipesPageBySeoUniqueWhere"]: ValueTypes["LocalePinnedRecipesPageBySeoUniqueWhere"];
 	["ContentReferenceLinkableItemOrderBy"]: ValueTypes["ContentReferenceLinkableItemOrderBy"];
 	["ContentReferenceOrderBy"]: ValueTypes["ContentReferenceOrderBy"];
 	["ContentBlockOrderBy"]: ValueTypes["ContentBlockOrderBy"];
