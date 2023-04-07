@@ -18,6 +18,7 @@ import { handleGetStaticPaths, handleGetStaticProps } from '../utilities/handler
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
 export default function ({
+	locale,
 	seo,
 	homePage,
 	pinnedRecipesPage,
@@ -32,7 +33,7 @@ export default function ({
 		<Layout homePageUrl={homePageUrl} currentPageUrl={currentUrlPage}>
 			<Seo {...seo} />
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
-			{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} />}
+			{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} locale={locale} />}
 			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
 			{recipeDetailPage && <RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={homePageUrl} />}
 		</Layout>
@@ -147,6 +148,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 
 	return {
 		props: {
+			locale,
 			homePage,
 			pinnedRecipesPage,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
