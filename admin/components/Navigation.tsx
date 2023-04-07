@@ -4,6 +4,7 @@ export const Navigation = () => (
 	<Menu>
 		<Menu.Item>
 			<Menu.Item title="Home page" to="homePage" />
+			<Menu.Item title="Pinned recipes page" to="pinnedRecipesPage" />
 			<Menu.Item title="Users" to="userList" />
 			<Menu.Item title="Recipes" to="recipeList" />
 			<Menu.Item title="Categories" to="categoryList" />
