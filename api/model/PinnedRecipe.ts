@@ -5,7 +5,7 @@ import { Recipe } from './Recipe'
 import { StepModification } from './StepModification'
 import { User } from './User'
 
-@acl.allow(publicRole, { read: true })
+@acl.allow(publicRole, { read: true, create: true, delete: true }) //@TODO restrict only owner can add/remove
 export class PinnedRecipe {
 	user = d.manyHasOne(User, 'pinnedRecipes').cascadeOnDelete().notNull()
 	derivedBy = d.manyHasOne(Recipe, 'pinnedRecipes').cascadeOnDelete().notNull()
