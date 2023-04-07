@@ -3,10 +3,12 @@ import Link from 'next/link'
 import type { FunctionComponent } from 'react'
 import { useMirrorLoading } from 'shared-loading-indicator'
 import type { PinnedRecipesPageLocaleResult } from '../../data/PinnedRecipesLocaleFragment'
+import { RecipeLocaleFragment } from '../../data/RecipeLocaleFragment'
 import { contember } from '../../utilities/contember'
 import { scalarResolver } from '../../utilities/createScalarResolver'
 import { hardcodedUserEmail } from '../../utilities/hardcodedUserEmail'
 import { Container } from '../Container'
+import { PinnedRecipeTile } from '../PinnedRecipeTile'
 import styles from './PinnedRecipesPage.module.sass'
 
 export interface PinnedRecipesPageProps {
@@ -24,7 +26,7 @@ export const PinnedRecipesPage: FunctionComponent<PinnedRecipesPageProps> = ({ p
 					derivedBy: [
 						{},
 						{
-							localesByLocale: [{ by: { locale: { code: locale } } }, { title: true, link: [{}, { url: true }] }],
+							localesByLocale: [{ by: { locale: { code: locale } } }, RecipeLocaleFragment(locale)],
 						},
 					],
 				},
@@ -50,7 +52,7 @@ export const PinnedRecipesPage: FunctionComponent<PinnedRecipesPageProps> = ({ p
 										query: { pinnedId: pinnedRecipe.id },
 									}}
 								>
-									{pinnedRecipe.derivedBy.localesByLocale.title}
+									<PinnedRecipeTile tile={pinnedRecipe.derivedBy.localesByLocale} />
 								</Link>
 							</li>
 						)

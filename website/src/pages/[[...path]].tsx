@@ -36,7 +36,9 @@ export default function ({
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
 			{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} locale={locale} />}
 			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
-			{recipeDetailPage && <RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={homePageUrl} />}
+			{recipeDetailPage && (
+				<RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={pinnedRecipesPageUrl} />
+			)}
 		</Layout>
 	)
 }
