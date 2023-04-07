@@ -1,0 +1,24 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/public/entities/ImplemetationDate/operations/create",
+					"value": {
+						"pinnedRecipe": true,
+						"step": true,
+						"date": true
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/ImplemetationDate/operations/delete",
+					"value": true
+				}
+			]
+		}
+	]
+}
