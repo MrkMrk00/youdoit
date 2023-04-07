@@ -185,6 +185,9 @@ export const AllTypesProps: Record<string,any> = {
 			filter:"ImplemetationDateWhere",
 			orderBy:"ImplemetationDateOrderBy"
 		},
+		validateCreateImplemetationDate:{
+			data:"ImplemetationDateCreateInput"
+		},
 		getStepGroup:{
 			by:"StepGroupUniqueWhere",
 			filter:"StepGroupWhere"
@@ -2030,13 +2033,38 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	PinnedRecipeCreateInput:{
 		user:"PinnedRecipeCreateUserEntityRelationInput",
-		derivedBy:"PinnedRecipeCreateDerivedByEntityRelationInput"
+		derivedBy:"PinnedRecipeCreateDerivedByEntityRelationInput",
+		implementationDate:"PinnedRecipeCreateImplementationDateEntityRelationInput"
 	},
 	PinnedRecipeCreateUserEntityRelationInput:{
 		connect:"UserUniqueWhere"
 	},
 	PinnedRecipeCreateDerivedByEntityRelationInput:{
 		connect:"RecipeUniqueWhere"
+	},
+	PinnedRecipeCreateImplementationDateEntityRelationInput:{
+		connect:"ImplemetationDateUniqueWhere",
+		create:"ImplemetationDateWithoutPinnedRecipeCreateInput"
+	},
+	ImplemetationDateWithoutPinnedRecipeCreateInput:{
+		step:"ImplemetationDateCreateStepEntityRelationInput",
+		date:"DateTime"
+	},
+	ImplemetationDateCreateStepEntityRelationInput:{
+		connect:"StepUniqueWhere"
+	},
+	ImplemetationDateCreateInput:{
+		step:"ImplemetationDateCreateStepEntityRelationInput",
+		pinnedRecipe:"ImplemetationDateCreatePinnedRecipeEntityRelationInput",
+		date:"DateTime"
+	},
+	ImplemetationDateCreatePinnedRecipeEntityRelationInput:{
+		connect:"PinnedRecipeUniqueWhere",
+		create:"PinnedRecipeWithoutImplementationDateCreateInput"
+	},
+	PinnedRecipeWithoutImplementationDateCreateInput:{
+		user:"PinnedRecipeCreateUserEntityRelationInput",
+		derivedBy:"PinnedRecipeCreateDerivedByEntityRelationInput"
 	},
 	RecipeList:{
 		items:{
@@ -2272,6 +2300,9 @@ export const AllTypesProps: Record<string,any> = {
 			filter:"ImplemetationDateWhere",
 			orderBy:"ImplemetationDateOrderBy"
 		},
+		validateCreateImplemetationDate:{
+			data:"ImplemetationDateCreateInput"
+		},
 		getStepGroup:{
 			by:"StepGroupUniqueWhere",
 			filter:"StepGroupWhere"
@@ -2497,6 +2528,13 @@ export const AllTypesProps: Record<string,any> = {
 			by:"PinnedRecipeUniqueWhere",
 			filter:"PinnedRecipeWhere"
 		},
+		createImplemetationDate:{
+			data:"ImplemetationDateCreateInput"
+		},
+		deleteImplemetationDate:{
+			by:"ImplemetationDateUniqueWhere",
+			filter:"ImplemetationDateWhere"
+		},
 		transaction:{
 			options:"MutationTransactionOptions"
 		},
@@ -2515,6 +2553,13 @@ export const AllTypesProps: Record<string,any> = {
 		deletePinnedRecipe:{
 			by:"PinnedRecipeUniqueWhere",
 			filter:"PinnedRecipeWhere"
+		},
+		createImplemetationDate:{
+			data:"ImplemetationDateCreateInput"
+		},
+		deleteImplemetationDate:{
+			by:"ImplemetationDateUniqueWhere",
+			filter:"ImplemetationDateWhere"
 		}
 	},
 	MutationTransactionOptions:{
@@ -2574,6 +2619,7 @@ export const ReturnTypes: Record<string,any> = {
 		getImplemetationDate:"ImplemetationDate",
 		listImplemetationDate:"ImplemetationDate",
 		paginateImplemetationDate:"ImplemetationDateConnection",
+		validateCreateImplemetationDate:"_ValidationResult",
 		getStepGroup:"StepGroup",
 		listStepGroup:"StepGroup",
 		paginateStepGroup:"StepGroupConnection",
@@ -3539,6 +3585,7 @@ export const ReturnTypes: Record<string,any> = {
 		getImplemetationDate:"ImplemetationDate",
 		listImplemetationDate:"ImplemetationDate",
 		paginateImplemetationDate:"ImplemetationDateConnection",
+		validateCreateImplemetationDate:"_ValidationResult",
 		getStepGroup:"StepGroup",
 		listStepGroup:"StepGroup",
 		paginateStepGroup:"StepGroupConnection",
@@ -3600,6 +3647,8 @@ export const ReturnTypes: Record<string,any> = {
 	Mutation:{
 		createPinnedRecipe:"PinnedRecipeCreateResult",
 		deletePinnedRecipe:"PinnedRecipeDeleteResult",
+		createImplemetationDate:"ImplemetationDateCreateResult",
+		deleteImplemetationDate:"ImplemetationDateDeleteResult",
 		transaction:"MutationTransaction",
 		query:"Query",
 		generateUploadUrl:"S3SignedUpload",
@@ -3615,6 +3664,8 @@ export const ReturnTypes: Record<string,any> = {
 	MutationResult:{
 		"...on PinnedRecipeCreateResult": "PinnedRecipeCreateResult",
 		"...on PinnedRecipeDeleteResult": "PinnedRecipeDeleteResult",
+		"...on ImplemetationDateCreateResult": "ImplemetationDateCreateResult",
+		"...on ImplemetationDateDeleteResult": "ImplemetationDateDeleteResult",
 		ok:"Boolean",
 		errorMessage:"String",
 		errors:"_MutationError"
@@ -3631,6 +3682,19 @@ export const ReturnTypes: Record<string,any> = {
 		errors:"_MutationError",
 		node:"PinnedRecipe"
 	},
+	ImplemetationDateCreateResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"ImplemetationDate",
+		validation:"_ValidationResult"
+	},
+	ImplemetationDateDeleteResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"ImplemetationDate"
+	},
 	MutationTransaction:{
 		ok:"Boolean",
 		errorMessage:"String",
@@ -3638,6 +3702,8 @@ export const ReturnTypes: Record<string,any> = {
 		validation:"_ValidationResult",
 		createPinnedRecipe:"PinnedRecipeCreateResult",
 		deletePinnedRecipe:"PinnedRecipeDeleteResult",
+		createImplemetationDate:"ImplemetationDateCreateResult",
+		deleteImplemetationDate:"ImplemetationDateDeleteResult",
 		query:"Query"
 	},
 	Json: `scalar.Json` as const,
@@ -4621,6 +4687,7 @@ validateCreatePinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Va
 getImplemetationDate?: [{	by: ValueTypes["ImplemetationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateConnection"]],
+validateCreateImplemetationDate?: [{	data: ValueTypes["ImplemetationDateCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 getStepGroup?: [{	by: ValueTypes["StepGroupUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 listStepGroup?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepGroupOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 paginateStepGroup?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepGroupOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepGroupConnection"]],
@@ -6662,6 +6729,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["PinnedRecipeCreateInput"]: {
 	user?: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null | Variable<any, string>,
 	derivedBy?: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null | Variable<any, string>,
+	implementationDate?: Array<ValueTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -6669,6 +6737,34 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 	connect?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+	connect?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined | null | Variable<any, string>,
+	alias?: string | undefined | null | Variable<any, string>
+};
+	["ImplemetationDateWithoutPinnedRecipeCreateInput"]: {
+	step?: ValueTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined | null | Variable<any, string>,
+	date?: ValueTypes["DateTime"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["ImplemetationDateCreateStepEntityRelationInput"]: {
+	connect?: ValueTypes["StepUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["ImplemetationDateCreateInput"]: {
+	step?: ValueTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined | null | Variable<any, string>,
+	pinnedRecipe?: ValueTypes["ImplemetationDateCreatePinnedRecipeEntityRelationInput"] | undefined | null | Variable<any, string>,
+	date?: ValueTypes["DateTime"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
+	connect?: ValueTypes["PinnedRecipeUniqueWhere"] | undefined | null | Variable<any, string>,
+	create?: ValueTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+	user?: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null | Variable<any, string>,
+	derivedBy?: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["HomePageConnection"]: AliasType<{
 	pageInfo?:ValueTypes["PageInfo"],
@@ -6834,6 +6930,7 @@ validateCreatePinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Va
 getImplemetationDate?: [{	by: ValueTypes["ImplemetationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateConnection"]],
+validateCreateImplemetationDate?: [{	data: ValueTypes["ImplemetationDateCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 getStepGroup?: [{	by: ValueTypes["StepGroupUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 listStepGroup?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepGroupOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 paginateStepGroup?: [{	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepGroupOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepGroupConnection"]],
@@ -6897,6 +6994,8 @@ paginatePinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocal
 	["Mutation"]: AliasType<{
 createPinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Variable<any, string>},ValueTypes["PinnedRecipeCreateResult"]],
 deletePinnedRecipe?: [{	by: ValueTypes["PinnedRecipeUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipeDeleteResult"]],
+createImplemetationDate?: [{	data: ValueTypes["ImplemetationDateCreateInput"] | Variable<any, string>},ValueTypes["ImplemetationDateCreateResult"]],
+deleteImplemetationDate?: [{	by: ValueTypes["ImplemetationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateDeleteResult"]],
 transaction?: [{	options?: ValueTypes["MutationTransactionOptions"] | undefined | null | Variable<any, string>},ValueTypes["MutationTransaction"]],
 	query?:ValueTypes["Query"],
 generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
@@ -6917,6 +7016,8 @@ generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: num
 	errors?:ValueTypes["_MutationError"];
 		['...on PinnedRecipeCreateResult']?: Omit<ValueTypes["PinnedRecipeCreateResult"],keyof ValueTypes["MutationResult"]>;
 		['...on PinnedRecipeDeleteResult']?: Omit<ValueTypes["PinnedRecipeDeleteResult"],keyof ValueTypes["MutationResult"]>;
+		['...on ImplemetationDateCreateResult']?: Omit<ValueTypes["ImplemetationDateCreateResult"],keyof ValueTypes["MutationResult"]>;
+		['...on ImplemetationDateDeleteResult']?: Omit<ValueTypes["ImplemetationDateDeleteResult"],keyof ValueTypes["MutationResult"]>;
 		__typename?: boolean | `@${string}`
 }>;
 	["_MutationError"]: AliasType<{
@@ -6934,6 +7035,21 @@ generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: num
 	node?:ValueTypes["PinnedRecipe"],
 		__typename?: boolean | `@${string}`
 }>;
+	["ImplemetationDateCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["ImplemetationDate"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["ImplemetationDateDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["ImplemetationDate"],
+		__typename?: boolean | `@${string}`
+}>;
 	["MutationTransaction"]: AliasType<{
 	ok?:boolean | `@${string}`,
 	errorMessage?:boolean | `@${string}`,
@@ -6941,6 +7057,8 @@ generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: num
 	validation?:ValueTypes["_ValidationResult"],
 createPinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Variable<any, string>},ValueTypes["PinnedRecipeCreateResult"]],
 deletePinnedRecipe?: [{	by: ValueTypes["PinnedRecipeUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipeDeleteResult"]],
+createImplemetationDate?: [{	data: ValueTypes["ImplemetationDateCreateInput"] | Variable<any, string>},ValueTypes["ImplemetationDateCreateResult"]],
+deleteImplemetationDate?: [{	by: ValueTypes["ImplemetationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateDeleteResult"]],
 	query?:ValueTypes["Query"],
 		__typename?: boolean | `@${string}`
 }>;
@@ -7119,6 +7237,7 @@ validateCreatePinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInpu
 getImplemetationDate?: [{	by: ResolverInputTypes["ImplemetationDateUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["ImplemetationDateConnection"]],
+validateCreateImplemetationDate?: [{	data: ResolverInputTypes["ImplemetationDateCreateInput"]},ResolverInputTypes["_ValidationResult"]],
 getStepGroup?: [{	by: ResolverInputTypes["StepGroupUniqueWhere"],	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null},ResolverInputTypes["StepGroup"]],
 listStepGroup?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepGroupOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["StepGroup"]],
 paginateStepGroup?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepGroupOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepGroupConnection"]],
@@ -9161,6 +9280,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["PinnedRecipeCreateInput"]: {
 	user?: ResolverInputTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null,
 	derivedBy?: ResolverInputTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null,
+	implementationDate?: Array<ResolverInputTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -9168,6 +9288,34 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 	connect?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null
+};
+	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+	connect?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null,
+	create?: ResolverInputTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined | null,
+	alias?: string | undefined | null
+};
+	["ImplemetationDateWithoutPinnedRecipeCreateInput"]: {
+	step?: ResolverInputTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined | null,
+	date?: ResolverInputTypes["DateTime"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["ImplemetationDateCreateStepEntityRelationInput"]: {
+	connect?: ResolverInputTypes["StepUniqueWhere"] | undefined | null
+};
+	["ImplemetationDateCreateInput"]: {
+	step?: ResolverInputTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined | null,
+	pinnedRecipe?: ResolverInputTypes["ImplemetationDateCreatePinnedRecipeEntityRelationInput"] | undefined | null,
+	date?: ResolverInputTypes["DateTime"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
+	connect?: ResolverInputTypes["PinnedRecipeUniqueWhere"] | undefined | null,
+	create?: ResolverInputTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined | null
+};
+	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+	user?: ResolverInputTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null,
+	derivedBy?: ResolverInputTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
 };
 	["HomePageConnection"]: AliasType<{
 	pageInfo?:ResolverInputTypes["PageInfo"],
@@ -9333,6 +9481,7 @@ validateCreatePinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInpu
 getImplemetationDate?: [{	by: ResolverInputTypes["ImplemetationDateUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["ImplemetationDateConnection"]],
+validateCreateImplemetationDate?: [{	data: ResolverInputTypes["ImplemetationDateCreateInput"]},ResolverInputTypes["_ValidationResult"]],
 getStepGroup?: [{	by: ResolverInputTypes["StepGroupUniqueWhere"],	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null},ResolverInputTypes["StepGroup"]],
 listStepGroup?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepGroupOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["StepGroup"]],
 paginateStepGroup?: [{	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepGroupOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepGroupConnection"]],
@@ -9396,6 +9545,8 @@ paginatePinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesP
 	["Mutation"]: AliasType<{
 createPinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInput"]},ResolverInputTypes["PinnedRecipeCreateResult"]],
 deletePinnedRecipe?: [{	by: ResolverInputTypes["PinnedRecipeUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipeDeleteResult"]],
+createImplemetationDate?: [{	data: ResolverInputTypes["ImplemetationDateCreateInput"]},ResolverInputTypes["ImplemetationDateCreateResult"]],
+deleteImplemetationDate?: [{	by: ResolverInputTypes["ImplemetationDateUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDateDeleteResult"]],
 transaction?: [{	options?: ResolverInputTypes["MutationTransactionOptions"] | undefined | null},ResolverInputTypes["MutationTransaction"]],
 	query?:ResolverInputTypes["Query"],
 generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null},ResolverInputTypes["S3SignedUpload"]],
@@ -9416,6 +9567,8 @@ generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},
 	errors?:ResolverInputTypes["_MutationError"];
 		['...on PinnedRecipeCreateResult']?: Omit<ResolverInputTypes["PinnedRecipeCreateResult"],keyof ResolverInputTypes["MutationResult"]>;
 		['...on PinnedRecipeDeleteResult']?: Omit<ResolverInputTypes["PinnedRecipeDeleteResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on ImplemetationDateCreateResult']?: Omit<ResolverInputTypes["ImplemetationDateCreateResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on ImplemetationDateDeleteResult']?: Omit<ResolverInputTypes["ImplemetationDateDeleteResult"],keyof ResolverInputTypes["MutationResult"]>;
 		__typename?: boolean | `@${string}`
 }>;
 	["_MutationError"]: AliasType<{
@@ -9433,6 +9586,21 @@ generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},
 	node?:ResolverInputTypes["PinnedRecipe"],
 		__typename?: boolean | `@${string}`
 }>;
+	["ImplemetationDateCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["ImplemetationDate"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["ImplemetationDateDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["ImplemetationDate"],
+		__typename?: boolean | `@${string}`
+}>;
 	["MutationTransaction"]: AliasType<{
 	ok?:boolean | `@${string}`,
 	errorMessage?:boolean | `@${string}`,
@@ -9440,6 +9608,8 @@ generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},
 	validation?:ResolverInputTypes["_ValidationResult"],
 createPinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInput"]},ResolverInputTypes["PinnedRecipeCreateResult"]],
 deletePinnedRecipe?: [{	by: ResolverInputTypes["PinnedRecipeUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipeDeleteResult"]],
+createImplemetationDate?: [{	data: ResolverInputTypes["ImplemetationDateCreateInput"]},ResolverInputTypes["ImplemetationDateCreateResult"]],
+deleteImplemetationDate?: [{	by: ResolverInputTypes["ImplemetationDateUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDateDeleteResult"]],
 	query?:ResolverInputTypes["Query"],
 		__typename?: boolean | `@${string}`
 }>;
@@ -9619,6 +9789,7 @@ export type ModelTypes = {
 	getImplemetationDate?: ModelTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<ModelTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: ModelTypes["ImplemetationDateConnection"],
+	validateCreateImplemetationDate: ModelTypes["_ValidationResult"],
 	getStepGroup?: ModelTypes["StepGroup"] | undefined,
 	listStepGroup: Array<ModelTypes["StepGroup"]>,
 	paginateStepGroup: ModelTypes["StepGroupConnection"],
@@ -11533,6 +11704,7 @@ export type ModelTypes = {
 	["PinnedRecipeCreateInput"]: {
 	user?: ModelTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
 	derivedBy?: ModelTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
+	implementationDate?: Array<ModelTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -11540,6 +11712,34 @@ export type ModelTypes = {
 };
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 	connect?: ModelTypes["RecipeUniqueWhere"] | undefined
+};
+	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+	connect?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined,
+	create?: ModelTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined,
+	alias?: string | undefined
+};
+	["ImplemetationDateWithoutPinnedRecipeCreateInput"]: {
+	step?: ModelTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined,
+	date?: ModelTypes["DateTime"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["ImplemetationDateCreateStepEntityRelationInput"]: {
+	connect?: ModelTypes["StepUniqueWhere"] | undefined
+};
+	["ImplemetationDateCreateInput"]: {
+	step?: ModelTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined,
+	pinnedRecipe?: ModelTypes["ImplemetationDateCreatePinnedRecipeEntityRelationInput"] | undefined,
+	date?: ModelTypes["DateTime"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
+	connect?: ModelTypes["PinnedRecipeUniqueWhere"] | undefined,
+	create?: ModelTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined
+};
+	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+	user?: ModelTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
+	derivedBy?: ModelTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
 };
 	["HomePageConnection"]: {
 		pageInfo: ModelTypes["PageInfo"],
@@ -11689,6 +11889,7 @@ export type ModelTypes = {
 	getImplemetationDate?: ModelTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<ModelTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: ModelTypes["ImplemetationDateConnection"],
+	validateCreateImplemetationDate: ModelTypes["_ValidationResult"],
 	getStepGroup?: ModelTypes["StepGroup"] | undefined,
 	listStepGroup: Array<ModelTypes["StepGroup"]>,
 	paginateStepGroup: ModelTypes["StepGroupConnection"],
@@ -11750,6 +11951,8 @@ export type ModelTypes = {
 	["Mutation"]: {
 		createPinnedRecipe: ModelTypes["PinnedRecipeCreateResult"],
 	deletePinnedRecipe: ModelTypes["PinnedRecipeDeleteResult"],
+	createImplemetationDate: ModelTypes["ImplemetationDateCreateResult"],
+	deleteImplemetationDate: ModelTypes["ImplemetationDateDeleteResult"],
 	transaction: ModelTypes["MutationTransaction"],
 	query: ModelTypes["Query"],
 	generateUploadUrl: ModelTypes["S3SignedUpload"],
@@ -11762,7 +11965,7 @@ export type ModelTypes = {
 	node?: ModelTypes["PinnedRecipe"] | undefined,
 	validation: ModelTypes["_ValidationResult"]
 };
-	["MutationResult"]: ModelTypes["PinnedRecipeCreateResult"] | ModelTypes["PinnedRecipeDeleteResult"];
+	["MutationResult"]: ModelTypes["PinnedRecipeCreateResult"] | ModelTypes["PinnedRecipeDeleteResult"] | ModelTypes["ImplemetationDateCreateResult"] | ModelTypes["ImplemetationDateDeleteResult"];
 	["_MutationError"]: {
 		path: Array<ModelTypes["_PathFragment"]>,
 	paths: Array<Array<ModelTypes["_PathFragment"]>>,
@@ -11776,6 +11979,19 @@ export type ModelTypes = {
 	errors: Array<ModelTypes["_MutationError"]>,
 	node?: ModelTypes["PinnedRecipe"] | undefined
 };
+	["ImplemetationDateCreateResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["ImplemetationDate"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
+	["ImplemetationDateDeleteResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["ImplemetationDate"] | undefined
+};
 	["MutationTransaction"]: {
 		ok: boolean,
 	errorMessage?: string | undefined,
@@ -11783,6 +11999,8 @@ export type ModelTypes = {
 	validation: ModelTypes["_ValidationResult"],
 	createPinnedRecipe: ModelTypes["PinnedRecipeCreateResult"],
 	deletePinnedRecipe: ModelTypes["PinnedRecipeDeleteResult"],
+	createImplemetationDate: ModelTypes["ImplemetationDateCreateResult"],
+	deleteImplemetationDate: ModelTypes["ImplemetationDateDeleteResult"],
 	query?: ModelTypes["Query"] | undefined
 };
 	["MutationTransactionOptions"]: {
@@ -11932,6 +12150,7 @@ export type GraphQLTypes = {
 	getImplemetationDate?: GraphQLTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<GraphQLTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: GraphQLTypes["ImplemetationDateConnection"],
+	validateCreateImplemetationDate: GraphQLTypes["_ValidationResult"],
 	getStepGroup?: GraphQLTypes["StepGroup"] | undefined,
 	listStepGroup: Array<GraphQLTypes["StepGroup"]>,
 	paginateStepGroup: GraphQLTypes["StepGroupConnection"],
@@ -13973,6 +14192,7 @@ export type GraphQLTypes = {
 	["PinnedRecipeCreateInput"]: {
 		user?: GraphQLTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
 	derivedBy?: GraphQLTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
+	implementationDate?: Array<GraphQLTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -13980,6 +14200,34 @@ export type GraphQLTypes = {
 };
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 		connect?: GraphQLTypes["RecipeUniqueWhere"] | undefined
+};
+	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+		connect?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined,
+	create?: GraphQLTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined,
+	alias?: string | undefined
+};
+	["ImplemetationDateWithoutPinnedRecipeCreateInput"]: {
+		step?: GraphQLTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined,
+	date?: GraphQLTypes["DateTime"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["ImplemetationDateCreateStepEntityRelationInput"]: {
+		connect?: GraphQLTypes["StepUniqueWhere"] | undefined
+};
+	["ImplemetationDateCreateInput"]: {
+		step?: GraphQLTypes["ImplemetationDateCreateStepEntityRelationInput"] | undefined,
+	pinnedRecipe?: GraphQLTypes["ImplemetationDateCreatePinnedRecipeEntityRelationInput"] | undefined,
+	date?: GraphQLTypes["DateTime"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
+		connect?: GraphQLTypes["PinnedRecipeUniqueWhere"] | undefined,
+	create?: GraphQLTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined
+};
+	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+		user?: GraphQLTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
+	derivedBy?: GraphQLTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
 };
 	["HomePageConnection"]: {
 	__typename: "HomePageConnection",
@@ -14146,6 +14394,7 @@ export type GraphQLTypes = {
 	getImplemetationDate?: GraphQLTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<GraphQLTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: GraphQLTypes["ImplemetationDateConnection"],
+	validateCreateImplemetationDate: GraphQLTypes["_ValidationResult"],
 	getStepGroup?: GraphQLTypes["StepGroup"] | undefined,
 	listStepGroup: Array<GraphQLTypes["StepGroup"]>,
 	paginateStepGroup: GraphQLTypes["StepGroupConnection"],
@@ -14209,6 +14458,8 @@ export type GraphQLTypes = {
 	__typename: "Mutation",
 	createPinnedRecipe: GraphQLTypes["PinnedRecipeCreateResult"],
 	deletePinnedRecipe: GraphQLTypes["PinnedRecipeDeleteResult"],
+	createImplemetationDate: GraphQLTypes["ImplemetationDateCreateResult"],
+	deleteImplemetationDate: GraphQLTypes["ImplemetationDateDeleteResult"],
 	transaction: GraphQLTypes["MutationTransaction"],
 	query: GraphQLTypes["Query"],
 	generateUploadUrl: GraphQLTypes["S3SignedUpload"],
@@ -14223,12 +14474,14 @@ export type GraphQLTypes = {
 	validation: GraphQLTypes["_ValidationResult"]
 };
 	["MutationResult"]: {
-	__typename:"PinnedRecipeCreateResult" | "PinnedRecipeDeleteResult",
+	__typename:"PinnedRecipeCreateResult" | "PinnedRecipeDeleteResult" | "ImplemetationDateCreateResult" | "ImplemetationDateDeleteResult",
 	ok: boolean,
 	errorMessage?: string | undefined,
 	errors: Array<GraphQLTypes["_MutationError"]>
 	['...on PinnedRecipeCreateResult']: '__union' & GraphQLTypes["PinnedRecipeCreateResult"];
 	['...on PinnedRecipeDeleteResult']: '__union' & GraphQLTypes["PinnedRecipeDeleteResult"];
+	['...on ImplemetationDateCreateResult']: '__union' & GraphQLTypes["ImplemetationDateCreateResult"];
+	['...on ImplemetationDateDeleteResult']: '__union' & GraphQLTypes["ImplemetationDateDeleteResult"];
 };
 	["_MutationError"]: {
 	__typename: "_MutationError",
@@ -14245,6 +14498,21 @@ export type GraphQLTypes = {
 	errors: Array<GraphQLTypes["_MutationError"]>,
 	node?: GraphQLTypes["PinnedRecipe"] | undefined
 };
+	["ImplemetationDateCreateResult"]: {
+	__typename: "ImplemetationDateCreateResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["ImplemetationDate"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
+	["ImplemetationDateDeleteResult"]: {
+	__typename: "ImplemetationDateDeleteResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["ImplemetationDate"] | undefined
+};
 	["MutationTransaction"]: {
 	__typename: "MutationTransaction",
 	ok: boolean,
@@ -14253,6 +14521,8 @@ export type GraphQLTypes = {
 	validation: GraphQLTypes["_ValidationResult"],
 	createPinnedRecipe: GraphQLTypes["PinnedRecipeCreateResult"],
 	deletePinnedRecipe: GraphQLTypes["PinnedRecipeDeleteResult"],
+	createImplemetationDate: GraphQLTypes["ImplemetationDateCreateResult"],
+	deleteImplemetationDate: GraphQLTypes["ImplemetationDateDeleteResult"],
 	query?: GraphQLTypes["Query"] | undefined
 };
 	["MutationTransactionOptions"]: {
@@ -14593,6 +14863,12 @@ type ZEUS_VARIABLES = {
 	["PinnedRecipeCreateInput"]: ValueTypes["PinnedRecipeCreateInput"];
 	["PinnedRecipeCreateUserEntityRelationInput"]: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"];
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"];
+	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: ValueTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"];
+	["ImplemetationDateWithoutPinnedRecipeCreateInput"]: ValueTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"];
+	["ImplemetationDateCreateStepEntityRelationInput"]: ValueTypes["ImplemetationDateCreateStepEntityRelationInput"];
+	["ImplemetationDateCreateInput"]: ValueTypes["ImplemetationDateCreateInput"];
+	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: ValueTypes["ImplemetationDateCreatePinnedRecipeEntityRelationInput"];
+	["PinnedRecipeWithoutImplementationDateCreateInput"]: ValueTypes["PinnedRecipeWithoutImplementationDateCreateInput"];
 	["RecipeListWhere"]: ValueTypes["RecipeListWhere"];
 	["RecipeListItemWhere"]: ValueTypes["RecipeListItemWhere"];
 	["RecipeListItemOrderBy"]: ValueTypes["RecipeListItemOrderBy"];
