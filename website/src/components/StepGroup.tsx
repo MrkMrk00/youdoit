@@ -10,9 +10,10 @@ import { StepItem } from './StepItem'
 export interface StepGroupProps {
 	group: StepGroupResult
 	index: number
+	onNextStep: () => void
 }
 
-export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index }) => {
+export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index, onNextStep }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.header}>
@@ -42,7 +43,7 @@ export const StepGroup: FunctionComponent<StepGroupProps> = ({ group, index }) =
 			</div>
 			{group.localesByLocale?.buttonTitle && (
 				<div className={styles.button}>
-					<StepGroupButton buttonTitle={group.localesByLocale?.buttonTitle} />
+					<StepGroupButton buttonTitle={group.localesByLocale?.buttonTitle} onClick={onNextStep} />
 				</div>
 			)}
 		</div>

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import type { FunctionComponent } from 'react'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import type { RecipeLocaleResult } from '../../data/RecipeLocaleFragment'
 import { Container } from '../Container'
 import { DetailHeader } from '../DetailHeader'
@@ -21,12 +21,12 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 		publishDate: recipeDetailPage.base?.publishDate,
 	}
 
-	const [activeStep, setActiveStep] = useState<number | null>(1)
+	const [activeStep, setActiveStep] = useState<number | null>(0)
 
 	return (
 		<>
 			<div className={styles.wrapper}>
-				<div className={styles.overlay} />
+				{/* <div className={styles.overlay} /> */}
 				<div className={styles.header}>
 					<DetailHeader
 						allRecipesLink={allRecipesLink}
@@ -40,11 +40,7 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 					<Container>
 						<div className={styles.tipGroupList}>
 							{recipeDetailPage.base?.tipGroups.map((group) => {
-								return (
-									<Fragment key={group.id}>
-										<TipGroup group={group} />
-									</Fragment>
-								)
+								return <TipGroup group={group} key={group.id} />
 							})}
 						</div>
 
@@ -52,11 +48,13 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 							{recipeDetailPage.base?.stepsGroups.map((group, index) => {
 								const isActive = activeStep === index
 								return (
-									<Fragment key={group.id}>
-										<div className={clsx(styles.stepGroup, isActive && styles.isActive)}>
-											<StepGroup group={group} index={index + 1} />
-										</div>
-									</Fragment>
+									<div className={clsx(styles.stepGroup, isActive && styles.isActive)} key={group.id}>
+										<StepGroup
+											group={group}
+											index={index + 1}
+											onNextStep={() => setActiveStep(activeStep && activeStep + 1)}
+										/>
+									</div>
 								)
 							})}
 						</div>
