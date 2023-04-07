@@ -1,7 +1,12 @@
+import { useMutation } from '@tanstack/react-query'
 import clsx from 'clsx'
 import type { FunctionComponent } from 'react'
 import { useState } from 'react'
+import { useMirrorLoading } from 'shared-loading-indicator'
 import type { RecipeLocaleResult } from '../../data/RecipeLocaleFragment'
+import { contember } from '../../utilities/contember'
+import { scalarResolver } from '../../utilities/createScalarResolver'
+import { hardcodedUserEmail } from '../../utilities/HardcodedUserEmail'
 import { Container } from '../Container'
 import { DetailHeader } from '../DetailHeader'
 import { StepGroup } from '../StepGroup'
@@ -23,6 +28,29 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 
 	const [activeStep, setActiveStep] = useState<number | null>(0)
 
+	const mutation = useMutation(
+		async () => {
+			await contember('mutation', { scalars: scalarResolver })({
+				createPinnedRecipe: [
+					{
+						data: {
+							user: { connect: { email: hardcodedUserEmail } },
+							derivedBy: { connect: { id: recipeDetailPage.base?.id } }, //@TODO investigate why ? is needed
+						},
+					},
+					{ ok: true, errorMessage: true },
+				],
+			})
+		},
+		{
+			onSuccess: () => {
+				console.log('success')
+			},
+		},
+	)
+
+	useMirrorLoading(mutation.isLoading)
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -36,6 +64,14 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 						author={author}
 					/>
 				</div>
+				<button
+					type="button"
+					onClick={() => {
+						mutation.mutate()
+					}}
+				>
+					Add to favourites
+				</button>
 				<div className={styles.contentIn}>
 					<Container>
 						<div className={styles.tipGroupList}>

@@ -12,6 +12,7 @@ export const RecipeLocaleFragment = (locale: string) =>
 		base: [
 			{},
 			{
+				id: true,
 				locales: [{}, { locale: [{}, LocaleFragment()], link: [{}, { url: true }] }],
 				createdBy: [{}, { firstName: true, lastName: true, image: [{}, ImageFragment()] }],
 				// pinnedRecipes: [{}, {}]
