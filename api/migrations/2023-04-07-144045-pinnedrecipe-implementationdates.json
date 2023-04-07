@@ -1,0 +1,11 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "updateFieldName",
+			"entityName": "PinnedRecipe",
+			"fieldName": "implementationDate",
+			"newFieldName": "implementationDates"
+		}
+	]
+}

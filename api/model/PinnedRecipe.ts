@@ -9,7 +9,7 @@ import { User } from './User'
 export class PinnedRecipe {
 	user = d.manyHasOne(User, 'pinnedRecipes').cascadeOnDelete().notNull()
 	derivedBy = d.manyHasOne(Recipe, 'pinnedRecipes').cascadeOnDelete().notNull()
-	implementationDate = d.oneHasMany(ImplemetationDate, 'pinnedRecipe')
+	implementationDates = d.oneHasMany(ImplemetationDate, 'pinnedRecipe')
 
 	modification = d.oneHasMany(StepModification, 'pinnedRecipe')
 }
