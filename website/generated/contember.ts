@@ -627,8 +627,8 @@ export const AllTypesProps: Record<string,any> = {
 		id:"UUIDCondition",
 		user:"UserWhere",
 		derivedBy:"RecipeWhere",
-		implementationDate:"ImplemetationDateWhere",
 		modification:"StepModificationWhere",
+		implementationDates:"ImplemetationDateWhere",
 		and:"PinnedRecipeWhere",
 		or:"PinnedRecipeWhere",
 		not:"PinnedRecipeWhere"
@@ -644,35 +644,6 @@ export const AllTypesProps: Record<string,any> = {
 		and:"UserWhere",
 		or:"UserWhere",
 		not:"UserWhere"
-	},
-	ImplemetationDateWhere:{
-		id:"UUIDCondition",
-		step:"StepWhere",
-		pinnedRecipe:"PinnedRecipeWhere",
-		date:"DateTimeCondition",
-		and:"ImplemetationDateWhere",
-		or:"ImplemetationDateWhere",
-		not:"ImplemetationDateWhere"
-	},
-	StepWhere:{
-		id:"UUIDCondition",
-		locales:"StepLocaleWhere",
-		implementationDate:"ImplemetationDateWhere",
-		hasTimer:"BooleanCondition",
-		timerCount:"IntCondition",
-		and:"StepWhere",
-		or:"StepWhere",
-		not:"StepWhere"
-	},
-	StepLocaleWhere:{
-		id:"UUIDCondition",
-		title:"StringCondition",
-		base:"StepWhere",
-		locale:"LocaleWhere",
-		modificationDate:"StepModificationWhere",
-		and:"StepLocaleWhere",
-		or:"StepLocaleWhere",
-		not:"StepLocaleWhere"
 	},
 	StepModificationWhere:{
 		id:"UUIDCondition",
@@ -697,6 +668,35 @@ export const AllTypesProps: Record<string,any> = {
 		gte:"DateTime"
 	},
 	DateTime: `scalar.DateTime` as const,
+	StepLocaleWhere:{
+		id:"UUIDCondition",
+		title:"StringCondition",
+		base:"StepWhere",
+		locale:"LocaleWhere",
+		modificationDate:"StepModificationWhere",
+		and:"StepLocaleWhere",
+		or:"StepLocaleWhere",
+		not:"StepLocaleWhere"
+	},
+	StepWhere:{
+		id:"UUIDCondition",
+		locales:"StepLocaleWhere",
+		implementationDate:"ImplemetationDateWhere",
+		hasTimer:"BooleanCondition",
+		timerCount:"IntCondition",
+		and:"StepWhere",
+		or:"StepWhere",
+		not:"StepWhere"
+	},
+	ImplemetationDateWhere:{
+		id:"UUIDCondition",
+		step:"StepWhere",
+		pinnedRecipe:"PinnedRecipeWhere",
+		date:"DateTimeCondition",
+		and:"ImplemetationDateWhere",
+		or:"ImplemetationDateWhere",
+		not:"ImplemetationDateWhere"
+	},
 	BooleanCondition:{
 		and:"BooleanCondition",
 		or:"BooleanCondition",
@@ -1046,8 +1046,11 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	PinnedRecipeUniqueWhere:{
 		id:"UUID",
-		implementationDate:"ImplemetationDateUniqueWhere",
-		modification:"StepModificationUniqueWhere"
+		modification:"StepModificationUniqueWhere",
+		implementationDates:"ImplemetationDateUniqueWhere"
+	},
+	StepModificationUniqueWhere:{
+		id:"UUID"
 	},
 	ImplemetationDateUniqueWhere:{
 		id:"UUID",
@@ -1064,9 +1067,6 @@ export const AllTypesProps: Record<string,any> = {
 		base:"StepUniqueWhere",
 		locale:"LocaleUniqueWhere",
 		modificationDate:"StepModificationUniqueWhere"
-	},
-	StepModificationUniqueWhere:{
-		id:"UUID"
 	},
 	StepGroupUniqueWhere:{
 		id:"UUID",
@@ -1341,12 +1341,12 @@ export const AllTypesProps: Record<string,any> = {
 			by:"RecipeLocalesByLinkUniqueWhere",
 			filter:"RecipeLocaleWhere"
 		},
-		pinnedRecipesByImplementationDate:{
-			by:"RecipePinnedRecipesByImplementationDateUniqueWhere",
-			filter:"PinnedRecipeWhere"
-		},
 		pinnedRecipesByModification:{
 			by:"RecipePinnedRecipesByModificationUniqueWhere",
+			filter:"PinnedRecipeWhere"
+		},
+		pinnedRecipesByImplementationDates:{
+			by:"RecipePinnedRecipesByImplementationDatesUniqueWhere",
 			filter:"PinnedRecipeWhere"
 		},
 		stepsGroupsByLocales:{
@@ -1393,25 +1393,25 @@ export const AllTypesProps: Record<string,any> = {
 		derivedBy:{
 			filter:"RecipeWhere"
 		},
-		implementationDate:{
-			filter:"ImplemetationDateWhere",
-			orderBy:"ImplemetationDateOrderBy"
-		},
 		modification:{
 			filter:"StepModificationWhere",
 			orderBy:"StepModificationOrderBy"
 		},
-		implementationDateByStep:{
-			by:"PinnedRecipeImplementationDateByStepUniqueWhere",
-			filter:"ImplemetationDateWhere"
-		},
-		paginateImplementationDate:{
+		implementationDates:{
 			filter:"ImplemetationDateWhere",
 			orderBy:"ImplemetationDateOrderBy"
+		},
+		implementationDatesByStep:{
+			by:"PinnedRecipeImplementationDatesByStepUniqueWhere",
+			filter:"ImplemetationDateWhere"
 		},
 		paginateModification:{
 			filter:"StepModificationWhere",
 			orderBy:"StepModificationOrderBy"
+		},
+		paginateImplementationDates:{
+			filter:"ImplemetationDateWhere",
+			orderBy:"ImplemetationDateOrderBy"
 		}
 	},
 	User:{
@@ -1426,12 +1426,12 @@ export const AllTypesProps: Record<string,any> = {
 			filter:"RecipeWhere",
 			orderBy:"RecipeOrderBy"
 		},
-		pinnedRecipesByImplementationDate:{
-			by:"UserPinnedRecipesByImplementationDateUniqueWhere",
-			filter:"PinnedRecipeWhere"
-		},
 		pinnedRecipesByModification:{
 			by:"UserPinnedRecipesByModificationUniqueWhere",
+			filter:"PinnedRecipeWhere"
+		},
+		pinnedRecipesByImplementationDates:{
+			by:"UserPinnedRecipesByImplementationDatesUniqueWhere",
 			filter:"PinnedRecipeWhere"
 		},
 		createdRecipesByLocales:{
@@ -1464,11 +1464,11 @@ export const AllTypesProps: Record<string,any> = {
 		user:"UserOrderBy",
 		derivedBy:"RecipeOrderBy"
 	},
-	UserPinnedRecipesByImplementationDateUniqueWhere:{
-		implementationDate:"ImplemetationDateUniqueWhere"
-	},
 	UserPinnedRecipesByModificationUniqueWhere:{
 		modification:"StepModificationUniqueWhere"
+	},
+	UserPinnedRecipesByImplementationDatesUniqueWhere:{
+		implementationDates:"ImplemetationDateUniqueWhere"
 	},
 	UserCreatedRecipesByLocalesUniqueWhere:{
 		locales:"RecipeLocaleUniqueWhere"
@@ -1482,12 +1482,28 @@ export const AllTypesProps: Record<string,any> = {
 	UserCreatedRecipesByTipGroupsUniqueWhere:{
 		tipGroups:"TipGroupUniqueWhere"
 	},
-	ImplemetationDate:{
-		step:{
-			filter:"StepWhere"
-		},
+	StepModification:{
 		pinnedRecipe:{
 			filter:"PinnedRecipeWhere"
+		},
+		step:{
+			filter:"StepLocaleWhere"
+		}
+	},
+	StepLocale:{
+		base:{
+			filter:"StepWhere"
+		},
+		locale:{
+			filter:"LocaleWhere"
+		},
+		modificationDate:{
+			filter:"StepModificationWhere",
+			orderBy:"StepModificationOrderBy"
+		},
+		paginateModificationDate:{
+			filter:"StepModificationWhere",
+			orderBy:"StepModificationOrderBy"
 		}
 	},
 	Step:{
@@ -1520,36 +1536,6 @@ export const AllTypesProps: Record<string,any> = {
 			orderBy:"ImplemetationDateOrderBy"
 		}
 	},
-	StepLocale:{
-		base:{
-			filter:"StepWhere"
-		},
-		locale:{
-			filter:"LocaleWhere"
-		},
-		modificationDate:{
-			filter:"StepModificationWhere",
-			orderBy:"StepModificationOrderBy"
-		},
-		paginateModificationDate:{
-			filter:"StepModificationWhere",
-			orderBy:"StepModificationOrderBy"
-		}
-	},
-	StepModification:{
-		pinnedRecipe:{
-			filter:"PinnedRecipeWhere"
-		},
-		step:{
-			filter:"StepLocaleWhere"
-		}
-	},
-	StepModificationOrderBy:{
-		id:"OrderDirection",
-		date:"OrderDirection",
-		pinnedRecipe:"PinnedRecipeOrderBy",
-		step:"StepLocaleOrderBy"
-	},
 	StepLocaleOrderBy:{
 		id:"OrderDirection",
 		title:"OrderDirection",
@@ -1560,6 +1546,14 @@ export const AllTypesProps: Record<string,any> = {
 		id:"OrderDirection",
 		hasTimer:"OrderDirection",
 		timerCount:"OrderDirection"
+	},
+	ImplemetationDate:{
+		step:{
+			filter:"StepWhere"
+		},
+		pinnedRecipe:{
+			filter:"PinnedRecipeWhere"
+		}
 	},
 	ImplemetationDateOrderBy:{
 		id:"OrderDirection",
@@ -1576,7 +1570,13 @@ export const AllTypesProps: Record<string,any> = {
 	StepImplementationDateByPinnedRecipeUniqueWhere:{
 		pinnedRecipe:"PinnedRecipeUniqueWhere"
 	},
-	PinnedRecipeImplementationDateByStepUniqueWhere:{
+	StepModificationOrderBy:{
+		id:"OrderDirection",
+		date:"OrderDirection",
+		pinnedRecipe:"PinnedRecipeOrderBy",
+		step:"StepLocaleOrderBy"
+	},
+	PinnedRecipeImplementationDatesByStepUniqueWhere:{
 		step:"StepUniqueWhere"
 	},
 	StepGroup:{
@@ -1831,11 +1831,11 @@ export const AllTypesProps: Record<string,any> = {
 	RecipeLocalesByLinkUniqueWhere:{
 		link:"LinkableUniqueWhere"
 	},
-	RecipePinnedRecipesByImplementationDateUniqueWhere:{
-		implementationDate:"ImplemetationDateUniqueWhere"
-	},
 	RecipePinnedRecipesByModificationUniqueWhere:{
 		modification:"StepModificationUniqueWhere"
+	},
+	RecipePinnedRecipesByImplementationDatesUniqueWhere:{
+		implementationDates:"ImplemetationDateUniqueWhere"
 	},
 	RecipeStepsGroupsByLocalesUniqueWhere:{
 		locales:"StepGroupLocaleUniqueWhere"
@@ -2034,7 +2034,7 @@ export const AllTypesProps: Record<string,any> = {
 	PinnedRecipeCreateInput:{
 		user:"PinnedRecipeCreateUserEntityRelationInput",
 		derivedBy:"PinnedRecipeCreateDerivedByEntityRelationInput",
-		implementationDate:"PinnedRecipeCreateImplementationDateEntityRelationInput"
+		implementationDates:"PinnedRecipeCreateImplementationDatesEntityRelationInput"
 	},
 	PinnedRecipeCreateUserEntityRelationInput:{
 		connect:"UserUniqueWhere"
@@ -2042,7 +2042,7 @@ export const AllTypesProps: Record<string,any> = {
 	PinnedRecipeCreateDerivedByEntityRelationInput:{
 		connect:"RecipeUniqueWhere"
 	},
-	PinnedRecipeCreateImplementationDateEntityRelationInput:{
+	PinnedRecipeCreateImplementationDatesEntityRelationInput:{
 		connect:"ImplemetationDateUniqueWhere",
 		create:"ImplemetationDateWithoutPinnedRecipeCreateInput"
 	},
@@ -2060,9 +2060,9 @@ export const AllTypesProps: Record<string,any> = {
 	},
 	ImplemetationDateCreatePinnedRecipeEntityRelationInput:{
 		connect:"PinnedRecipeUniqueWhere",
-		create:"PinnedRecipeWithoutImplementationDateCreateInput"
+		create:"PinnedRecipeWithoutImplementationDatesCreateInput"
 	},
-	PinnedRecipeWithoutImplementationDateCreateInput:{
+	PinnedRecipeWithoutImplementationDatesCreateInput:{
 		user:"PinnedRecipeCreateUserEntityRelationInput",
 		derivedBy:"PinnedRecipeCreateDerivedByEntityRelationInput"
 	},
@@ -2886,8 +2886,8 @@ export const ReturnTypes: Record<string,any> = {
 		tipGroups:"TipGroup",
 		localesByLocale:"RecipeLocale",
 		localesByLink:"RecipeLocale",
-		pinnedRecipesByImplementationDate:"PinnedRecipe",
 		pinnedRecipesByModification:"PinnedRecipe",
+		pinnedRecipesByImplementationDates:"PinnedRecipe",
 		stepsGroupsByLocales:"StepGroup",
 		stepsGroupsByItems:"StepGroup",
 		tipGroupsByItems:"TipGroup",
@@ -2935,18 +2935,18 @@ export const ReturnTypes: Record<string,any> = {
 		id:"UUID",
 		user:"User",
 		derivedBy:"Recipe",
-		implementationDate:"ImplemetationDate",
 		modification:"StepModification",
-		implementationDateByStep:"ImplemetationDate",
-		paginateImplementationDate:"ImplemetationDateConnection",
-		paginateModification:"StepModificationConnection"
+		implementationDates:"ImplemetationDate",
+		implementationDatesByStep:"ImplemetationDate",
+		paginateModification:"StepModificationConnection",
+		paginateImplementationDates:"ImplemetationDateConnection"
 	},
 	PinnedRecipeMeta:{
 		id:"FieldMeta",
 		user:"FieldMeta",
 		derivedBy:"FieldMeta",
-		implementationDate:"FieldMeta",
-		modification:"FieldMeta"
+		modification:"FieldMeta",
+		implementationDates:"FieldMeta"
 	},
 	User:{
 		_meta:"UserMeta",
@@ -2957,8 +2957,8 @@ export const ReturnTypes: Record<string,any> = {
 		image:"Image",
 		pinnedRecipes:"PinnedRecipe",
 		createdRecipes:"Recipe",
-		pinnedRecipesByImplementationDate:"PinnedRecipe",
 		pinnedRecipesByModification:"PinnedRecipe",
+		pinnedRecipesByImplementationDates:"PinnedRecipe",
 		createdRecipesByLocales:"Recipe",
 		createdRecipesByPinnedRecipes:"Recipe",
 		createdRecipesByStepsGroups:"Recipe",
@@ -2989,18 +2989,34 @@ export const ReturnTypes: Record<string,any> = {
 	RecipeEdge:{
 		node:"Recipe"
 	},
-	ImplemetationDate:{
-		_meta:"ImplemetationDateMeta",
+	StepModification:{
+		_meta:"StepModificationMeta",
 		id:"UUID",
-		step:"Step",
+		date:"DateTime",
 		pinnedRecipe:"PinnedRecipe",
-		date:"DateTime"
+		step:"StepLocale"
 	},
-	ImplemetationDateMeta:{
+	StepModificationMeta:{
 		id:"FieldMeta",
-		step:"FieldMeta",
+		date:"FieldMeta",
 		pinnedRecipe:"FieldMeta",
-		date:"FieldMeta"
+		step:"FieldMeta"
+	},
+	StepLocale:{
+		_meta:"StepLocaleMeta",
+		id:"UUID",
+		title:"String",
+		base:"Step",
+		locale:"Locale",
+		modificationDate:"StepModification",
+		paginateModificationDate:"StepModificationConnection"
+	},
+	StepLocaleMeta:{
+		id:"FieldMeta",
+		title:"FieldMeta",
+		base:"FieldMeta",
+		locale:"FieldMeta",
+		modificationDate:"FieldMeta"
 	},
 	Step:{
 		_meta:"StepMeta",
@@ -3022,41 +3038,18 @@ export const ReturnTypes: Record<string,any> = {
 		hasTimer:"FieldMeta",
 		timerCount:"FieldMeta"
 	},
-	StepLocale:{
-		_meta:"StepLocaleMeta",
+	ImplemetationDate:{
+		_meta:"ImplemetationDateMeta",
 		id:"UUID",
-		title:"String",
-		base:"Step",
-		locale:"Locale",
-		modificationDate:"StepModification",
-		paginateModificationDate:"StepModificationConnection"
-	},
-	StepLocaleMeta:{
-		id:"FieldMeta",
-		title:"FieldMeta",
-		base:"FieldMeta",
-		locale:"FieldMeta",
-		modificationDate:"FieldMeta"
-	},
-	StepModification:{
-		_meta:"StepModificationMeta",
-		id:"UUID",
-		date:"DateTime",
+		step:"Step",
 		pinnedRecipe:"PinnedRecipe",
-		step:"StepLocale"
+		date:"DateTime"
 	},
-	StepModificationMeta:{
+	ImplemetationDateMeta:{
 		id:"FieldMeta",
-		date:"FieldMeta",
+		step:"FieldMeta",
 		pinnedRecipe:"FieldMeta",
-		step:"FieldMeta"
-	},
-	StepModificationConnection:{
-		pageInfo:"PageInfo",
-		edges:"StepModificationEdge"
-	},
-	StepModificationEdge:{
-		node:"StepModification"
+		date:"FieldMeta"
 	},
 	StepLocaleConnection:{
 		pageInfo:"PageInfo",
@@ -3071,6 +3064,13 @@ export const ReturnTypes: Record<string,any> = {
 	},
 	ImplemetationDateEdge:{
 		node:"ImplemetationDate"
+	},
+	StepModificationConnection:{
+		pageInfo:"PageInfo",
+		edges:"StepModificationEdge"
+	},
+	StepModificationEdge:{
+		node:"StepModification"
 	},
 	StepGroup:{
 		_meta:"StepGroupMeta",
@@ -5010,8 +5010,8 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
 	user?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>,
 	derivedBy?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,
-	implementationDate?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,
 	modification?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,
+	implementationDates?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["PinnedRecipeWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["PinnedRecipeWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>
@@ -5027,35 +5027,6 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	and?: Array<ValueTypes["UserWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["UserWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>
-};
-	["ImplemetationDateWhere"]: {
-	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
-	step?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>,
-	pinnedRecipe?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,
-	date?: ValueTypes["DateTimeCondition"] | undefined | null | Variable<any, string>,
-	and?: Array<ValueTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	or?: Array<ValueTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	not?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>
-};
-	["StepWhere"]: {
-	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
-	locales?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>,
-	implementationDate?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,
-	hasTimer?: ValueTypes["BooleanCondition"] | undefined | null | Variable<any, string>,
-	timerCount?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
-	and?: Array<ValueTypes["StepWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	or?: Array<ValueTypes["StepWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	not?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>
-};
-	["StepLocaleWhere"]: {
-	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
-	title?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
-	base?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>,
-	locale?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>,
-	modificationDate?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,
-	and?: Array<ValueTypes["StepLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	or?: Array<ValueTypes["StepLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	not?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>
 };
 	["StepModificationWhere"]: {
 	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
@@ -5082,6 +5053,35 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	gte?: ValueTypes["DateTime"] | undefined | null | Variable<any, string>
 };
 	["DateTime"]:unknown;
+	["StepLocaleWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	title?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	base?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>,
+	locale?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>,
+	modificationDate?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["StepLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["StepLocaleWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>
+};
+	["StepWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	locales?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>,
+	implementationDate?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,
+	hasTimer?: ValueTypes["BooleanCondition"] | undefined | null | Variable<any, string>,
+	timerCount?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["StepWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["StepWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>
+};
+	["ImplemetationDateWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	step?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>,
+	pinnedRecipe?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,
+	date?: ValueTypes["DateTimeCondition"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>
+};
 	["BooleanCondition"]: {
 	and?: Array<ValueTypes["BooleanCondition"]> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["BooleanCondition"]> | undefined | null | Variable<any, string>,
@@ -5482,8 +5482,11 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 };
 	["PinnedRecipeUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
-	implementationDate?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>,
-	modification?: ValueTypes["StepModificationUniqueWhere"] | undefined | null | Variable<any, string>
+	modification?: ValueTypes["StepModificationUniqueWhere"] | undefined | null | Variable<any, string>,
+	implementationDates?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["StepModificationUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>
 };
 	["ImplemetationDateUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
@@ -5500,9 +5503,6 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	base?: ValueTypes["StepUniqueWhere"] | undefined | null | Variable<any, string>,
 	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>,
 	modificationDate?: ValueTypes["StepModificationUniqueWhere"] | undefined | null | Variable<any, string>
-};
-	["StepModificationUniqueWhere"]: {
-	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>
 };
 	["StepGroupUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
@@ -5701,8 +5701,8 @@ tileImage?: [{	filter?: ValueTypes["ImageWhere"] | undefined | null | Variable<a
 tipGroups?: [{	filter?: ValueTypes["TipGroupWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TipGroupOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TipGroup"]],
 localesByLocale?: [{	by: ValueTypes["RecipeLocalesByLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
 localesByLink?: [{	by: ValueTypes["RecipeLocalesByLinkUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
-pinnedRecipesByImplementationDate?: [{	by: ValueTypes["RecipePinnedRecipesByImplementationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 pinnedRecipesByModification?: [{	by: ValueTypes["RecipePinnedRecipesByModificationUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
+pinnedRecipesByImplementationDates?: [{	by: ValueTypes["RecipePinnedRecipesByImplementationDatesUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 stepsGroupsByLocales?: [{	by: ValueTypes["RecipeStepsGroupsByLocalesUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 stepsGroupsByItems?: [{	by: ValueTypes["RecipeStepsGroupsByItemsUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["StepGroupWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepGroup"]],
 tipGroupsByItems?: [{	by: ValueTypes["RecipeTipGroupsByItemsUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TipGroupWhere"] | undefined | null | Variable<any, string>},ValueTypes["TipGroup"]],
@@ -5754,19 +5754,19 @@ paginateTipGroups?: [{	filter?: ValueTypes["TipGroupWhere"] | undefined | null |
 	id?:boolean | `@${string}`,
 user?: [{	filter?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>},ValueTypes["User"]],
 derivedBy?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
-implementationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 modification?: [{	filter?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepModificationOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["StepModification"]],
-implementationDateByStep?: [{	by: ValueTypes["PinnedRecipeImplementationDateByStepUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
-paginateImplementationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateConnection"]],
+implementationDates?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
+implementationDatesByStep?: [{	by: ValueTypes["PinnedRecipeImplementationDatesByStepUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 paginateModification?: [{	filter?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepModificationOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepModificationConnection"]],
+paginateImplementationDates?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["PinnedRecipeMeta"]: AliasType<{
 	id?:ValueTypes["FieldMeta"],
 	user?:ValueTypes["FieldMeta"],
 	derivedBy?:ValueTypes["FieldMeta"],
-	implementationDate?:ValueTypes["FieldMeta"],
 	modification?:ValueTypes["FieldMeta"],
+	implementationDates?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["User"]: AliasType<{
@@ -5778,8 +5778,8 @@ paginateModification?: [{	filter?: ValueTypes["StepModificationWhere"] | undefin
 image?: [{	filter?: ValueTypes["ImageWhere"] | undefined | null | Variable<any, string>},ValueTypes["Image"]],
 pinnedRecipes?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipeOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 createdRecipes?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
-pinnedRecipesByImplementationDate?: [{	by: ValueTypes["UserPinnedRecipesByImplementationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 pinnedRecipesByModification?: [{	by: ValueTypes["UserPinnedRecipesByModificationUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
+pinnedRecipesByImplementationDates?: [{	by: ValueTypes["UserPinnedRecipesByImplementationDatesUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 createdRecipesByLocales?: [{	by: ValueTypes["UserCreatedRecipesByLocalesUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
 createdRecipesByPinnedRecipes?: [{	by: ValueTypes["UserCreatedRecipesByPinnedRecipesUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
 createdRecipesByStepsGroups?: [{	by: ValueTypes["UserCreatedRecipesByStepsGroupsUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
@@ -5805,11 +5805,11 @@ paginateCreatedRecipes?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | nul
 	user?: ValueTypes["UserOrderBy"] | undefined | null | Variable<any, string>,
 	derivedBy?: ValueTypes["RecipeOrderBy"] | undefined | null | Variable<any, string>
 };
-	["UserPinnedRecipesByImplementationDateUniqueWhere"]: {
-	implementationDate?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>
-};
 	["UserPinnedRecipesByModificationUniqueWhere"]: {
 	modification?: ValueTypes["StepModificationUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["UserPinnedRecipesByImplementationDatesUniqueWhere"]: {
+	implementationDates?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>
 };
 	["UserCreatedRecipesByLocalesUniqueWhere"]: {
 	locales?: ValueTypes["RecipeLocaleUniqueWhere"] | undefined | null | Variable<any, string>
@@ -5841,19 +5841,37 @@ paginateCreatedRecipes?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | nul
 	node?:ValueTypes["Recipe"],
 		__typename?: boolean | `@${string}`
 }>;
-	["ImplemetationDate"]: AliasType<{
-	_meta?:ValueTypes["ImplemetationDateMeta"],
+	["StepModification"]: AliasType<{
+	_meta?:ValueTypes["StepModificationMeta"],
 	id?:boolean | `@${string}`,
-step?: [{	filter?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>},ValueTypes["Step"]],
-pinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 	date?:boolean | `@${string}`,
+pinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
+step?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepLocale"]],
 		__typename?: boolean | `@${string}`
 }>;
-	["ImplemetationDateMeta"]: AliasType<{
+	["StepModificationMeta"]: AliasType<{
 	id?:ValueTypes["FieldMeta"],
-	step?:ValueTypes["FieldMeta"],
-	pinnedRecipe?:ValueTypes["FieldMeta"],
 	date?:ValueTypes["FieldMeta"],
+	pinnedRecipe?:ValueTypes["FieldMeta"],
+	step?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["StepLocale"]: AliasType<{
+	_meta?:ValueTypes["StepLocaleMeta"],
+	id?:boolean | `@${string}`,
+	title?:boolean | `@${string}`,
+base?: [{	filter?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>},ValueTypes["Step"]],
+locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["Locale"]],
+modificationDate?: [{	filter?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepModificationOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["StepModification"]],
+paginateModificationDate?: [{	filter?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepModificationOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepModificationConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["StepLocaleMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	title?:ValueTypes["FieldMeta"],
+	base?:ValueTypes["FieldMeta"],
+	locale?:ValueTypes["FieldMeta"],
+	modificationDate?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Step"]: AliasType<{
@@ -5878,47 +5896,6 @@ paginateImplementationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | 
 	timerCount?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
-	["StepLocale"]: AliasType<{
-	_meta?:ValueTypes["StepLocaleMeta"],
-	id?:boolean | `@${string}`,
-	title?:boolean | `@${string}`,
-base?: [{	filter?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>},ValueTypes["Step"]],
-locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["Locale"]],
-modificationDate?: [{	filter?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepModificationOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["StepModification"]],
-paginateModificationDate?: [{	filter?: ValueTypes["StepModificationWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["StepModificationOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["StepModificationConnection"]],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepLocaleMeta"]: AliasType<{
-	id?:ValueTypes["FieldMeta"],
-	title?:ValueTypes["FieldMeta"],
-	base?:ValueTypes["FieldMeta"],
-	locale?:ValueTypes["FieldMeta"],
-	modificationDate?:ValueTypes["FieldMeta"],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepModification"]: AliasType<{
-	_meta?:ValueTypes["StepModificationMeta"],
-	id?:boolean | `@${string}`,
-	date?:boolean | `@${string}`,
-pinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
-step?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["StepLocale"]],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepModificationMeta"]: AliasType<{
-	id?:ValueTypes["FieldMeta"],
-	date?:ValueTypes["FieldMeta"],
-	pinnedRecipe?:ValueTypes["FieldMeta"],
-	step?:ValueTypes["FieldMeta"],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepModificationOrderBy"]: {
-	_random?: boolean | undefined | null | Variable<any, string>,
-	_randomSeeded?: number | undefined | null | Variable<any, string>,
-	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	date?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	pinnedRecipe?: ValueTypes["PinnedRecipeOrderBy"] | undefined | null | Variable<any, string>,
-	step?: ValueTypes["StepLocaleOrderBy"] | undefined | null | Variable<any, string>
-};
 	["StepLocaleOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
 	_randomSeeded?: number | undefined | null | Variable<any, string>,
@@ -5934,13 +5911,19 @@ step?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<a
 	hasTimer?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	timerCount?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
-	["StepModificationConnection"]: AliasType<{
-	pageInfo?:ValueTypes["PageInfo"],
-	edges?:ValueTypes["StepModificationEdge"],
+	["ImplemetationDate"]: AliasType<{
+	_meta?:ValueTypes["ImplemetationDateMeta"],
+	id?:boolean | `@${string}`,
+step?: [{	filter?: ValueTypes["StepWhere"] | undefined | null | Variable<any, string>},ValueTypes["Step"]],
+pinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
+	date?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
-	["StepModificationEdge"]: AliasType<{
-	node?:ValueTypes["StepModification"],
+	["ImplemetationDateMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	step?:ValueTypes["FieldMeta"],
+	pinnedRecipe?:ValueTypes["FieldMeta"],
+	date?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["ImplemetationDateOrderBy"]: {
@@ -5978,7 +5961,24 @@ step?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | null | Variable<a
 	node?:ValueTypes["ImplemetationDate"],
 		__typename?: boolean | `@${string}`
 }>;
-	["PinnedRecipeImplementationDateByStepUniqueWhere"]: {
+	["StepModificationOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	date?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	pinnedRecipe?: ValueTypes["PinnedRecipeOrderBy"] | undefined | null | Variable<any, string>,
+	step?: ValueTypes["StepLocaleOrderBy"] | undefined | null | Variable<any, string>
+};
+	["StepModificationConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["StepModificationEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["StepModificationEdge"]: AliasType<{
+	node?:ValueTypes["StepModification"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipeImplementationDatesByStepUniqueWhere"]: {
 	step?: ValueTypes["StepUniqueWhere"] | undefined | null | Variable<any, string>
 };
 	["StepGroup"]: AliasType<{
@@ -6339,11 +6339,11 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	["RecipeLocalesByLinkUniqueWhere"]: {
 	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>
 };
-	["RecipePinnedRecipesByImplementationDateUniqueWhere"]: {
-	implementationDate?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>
-};
 	["RecipePinnedRecipesByModificationUniqueWhere"]: {
 	modification?: ValueTypes["StepModificationUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["RecipePinnedRecipesByImplementationDatesUniqueWhere"]: {
+	implementationDates?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>
 };
 	["RecipeStepsGroupsByLocalesUniqueWhere"]: {
 	locales?: ValueTypes["StepGroupLocaleUniqueWhere"] | undefined | null | Variable<any, string>
@@ -6729,7 +6729,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["PinnedRecipeCreateInput"]: {
 	user?: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null | Variable<any, string>,
 	derivedBy?: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null | Variable<any, string>,
-	implementationDate?: Array<ValueTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined | null | Variable<any, string>,
+	implementationDates?: Array<ValueTypes["PinnedRecipeCreateImplementationDatesEntityRelationInput"]> | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -6738,7 +6738,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 	connect?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>
 };
-	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+	["PinnedRecipeCreateImplementationDatesEntityRelationInput"]: {
 	connect?: ValueTypes["ImplemetationDateUniqueWhere"] | undefined | null | Variable<any, string>,
 	create?: ValueTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined | null | Variable<any, string>,
 	alias?: string | undefined | null | Variable<any, string>
@@ -6759,9 +6759,9 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 };
 	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
 	connect?: ValueTypes["PinnedRecipeUniqueWhere"] | undefined | null | Variable<any, string>,
-	create?: ValueTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined | null | Variable<any, string>
+	create?: ValueTypes["PinnedRecipeWithoutImplementationDatesCreateInput"] | undefined | null | Variable<any, string>
 };
-	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+	["PinnedRecipeWithoutImplementationDatesCreateInput"]: {
 	user?: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null | Variable<any, string>,
 	derivedBy?: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null | Variable<any, string>,
 	_dummy_field_?: boolean | undefined | null | Variable<any, string>
@@ -7560,8 +7560,8 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
 	user?: ResolverInputTypes["UserWhere"] | undefined | null,
 	derivedBy?: ResolverInputTypes["RecipeWhere"] | undefined | null,
-	implementationDate?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,
 	modification?: ResolverInputTypes["StepModificationWhere"] | undefined | null,
+	implementationDates?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,
 	and?: Array<ResolverInputTypes["PinnedRecipeWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["PinnedRecipeWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null
@@ -7577,35 +7577,6 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	and?: Array<ResolverInputTypes["UserWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["UserWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["UserWhere"] | undefined | null
-};
-	["ImplemetationDateWhere"]: {
-	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
-	step?: ResolverInputTypes["StepWhere"] | undefined | null,
-	pinnedRecipe?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,
-	date?: ResolverInputTypes["DateTimeCondition"] | undefined | null,
-	and?: Array<ResolverInputTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null,
-	or?: Array<ResolverInputTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null,
-	not?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null
-};
-	["StepWhere"]: {
-	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
-	locales?: ResolverInputTypes["StepLocaleWhere"] | undefined | null,
-	implementationDate?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,
-	hasTimer?: ResolverInputTypes["BooleanCondition"] | undefined | null,
-	timerCount?: ResolverInputTypes["IntCondition"] | undefined | null,
-	and?: Array<ResolverInputTypes["StepWhere"] | undefined | null> | undefined | null,
-	or?: Array<ResolverInputTypes["StepWhere"] | undefined | null> | undefined | null,
-	not?: ResolverInputTypes["StepWhere"] | undefined | null
-};
-	["StepLocaleWhere"]: {
-	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
-	title?: ResolverInputTypes["StringCondition"] | undefined | null,
-	base?: ResolverInputTypes["StepWhere"] | undefined | null,
-	locale?: ResolverInputTypes["LocaleWhere"] | undefined | null,
-	modificationDate?: ResolverInputTypes["StepModificationWhere"] | undefined | null,
-	and?: Array<ResolverInputTypes["StepLocaleWhere"] | undefined | null> | undefined | null,
-	or?: Array<ResolverInputTypes["StepLocaleWhere"] | undefined | null> | undefined | null,
-	not?: ResolverInputTypes["StepLocaleWhere"] | undefined | null
 };
 	["StepModificationWhere"]: {
 	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
@@ -7632,6 +7603,35 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	gte?: ResolverInputTypes["DateTime"] | undefined | null
 };
 	["DateTime"]:unknown;
+	["StepLocaleWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	title?: ResolverInputTypes["StringCondition"] | undefined | null,
+	base?: ResolverInputTypes["StepWhere"] | undefined | null,
+	locale?: ResolverInputTypes["LocaleWhere"] | undefined | null,
+	modificationDate?: ResolverInputTypes["StepModificationWhere"] | undefined | null,
+	and?: Array<ResolverInputTypes["StepLocaleWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["StepLocaleWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["StepLocaleWhere"] | undefined | null
+};
+	["StepWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	locales?: ResolverInputTypes["StepLocaleWhere"] | undefined | null,
+	implementationDate?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,
+	hasTimer?: ResolverInputTypes["BooleanCondition"] | undefined | null,
+	timerCount?: ResolverInputTypes["IntCondition"] | undefined | null,
+	and?: Array<ResolverInputTypes["StepWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["StepWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["StepWhere"] | undefined | null
+};
+	["ImplemetationDateWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	step?: ResolverInputTypes["StepWhere"] | undefined | null,
+	pinnedRecipe?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,
+	date?: ResolverInputTypes["DateTimeCondition"] | undefined | null,
+	and?: Array<ResolverInputTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["ImplemetationDateWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null
+};
 	["BooleanCondition"]: {
 	and?: Array<ResolverInputTypes["BooleanCondition"]> | undefined | null,
 	or?: Array<ResolverInputTypes["BooleanCondition"]> | undefined | null,
@@ -8032,8 +8032,11 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 };
 	["PinnedRecipeUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
-	implementationDate?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null,
-	modification?: ResolverInputTypes["StepModificationUniqueWhere"] | undefined | null
+	modification?: ResolverInputTypes["StepModificationUniqueWhere"] | undefined | null,
+	implementationDates?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null
+};
+	["StepModificationUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null
 };
 	["ImplemetationDateUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
@@ -8050,9 +8053,6 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	base?: ResolverInputTypes["StepUniqueWhere"] | undefined | null,
 	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null,
 	modificationDate?: ResolverInputTypes["StepModificationUniqueWhere"] | undefined | null
-};
-	["StepModificationUniqueWhere"]: {
-	id?: ResolverInputTypes["UUID"] | undefined | null
 };
 	["StepGroupUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
@@ -8251,8 +8251,8 @@ tileImage?: [{	filter?: ResolverInputTypes["ImageWhere"] | undefined | null},Res
 tipGroups?: [{	filter?: ResolverInputTypes["TipGroupWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TipGroupOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TipGroup"]],
 localesByLocale?: [{	by: ResolverInputTypes["RecipeLocalesByLocaleUniqueWhere"],	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
 localesByLink?: [{	by: ResolverInputTypes["RecipeLocalesByLinkUniqueWhere"],	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
-pinnedRecipesByImplementationDate?: [{	by: ResolverInputTypes["RecipePinnedRecipesByImplementationDateUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 pinnedRecipesByModification?: [{	by: ResolverInputTypes["RecipePinnedRecipesByModificationUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
+pinnedRecipesByImplementationDates?: [{	by: ResolverInputTypes["RecipePinnedRecipesByImplementationDatesUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 stepsGroupsByLocales?: [{	by: ResolverInputTypes["RecipeStepsGroupsByLocalesUniqueWhere"],	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null},ResolverInputTypes["StepGroup"]],
 stepsGroupsByItems?: [{	by: ResolverInputTypes["RecipeStepsGroupsByItemsUniqueWhere"],	filter?: ResolverInputTypes["StepGroupWhere"] | undefined | null},ResolverInputTypes["StepGroup"]],
 tipGroupsByItems?: [{	by: ResolverInputTypes["RecipeTipGroupsByItemsUniqueWhere"],	filter?: ResolverInputTypes["TipGroupWhere"] | undefined | null},ResolverInputTypes["TipGroup"]],
@@ -8304,19 +8304,19 @@ paginateTipGroups?: [{	filter?: ResolverInputTypes["TipGroupWhere"] | undefined 
 	id?:boolean | `@${string}`,
 user?: [{	filter?: ResolverInputTypes["UserWhere"] | undefined | null},ResolverInputTypes["User"]],
 derivedBy?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},ResolverInputTypes["Recipe"]],
-implementationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 modification?: [{	filter?: ResolverInputTypes["StepModificationWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepModificationOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["StepModification"]],
-implementationDateByStep?: [{	by: ResolverInputTypes["PinnedRecipeImplementationDateByStepUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDate"]],
-paginateImplementationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["ImplemetationDateConnection"]],
+implementationDates?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["ImplemetationDate"]],
+implementationDatesByStep?: [{	by: ResolverInputTypes["PinnedRecipeImplementationDatesByStepUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 paginateModification?: [{	filter?: ResolverInputTypes["StepModificationWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepModificationOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepModificationConnection"]],
+paginateImplementationDates?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["ImplemetationDateConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["PinnedRecipeMeta"]: AliasType<{
 	id?:ResolverInputTypes["FieldMeta"],
 	user?:ResolverInputTypes["FieldMeta"],
 	derivedBy?:ResolverInputTypes["FieldMeta"],
-	implementationDate?:ResolverInputTypes["FieldMeta"],
 	modification?:ResolverInputTypes["FieldMeta"],
+	implementationDates?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["User"]: AliasType<{
@@ -8328,8 +8328,8 @@ paginateModification?: [{	filter?: ResolverInputTypes["StepModificationWhere"] |
 image?: [{	filter?: ResolverInputTypes["ImageWhere"] | undefined | null},ResolverInputTypes["Image"]],
 pinnedRecipes?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipeOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 createdRecipes?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Recipe"]],
-pinnedRecipesByImplementationDate?: [{	by: ResolverInputTypes["UserPinnedRecipesByImplementationDateUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 pinnedRecipesByModification?: [{	by: ResolverInputTypes["UserPinnedRecipesByModificationUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
+pinnedRecipesByImplementationDates?: [{	by: ResolverInputTypes["UserPinnedRecipesByImplementationDatesUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 createdRecipesByLocales?: [{	by: ResolverInputTypes["UserCreatedRecipesByLocalesUniqueWhere"],	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},ResolverInputTypes["Recipe"]],
 createdRecipesByPinnedRecipes?: [{	by: ResolverInputTypes["UserCreatedRecipesByPinnedRecipesUniqueWhere"],	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},ResolverInputTypes["Recipe"]],
 createdRecipesByStepsGroups?: [{	by: ResolverInputTypes["UserCreatedRecipesByStepsGroupsUniqueWhere"],	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},ResolverInputTypes["Recipe"]],
@@ -8355,11 +8355,11 @@ paginateCreatedRecipes?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefin
 	user?: ResolverInputTypes["UserOrderBy"] | undefined | null,
 	derivedBy?: ResolverInputTypes["RecipeOrderBy"] | undefined | null
 };
-	["UserPinnedRecipesByImplementationDateUniqueWhere"]: {
-	implementationDate?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null
-};
 	["UserPinnedRecipesByModificationUniqueWhere"]: {
 	modification?: ResolverInputTypes["StepModificationUniqueWhere"] | undefined | null
+};
+	["UserPinnedRecipesByImplementationDatesUniqueWhere"]: {
+	implementationDates?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null
 };
 	["UserCreatedRecipesByLocalesUniqueWhere"]: {
 	locales?: ResolverInputTypes["RecipeLocaleUniqueWhere"] | undefined | null
@@ -8391,19 +8391,37 @@ paginateCreatedRecipes?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefin
 	node?:ResolverInputTypes["Recipe"],
 		__typename?: boolean | `@${string}`
 }>;
-	["ImplemetationDate"]: AliasType<{
-	_meta?:ResolverInputTypes["ImplemetationDateMeta"],
+	["StepModification"]: AliasType<{
+	_meta?:ResolverInputTypes["StepModificationMeta"],
 	id?:boolean | `@${string}`,
-step?: [{	filter?: ResolverInputTypes["StepWhere"] | undefined | null},ResolverInputTypes["Step"]],
-pinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 	date?:boolean | `@${string}`,
+pinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
+step?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},ResolverInputTypes["StepLocale"]],
 		__typename?: boolean | `@${string}`
 }>;
-	["ImplemetationDateMeta"]: AliasType<{
+	["StepModificationMeta"]: AliasType<{
 	id?:ResolverInputTypes["FieldMeta"],
-	step?:ResolverInputTypes["FieldMeta"],
-	pinnedRecipe?:ResolverInputTypes["FieldMeta"],
 	date?:ResolverInputTypes["FieldMeta"],
+	pinnedRecipe?:ResolverInputTypes["FieldMeta"],
+	step?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["StepLocale"]: AliasType<{
+	_meta?:ResolverInputTypes["StepLocaleMeta"],
+	id?:boolean | `@${string}`,
+	title?:boolean | `@${string}`,
+base?: [{	filter?: ResolverInputTypes["StepWhere"] | undefined | null},ResolverInputTypes["Step"]],
+locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},ResolverInputTypes["Locale"]],
+modificationDate?: [{	filter?: ResolverInputTypes["StepModificationWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepModificationOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["StepModification"]],
+paginateModificationDate?: [{	filter?: ResolverInputTypes["StepModificationWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepModificationOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepModificationConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["StepLocaleMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	title?:ResolverInputTypes["FieldMeta"],
+	base?:ResolverInputTypes["FieldMeta"],
+	locale?:ResolverInputTypes["FieldMeta"],
+	modificationDate?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Step"]: AliasType<{
@@ -8428,47 +8446,6 @@ paginateImplementationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWh
 	timerCount?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
-	["StepLocale"]: AliasType<{
-	_meta?:ResolverInputTypes["StepLocaleMeta"],
-	id?:boolean | `@${string}`,
-	title?:boolean | `@${string}`,
-base?: [{	filter?: ResolverInputTypes["StepWhere"] | undefined | null},ResolverInputTypes["Step"]],
-locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},ResolverInputTypes["Locale"]],
-modificationDate?: [{	filter?: ResolverInputTypes["StepModificationWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepModificationOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["StepModification"]],
-paginateModificationDate?: [{	filter?: ResolverInputTypes["StepModificationWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["StepModificationOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["StepModificationConnection"]],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepLocaleMeta"]: AliasType<{
-	id?:ResolverInputTypes["FieldMeta"],
-	title?:ResolverInputTypes["FieldMeta"],
-	base?:ResolverInputTypes["FieldMeta"],
-	locale?:ResolverInputTypes["FieldMeta"],
-	modificationDate?:ResolverInputTypes["FieldMeta"],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepModification"]: AliasType<{
-	_meta?:ResolverInputTypes["StepModificationMeta"],
-	id?:boolean | `@${string}`,
-	date?:boolean | `@${string}`,
-pinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
-step?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},ResolverInputTypes["StepLocale"]],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepModificationMeta"]: AliasType<{
-	id?:ResolverInputTypes["FieldMeta"],
-	date?:ResolverInputTypes["FieldMeta"],
-	pinnedRecipe?:ResolverInputTypes["FieldMeta"],
-	step?:ResolverInputTypes["FieldMeta"],
-		__typename?: boolean | `@${string}`
-}>;
-	["StepModificationOrderBy"]: {
-	_random?: boolean | undefined | null,
-	_randomSeeded?: number | undefined | null,
-	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	date?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	pinnedRecipe?: ResolverInputTypes["PinnedRecipeOrderBy"] | undefined | null,
-	step?: ResolverInputTypes["StepLocaleOrderBy"] | undefined | null
-};
 	["StepLocaleOrderBy"]: {
 	_random?: boolean | undefined | null,
 	_randomSeeded?: number | undefined | null,
@@ -8484,13 +8461,19 @@ step?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},Res
 	hasTimer?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	timerCount?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
-	["StepModificationConnection"]: AliasType<{
-	pageInfo?:ResolverInputTypes["PageInfo"],
-	edges?:ResolverInputTypes["StepModificationEdge"],
+	["ImplemetationDate"]: AliasType<{
+	_meta?:ResolverInputTypes["ImplemetationDateMeta"],
+	id?:boolean | `@${string}`,
+step?: [{	filter?: ResolverInputTypes["StepWhere"] | undefined | null},ResolverInputTypes["Step"]],
+pinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
+	date?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
-	["StepModificationEdge"]: AliasType<{
-	node?:ResolverInputTypes["StepModification"],
+	["ImplemetationDateMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	step?:ResolverInputTypes["FieldMeta"],
+	pinnedRecipe?:ResolverInputTypes["FieldMeta"],
+	date?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["ImplemetationDateOrderBy"]: {
@@ -8528,7 +8511,24 @@ step?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefined | null},Res
 	node?:ResolverInputTypes["ImplemetationDate"],
 		__typename?: boolean | `@${string}`
 }>;
-	["PinnedRecipeImplementationDateByStepUniqueWhere"]: {
+	["StepModificationOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	date?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	pinnedRecipe?: ResolverInputTypes["PinnedRecipeOrderBy"] | undefined | null,
+	step?: ResolverInputTypes["StepLocaleOrderBy"] | undefined | null
+};
+	["StepModificationConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["StepModificationEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["StepModificationEdge"]: AliasType<{
+	node?:ResolverInputTypes["StepModification"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipeImplementationDatesByStepUniqueWhere"]: {
 	step?: ResolverInputTypes["StepUniqueWhere"] | undefined | null
 };
 	["StepGroup"]: AliasType<{
@@ -8889,11 +8889,11 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	["RecipeLocalesByLinkUniqueWhere"]: {
 	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null
 };
-	["RecipePinnedRecipesByImplementationDateUniqueWhere"]: {
-	implementationDate?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null
-};
 	["RecipePinnedRecipesByModificationUniqueWhere"]: {
 	modification?: ResolverInputTypes["StepModificationUniqueWhere"] | undefined | null
+};
+	["RecipePinnedRecipesByImplementationDatesUniqueWhere"]: {
+	implementationDates?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null
 };
 	["RecipeStepsGroupsByLocalesUniqueWhere"]: {
 	locales?: ResolverInputTypes["StepGroupLocaleUniqueWhere"] | undefined | null
@@ -9280,7 +9280,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["PinnedRecipeCreateInput"]: {
 	user?: ResolverInputTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null,
 	derivedBy?: ResolverInputTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null,
-	implementationDate?: Array<ResolverInputTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined | null,
+	implementationDates?: Array<ResolverInputTypes["PinnedRecipeCreateImplementationDatesEntityRelationInput"]> | undefined | null,
 	_dummy_field_?: boolean | undefined | null
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -9289,7 +9289,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 	connect?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null
 };
-	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+	["PinnedRecipeCreateImplementationDatesEntityRelationInput"]: {
 	connect?: ResolverInputTypes["ImplemetationDateUniqueWhere"] | undefined | null,
 	create?: ResolverInputTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined | null,
 	alias?: string | undefined | null
@@ -9310,9 +9310,9 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 };
 	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
 	connect?: ResolverInputTypes["PinnedRecipeUniqueWhere"] | undefined | null,
-	create?: ResolverInputTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined | null
+	create?: ResolverInputTypes["PinnedRecipeWithoutImplementationDatesCreateInput"] | undefined | null
 };
-	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+	["PinnedRecipeWithoutImplementationDatesCreateInput"]: {
 	user?: ResolverInputTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null,
 	derivedBy?: ResolverInputTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null,
 	_dummy_field_?: boolean | undefined | null
@@ -10106,8 +10106,8 @@ export type ModelTypes = {
 	id?: ModelTypes["UUIDCondition"] | undefined,
 	user?: ModelTypes["UserWhere"] | undefined,
 	derivedBy?: ModelTypes["RecipeWhere"] | undefined,
-	implementationDate?: ModelTypes["ImplemetationDateWhere"] | undefined,
 	modification?: ModelTypes["StepModificationWhere"] | undefined,
+	implementationDates?: ModelTypes["ImplemetationDateWhere"] | undefined,
 	and?: Array<ModelTypes["PinnedRecipeWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["PinnedRecipeWhere"] | undefined> | undefined,
 	not?: ModelTypes["PinnedRecipeWhere"] | undefined
@@ -10123,35 +10123,6 @@ export type ModelTypes = {
 	and?: Array<ModelTypes["UserWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["UserWhere"] | undefined> | undefined,
 	not?: ModelTypes["UserWhere"] | undefined
-};
-	["ImplemetationDateWhere"]: {
-	id?: ModelTypes["UUIDCondition"] | undefined,
-	step?: ModelTypes["StepWhere"] | undefined,
-	pinnedRecipe?: ModelTypes["PinnedRecipeWhere"] | undefined,
-	date?: ModelTypes["DateTimeCondition"] | undefined,
-	and?: Array<ModelTypes["ImplemetationDateWhere"] | undefined> | undefined,
-	or?: Array<ModelTypes["ImplemetationDateWhere"] | undefined> | undefined,
-	not?: ModelTypes["ImplemetationDateWhere"] | undefined
-};
-	["StepWhere"]: {
-	id?: ModelTypes["UUIDCondition"] | undefined,
-	locales?: ModelTypes["StepLocaleWhere"] | undefined,
-	implementationDate?: ModelTypes["ImplemetationDateWhere"] | undefined,
-	hasTimer?: ModelTypes["BooleanCondition"] | undefined,
-	timerCount?: ModelTypes["IntCondition"] | undefined,
-	and?: Array<ModelTypes["StepWhere"] | undefined> | undefined,
-	or?: Array<ModelTypes["StepWhere"] | undefined> | undefined,
-	not?: ModelTypes["StepWhere"] | undefined
-};
-	["StepLocaleWhere"]: {
-	id?: ModelTypes["UUIDCondition"] | undefined,
-	title?: ModelTypes["StringCondition"] | undefined,
-	base?: ModelTypes["StepWhere"] | undefined,
-	locale?: ModelTypes["LocaleWhere"] | undefined,
-	modificationDate?: ModelTypes["StepModificationWhere"] | undefined,
-	and?: Array<ModelTypes["StepLocaleWhere"] | undefined> | undefined,
-	or?: Array<ModelTypes["StepLocaleWhere"] | undefined> | undefined,
-	not?: ModelTypes["StepLocaleWhere"] | undefined
 };
 	["StepModificationWhere"]: {
 	id?: ModelTypes["UUIDCondition"] | undefined,
@@ -10178,6 +10149,35 @@ export type ModelTypes = {
 	gte?: ModelTypes["DateTime"] | undefined
 };
 	["DateTime"]:any;
+	["StepLocaleWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	title?: ModelTypes["StringCondition"] | undefined,
+	base?: ModelTypes["StepWhere"] | undefined,
+	locale?: ModelTypes["LocaleWhere"] | undefined,
+	modificationDate?: ModelTypes["StepModificationWhere"] | undefined,
+	and?: Array<ModelTypes["StepLocaleWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["StepLocaleWhere"] | undefined> | undefined,
+	not?: ModelTypes["StepLocaleWhere"] | undefined
+};
+	["StepWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	locales?: ModelTypes["StepLocaleWhere"] | undefined,
+	implementationDate?: ModelTypes["ImplemetationDateWhere"] | undefined,
+	hasTimer?: ModelTypes["BooleanCondition"] | undefined,
+	timerCount?: ModelTypes["IntCondition"] | undefined,
+	and?: Array<ModelTypes["StepWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["StepWhere"] | undefined> | undefined,
+	not?: ModelTypes["StepWhere"] | undefined
+};
+	["ImplemetationDateWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	step?: ModelTypes["StepWhere"] | undefined,
+	pinnedRecipe?: ModelTypes["PinnedRecipeWhere"] | undefined,
+	date?: ModelTypes["DateTimeCondition"] | undefined,
+	and?: Array<ModelTypes["ImplemetationDateWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["ImplemetationDateWhere"] | undefined> | undefined,
+	not?: ModelTypes["ImplemetationDateWhere"] | undefined
+};
 	["BooleanCondition"]: {
 	and?: Array<ModelTypes["BooleanCondition"]> | undefined,
 	or?: Array<ModelTypes["BooleanCondition"]> | undefined,
@@ -10568,8 +10568,11 @@ export type ModelTypes = {
 };
 	["PinnedRecipeUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
-	implementationDate?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined,
-	modification?: ModelTypes["StepModificationUniqueWhere"] | undefined
+	modification?: ModelTypes["StepModificationUniqueWhere"] | undefined,
+	implementationDates?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined
+};
+	["StepModificationUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined
 };
 	["ImplemetationDateUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
@@ -10586,9 +10589,6 @@ export type ModelTypes = {
 	base?: ModelTypes["StepUniqueWhere"] | undefined,
 	locale?: ModelTypes["LocaleUniqueWhere"] | undefined,
 	modificationDate?: ModelTypes["StepModificationUniqueWhere"] | undefined
-};
-	["StepModificationUniqueWhere"]: {
-	id?: ModelTypes["UUID"] | undefined
 };
 	["StepGroupUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
@@ -10780,8 +10780,8 @@ export type ModelTypes = {
 	tipGroups: Array<ModelTypes["TipGroup"]>,
 	localesByLocale?: ModelTypes["RecipeLocale"] | undefined,
 	localesByLink?: ModelTypes["RecipeLocale"] | undefined,
-	pinnedRecipesByImplementationDate?: ModelTypes["PinnedRecipe"] | undefined,
 	pinnedRecipesByModification?: ModelTypes["PinnedRecipe"] | undefined,
+	pinnedRecipesByImplementationDates?: ModelTypes["PinnedRecipe"] | undefined,
 	stepsGroupsByLocales?: ModelTypes["StepGroup"] | undefined,
 	stepsGroupsByItems?: ModelTypes["StepGroup"] | undefined,
 	tipGroupsByItems?: ModelTypes["TipGroup"] | undefined,
@@ -10829,18 +10829,18 @@ export type ModelTypes = {
 	id: ModelTypes["UUID"],
 	user?: ModelTypes["User"] | undefined,
 	derivedBy?: ModelTypes["Recipe"] | undefined,
-	implementationDate: Array<ModelTypes["ImplemetationDate"]>,
 	modification: Array<ModelTypes["StepModification"]>,
-	implementationDateByStep?: ModelTypes["ImplemetationDate"] | undefined,
-	paginateImplementationDate: ModelTypes["ImplemetationDateConnection"],
-	paginateModification: ModelTypes["StepModificationConnection"]
+	implementationDates: Array<ModelTypes["ImplemetationDate"]>,
+	implementationDatesByStep?: ModelTypes["ImplemetationDate"] | undefined,
+	paginateModification: ModelTypes["StepModificationConnection"],
+	paginateImplementationDates: ModelTypes["ImplemetationDateConnection"]
 };
 	["PinnedRecipeMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
 	user?: ModelTypes["FieldMeta"] | undefined,
 	derivedBy?: ModelTypes["FieldMeta"] | undefined,
-	implementationDate?: ModelTypes["FieldMeta"] | undefined,
-	modification?: ModelTypes["FieldMeta"] | undefined
+	modification?: ModelTypes["FieldMeta"] | undefined,
+	implementationDates?: ModelTypes["FieldMeta"] | undefined
 };
 	["User"]: {
 		_meta?: ModelTypes["UserMeta"] | undefined,
@@ -10851,8 +10851,8 @@ export type ModelTypes = {
 	image?: ModelTypes["Image"] | undefined,
 	pinnedRecipes: Array<ModelTypes["PinnedRecipe"]>,
 	createdRecipes: Array<ModelTypes["Recipe"]>,
-	pinnedRecipesByImplementationDate?: ModelTypes["PinnedRecipe"] | undefined,
 	pinnedRecipesByModification?: ModelTypes["PinnedRecipe"] | undefined,
+	pinnedRecipesByImplementationDates?: ModelTypes["PinnedRecipe"] | undefined,
 	createdRecipesByLocales?: ModelTypes["Recipe"] | undefined,
 	createdRecipesByPinnedRecipes?: ModelTypes["Recipe"] | undefined,
 	createdRecipesByStepsGroups?: ModelTypes["Recipe"] | undefined,
@@ -10876,11 +10876,11 @@ export type ModelTypes = {
 	user?: ModelTypes["UserOrderBy"] | undefined,
 	derivedBy?: ModelTypes["RecipeOrderBy"] | undefined
 };
-	["UserPinnedRecipesByImplementationDateUniqueWhere"]: {
-	implementationDate?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined
-};
 	["UserPinnedRecipesByModificationUniqueWhere"]: {
 	modification?: ModelTypes["StepModificationUniqueWhere"] | undefined
+};
+	["UserPinnedRecipesByImplementationDatesUniqueWhere"]: {
+	implementationDates?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined
 };
 	["UserCreatedRecipesByLocalesUniqueWhere"]: {
 	locales?: ModelTypes["RecipeLocaleUniqueWhere"] | undefined
@@ -10908,18 +10908,34 @@ export type ModelTypes = {
 	["RecipeEdge"]: {
 		node: ModelTypes["Recipe"]
 };
-	["ImplemetationDate"]: {
-		_meta?: ModelTypes["ImplemetationDateMeta"] | undefined,
+	["StepModification"]: {
+		_meta?: ModelTypes["StepModificationMeta"] | undefined,
 	id: ModelTypes["UUID"],
-	step?: ModelTypes["Step"] | undefined,
+	date?: ModelTypes["DateTime"] | undefined,
 	pinnedRecipe?: ModelTypes["PinnedRecipe"] | undefined,
-	date: ModelTypes["DateTime"]
+	step?: ModelTypes["StepLocale"] | undefined
 };
-	["ImplemetationDateMeta"]: {
+	["StepModificationMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
-	step?: ModelTypes["FieldMeta"] | undefined,
+	date?: ModelTypes["FieldMeta"] | undefined,
 	pinnedRecipe?: ModelTypes["FieldMeta"] | undefined,
-	date?: ModelTypes["FieldMeta"] | undefined
+	step?: ModelTypes["FieldMeta"] | undefined
+};
+	["StepLocale"]: {
+		_meta?: ModelTypes["StepLocaleMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	title?: string | undefined,
+	base?: ModelTypes["Step"] | undefined,
+	locale?: ModelTypes["Locale"] | undefined,
+	modificationDate: Array<ModelTypes["StepModification"]>,
+	paginateModificationDate: ModelTypes["StepModificationConnection"]
+};
+	["StepLocaleMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	title?: ModelTypes["FieldMeta"] | undefined,
+	base?: ModelTypes["FieldMeta"] | undefined,
+	locale?: ModelTypes["FieldMeta"] | undefined,
+	modificationDate?: ModelTypes["FieldMeta"] | undefined
 };
 	["Step"]: {
 		_meta?: ModelTypes["StepMeta"] | undefined,
@@ -10941,43 +10957,6 @@ export type ModelTypes = {
 	hasTimer?: ModelTypes["FieldMeta"] | undefined,
 	timerCount?: ModelTypes["FieldMeta"] | undefined
 };
-	["StepLocale"]: {
-		_meta?: ModelTypes["StepLocaleMeta"] | undefined,
-	id: ModelTypes["UUID"],
-	title?: string | undefined,
-	base?: ModelTypes["Step"] | undefined,
-	locale?: ModelTypes["Locale"] | undefined,
-	modificationDate: Array<ModelTypes["StepModification"]>,
-	paginateModificationDate: ModelTypes["StepModificationConnection"]
-};
-	["StepLocaleMeta"]: {
-		id?: ModelTypes["FieldMeta"] | undefined,
-	title?: ModelTypes["FieldMeta"] | undefined,
-	base?: ModelTypes["FieldMeta"] | undefined,
-	locale?: ModelTypes["FieldMeta"] | undefined,
-	modificationDate?: ModelTypes["FieldMeta"] | undefined
-};
-	["StepModification"]: {
-		_meta?: ModelTypes["StepModificationMeta"] | undefined,
-	id: ModelTypes["UUID"],
-	date?: ModelTypes["DateTime"] | undefined,
-	pinnedRecipe?: ModelTypes["PinnedRecipe"] | undefined,
-	step?: ModelTypes["StepLocale"] | undefined
-};
-	["StepModificationMeta"]: {
-		id?: ModelTypes["FieldMeta"] | undefined,
-	date?: ModelTypes["FieldMeta"] | undefined,
-	pinnedRecipe?: ModelTypes["FieldMeta"] | undefined,
-	step?: ModelTypes["FieldMeta"] | undefined
-};
-	["StepModificationOrderBy"]: {
-	_random?: boolean | undefined,
-	_randomSeeded?: number | undefined,
-	id?: ModelTypes["OrderDirection"] | undefined,
-	date?: ModelTypes["OrderDirection"] | undefined,
-	pinnedRecipe?: ModelTypes["PinnedRecipeOrderBy"] | undefined,
-	step?: ModelTypes["StepLocaleOrderBy"] | undefined
-};
 	["StepLocaleOrderBy"]: {
 	_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
@@ -10993,12 +10972,18 @@ export type ModelTypes = {
 	hasTimer?: ModelTypes["OrderDirection"] | undefined,
 	timerCount?: ModelTypes["OrderDirection"] | undefined
 };
-	["StepModificationConnection"]: {
-		pageInfo: ModelTypes["PageInfo"],
-	edges: Array<ModelTypes["StepModificationEdge"]>
+	["ImplemetationDate"]: {
+		_meta?: ModelTypes["ImplemetationDateMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	step?: ModelTypes["Step"] | undefined,
+	pinnedRecipe?: ModelTypes["PinnedRecipe"] | undefined,
+	date: ModelTypes["DateTime"]
 };
-	["StepModificationEdge"]: {
-		node: ModelTypes["StepModification"]
+	["ImplemetationDateMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	step?: ModelTypes["FieldMeta"] | undefined,
+	pinnedRecipe?: ModelTypes["FieldMeta"] | undefined,
+	date?: ModelTypes["FieldMeta"] | undefined
 };
 	["ImplemetationDateOrderBy"]: {
 	_random?: boolean | undefined,
@@ -11031,7 +11016,22 @@ export type ModelTypes = {
 	["ImplemetationDateEdge"]: {
 		node: ModelTypes["ImplemetationDate"]
 };
-	["PinnedRecipeImplementationDateByStepUniqueWhere"]: {
+	["StepModificationOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	date?: ModelTypes["OrderDirection"] | undefined,
+	pinnedRecipe?: ModelTypes["PinnedRecipeOrderBy"] | undefined,
+	step?: ModelTypes["StepLocaleOrderBy"] | undefined
+};
+	["StepModificationConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["StepModificationEdge"]>
+};
+	["StepModificationEdge"]: {
+		node: ModelTypes["StepModification"]
+};
+	["PinnedRecipeImplementationDatesByStepUniqueWhere"]: {
 	step?: ModelTypes["StepUniqueWhere"] | undefined
 };
 	["StepGroup"]: {
@@ -11358,11 +11358,11 @@ export type ModelTypes = {
 	["RecipeLocalesByLinkUniqueWhere"]: {
 	link?: ModelTypes["LinkableUniqueWhere"] | undefined
 };
-	["RecipePinnedRecipesByImplementationDateUniqueWhere"]: {
-	implementationDate?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined
-};
 	["RecipePinnedRecipesByModificationUniqueWhere"]: {
 	modification?: ModelTypes["StepModificationUniqueWhere"] | undefined
+};
+	["RecipePinnedRecipesByImplementationDatesUniqueWhere"]: {
+	implementationDates?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined
 };
 	["RecipeStepsGroupsByLocalesUniqueWhere"]: {
 	locales?: ModelTypes["StepGroupLocaleUniqueWhere"] | undefined
@@ -11704,7 +11704,7 @@ export type ModelTypes = {
 	["PinnedRecipeCreateInput"]: {
 	user?: ModelTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
 	derivedBy?: ModelTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
-	implementationDate?: Array<ModelTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined,
+	implementationDates?: Array<ModelTypes["PinnedRecipeCreateImplementationDatesEntityRelationInput"]> | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -11713,7 +11713,7 @@ export type ModelTypes = {
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 	connect?: ModelTypes["RecipeUniqueWhere"] | undefined
 };
-	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+	["PinnedRecipeCreateImplementationDatesEntityRelationInput"]: {
 	connect?: ModelTypes["ImplemetationDateUniqueWhere"] | undefined,
 	create?: ModelTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined,
 	alias?: string | undefined
@@ -11734,9 +11734,9 @@ export type ModelTypes = {
 };
 	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
 	connect?: ModelTypes["PinnedRecipeUniqueWhere"] | undefined,
-	create?: ModelTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined
+	create?: ModelTypes["PinnedRecipeWithoutImplementationDatesCreateInput"] | undefined
 };
-	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+	["PinnedRecipeWithoutImplementationDatesCreateInput"]: {
 	user?: ModelTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
 	derivedBy?: ModelTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
@@ -12472,8 +12472,8 @@ export type GraphQLTypes = {
 		id?: GraphQLTypes["UUIDCondition"] | undefined,
 	user?: GraphQLTypes["UserWhere"] | undefined,
 	derivedBy?: GraphQLTypes["RecipeWhere"] | undefined,
-	implementationDate?: GraphQLTypes["ImplemetationDateWhere"] | undefined,
 	modification?: GraphQLTypes["StepModificationWhere"] | undefined,
+	implementationDates?: GraphQLTypes["ImplemetationDateWhere"] | undefined,
 	and?: Array<GraphQLTypes["PinnedRecipeWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["PinnedRecipeWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["PinnedRecipeWhere"] | undefined
@@ -12489,35 +12489,6 @@ export type GraphQLTypes = {
 	and?: Array<GraphQLTypes["UserWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["UserWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["UserWhere"] | undefined
-};
-	["ImplemetationDateWhere"]: {
-		id?: GraphQLTypes["UUIDCondition"] | undefined,
-	step?: GraphQLTypes["StepWhere"] | undefined,
-	pinnedRecipe?: GraphQLTypes["PinnedRecipeWhere"] | undefined,
-	date?: GraphQLTypes["DateTimeCondition"] | undefined,
-	and?: Array<GraphQLTypes["ImplemetationDateWhere"] | undefined> | undefined,
-	or?: Array<GraphQLTypes["ImplemetationDateWhere"] | undefined> | undefined,
-	not?: GraphQLTypes["ImplemetationDateWhere"] | undefined
-};
-	["StepWhere"]: {
-		id?: GraphQLTypes["UUIDCondition"] | undefined,
-	locales?: GraphQLTypes["StepLocaleWhere"] | undefined,
-	implementationDate?: GraphQLTypes["ImplemetationDateWhere"] | undefined,
-	hasTimer?: GraphQLTypes["BooleanCondition"] | undefined,
-	timerCount?: GraphQLTypes["IntCondition"] | undefined,
-	and?: Array<GraphQLTypes["StepWhere"] | undefined> | undefined,
-	or?: Array<GraphQLTypes["StepWhere"] | undefined> | undefined,
-	not?: GraphQLTypes["StepWhere"] | undefined
-};
-	["StepLocaleWhere"]: {
-		id?: GraphQLTypes["UUIDCondition"] | undefined,
-	title?: GraphQLTypes["StringCondition"] | undefined,
-	base?: GraphQLTypes["StepWhere"] | undefined,
-	locale?: GraphQLTypes["LocaleWhere"] | undefined,
-	modificationDate?: GraphQLTypes["StepModificationWhere"] | undefined,
-	and?: Array<GraphQLTypes["StepLocaleWhere"] | undefined> | undefined,
-	or?: Array<GraphQLTypes["StepLocaleWhere"] | undefined> | undefined,
-	not?: GraphQLTypes["StepLocaleWhere"] | undefined
 };
 	["StepModificationWhere"]: {
 		id?: GraphQLTypes["UUIDCondition"] | undefined,
@@ -12544,6 +12515,35 @@ export type GraphQLTypes = {
 	gte?: GraphQLTypes["DateTime"] | undefined
 };
 	["DateTime"]: "scalar" & { name: "DateTime" };
+	["StepLocaleWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	title?: GraphQLTypes["StringCondition"] | undefined,
+	base?: GraphQLTypes["StepWhere"] | undefined,
+	locale?: GraphQLTypes["LocaleWhere"] | undefined,
+	modificationDate?: GraphQLTypes["StepModificationWhere"] | undefined,
+	and?: Array<GraphQLTypes["StepLocaleWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["StepLocaleWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["StepLocaleWhere"] | undefined
+};
+	["StepWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	locales?: GraphQLTypes["StepLocaleWhere"] | undefined,
+	implementationDate?: GraphQLTypes["ImplemetationDateWhere"] | undefined,
+	hasTimer?: GraphQLTypes["BooleanCondition"] | undefined,
+	timerCount?: GraphQLTypes["IntCondition"] | undefined,
+	and?: Array<GraphQLTypes["StepWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["StepWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["StepWhere"] | undefined
+};
+	["ImplemetationDateWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	step?: GraphQLTypes["StepWhere"] | undefined,
+	pinnedRecipe?: GraphQLTypes["PinnedRecipeWhere"] | undefined,
+	date?: GraphQLTypes["DateTimeCondition"] | undefined,
+	and?: Array<GraphQLTypes["ImplemetationDateWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["ImplemetationDateWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["ImplemetationDateWhere"] | undefined
+};
 	["BooleanCondition"]: {
 		and?: Array<GraphQLTypes["BooleanCondition"]> | undefined,
 	or?: Array<GraphQLTypes["BooleanCondition"]> | undefined,
@@ -12944,8 +12944,11 @@ export type GraphQLTypes = {
 };
 	["PinnedRecipeUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
-	implementationDate?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined,
-	modification?: GraphQLTypes["StepModificationUniqueWhere"] | undefined
+	modification?: GraphQLTypes["StepModificationUniqueWhere"] | undefined,
+	implementationDates?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined
+};
+	["StepModificationUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined
 };
 	["ImplemetationDateUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
@@ -12962,9 +12965,6 @@ export type GraphQLTypes = {
 	base?: GraphQLTypes["StepUniqueWhere"] | undefined,
 	locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined,
 	modificationDate?: GraphQLTypes["StepModificationUniqueWhere"] | undefined
-};
-	["StepModificationUniqueWhere"]: {
-		id?: GraphQLTypes["UUID"] | undefined
 };
 	["StepGroupUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
@@ -13164,8 +13164,8 @@ export type GraphQLTypes = {
 	tipGroups: Array<GraphQLTypes["TipGroup"]>,
 	localesByLocale?: GraphQLTypes["RecipeLocale"] | undefined,
 	localesByLink?: GraphQLTypes["RecipeLocale"] | undefined,
-	pinnedRecipesByImplementationDate?: GraphQLTypes["PinnedRecipe"] | undefined,
 	pinnedRecipesByModification?: GraphQLTypes["PinnedRecipe"] | undefined,
+	pinnedRecipesByImplementationDates?: GraphQLTypes["PinnedRecipe"] | undefined,
 	stepsGroupsByLocales?: GraphQLTypes["StepGroup"] | undefined,
 	stepsGroupsByItems?: GraphQLTypes["StepGroup"] | undefined,
 	tipGroupsByItems?: GraphQLTypes["TipGroup"] | undefined,
@@ -13217,19 +13217,19 @@ export type GraphQLTypes = {
 	id: GraphQLTypes["UUID"],
 	user?: GraphQLTypes["User"] | undefined,
 	derivedBy?: GraphQLTypes["Recipe"] | undefined,
-	implementationDate: Array<GraphQLTypes["ImplemetationDate"]>,
 	modification: Array<GraphQLTypes["StepModification"]>,
-	implementationDateByStep?: GraphQLTypes["ImplemetationDate"] | undefined,
-	paginateImplementationDate: GraphQLTypes["ImplemetationDateConnection"],
-	paginateModification: GraphQLTypes["StepModificationConnection"]
+	implementationDates: Array<GraphQLTypes["ImplemetationDate"]>,
+	implementationDatesByStep?: GraphQLTypes["ImplemetationDate"] | undefined,
+	paginateModification: GraphQLTypes["StepModificationConnection"],
+	paginateImplementationDates: GraphQLTypes["ImplemetationDateConnection"]
 };
 	["PinnedRecipeMeta"]: {
 	__typename: "PinnedRecipeMeta",
 	id?: GraphQLTypes["FieldMeta"] | undefined,
 	user?: GraphQLTypes["FieldMeta"] | undefined,
 	derivedBy?: GraphQLTypes["FieldMeta"] | undefined,
-	implementationDate?: GraphQLTypes["FieldMeta"] | undefined,
-	modification?: GraphQLTypes["FieldMeta"] | undefined
+	modification?: GraphQLTypes["FieldMeta"] | undefined,
+	implementationDates?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["User"]: {
 	__typename: "User",
@@ -13241,8 +13241,8 @@ export type GraphQLTypes = {
 	image?: GraphQLTypes["Image"] | undefined,
 	pinnedRecipes: Array<GraphQLTypes["PinnedRecipe"]>,
 	createdRecipes: Array<GraphQLTypes["Recipe"]>,
-	pinnedRecipesByImplementationDate?: GraphQLTypes["PinnedRecipe"] | undefined,
 	pinnedRecipesByModification?: GraphQLTypes["PinnedRecipe"] | undefined,
+	pinnedRecipesByImplementationDates?: GraphQLTypes["PinnedRecipe"] | undefined,
 	createdRecipesByLocales?: GraphQLTypes["Recipe"] | undefined,
 	createdRecipesByPinnedRecipes?: GraphQLTypes["Recipe"] | undefined,
 	createdRecipesByStepsGroups?: GraphQLTypes["Recipe"] | undefined,
@@ -13267,11 +13267,11 @@ export type GraphQLTypes = {
 	user?: GraphQLTypes["UserOrderBy"] | undefined,
 	derivedBy?: GraphQLTypes["RecipeOrderBy"] | undefined
 };
-	["UserPinnedRecipesByImplementationDateUniqueWhere"]: {
-		implementationDate?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined
-};
 	["UserPinnedRecipesByModificationUniqueWhere"]: {
 		modification?: GraphQLTypes["StepModificationUniqueWhere"] | undefined
+};
+	["UserPinnedRecipesByImplementationDatesUniqueWhere"]: {
+		implementationDates?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined
 };
 	["UserCreatedRecipesByLocalesUniqueWhere"]: {
 		locales?: GraphQLTypes["RecipeLocaleUniqueWhere"] | undefined
@@ -13303,20 +13303,38 @@ export type GraphQLTypes = {
 	__typename: "RecipeEdge",
 	node: GraphQLTypes["Recipe"]
 };
-	["ImplemetationDate"]: {
-	__typename: "ImplemetationDate",
-	_meta?: GraphQLTypes["ImplemetationDateMeta"] | undefined,
+	["StepModification"]: {
+	__typename: "StepModification",
+	_meta?: GraphQLTypes["StepModificationMeta"] | undefined,
 	id: GraphQLTypes["UUID"],
-	step?: GraphQLTypes["Step"] | undefined,
+	date?: GraphQLTypes["DateTime"] | undefined,
 	pinnedRecipe?: GraphQLTypes["PinnedRecipe"] | undefined,
-	date: GraphQLTypes["DateTime"]
+	step?: GraphQLTypes["StepLocale"] | undefined
 };
-	["ImplemetationDateMeta"]: {
-	__typename: "ImplemetationDateMeta",
+	["StepModificationMeta"]: {
+	__typename: "StepModificationMeta",
 	id?: GraphQLTypes["FieldMeta"] | undefined,
-	step?: GraphQLTypes["FieldMeta"] | undefined,
+	date?: GraphQLTypes["FieldMeta"] | undefined,
 	pinnedRecipe?: GraphQLTypes["FieldMeta"] | undefined,
-	date?: GraphQLTypes["FieldMeta"] | undefined
+	step?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["StepLocale"]: {
+	__typename: "StepLocale",
+	_meta?: GraphQLTypes["StepLocaleMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	title?: string | undefined,
+	base?: GraphQLTypes["Step"] | undefined,
+	locale?: GraphQLTypes["Locale"] | undefined,
+	modificationDate: Array<GraphQLTypes["StepModification"]>,
+	paginateModificationDate: GraphQLTypes["StepModificationConnection"]
+};
+	["StepLocaleMeta"]: {
+	__typename: "StepLocaleMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	title?: GraphQLTypes["FieldMeta"] | undefined,
+	base?: GraphQLTypes["FieldMeta"] | undefined,
+	locale?: GraphQLTypes["FieldMeta"] | undefined,
+	modificationDate?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["Step"]: {
 	__typename: "Step",
@@ -13340,47 +13358,6 @@ export type GraphQLTypes = {
 	hasTimer?: GraphQLTypes["FieldMeta"] | undefined,
 	timerCount?: GraphQLTypes["FieldMeta"] | undefined
 };
-	["StepLocale"]: {
-	__typename: "StepLocale",
-	_meta?: GraphQLTypes["StepLocaleMeta"] | undefined,
-	id: GraphQLTypes["UUID"],
-	title?: string | undefined,
-	base?: GraphQLTypes["Step"] | undefined,
-	locale?: GraphQLTypes["Locale"] | undefined,
-	modificationDate: Array<GraphQLTypes["StepModification"]>,
-	paginateModificationDate: GraphQLTypes["StepModificationConnection"]
-};
-	["StepLocaleMeta"]: {
-	__typename: "StepLocaleMeta",
-	id?: GraphQLTypes["FieldMeta"] | undefined,
-	title?: GraphQLTypes["FieldMeta"] | undefined,
-	base?: GraphQLTypes["FieldMeta"] | undefined,
-	locale?: GraphQLTypes["FieldMeta"] | undefined,
-	modificationDate?: GraphQLTypes["FieldMeta"] | undefined
-};
-	["StepModification"]: {
-	__typename: "StepModification",
-	_meta?: GraphQLTypes["StepModificationMeta"] | undefined,
-	id: GraphQLTypes["UUID"],
-	date?: GraphQLTypes["DateTime"] | undefined,
-	pinnedRecipe?: GraphQLTypes["PinnedRecipe"] | undefined,
-	step?: GraphQLTypes["StepLocale"] | undefined
-};
-	["StepModificationMeta"]: {
-	__typename: "StepModificationMeta",
-	id?: GraphQLTypes["FieldMeta"] | undefined,
-	date?: GraphQLTypes["FieldMeta"] | undefined,
-	pinnedRecipe?: GraphQLTypes["FieldMeta"] | undefined,
-	step?: GraphQLTypes["FieldMeta"] | undefined
-};
-	["StepModificationOrderBy"]: {
-		_random?: boolean | undefined,
-	_randomSeeded?: number | undefined,
-	id?: GraphQLTypes["OrderDirection"] | undefined,
-	date?: GraphQLTypes["OrderDirection"] | undefined,
-	pinnedRecipe?: GraphQLTypes["PinnedRecipeOrderBy"] | undefined,
-	step?: GraphQLTypes["StepLocaleOrderBy"] | undefined
-};
 	["StepLocaleOrderBy"]: {
 		_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
@@ -13396,14 +13373,20 @@ export type GraphQLTypes = {
 	hasTimer?: GraphQLTypes["OrderDirection"] | undefined,
 	timerCount?: GraphQLTypes["OrderDirection"] | undefined
 };
-	["StepModificationConnection"]: {
-	__typename: "StepModificationConnection",
-	pageInfo: GraphQLTypes["PageInfo"],
-	edges: Array<GraphQLTypes["StepModificationEdge"]>
+	["ImplemetationDate"]: {
+	__typename: "ImplemetationDate",
+	_meta?: GraphQLTypes["ImplemetationDateMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	step?: GraphQLTypes["Step"] | undefined,
+	pinnedRecipe?: GraphQLTypes["PinnedRecipe"] | undefined,
+	date: GraphQLTypes["DateTime"]
 };
-	["StepModificationEdge"]: {
-	__typename: "StepModificationEdge",
-	node: GraphQLTypes["StepModification"]
+	["ImplemetationDateMeta"]: {
+	__typename: "ImplemetationDateMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	step?: GraphQLTypes["FieldMeta"] | undefined,
+	pinnedRecipe?: GraphQLTypes["FieldMeta"] | undefined,
+	date?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["ImplemetationDateOrderBy"]: {
 		_random?: boolean | undefined,
@@ -13440,7 +13423,24 @@ export type GraphQLTypes = {
 	__typename: "ImplemetationDateEdge",
 	node: GraphQLTypes["ImplemetationDate"]
 };
-	["PinnedRecipeImplementationDateByStepUniqueWhere"]: {
+	["StepModificationOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	date?: GraphQLTypes["OrderDirection"] | undefined,
+	pinnedRecipe?: GraphQLTypes["PinnedRecipeOrderBy"] | undefined,
+	step?: GraphQLTypes["StepLocaleOrderBy"] | undefined
+};
+	["StepModificationConnection"]: {
+	__typename: "StepModificationConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["StepModificationEdge"]>
+};
+	["StepModificationEdge"]: {
+	__typename: "StepModificationEdge",
+	node: GraphQLTypes["StepModification"]
+};
+	["PinnedRecipeImplementationDatesByStepUniqueWhere"]: {
 		step?: GraphQLTypes["StepUniqueWhere"] | undefined
 };
 	["StepGroup"]: {
@@ -13801,11 +13801,11 @@ export type GraphQLTypes = {
 	["RecipeLocalesByLinkUniqueWhere"]: {
 		link?: GraphQLTypes["LinkableUniqueWhere"] | undefined
 };
-	["RecipePinnedRecipesByImplementationDateUniqueWhere"]: {
-		implementationDate?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined
-};
 	["RecipePinnedRecipesByModificationUniqueWhere"]: {
 		modification?: GraphQLTypes["StepModificationUniqueWhere"] | undefined
+};
+	["RecipePinnedRecipesByImplementationDatesUniqueWhere"]: {
+		implementationDates?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined
 };
 	["RecipeStepsGroupsByLocalesUniqueWhere"]: {
 		locales?: GraphQLTypes["StepGroupLocaleUniqueWhere"] | undefined
@@ -14192,7 +14192,7 @@ export type GraphQLTypes = {
 	["PinnedRecipeCreateInput"]: {
 		user?: GraphQLTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
 	derivedBy?: GraphQLTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
-	implementationDate?: Array<GraphQLTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"]> | undefined,
+	implementationDates?: Array<GraphQLTypes["PinnedRecipeCreateImplementationDatesEntityRelationInput"]> | undefined,
 	_dummy_field_?: boolean | undefined
 };
 	["PinnedRecipeCreateUserEntityRelationInput"]: {
@@ -14201,7 +14201,7 @@ export type GraphQLTypes = {
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
 		connect?: GraphQLTypes["RecipeUniqueWhere"] | undefined
 };
-	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: {
+	["PinnedRecipeCreateImplementationDatesEntityRelationInput"]: {
 		connect?: GraphQLTypes["ImplemetationDateUniqueWhere"] | undefined,
 	create?: GraphQLTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"] | undefined,
 	alias?: string | undefined
@@ -14222,9 +14222,9 @@ export type GraphQLTypes = {
 };
 	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: {
 		connect?: GraphQLTypes["PinnedRecipeUniqueWhere"] | undefined,
-	create?: GraphQLTypes["PinnedRecipeWithoutImplementationDateCreateInput"] | undefined
+	create?: GraphQLTypes["PinnedRecipeWithoutImplementationDatesCreateInput"] | undefined
 };
-	["PinnedRecipeWithoutImplementationDateCreateInput"]: {
+	["PinnedRecipeWithoutImplementationDatesCreateInput"]: {
 		user?: GraphQLTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
 	derivedBy?: GraphQLTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
 	_dummy_field_?: boolean | undefined
@@ -14720,12 +14720,12 @@ type ZEUS_VARIABLES = {
 	["ImageWhere"]: ValueTypes["ImageWhere"];
 	["PinnedRecipeWhere"]: ValueTypes["PinnedRecipeWhere"];
 	["UserWhere"]: ValueTypes["UserWhere"];
-	["ImplemetationDateWhere"]: ValueTypes["ImplemetationDateWhere"];
-	["StepWhere"]: ValueTypes["StepWhere"];
-	["StepLocaleWhere"]: ValueTypes["StepLocaleWhere"];
 	["StepModificationWhere"]: ValueTypes["StepModificationWhere"];
 	["DateTimeCondition"]: ValueTypes["DateTimeCondition"];
 	["DateTime"]: ValueTypes["DateTime"];
+	["StepLocaleWhere"]: ValueTypes["StepLocaleWhere"];
+	["StepWhere"]: ValueTypes["StepWhere"];
+	["ImplemetationDateWhere"]: ValueTypes["ImplemetationDateWhere"];
 	["BooleanCondition"]: ValueTypes["BooleanCondition"];
 	["StepGroupWhere"]: ValueTypes["StepGroupWhere"];
 	["StepGroupLocaleWhere"]: ValueTypes["StepGroupLocaleWhere"];
@@ -14761,10 +14761,10 @@ type ZEUS_VARIABLES = {
 	["RecipeLocaleUniqueWhere"]: ValueTypes["RecipeLocaleUniqueWhere"];
 	["RecipeUniqueWhere"]: ValueTypes["RecipeUniqueWhere"];
 	["PinnedRecipeUniqueWhere"]: ValueTypes["PinnedRecipeUniqueWhere"];
+	["StepModificationUniqueWhere"]: ValueTypes["StepModificationUniqueWhere"];
 	["ImplemetationDateUniqueWhere"]: ValueTypes["ImplemetationDateUniqueWhere"];
 	["StepUniqueWhere"]: ValueTypes["StepUniqueWhere"];
 	["StepLocaleUniqueWhere"]: ValueTypes["StepLocaleUniqueWhere"];
-	["StepModificationUniqueWhere"]: ValueTypes["StepModificationUniqueWhere"];
 	["StepGroupUniqueWhere"]: ValueTypes["StepGroupUniqueWhere"];
 	["StepGroupLocaleUniqueWhere"]: ValueTypes["StepGroupLocaleUniqueWhere"];
 	["StepGroupItemUniqueWhere"]: ValueTypes["StepGroupItemUniqueWhere"];
@@ -14785,20 +14785,20 @@ type ZEUS_VARIABLES = {
 	["HomePageLocalesByLinkUniqueWhere"]: ValueTypes["HomePageLocalesByLinkUniqueWhere"];
 	["HomePageLocalesBySeoUniqueWhere"]: ValueTypes["HomePageLocalesBySeoUniqueWhere"];
 	["PinnedRecipeOrderBy"]: ValueTypes["PinnedRecipeOrderBy"];
-	["UserPinnedRecipesByImplementationDateUniqueWhere"]: ValueTypes["UserPinnedRecipesByImplementationDateUniqueWhere"];
 	["UserPinnedRecipesByModificationUniqueWhere"]: ValueTypes["UserPinnedRecipesByModificationUniqueWhere"];
+	["UserPinnedRecipesByImplementationDatesUniqueWhere"]: ValueTypes["UserPinnedRecipesByImplementationDatesUniqueWhere"];
 	["UserCreatedRecipesByLocalesUniqueWhere"]: ValueTypes["UserCreatedRecipesByLocalesUniqueWhere"];
 	["UserCreatedRecipesByPinnedRecipesUniqueWhere"]: ValueTypes["UserCreatedRecipesByPinnedRecipesUniqueWhere"];
 	["UserCreatedRecipesByStepsGroupsUniqueWhere"]: ValueTypes["UserCreatedRecipesByStepsGroupsUniqueWhere"];
 	["UserCreatedRecipesByTipGroupsUniqueWhere"]: ValueTypes["UserCreatedRecipesByTipGroupsUniqueWhere"];
-	["StepModificationOrderBy"]: ValueTypes["StepModificationOrderBy"];
 	["StepLocaleOrderBy"]: ValueTypes["StepLocaleOrderBy"];
 	["StepOrderBy"]: ValueTypes["StepOrderBy"];
 	["ImplemetationDateOrderBy"]: ValueTypes["ImplemetationDateOrderBy"];
 	["StepLocalesByLocaleUniqueWhere"]: ValueTypes["StepLocalesByLocaleUniqueWhere"];
 	["StepLocalesByModificationDateUniqueWhere"]: ValueTypes["StepLocalesByModificationDateUniqueWhere"];
 	["StepImplementationDateByPinnedRecipeUniqueWhere"]: ValueTypes["StepImplementationDateByPinnedRecipeUniqueWhere"];
-	["PinnedRecipeImplementationDateByStepUniqueWhere"]: ValueTypes["PinnedRecipeImplementationDateByStepUniqueWhere"];
+	["StepModificationOrderBy"]: ValueTypes["StepModificationOrderBy"];
+	["PinnedRecipeImplementationDatesByStepUniqueWhere"]: ValueTypes["PinnedRecipeImplementationDatesByStepUniqueWhere"];
 	["StepGroupLocaleOrderBy"]: ValueTypes["StepGroupLocaleOrderBy"];
 	["StepGroupOrderBy"]: ValueTypes["StepGroupOrderBy"];
 	["TipLocaleOrderBy"]: ValueTypes["TipLocaleOrderBy"];
@@ -14818,8 +14818,8 @@ type ZEUS_VARIABLES = {
 	["TipGroupLocalesByLocaleUniqueWhere"]: ValueTypes["TipGroupLocalesByLocaleUniqueWhere"];
 	["RecipeLocalesByLocaleUniqueWhere"]: ValueTypes["RecipeLocalesByLocaleUniqueWhere"];
 	["RecipeLocalesByLinkUniqueWhere"]: ValueTypes["RecipeLocalesByLinkUniqueWhere"];
-	["RecipePinnedRecipesByImplementationDateUniqueWhere"]: ValueTypes["RecipePinnedRecipesByImplementationDateUniqueWhere"];
 	["RecipePinnedRecipesByModificationUniqueWhere"]: ValueTypes["RecipePinnedRecipesByModificationUniqueWhere"];
+	["RecipePinnedRecipesByImplementationDatesUniqueWhere"]: ValueTypes["RecipePinnedRecipesByImplementationDatesUniqueWhere"];
 	["RecipeStepsGroupsByLocalesUniqueWhere"]: ValueTypes["RecipeStepsGroupsByLocalesUniqueWhere"];
 	["RecipeStepsGroupsByItemsUniqueWhere"]: ValueTypes["RecipeStepsGroupsByItemsUniqueWhere"];
 	["RecipeTipGroupsByItemsUniqueWhere"]: ValueTypes["RecipeTipGroupsByItemsUniqueWhere"];
@@ -14863,12 +14863,12 @@ type ZEUS_VARIABLES = {
 	["PinnedRecipeCreateInput"]: ValueTypes["PinnedRecipeCreateInput"];
 	["PinnedRecipeCreateUserEntityRelationInput"]: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"];
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"];
-	["PinnedRecipeCreateImplementationDateEntityRelationInput"]: ValueTypes["PinnedRecipeCreateImplementationDateEntityRelationInput"];
+	["PinnedRecipeCreateImplementationDatesEntityRelationInput"]: ValueTypes["PinnedRecipeCreateImplementationDatesEntityRelationInput"];
 	["ImplemetationDateWithoutPinnedRecipeCreateInput"]: ValueTypes["ImplemetationDateWithoutPinnedRecipeCreateInput"];
 	["ImplemetationDateCreateStepEntityRelationInput"]: ValueTypes["ImplemetationDateCreateStepEntityRelationInput"];
 	["ImplemetationDateCreateInput"]: ValueTypes["ImplemetationDateCreateInput"];
 	["ImplemetationDateCreatePinnedRecipeEntityRelationInput"]: ValueTypes["ImplemetationDateCreatePinnedRecipeEntityRelationInput"];
-	["PinnedRecipeWithoutImplementationDateCreateInput"]: ValueTypes["PinnedRecipeWithoutImplementationDateCreateInput"];
+	["PinnedRecipeWithoutImplementationDatesCreateInput"]: ValueTypes["PinnedRecipeWithoutImplementationDatesCreateInput"];
 	["RecipeListWhere"]: ValueTypes["RecipeListWhere"];
 	["RecipeListItemWhere"]: ValueTypes["RecipeListItemWhere"];
 	["RecipeListItemOrderBy"]: ValueTypes["RecipeListItemOrderBy"];
