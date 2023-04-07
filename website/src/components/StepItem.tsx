@@ -6,12 +6,13 @@ import styles from './StepItem.module.sass'
 
 export interface StepItemProps {
 	item: StepGroupItemResult
+	disabled: boolean
 }
 
-export const StepItem: FunctionComponent<StepItemProps> = ({ item }) => {
+export const StepItem: FunctionComponent<StepItemProps> = ({ item, disabled }) => {
 	switch (item.type) {
 		case 'step':
-			return item.step ? <Step step={item.step} /> : null
+			return item.step ? <Step step={item.step} disabled={disabled} /> : null
 		case 'tip':
 			return (
 				<div className={styles.tipWrapper}>

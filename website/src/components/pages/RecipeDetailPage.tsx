@@ -1,7 +1,8 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import type { FunctionComponent } from 'react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useMirrorLoading } from 'shared-loading-indicator'
 import type { RecipeLocaleResult } from '../../data/RecipeLocaleFragment'
 import { contember } from '../../utilities/contember'
@@ -51,6 +52,29 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 
 	useMirrorLoading(mutation.isLoading)
 
+	const router = useRouter()
+
+	const pinnedId = useMemo(() => {
+		const id = router.query.pinnedId
+		if (typeof id === 'string') {
+			return id
+		}
+	}, [router.query.pinnedId])
+
+	const pinnedData = useQuery([pinnedId], async () => {
+		if (!pinnedId) {
+			return null
+		}
+		const data = await contember('query', { scalars: scalarResolver })({
+			getPinnedRecipe: [{ by: { id: pinnedId } }, { id: true }],
+		})
+		return data.getPinnedRecipe
+	})
+
+	const readOnly = !pinnedData.data
+
+	useMirrorLoading(pinnedData.isLoading)
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -86,6 +110,7 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 								return (
 									<div className={clsx(styles.stepGroup, isActive && styles.isActive)} key={group.id}>
 										<StepGroup
+											disabled={readOnly}
 											group={group}
 											index={index + 1}
 											onNextStep={() => setActiveStep(activeStep && activeStep + 1)}
