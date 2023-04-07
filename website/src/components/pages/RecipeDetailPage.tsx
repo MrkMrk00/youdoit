@@ -27,11 +27,13 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 		publishDate: recipeDetailPage.base?.publishDate,
 	}
 
+	const router = useRouter()
+
 	const [activeStep, setActiveStep] = useState<number | null>(0)
 
 	const mutation = useMutation(
 		async () => {
-			await contember('mutation', { scalars: scalarResolver })({
+			const data = await contember('mutation', { scalars: scalarResolver })({
 				createPinnedRecipe: [
 					{
 						data: {
@@ -39,20 +41,19 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 							derivedBy: { connect: { id: recipeDetailPage.base?.id } }, //@TODO investigate why ? is needed
 						},
 					},
-					{ ok: true, errorMessage: true },
+					{ ok: true, errorMessage: true, node: { id: true } },
 				],
 			})
+			return data.createPinnedRecipe.node?.id
 		},
 		{
-			onSuccess: () => {
-				console.log('success')
+			onSuccess: (id) => {
+				router.push({ pathname: router.asPath, query: { pinnedId: id } })
 			},
 		},
 	)
 
 	useMirrorLoading(mutation.isLoading)
-
-	const router = useRouter()
 
 	const pinnedId = useMemo(() => {
 		const id = router.query.pinnedId
@@ -88,14 +89,17 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 						author={author}
 					/>
 				</div>
-				<button
-					type="button"
-					onClick={() => {
-						mutation.mutate()
-					}}
-				>
-					Add to favourites
-				</button>
+				{readOnly && (
+					<button
+						type="button"
+						onClick={() => {
+							mutation.mutate()
+						}}
+						disabled={mutation.isLoading}
+					>
+						Add to favourites
+					</button>
+				)}
 				<div className={styles.contentIn}>
 					<Container>
 						<div className={styles.tipGroupList}>
