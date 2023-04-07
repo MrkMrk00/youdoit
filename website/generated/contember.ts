@@ -170,6 +170,9 @@ export const AllTypesProps: Record<string,any> = {
 			filter:"PinnedRecipeWhere",
 			orderBy:"PinnedRecipeOrderBy"
 		},
+		validateCreatePinnedRecipe:{
+			data:"PinnedRecipeCreateInput"
+		},
 		getImplemetationDate:{
 			by:"ImplemetationDateUniqueWhere",
 			filter:"ImplemetationDateWhere"
@@ -1876,6 +1879,16 @@ export const AllTypesProps: Record<string,any> = {
 		pinnedRecipes:"PinnedRecipeUniqueWhere",
 		createdRecipes:"RecipeUniqueWhere"
 	},
+	PinnedRecipeCreateInput:{
+		user:"PinnedRecipeCreateUserEntityRelationInput",
+		derivedBy:"PinnedRecipeCreateDerivedByEntityRelationInput"
+	},
+	PinnedRecipeCreateUserEntityRelationInput:{
+		connect:"UserUniqueWhere"
+	},
+	PinnedRecipeCreateDerivedByEntityRelationInput:{
+		connect:"RecipeUniqueWhere"
+	},
 	RecipeList:{
 		items:{
 			filter:"RecipeListItemWhere",
@@ -2095,6 +2108,9 @@ export const AllTypesProps: Record<string,any> = {
 			filter:"PinnedRecipeWhere",
 			orderBy:"PinnedRecipeOrderBy"
 		},
+		validateCreatePinnedRecipe:{
+			data:"PinnedRecipeCreateInput"
+		},
 		getImplemetationDate:{
 			by:"ImplemetationDateUniqueWhere",
 			filter:"ImplemetationDateWhere"
@@ -2300,18 +2316,41 @@ export const AllTypesProps: Record<string,any> = {
 			orderBy:"TipGroupLocaleOrderBy"
 		}
 	},
-	Json: `scalar.Json` as const,
-	_OnDeleteBehaviour: "enum" as const,
-	_RelationSide: "enum" as const,
-	_OrderByDirection: "enum" as const,
 	Mutation:{
+		createPinnedRecipe:{
+			data:"PinnedRecipeCreateInput"
+		},
+		deletePinnedRecipe:{
+			by:"PinnedRecipeUniqueWhere",
+			filter:"PinnedRecipeWhere"
+		},
+		transaction:{
+			options:"MutationTransactionOptions"
+		},
 		generateUploadUrl:{
 
 		},
 		generateReadUrl:{
 
 		}
-	}
+	},
+	_MutationErrorType: "enum" as const,
+	MutationTransaction:{
+		createPinnedRecipe:{
+			data:"PinnedRecipeCreateInput"
+		},
+		deletePinnedRecipe:{
+			by:"PinnedRecipeUniqueWhere",
+			filter:"PinnedRecipeWhere"
+		}
+	},
+	MutationTransactionOptions:{
+
+	},
+	Json: `scalar.Json` as const,
+	_OnDeleteBehaviour: "enum" as const,
+	_RelationSide: "enum" as const,
+	_OrderByDirection: "enum" as const
 }
 
 export const ReturnTypes: Record<string,any> = {
@@ -2358,6 +2397,7 @@ export const ReturnTypes: Record<string,any> = {
 		getPinnedRecipe:"PinnedRecipe",
 		listPinnedRecipe:"PinnedRecipe",
 		paginatePinnedRecipe:"PinnedRecipeConnection",
+		validateCreatePinnedRecipe:"_ValidationResult",
 		getImplemetationDate:"ImplemetationDate",
 		listImplemetationDate:"ImplemetationDate",
 		paginateImplemetationDate:"ImplemetationDateConnection",
@@ -3139,6 +3179,28 @@ export const ReturnTypes: Record<string,any> = {
 	StepEdge:{
 		node:"Step"
 	},
+	_ValidationResult:{
+		valid:"Boolean",
+		errors:"_ValidationError"
+	},
+	_ValidationError:{
+		path:"_PathFragment",
+		message:"_ValidationMessage"
+	},
+	_PathFragment:{
+		"...on _FieldPathFragment":"_FieldPathFragment",
+		"...on _IndexPathFragment":"_IndexPathFragment"
+	},
+	_FieldPathFragment:{
+		field:"String"
+	},
+	_IndexPathFragment:{
+		index:"Int",
+		alias:"String"
+	},
+	_ValidationMessage:{
+		text:"String"
+	},
 	HomePageConnection:{
 		pageInfo:"PageInfo",
 		edges:"HomePageEdge"
@@ -3240,6 +3302,7 @@ export const ReturnTypes: Record<string,any> = {
 		getPinnedRecipe:"PinnedRecipe",
 		listPinnedRecipe:"PinnedRecipe",
 		paginatePinnedRecipe:"PinnedRecipeConnection",
+		validateCreatePinnedRecipe:"_ValidationResult",
 		getImplemetationDate:"ImplemetationDate",
 		listImplemetationDate:"ImplemetationDate",
 		paginateImplemetationDate:"ImplemetationDateConnection",
@@ -3294,6 +3357,49 @@ export const ReturnTypes: Record<string,any> = {
 	},
 	Info:{
 		description:"String"
+	},
+	Mutation:{
+		createPinnedRecipe:"PinnedRecipeCreateResult",
+		deletePinnedRecipe:"PinnedRecipeDeleteResult",
+		transaction:"MutationTransaction",
+		query:"Query",
+		generateUploadUrl:"S3SignedUpload",
+		generateReadUrl:"S3SignedRead"
+	},
+	PinnedRecipeCreateResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"PinnedRecipe",
+		validation:"_ValidationResult"
+	},
+	MutationResult:{
+		"...on PinnedRecipeCreateResult": "PinnedRecipeCreateResult",
+		"...on PinnedRecipeDeleteResult": "PinnedRecipeDeleteResult",
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError"
+	},
+	_MutationError:{
+		path:"_PathFragment",
+		paths:"_PathFragment",
+		type:"_MutationErrorType",
+		message:"String"
+	},
+	PinnedRecipeDeleteResult:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		node:"PinnedRecipe"
+	},
+	MutationTransaction:{
+		ok:"Boolean",
+		errorMessage:"String",
+		errors:"_MutationError",
+		validation:"_ValidationResult",
+		createPinnedRecipe:"PinnedRecipeCreateResult",
+		deletePinnedRecipe:"PinnedRecipeDeleteResult",
+		query:"Query"
 	},
 	Json: `scalar.Json` as const,
 	_Schema:{
@@ -3373,10 +3479,6 @@ export const ReturnTypes: Record<string,any> = {
 	_Enum:{
 		name:"String",
 		values:"String"
-	},
-	Mutation:{
-		generateUploadUrl:"S3SignedUpload",
-		generateReadUrl:"S3SignedRead"
 	},
 	S3SignedUpload:{
 		url:"String",
@@ -4223,14 +4325,14 @@ export const GRAPHQL_TYPE_SEPARATOR = `__$GRAPHQL__`;
 export const $ = <Type extends GraphQLVariableType, Name extends string>(name: Name, graphqlType: Type) => {
   return (START_VAR_NAME + name + GRAPHQL_TYPE_SEPARATOR + graphqlType) as unknown as Variable<Type, Name>;
 };
-type ZEUS_INTERFACES = GraphQLTypes["_Field"]
+type ZEUS_INTERFACES = GraphQLTypes["MutationResult"] | GraphQLTypes["_Field"]
 export type ScalarCoders = {
 	UUID?: ScalarResolver;
 	Date?: ScalarResolver;
 	DateTime?: ScalarResolver;
 	Json?: ScalarResolver;
 }
-type ZEUS_UNIONS = GraphQLTypes["_Argument"]
+type ZEUS_UNIONS = GraphQLTypes["_PathFragment"] | GraphQLTypes["_Argument"]
 
 export type ValueTypes = {
     ["Query"]: AliasType<{
@@ -4276,6 +4378,7 @@ paginateStepLocale?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | nul
 getPinnedRecipe?: [{	by: ValueTypes["PinnedRecipeUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 listPinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipeOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 paginatePinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipeOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipeConnection"]],
+validateCreatePinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 getImplemetationDate?: [{	by: ValueTypes["ImplemetationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateConnection"]],
@@ -6161,6 +6264,44 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	node?:ValueTypes["Step"],
 		__typename?: boolean | `@${string}`
 }>;
+	["_ValidationResult"]: AliasType<{
+	valid?:boolean | `@${string}`,
+	errors?:ValueTypes["_ValidationError"],
+		__typename?: boolean | `@${string}`
+}>;
+	["_ValidationError"]: AliasType<{
+	path?:ValueTypes["_PathFragment"],
+	message?:ValueTypes["_ValidationMessage"],
+		__typename?: boolean | `@${string}`
+}>;
+	["_PathFragment"]: AliasType<{		["...on _FieldPathFragment"] : ValueTypes["_FieldPathFragment"],
+		["...on _IndexPathFragment"] : ValueTypes["_IndexPathFragment"]
+		__typename?: boolean | `@${string}`
+}>;
+	["_FieldPathFragment"]: AliasType<{
+	field?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["_IndexPathFragment"]: AliasType<{
+	index?:boolean | `@${string}`,
+	alias?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["_ValidationMessage"]: AliasType<{
+	text?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipeCreateInput"]: {
+	user?: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null | Variable<any, string>,
+	derivedBy?: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null | Variable<any, string>,
+	_dummy_field_?: boolean | undefined | null | Variable<any, string>
+};
+	["PinnedRecipeCreateUserEntityRelationInput"]: {
+	connect?: ValueTypes["UserUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
+	connect?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>
+};
 	["HomePageConnection"]: AliasType<{
 	pageInfo?:ValueTypes["PageInfo"],
 	edges?:ValueTypes["HomePageEdge"],
@@ -6312,6 +6453,7 @@ paginateStepLocale?: [{	filter?: ValueTypes["StepLocaleWhere"] | undefined | nul
 getPinnedRecipe?: [{	by: ValueTypes["PinnedRecipeUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 listPinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipeOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 paginatePinnedRecipe?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipeOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipeConnection"]],
+validateCreatePinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Variable<any, string>},ValueTypes["_ValidationResult"]],
 getImplemetationDate?: [{	by: ValueTypes["ImplemetationDateUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ValueTypes["ImplemetationDateWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ImplemetationDateOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["ImplemetationDateConnection"]],
@@ -6369,6 +6511,59 @@ paginateTipGroupLocale?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefin
 	description?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["Mutation"]: AliasType<{
+createPinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Variable<any, string>},ValueTypes["PinnedRecipeCreateResult"]],
+deletePinnedRecipe?: [{	by: ValueTypes["PinnedRecipeUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipeDeleteResult"]],
+transaction?: [{	options?: ValueTypes["MutationTransactionOptions"] | undefined | null | Variable<any, string>},ValueTypes["MutationTransaction"]],
+	query?:ValueTypes["Query"],
+generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
+generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>},ValueTypes["S3SignedRead"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipeCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["PinnedRecipe"],
+	validation?:ValueTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["MutationResult"]:AliasType<{
+		ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"];
+		['...on PinnedRecipeCreateResult']?: Omit<ValueTypes["PinnedRecipeCreateResult"],keyof ValueTypes["MutationResult"]>;
+		['...on PinnedRecipeDeleteResult']?: Omit<ValueTypes["PinnedRecipeDeleteResult"],keyof ValueTypes["MutationResult"]>;
+		__typename?: boolean | `@${string}`
+}>;
+	["_MutationError"]: AliasType<{
+	path?:ValueTypes["_PathFragment"],
+	paths?:ValueTypes["_PathFragment"],
+	type?:boolean | `@${string}`,
+	message?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["_MutationErrorType"]:_MutationErrorType;
+	["PinnedRecipeDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	node?:ValueTypes["PinnedRecipe"],
+		__typename?: boolean | `@${string}`
+}>;
+	["MutationTransaction"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ValueTypes["_MutationError"],
+	validation?:ValueTypes["_ValidationResult"],
+createPinnedRecipe?: [{	data: ValueTypes["PinnedRecipeCreateInput"] | Variable<any, string>},ValueTypes["PinnedRecipeCreateResult"]],
+deletePinnedRecipe?: [{	by: ValueTypes["PinnedRecipeUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipeDeleteResult"]],
+	query?:ValueTypes["Query"],
+		__typename?: boolean | `@${string}`
+}>;
+	["MutationTransactionOptions"]: {
+	deferForeignKeyConstraints?: boolean | undefined | null | Variable<any, string>
+};
 	["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ValueTypes["_Enum"],
@@ -6465,11 +6660,6 @@ paginateTipGroupLocale?: [{	filter?: ValueTypes["TipGroupLocaleWhere"] | undefin
 	values?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
-	["Mutation"]: AliasType<{
-generateUploadUrl?: [{	contentType: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>,	prefix?: string | undefined | null | Variable<any, string>},ValueTypes["S3SignedUpload"]],
-generateReadUrl?: [{	objectKey: string | Variable<any, string>,	expiration?: number | undefined | null | Variable<any, string>},ValueTypes["S3SignedRead"]],
-		__typename?: boolean | `@${string}`
-}>;
 	["S3SignedUpload"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ValueTypes["S3Header"],
@@ -6542,6 +6732,7 @@ paginateStepLocale?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefin
 getPinnedRecipe?: [{	by: ResolverInputTypes["PinnedRecipeUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 listPinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipeOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 paginatePinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipeOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipeConnection"]],
+validateCreatePinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInput"]},ResolverInputTypes["_ValidationResult"]],
 getImplemetationDate?: [{	by: ResolverInputTypes["ImplemetationDateUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["ImplemetationDateConnection"]],
@@ -8427,6 +8618,45 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	node?:ResolverInputTypes["Step"],
 		__typename?: boolean | `@${string}`
 }>;
+	["_ValidationResult"]: AliasType<{
+	valid?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_ValidationError"],
+		__typename?: boolean | `@${string}`
+}>;
+	["_ValidationError"]: AliasType<{
+	path?:ResolverInputTypes["_PathFragment"],
+	message?:ResolverInputTypes["_ValidationMessage"],
+		__typename?: boolean | `@${string}`
+}>;
+	["_PathFragment"]: AliasType<{
+	_FieldPathFragment?:ResolverInputTypes["_FieldPathFragment"],
+	_IndexPathFragment?:ResolverInputTypes["_IndexPathFragment"],
+		__typename?: boolean | `@${string}`
+}>;
+	["_FieldPathFragment"]: AliasType<{
+	field?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["_IndexPathFragment"]: AliasType<{
+	index?:boolean | `@${string}`,
+	alias?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["_ValidationMessage"]: AliasType<{
+	text?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipeCreateInput"]: {
+	user?: ResolverInputTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined | null,
+	derivedBy?: ResolverInputTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined | null,
+	_dummy_field_?: boolean | undefined | null
+};
+	["PinnedRecipeCreateUserEntityRelationInput"]: {
+	connect?: ResolverInputTypes["UserUniqueWhere"] | undefined | null
+};
+	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
+	connect?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null
+};
 	["HomePageConnection"]: AliasType<{
 	pageInfo?:ResolverInputTypes["PageInfo"],
 	edges?:ResolverInputTypes["HomePageEdge"],
@@ -8578,6 +8808,7 @@ paginateStepLocale?: [{	filter?: ResolverInputTypes["StepLocaleWhere"] | undefin
 getPinnedRecipe?: [{	by: ResolverInputTypes["PinnedRecipeUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 listPinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipeOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 paginatePinnedRecipe?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipeOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipeConnection"]],
+validateCreatePinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInput"]},ResolverInputTypes["_ValidationResult"]],
 getImplemetationDate?: [{	by: ResolverInputTypes["ImplemetationDateUniqueWhere"],	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 listImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["ImplemetationDate"]],
 paginateImplemetationDate?: [{	filter?: ResolverInputTypes["ImplemetationDateWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ImplemetationDateOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["ImplemetationDateConnection"]],
@@ -8635,6 +8866,59 @@ paginateTipGroupLocale?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] |
 	description?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["Mutation"]: AliasType<{
+createPinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInput"]},ResolverInputTypes["PinnedRecipeCreateResult"]],
+deletePinnedRecipe?: [{	by: ResolverInputTypes["PinnedRecipeUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipeDeleteResult"]],
+transaction?: [{	options?: ResolverInputTypes["MutationTransactionOptions"] | undefined | null},ResolverInputTypes["MutationTransaction"]],
+	query?:ResolverInputTypes["Query"],
+generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null},ResolverInputTypes["S3SignedUpload"]],
+generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},ResolverInputTypes["S3SignedRead"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["PinnedRecipeCreateResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["PinnedRecipe"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+		__typename?: boolean | `@${string}`
+}>;
+	["MutationResult"]:AliasType<{
+		ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"];
+		['...on PinnedRecipeCreateResult']?: Omit<ResolverInputTypes["PinnedRecipeCreateResult"],keyof ResolverInputTypes["MutationResult"]>;
+		['...on PinnedRecipeDeleteResult']?: Omit<ResolverInputTypes["PinnedRecipeDeleteResult"],keyof ResolverInputTypes["MutationResult"]>;
+		__typename?: boolean | `@${string}`
+}>;
+	["_MutationError"]: AliasType<{
+	path?:ResolverInputTypes["_PathFragment"],
+	paths?:ResolverInputTypes["_PathFragment"],
+	type?:boolean | `@${string}`,
+	message?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["_MutationErrorType"]:_MutationErrorType;
+	["PinnedRecipeDeleteResult"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	node?:ResolverInputTypes["PinnedRecipe"],
+		__typename?: boolean | `@${string}`
+}>;
+	["MutationTransaction"]: AliasType<{
+	ok?:boolean | `@${string}`,
+	errorMessage?:boolean | `@${string}`,
+	errors?:ResolverInputTypes["_MutationError"],
+	validation?:ResolverInputTypes["_ValidationResult"],
+createPinnedRecipe?: [{	data: ResolverInputTypes["PinnedRecipeCreateInput"]},ResolverInputTypes["PinnedRecipeCreateResult"]],
+deletePinnedRecipe?: [{	by: ResolverInputTypes["PinnedRecipeUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipeDeleteResult"]],
+	query?:ResolverInputTypes["Query"],
+		__typename?: boolean | `@${string}`
+}>;
+	["MutationTransactionOptions"]: {
+	deferForeignKeyConstraints?: boolean | undefined | null
+};
 	["Json"]:unknown;
 	["_Schema"]: AliasType<{
 	enums?:ResolverInputTypes["_Enum"],
@@ -8732,11 +9016,6 @@ paginateTipGroupLocale?: [{	filter?: ResolverInputTypes["TipGroupLocaleWhere"] |
 	values?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
-	["Mutation"]: AliasType<{
-generateUploadUrl?: [{	contentType: string,	expiration?: number | undefined | null,	prefix?: string | undefined | null},ResolverInputTypes["S3SignedUpload"]],
-generateReadUrl?: [{	objectKey: string,	expiration?: number | undefined | null},ResolverInputTypes["S3SignedRead"]],
-		__typename?: boolean | `@${string}`
-}>;
 	["S3SignedUpload"]: AliasType<{
 	url?:boolean | `@${string}`,
 	headers?:ResolverInputTypes["S3Header"],
@@ -8809,6 +9088,7 @@ export type ModelTypes = {
 	getPinnedRecipe?: ModelTypes["PinnedRecipe"] | undefined,
 	listPinnedRecipe: Array<ModelTypes["PinnedRecipe"]>,
 	paginatePinnedRecipe: ModelTypes["PinnedRecipeConnection"],
+	validateCreatePinnedRecipe: ModelTypes["_ValidationResult"],
 	getImplemetationDate?: ModelTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<ModelTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: ModelTypes["ImplemetationDateConnection"],
@@ -10581,6 +10861,36 @@ export type ModelTypes = {
 	["StepEdge"]: {
 		node: ModelTypes["Step"]
 };
+	["_ValidationResult"]: {
+		valid: boolean,
+	errors: Array<ModelTypes["_ValidationError"]>
+};
+	["_ValidationError"]: {
+		path: Array<ModelTypes["_PathFragment"]>,
+	message: ModelTypes["_ValidationMessage"]
+};
+	["_PathFragment"]:ModelTypes["_FieldPathFragment"] | ModelTypes["_IndexPathFragment"];
+	["_FieldPathFragment"]: {
+		field: string
+};
+	["_IndexPathFragment"]: {
+		index: number,
+	alias?: string | undefined
+};
+	["_ValidationMessage"]: {
+		text: string
+};
+	["PinnedRecipeCreateInput"]: {
+	user?: ModelTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
+	derivedBy?: ModelTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["PinnedRecipeCreateUserEntityRelationInput"]: {
+	connect?: ModelTypes["UserUniqueWhere"] | undefined
+};
+	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
+	connect?: ModelTypes["RecipeUniqueWhere"] | undefined
+};
 	["HomePageConnection"]: {
 		pageInfo: ModelTypes["PageInfo"],
 	edges: Array<ModelTypes["HomePageEdge"]>
@@ -10718,6 +11028,7 @@ export type ModelTypes = {
 	getPinnedRecipe?: ModelTypes["PinnedRecipe"] | undefined,
 	listPinnedRecipe: Array<ModelTypes["PinnedRecipe"]>,
 	paginatePinnedRecipe: ModelTypes["PinnedRecipeConnection"],
+	validateCreatePinnedRecipe: ModelTypes["_ValidationResult"],
 	getImplemetationDate?: ModelTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<ModelTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: ModelTypes["ImplemetationDateConnection"],
@@ -10772,6 +11083,47 @@ export type ModelTypes = {
 };
 	["Info"]: {
 		description?: string | undefined
+};
+	["Mutation"]: {
+		createPinnedRecipe: ModelTypes["PinnedRecipeCreateResult"],
+	deletePinnedRecipe: ModelTypes["PinnedRecipeDeleteResult"],
+	transaction: ModelTypes["MutationTransaction"],
+	query: ModelTypes["Query"],
+	generateUploadUrl: ModelTypes["S3SignedUpload"],
+	generateReadUrl: ModelTypes["S3SignedRead"]
+};
+	["PinnedRecipeCreateResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["PinnedRecipe"] | undefined,
+	validation: ModelTypes["_ValidationResult"]
+};
+	["MutationResult"]: ModelTypes["PinnedRecipeCreateResult"] | ModelTypes["PinnedRecipeDeleteResult"];
+	["_MutationError"]: {
+		path: Array<ModelTypes["_PathFragment"]>,
+	paths: Array<Array<ModelTypes["_PathFragment"]>>,
+	type: ModelTypes["_MutationErrorType"],
+	message?: string | undefined
+};
+	["_MutationErrorType"]:_MutationErrorType;
+	["PinnedRecipeDeleteResult"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	node?: ModelTypes["PinnedRecipe"] | undefined
+};
+	["MutationTransaction"]: {
+		ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<ModelTypes["_MutationError"]>,
+	validation: ModelTypes["_ValidationResult"],
+	createPinnedRecipe: ModelTypes["PinnedRecipeCreateResult"],
+	deletePinnedRecipe: ModelTypes["PinnedRecipeDeleteResult"],
+	query?: ModelTypes["Query"] | undefined
+};
+	["MutationTransactionOptions"]: {
+	deferForeignKeyConstraints?: boolean | undefined
 };
 	["Json"]:any;
 	["_Schema"]: {
@@ -10843,10 +11195,6 @@ export type ModelTypes = {
 		name: string,
 	values: Array<string>
 };
-	["Mutation"]: {
-		generateUploadUrl: ModelTypes["S3SignedUpload"],
-	generateReadUrl: ModelTypes["S3SignedRead"]
-};
 	["S3SignedUpload"]: {
 		url: string,
 	headers: Array<ModelTypes["S3Header"]>,
@@ -10917,6 +11265,7 @@ export type GraphQLTypes = {
 	getPinnedRecipe?: GraphQLTypes["PinnedRecipe"] | undefined,
 	listPinnedRecipe: Array<GraphQLTypes["PinnedRecipe"]>,
 	paginatePinnedRecipe: GraphQLTypes["PinnedRecipeConnection"],
+	validateCreatePinnedRecipe: GraphQLTypes["_ValidationResult"],
 	getImplemetationDate?: GraphQLTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<GraphQLTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: GraphQLTypes["ImplemetationDateConnection"],
@@ -12801,6 +13150,45 @@ export type GraphQLTypes = {
 	__typename: "StepEdge",
 	node: GraphQLTypes["Step"]
 };
+	["_ValidationResult"]: {
+	__typename: "_ValidationResult",
+	valid: boolean,
+	errors: Array<GraphQLTypes["_ValidationError"]>
+};
+	["_ValidationError"]: {
+	__typename: "_ValidationError",
+	path: Array<GraphQLTypes["_PathFragment"]>,
+	message: GraphQLTypes["_ValidationMessage"]
+};
+	["_PathFragment"]:{
+        	__typename:"_FieldPathFragment" | "_IndexPathFragment"
+        	['...on _FieldPathFragment']: '__union' & GraphQLTypes["_FieldPathFragment"];
+	['...on _IndexPathFragment']: '__union' & GraphQLTypes["_IndexPathFragment"];
+};
+	["_FieldPathFragment"]: {
+	__typename: "_FieldPathFragment",
+	field: string
+};
+	["_IndexPathFragment"]: {
+	__typename: "_IndexPathFragment",
+	index: number,
+	alias?: string | undefined
+};
+	["_ValidationMessage"]: {
+	__typename: "_ValidationMessage",
+	text: string
+};
+	["PinnedRecipeCreateInput"]: {
+		user?: GraphQLTypes["PinnedRecipeCreateUserEntityRelationInput"] | undefined,
+	derivedBy?: GraphQLTypes["PinnedRecipeCreateDerivedByEntityRelationInput"] | undefined,
+	_dummy_field_?: boolean | undefined
+};
+	["PinnedRecipeCreateUserEntityRelationInput"]: {
+		connect?: GraphQLTypes["UserUniqueWhere"] | undefined
+};
+	["PinnedRecipeCreateDerivedByEntityRelationInput"]: {
+		connect?: GraphQLTypes["RecipeUniqueWhere"] | undefined
+};
 	["HomePageConnection"]: {
 	__typename: "HomePageConnection",
 	pageInfo: GraphQLTypes["PageInfo"],
@@ -12953,6 +13341,7 @@ export type GraphQLTypes = {
 	getPinnedRecipe?: GraphQLTypes["PinnedRecipe"] | undefined,
 	listPinnedRecipe: Array<GraphQLTypes["PinnedRecipe"]>,
 	paginatePinnedRecipe: GraphQLTypes["PinnedRecipeConnection"],
+	validateCreatePinnedRecipe: GraphQLTypes["_ValidationResult"],
 	getImplemetationDate?: GraphQLTypes["ImplemetationDate"] | undefined,
 	listImplemetationDate: Array<GraphQLTypes["ImplemetationDate"]>,
 	paginateImplemetationDate: GraphQLTypes["ImplemetationDateConnection"],
@@ -13008,6 +13397,59 @@ export type GraphQLTypes = {
 	["Info"]: {
 	__typename: "Info",
 	description?: string | undefined
+};
+	["Mutation"]: {
+	__typename: "Mutation",
+	createPinnedRecipe: GraphQLTypes["PinnedRecipeCreateResult"],
+	deletePinnedRecipe: GraphQLTypes["PinnedRecipeDeleteResult"],
+	transaction: GraphQLTypes["MutationTransaction"],
+	query: GraphQLTypes["Query"],
+	generateUploadUrl: GraphQLTypes["S3SignedUpload"],
+	generateReadUrl: GraphQLTypes["S3SignedRead"]
+};
+	["PinnedRecipeCreateResult"]: {
+	__typename: "PinnedRecipeCreateResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["PinnedRecipe"] | undefined,
+	validation: GraphQLTypes["_ValidationResult"]
+};
+	["MutationResult"]: {
+	__typename:"PinnedRecipeCreateResult" | "PinnedRecipeDeleteResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>
+	['...on PinnedRecipeCreateResult']: '__union' & GraphQLTypes["PinnedRecipeCreateResult"];
+	['...on PinnedRecipeDeleteResult']: '__union' & GraphQLTypes["PinnedRecipeDeleteResult"];
+};
+	["_MutationError"]: {
+	__typename: "_MutationError",
+	path: Array<GraphQLTypes["_PathFragment"]>,
+	paths: Array<Array<GraphQLTypes["_PathFragment"]>>,
+	type: GraphQLTypes["_MutationErrorType"],
+	message?: string | undefined
+};
+	["_MutationErrorType"]: _MutationErrorType;
+	["PinnedRecipeDeleteResult"]: {
+	__typename: "PinnedRecipeDeleteResult",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	node?: GraphQLTypes["PinnedRecipe"] | undefined
+};
+	["MutationTransaction"]: {
+	__typename: "MutationTransaction",
+	ok: boolean,
+	errorMessage?: string | undefined,
+	errors: Array<GraphQLTypes["_MutationError"]>,
+	validation: GraphQLTypes["_ValidationResult"],
+	createPinnedRecipe: GraphQLTypes["PinnedRecipeCreateResult"],
+	deletePinnedRecipe: GraphQLTypes["PinnedRecipeDeleteResult"],
+	query?: GraphQLTypes["Query"] | undefined
+};
+	["MutationTransactionOptions"]: {
+		deferForeignKeyConstraints?: boolean | undefined
 };
 	["Json"]: "scalar" & { name: "Json" };
 	["_Schema"]: {
@@ -13106,11 +13548,6 @@ export type GraphQLTypes = {
 	name: string,
 	values: Array<string>
 };
-	["Mutation"]: {
-	__typename: "Mutation",
-	generateUploadUrl: GraphQLTypes["S3SignedUpload"],
-	generateReadUrl: GraphQLTypes["S3SignedRead"]
-};
 	["S3SignedUpload"]: {
 	__typename: "S3SignedUpload",
 	url: string,
@@ -13158,6 +13595,15 @@ export const enum OrderDirection {
 export const enum LinkType {
 	internal = "internal",
 	external = "external"
+}
+export const enum _MutationErrorType {
+	NotNullConstraintViolation = "NotNullConstraintViolation",
+	UniqueConstraintViolation = "UniqueConstraintViolation",
+	ForeignKeyConstraintViolation = "ForeignKeyConstraintViolation",
+	NotFoundOrDenied = "NotFoundOrDenied",
+	NonUniqueWhereInput = "NonUniqueWhereInput",
+	InvalidDataInput = "InvalidDataInput",
+	SqlError = "SqlError"
 }
 export const enum _OnDeleteBehaviour {
 	restrict = "restrict",
@@ -13325,12 +13771,17 @@ type ZEUS_VARIABLES = {
 	["LinkTypeCondition"]: ValueTypes["LinkTypeCondition"];
 	["LinkOrderBy"]: ValueTypes["LinkOrderBy"];
 	["UserUniqueWhere"]: ValueTypes["UserUniqueWhere"];
+	["PinnedRecipeCreateInput"]: ValueTypes["PinnedRecipeCreateInput"];
+	["PinnedRecipeCreateUserEntityRelationInput"]: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"];
+	["PinnedRecipeCreateDerivedByEntityRelationInput"]: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"];
 	["RecipeListWhere"]: ValueTypes["RecipeListWhere"];
 	["RecipeListItemWhere"]: ValueTypes["RecipeListItemWhere"];
 	["RecipeListItemOrderBy"]: ValueTypes["RecipeListItemOrderBy"];
 	["RecipeListOrderBy"]: ValueTypes["RecipeListOrderBy"];
 	["RecipeListUniqueWhere"]: ValueTypes["RecipeListUniqueWhere"];
 	["RecipeListItemUniqueWhere"]: ValueTypes["RecipeListItemUniqueWhere"];
+	["_MutationErrorType"]: ValueTypes["_MutationErrorType"];
+	["MutationTransactionOptions"]: ValueTypes["MutationTransactionOptions"];
 	["Json"]: ValueTypes["Json"];
 	["_OnDeleteBehaviour"]: ValueTypes["_OnDeleteBehaviour"];
 	["_RelationSide"]: ValueTypes["_RelationSide"];
