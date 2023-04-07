@@ -1,12 +1,13 @@
 import { One, OrderDirection } from '../../generated/contember'
-import { Container } from '../components/Container'
 import { Layout } from '../components/Layout'
 import { CategoryPage } from '../components/pages/CategoryPage'
 import { HomePage } from '../components/pages/HomePage'
+import { PinnedRecipesPage } from '../components/pages/PinnedRecipesPage'
 import { RecipeDetailPage } from '../components/pages/RecipeDetailPage'
 import { Seo } from '../components/Seo'
 import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
+import { PinnedRecipesPageLocaleFragment } from '../data/PinnedRecipesLocaleFragment'
 import { RecipeLocaleFragment } from '../data/RecipeLocaleFragment'
 import { contember } from '../utilities/contember'
 import { scalarResolver } from '../utilities/createScalarResolver'
@@ -19,6 +20,7 @@ export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 export default function ({
 	seo,
 	homePage,
+	pinnedRecipesPage,
 	homePageUrl,
 	currentUrlPage,
 	categoryPage,
@@ -29,31 +31,10 @@ export default function ({
 	return (
 		<Layout homePageUrl={homePageUrl} currentPageUrl={currentUrlPage}>
 			<Seo {...seo} />
-
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
+			{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} />}
 			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
 			{recipeDetailPage && <RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={homePageUrl} />}
-			{/* {page && (
-				<>
-					<Container>
-						<h2>{page.title}</h2>
-						<h2>Title</h2>
-					</Container>
-					{page.content && <ContentRenderer content={page.content} />}
-				</>
-			)} */}
-			<Container size="wide">
-				{/* <Dump data={general} /> */}
-				{/* <p>{general?.dummy}</p>
-				{general?.image && (
-					<Image
-						src={general.image.url}
-						alt={general.image.alt ?? ''}
-						width={general.image.width}
-						height={general.image.height}
-					/>
-				)} */}
-			</Container>
 		</Layout>
 	)
 }
@@ -104,14 +85,6 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 	}
 
 	const data = await contember('query', { scalars: scalarResolver })({
-		// getGeneral: [
-		// 	{
-		// 		by: {
-		// 			unique: One.One,
-		// 		},
-		// 	},
-		// 	GeneralFragment(),
-		// ],
 		listCategoryLocale: [{ orderBy: [{ base: { order: OrderDirection.asc } }] }, CategoryLocaleFragment(locale)],
 		listRecipeLocale: [{ orderBy: [{ base: { publishDate: OrderDirection.desc } }] }, RecipeLocaleFragment(locale)],
 		getLinkable: [
@@ -121,6 +94,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			{
 				url: true,
 				homePage: [{}, HomePageLocaleFragment()],
+				pinnedRecipesPage: [{}, PinnedRecipesPageLocaleFragment()],
 				category: [{}, CategoryLocaleFragment(locale)],
 				recipe: [{}, RecipeLocaleFragment(locale)],
 				// genericPage: [{}, GenericPageFragment()],
@@ -163,7 +137,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			notFound: true,
 		}
 	}
-	const { homePage, category, recipe } = data.getLinkable
+	const { homePage, pinnedRecipesPage, category, recipe } = data.getLinkable
 
 	// if (!page) {
 	// 	return {
@@ -173,9 +147,8 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 
 	return {
 		props: {
-			// general: data.getGeneral,
-			// page,
 			homePage,
+			pinnedRecipesPage,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
 			currentUrlPage: data.getLinkable.url,
 			categoryPage: category,
