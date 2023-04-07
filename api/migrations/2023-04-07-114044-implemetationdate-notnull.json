@@ -1,0 +1,27 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "updateColumnDefinition",
+			"entityName": "ImplemetationDate",
+			"fieldName": "date",
+			"definition": {
+				"columnType": "timestamptz",
+				"nullable": false,
+				"type": "DateTime",
+				"default": "now"
+			}
+		},
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "ImplemetationDate",
+			"unique": {
+				"fields": [
+					"pinnedRecipe",
+					"step"
+				],
+				"name": "unique_ImplemetationDate_pinnedRecipe_step_57d2ea"
+			}
+		}
+	]
+}
