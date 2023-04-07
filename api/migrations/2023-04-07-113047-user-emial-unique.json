@@ -1,0 +1,15 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "User",
+			"unique": {
+				"fields": [
+					"email"
+				],
+				"name": "unique_User_email_c3abc8"
+			}
+		}
+	]
+}

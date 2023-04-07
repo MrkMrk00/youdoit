@@ -12,5 +12,5 @@ export class User {
 	image = d.manyHasOne(Image)
 	firstName = d.stringColumn().notNull()
 	lastName = d.stringColumn().notNull()
-	email = d.stringColumn().notNull()
+	email = d.stringColumn().notNull().unique()
 }
