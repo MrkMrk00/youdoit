@@ -23,6 +23,7 @@ export default function ({
 	homePage,
 	pinnedRecipesPage,
 	homePageUrl,
+	pinnedRecipesPageUrl,
 	currentUrlPage,
 	categoryPage,
 	recipeDetailPage,
@@ -30,7 +31,7 @@ export default function ({
 	categories,
 }: PageProps) {
 	return (
-		<Layout homePageUrl={homePageUrl} currentPageUrl={currentUrlPage}>
+		<Layout homePageUrl={homePageUrl} pinnedRecipesPageUrl={pinnedRecipesPageUrl} currentPageUrl={currentUrlPage}>
 			<Seo {...seo} />
 			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
 			{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} locale={locale} />}
@@ -109,6 +110,10 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			},
 		],
 		getHomePageLocale: [{ by: { locale: { code: locale }, base: { unique: One.One } } }, { link: [{}, { url: true }] }],
+		getPinnedRecipesPageLocale: [
+			{ by: { locale: { code: locale }, base: { unique: One.One } } },
+			{ link: [{}, { url: true }] },
+		],
 	})
 
 	// const redirectUrl = (() => {
@@ -152,6 +157,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			homePage,
 			pinnedRecipesPage,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
+			pinnedRecipesPageUrl: data.getPinnedRecipesPageLocale?.link?.url ?? null,
 			currentUrlPage: data.getLinkable.url,
 			categoryPage: category,
 			recipeDetailPage: recipe,
