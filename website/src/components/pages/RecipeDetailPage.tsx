@@ -9,6 +9,7 @@ import { contember } from '../../utilities/contember'
 import { scalarResolver } from '../../utilities/createScalarResolver'
 import { hardcodedUserEmail } from '../../utilities/hardcodedUserEmail'
 import { isDefined } from '../../utilities/isDefined'
+import { Button } from '../Button'
 import { Container } from '../Container'
 import { DetailHeader } from '../DetailHeader'
 import { StepGroup } from '../StepGroup'
@@ -123,7 +124,6 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 	return (
 		<>
 			<div className={styles.wrapper}>
-				{/* <div className={styles.overlay} /> */}
 				<div className={styles.header}>
 					<DetailHeader
 						allRecipesLink={allRecipesLink}
@@ -134,15 +134,21 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 					/>
 				</div>
 				{readOnly && (
-					<button
-						type="button"
-						onClick={() => {
-							createPinnedMutation.mutate()
-						}}
-						disabled={createPinnedMutation.isLoading}
-					>
-						Add to favourites
-					</button>
+					<>
+						<div className={styles.overlay}>
+							<div className={styles.pinButton}>
+								<Button
+									type="button"
+									onClick={() => {
+										createPinnedMutation.mutate()
+									}}
+									disabled={createPinnedMutation.isLoading}
+								>
+									Přidat do oblíbených
+								</Button>
+							</div>
+						</div>
+					</>
 				)}
 				<div className={styles.contentIn}>
 					<Container>
