@@ -4,6 +4,7 @@ import { CategoryLocale } from './Category'
 import { HomePageLocale } from './HomePage'
 import { PinnedRecipesPageLocale } from './PinnedRecipesPage'
 import { RecipeLocale } from './Recipe'
+import { User } from './User'
 
 @acl.allow(publicRole, { read: true })
 export class Linkable {
@@ -13,4 +14,6 @@ export class Linkable {
 	pinnedRecipesPage = d.oneHasOne(PinnedRecipesPageLocale, 'link').cascadeOnDelete()
 	category = d.oneHasOne(CategoryLocale, 'link').cascadeOnDelete()
 	recipe = d.oneHasOne(RecipeLocale, 'link').cascadeOnDelete()
+
+	user = d.oneHasOne(User, 'link').cascadeOnDelete()
 }
