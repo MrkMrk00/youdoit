@@ -20,7 +20,8 @@
 		"build": "concurrently npm:build-admin npm:build-api npm:build-website",
 		"build-admin": "tsc --project admin && vite build admin",
 		"build-api": "tsc --project api",
-		"build-website": "tsc --project website && next build website"
+		"build-website": "tsc --project website && next build website",
+		"generate-diagram": "npx -y tsx ./api/mermaid.ts | npx -y @mermaid-js/mermaid-cli -i - -o schema.svg"
 	},
 	"dependencies": {
 		"@types/inquirer": "^9.0.3",
