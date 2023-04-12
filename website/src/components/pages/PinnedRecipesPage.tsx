@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import Link from 'next/link'
 import type { FunctionComponent } from 'react'
 import { useMirrorLoading } from 'shared-loading-indicator'
 import type { PinnedRecipesPageLocaleResult } from '../../data/PinnedRecipesLocaleFragment'
@@ -46,14 +45,11 @@ export const PinnedRecipesPage: FunctionComponent<PinnedRecipesPageProps> = ({ p
 					return (
 						pinnedRecipe.derivedBy?.localesByLocale && (
 							<li key={pinnedRecipe.id}>
-								<Link
-									href={{
-										pathname: pinnedRecipe.derivedBy.localesByLocale.link?.url ?? '/',
-										query: { pinnedId: pinnedRecipe.id },
-									}}
-								>
-									<PinnedRecipeTile tile={pinnedRecipe.derivedBy.localesByLocale} />
-								</Link>
+								<PinnedRecipeTile
+									pathname={pinnedRecipe.derivedBy.localesByLocale.link?.url ?? '/'}
+									query={{ pinnedId: pinnedRecipe.id }}
+									tile={pinnedRecipe.derivedBy.localesByLocale}
+								/>
 							</li>
 						)
 					)
