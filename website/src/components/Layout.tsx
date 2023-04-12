@@ -8,6 +8,7 @@ export type LayoutProps = {
 	children: ReactNode
 	homePageUrl: string | null
 	pinnedRecipesPageUrl: string | null
+	userPageUrl: string | null
 	currentPageUrl?: string
 }
 
@@ -15,15 +16,20 @@ export const Layout: FunctionComponent<LayoutProps> = ({
 	children,
 	homePageUrl,
 	pinnedRecipesPageUrl,
+	userPageUrl,
 	currentPageUrl,
 }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.content}>{children}</div>
 			<div className={styles.navigation}>
-				<div className={styles.personalIcon}>
-					<Icon name="personal" />
-				</div>
+				{userPageUrl ? (
+					<Link href={userPageUrl}>
+						<UserIcon iconUrl={userPageUrl} currentPageUrl={currentPageUrl} />
+					</Link>
+				) : (
+					<UserIcon iconUrl={userPageUrl} currentPageUrl={currentPageUrl} />
+				)}
 				{pinnedRecipesPageUrl ? (
 					<Link href={pinnedRecipesPageUrl}>
 						<AppleIcon currentPageUrl={currentPageUrl} iconUrl={pinnedRecipesPageUrl} />
@@ -60,6 +66,14 @@ const AppleIcon: FunctionComponent<IconProps> = ({ currentPageUrl, iconUrl }) =>
 	return (
 		<div className={clsx(styles.appleIcon, iconUrl === currentPageUrl && styles.isActive)}>
 			<Icon name="apple" />
+		</div>
+	)
+}
+
+const UserIcon: FunctionComponent<IconProps> = ({ currentPageUrl, iconUrl }) => {
+	return (
+		<div className={clsx(styles.personalIcon, iconUrl === currentPageUrl && styles.isActive)}>
+			<Icon name="personal" />
 		</div>
 	)
 }

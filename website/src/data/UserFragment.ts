@@ -1,12 +1,11 @@
 import type { GraphQLTypes, InputType } from '../../generated/contember'
-import { OrderDirection, Selector } from '../../generated/contember'
+import { Selector } from '../../generated/contember'
 import type { scalarResolver } from '../utilities/createScalarResolver'
 import { ImageFragment } from './ImageFragment'
-import { RecipeLocaleFragment } from './RecipeLocaleFragment'
 
-export const UserFragment = (locale: string) =>
+export const UserFragment = () =>
 	Selector('User')({
-		createdRecipes: [{ orderBy: [{ order: OrderDirection.asc }] }, RecipeLocaleFragment(locale)],
+		link: [{}, { url: true }],
 		image: [{}, ImageFragment()],
 		firstName: true,
 		lastName: true,

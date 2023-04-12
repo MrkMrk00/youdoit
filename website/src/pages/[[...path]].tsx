@@ -4,6 +4,7 @@ import { CategoryPage } from '../components/pages/CategoryPage'
 import { HomePage } from '../components/pages/HomePage'
 import { PinnedRecipesPage } from '../components/pages/PinnedRecipesPage'
 import { RecipeDetailPage } from '../components/pages/RecipeDetailPage'
+import { UserPage } from '../components/pages/UserPage'
 import { Seo } from '../components/Seo'
 import { TranslationsProvider } from '../contexts/TranslationsContext'
 import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
@@ -11,11 +12,13 @@ import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { PinnedRecipesPageLocaleFragment } from '../data/PinnedRecipesLocaleFragment'
 import { RecipeLocaleFragment } from '../data/RecipeLocaleFragment'
 import { TranslationsEntryFragment } from '../data/TranslationsEntryFragment'
+import { UserFragment } from '../data/UserFragment'
 import { contember } from '../utilities/contember'
 import { scalarResolver } from '../utilities/createScalarResolver'
 import { getLinkableUrlFromContext } from '../utilities/getLinkableUrlFromContext'
 import type { InferDataLoaderProps } from '../utilities/handlers'
 import { handleGetStaticPaths, handleGetStaticProps } from '../utilities/handlers'
+import { hardcodedUserEmail } from '../utilities/hardcodedUserEmail'
 
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
@@ -26,12 +29,14 @@ export default function ({
 	pinnedRecipesPage,
 	homePageUrl,
 	pinnedRecipesPageUrl,
+	userPageUrl,
 	currentUrlPage,
 	categoryPage,
 	recipeDetailPage,
 	recipes,
 	categories,
 	translations,
+	user,
 }: PageProps) {
 	return (
 		<TranslationsProvider
@@ -41,7 +46,12 @@ export default function ({
 				}),
 			)}
 		>
-			<Layout homePageUrl={homePageUrl} pinnedRecipesPageUrl={pinnedRecipesPageUrl} currentPageUrl={currentUrlPage}>
+			<Layout
+				homePageUrl={homePageUrl}
+				pinnedRecipesPageUrl={pinnedRecipesPageUrl}
+				userPageUrl={userPageUrl}
+				currentPageUrl={currentUrlPage}
+			>
 				<Seo {...seo} />
 				{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
 				{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} locale={locale} />}
@@ -49,6 +59,7 @@ export default function ({
 				{recipeDetailPage && (
 					<RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={pinnedRecipesPageUrl} />
 				)}
+				{user && currentUrlPage === userPageUrl && <UserPage user={user} />}
 			</Layout>
 		</TranslationsProvider>
 	)
@@ -112,6 +123,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 				pinnedRecipesPage: [{}, PinnedRecipesPageLocaleFragment()],
 				category: [{}, CategoryLocaleFragment(locale)],
 				recipe: [{}, RecipeLocaleFragment(locale)],
+				user: [{}, UserFragment()],
 				// genericPage: [{}, GenericPageFragment()],
 				// redirect: [
 				// 	{},
@@ -127,6 +139,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			{ by: { locale: { code: locale }, base: { unique: One.One } } },
 			{ link: [{}, { url: true }] },
 		],
+		getUser: [{ by: { email: hardcodedUserEmail } }, UserFragment()],
 	})
 
 	// const redirectUrl = (() => {
@@ -162,12 +175,6 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		listTranslationsEntry: [{}, TranslationsEntryFragment(locale)],
 	})
 
-	// if (!page) {
-	// 	return {
-	// 		notFound: true,
-	// 	}
-	// }
-
 	return {
 		props: {
 			locale,
@@ -175,12 +182,14 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			pinnedRecipesPage,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
 			pinnedRecipesPageUrl: data.getPinnedRecipesPageLocale?.link?.url ?? null,
+			userPageUrl: data.getUser?.link?.url ?? null,
 			currentUrlPage: data.getLinkable.url,
 			categoryPage: category,
 			recipeDetailPage: recipe,
 			categories: data.listCategoryLocale,
 			recipes: data.listRecipeLocale,
 			translations: translations.listTranslationsEntry,
+			user: data.getUser,
 			seo: {
 				canonicalUrl,
 				// seo: {
