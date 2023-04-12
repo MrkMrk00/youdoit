@@ -665,6 +665,7 @@ export const AllTypesProps: Record<string,any> = {
 		image:"ImageWhere",
 		pinnedRecipes:"PinnedRecipeWhere",
 		createdRecipes:"RecipeWhere",
+		link:"StringCondition",
 		and:"UserWhere",
 		or:"UserWhere",
 		not:"UserWhere"
@@ -1027,7 +1028,8 @@ export const AllTypesProps: Record<string,any> = {
 		firstName:"OrderDirection",
 		lastName:"OrderDirection",
 		email:"OrderDirection",
-		image:"ImageOrderBy"
+		image:"ImageOrderBy",
+		link:"OrderDirection"
 	},
 	PinnedRecipesPageLocaleOrderBy:{
 		id:"OrderDirection",
@@ -3076,6 +3078,7 @@ export const ReturnTypes: Record<string,any> = {
 		image:"Image",
 		pinnedRecipes:"PinnedRecipe",
 		createdRecipes:"Recipe",
+		link:"String",
 		pinnedRecipesByModification:"PinnedRecipe",
 		pinnedRecipesByImplementationDates:"PinnedRecipe",
 		createdRecipesByLocales:"Recipe",
@@ -3092,7 +3095,8 @@ export const ReturnTypes: Record<string,any> = {
 		email:"FieldMeta",
 		image:"FieldMeta",
 		pinnedRecipes:"FieldMeta",
-		createdRecipes:"FieldMeta"
+		createdRecipes:"FieldMeta",
+		link:"FieldMeta"
 	},
 	PinnedRecipeConnection:{
 		pageInfo:"PageInfo",
@@ -5199,6 +5203,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	image?: ValueTypes["ImageWhere"] | undefined | null | Variable<any, string>,
 	pinnedRecipes?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,
 	createdRecipes?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["UserWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["UserWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>
@@ -5609,7 +5614,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	firstName?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	lastName?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	email?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	image?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>
+	image?: ValueTypes["ImageOrderBy"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
 };
 	["PinnedRecipesPageLocaleOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -5953,6 +5959,7 @@ paginateImplementationDates?: [{	filter?: ValueTypes["ImplemetationDateWhere"] |
 image?: [{	filter?: ValueTypes["ImageWhere"] | undefined | null | Variable<any, string>},ValueTypes["Image"]],
 pinnedRecipes?: [{	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipeOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 createdRecipes?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RecipeOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
+	link?:boolean | `@${string}`,
 pinnedRecipesByModification?: [{	by: ValueTypes["UserPinnedRecipesByModificationUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 pinnedRecipesByImplementationDates?: [{	by: ValueTypes["UserPinnedRecipesByImplementationDatesUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipe"]],
 createdRecipesByLocales?: [{	by: ValueTypes["UserCreatedRecipesByLocalesUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any, string>},ValueTypes["Recipe"]],
@@ -5971,6 +5978,7 @@ paginateCreatedRecipes?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | nul
 	image?:ValueTypes["FieldMeta"],
 	pinnedRecipes?:ValueTypes["FieldMeta"],
 	createdRecipes?:ValueTypes["FieldMeta"],
+	link?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["PinnedRecipeOrderBy"]: {
@@ -6853,6 +6861,7 @@ internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Vari
 	["UserUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
 	email?: string | undefined | null | Variable<any, string>,
+	link?: string | undefined | null | Variable<any, string>,
 	pinnedRecipes?: ValueTypes["PinnedRecipeUniqueWhere"] | undefined | null | Variable<any, string>,
 	createdRecipes?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>
 };
@@ -7861,6 +7870,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	image?: ResolverInputTypes["ImageWhere"] | undefined | null,
 	pinnedRecipes?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,
 	createdRecipes?: ResolverInputTypes["RecipeWhere"] | undefined | null,
+	link?: ResolverInputTypes["StringCondition"] | undefined | null,
 	and?: Array<ResolverInputTypes["UserWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["UserWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["UserWhere"] | undefined | null
@@ -8271,7 +8281,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	firstName?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	lastName?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	email?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	image?: ResolverInputTypes["ImageOrderBy"] | undefined | null
+	image?: ResolverInputTypes["ImageOrderBy"] | undefined | null,
+	link?: ResolverInputTypes["OrderDirection"] | undefined | null
 };
 	["PinnedRecipesPageLocaleOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -8615,6 +8626,7 @@ paginateImplementationDates?: [{	filter?: ResolverInputTypes["ImplemetationDateW
 image?: [{	filter?: ResolverInputTypes["ImageWhere"] | undefined | null},ResolverInputTypes["Image"]],
 pinnedRecipes?: [{	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipeOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 createdRecipes?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RecipeOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Recipe"]],
+	link?:boolean | `@${string}`,
 pinnedRecipesByModification?: [{	by: ResolverInputTypes["UserPinnedRecipesByModificationUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 pinnedRecipesByImplementationDates?: [{	by: ResolverInputTypes["UserPinnedRecipesByImplementationDatesUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipeWhere"] | undefined | null},ResolverInputTypes["PinnedRecipe"]],
 createdRecipesByLocales?: [{	by: ResolverInputTypes["UserCreatedRecipesByLocalesUniqueWhere"],	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},ResolverInputTypes["Recipe"]],
@@ -8633,6 +8645,7 @@ paginateCreatedRecipes?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefin
 	image?:ResolverInputTypes["FieldMeta"],
 	pinnedRecipes?:ResolverInputTypes["FieldMeta"],
 	createdRecipes?:ResolverInputTypes["FieldMeta"],
+	link?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["PinnedRecipeOrderBy"]: {
@@ -9515,6 +9528,7 @@ internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | nul
 	["UserUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
 	email?: string | undefined | null,
+	link?: string | undefined | null,
 	pinnedRecipes?: ResolverInputTypes["PinnedRecipeUniqueWhere"] | undefined | null,
 	createdRecipes?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null
 };
@@ -10519,6 +10533,7 @@ export type ModelTypes = {
 	image?: ModelTypes["ImageWhere"] | undefined,
 	pinnedRecipes?: ModelTypes["PinnedRecipeWhere"] | undefined,
 	createdRecipes?: ModelTypes["RecipeWhere"] | undefined,
+	link?: ModelTypes["StringCondition"] | undefined,
 	and?: Array<ModelTypes["UserWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["UserWhere"] | undefined> | undefined,
 	not?: ModelTypes["UserWhere"] | undefined
@@ -10919,7 +10934,8 @@ export type ModelTypes = {
 	firstName?: ModelTypes["OrderDirection"] | undefined,
 	lastName?: ModelTypes["OrderDirection"] | undefined,
 	email?: ModelTypes["OrderDirection"] | undefined,
-	image?: ModelTypes["ImageOrderBy"] | undefined
+	image?: ModelTypes["ImageOrderBy"] | undefined,
+	link?: ModelTypes["OrderDirection"] | undefined
 };
 	["PinnedRecipesPageLocaleOrderBy"]: {
 	_random?: boolean | undefined,
@@ -11250,6 +11266,7 @@ export type ModelTypes = {
 	image?: ModelTypes["Image"] | undefined,
 	pinnedRecipes: Array<ModelTypes["PinnedRecipe"]>,
 	createdRecipes: Array<ModelTypes["Recipe"]>,
+	link: string,
 	pinnedRecipesByModification?: ModelTypes["PinnedRecipe"] | undefined,
 	pinnedRecipesByImplementationDates?: ModelTypes["PinnedRecipe"] | undefined,
 	createdRecipesByLocales?: ModelTypes["Recipe"] | undefined,
@@ -11266,7 +11283,8 @@ export type ModelTypes = {
 	email?: ModelTypes["FieldMeta"] | undefined,
 	image?: ModelTypes["FieldMeta"] | undefined,
 	pinnedRecipes?: ModelTypes["FieldMeta"] | undefined,
-	createdRecipes?: ModelTypes["FieldMeta"] | undefined
+	createdRecipes?: ModelTypes["FieldMeta"] | undefined,
+	link?: ModelTypes["FieldMeta"] | undefined
 };
 	["PinnedRecipeOrderBy"]: {
 	_random?: boolean | undefined,
@@ -12064,6 +12082,7 @@ export type ModelTypes = {
 	["UserUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
 	email?: string | undefined,
+	link?: string | undefined,
 	pinnedRecipes?: ModelTypes["PinnedRecipeUniqueWhere"] | undefined,
 	createdRecipes?: ModelTypes["RecipeUniqueWhere"] | undefined
 };
@@ -12989,6 +13008,7 @@ export type GraphQLTypes = {
 	image?: GraphQLTypes["ImageWhere"] | undefined,
 	pinnedRecipes?: GraphQLTypes["PinnedRecipeWhere"] | undefined,
 	createdRecipes?: GraphQLTypes["RecipeWhere"] | undefined,
+	link?: GraphQLTypes["StringCondition"] | undefined,
 	and?: Array<GraphQLTypes["UserWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["UserWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["UserWhere"] | undefined
@@ -13399,7 +13419,8 @@ export type GraphQLTypes = {
 	firstName?: GraphQLTypes["OrderDirection"] | undefined,
 	lastName?: GraphQLTypes["OrderDirection"] | undefined,
 	email?: GraphQLTypes["OrderDirection"] | undefined,
-	image?: GraphQLTypes["ImageOrderBy"] | undefined
+	image?: GraphQLTypes["ImageOrderBy"] | undefined,
+	link?: GraphQLTypes["OrderDirection"] | undefined
 };
 	["PinnedRecipesPageLocaleOrderBy"]: {
 		_random?: boolean | undefined,
@@ -13744,6 +13765,7 @@ export type GraphQLTypes = {
 	image?: GraphQLTypes["Image"] | undefined,
 	pinnedRecipes: Array<GraphQLTypes["PinnedRecipe"]>,
 	createdRecipes: Array<GraphQLTypes["Recipe"]>,
+	link: string,
 	pinnedRecipesByModification?: GraphQLTypes["PinnedRecipe"] | undefined,
 	pinnedRecipesByImplementationDates?: GraphQLTypes["PinnedRecipe"] | undefined,
 	createdRecipesByLocales?: GraphQLTypes["Recipe"] | undefined,
@@ -13761,7 +13783,8 @@ export type GraphQLTypes = {
 	email?: GraphQLTypes["FieldMeta"] | undefined,
 	image?: GraphQLTypes["FieldMeta"] | undefined,
 	pinnedRecipes?: GraphQLTypes["FieldMeta"] | undefined,
-	createdRecipes?: GraphQLTypes["FieldMeta"] | undefined
+	createdRecipes?: GraphQLTypes["FieldMeta"] | undefined,
+	link?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["PinnedRecipeOrderBy"]: {
 		_random?: boolean | undefined,
@@ -14643,6 +14666,7 @@ export type GraphQLTypes = {
 	["UserUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
 	email?: string | undefined,
+	link?: string | undefined,
 	pinnedRecipes?: GraphQLTypes["PinnedRecipeUniqueWhere"] | undefined,
 	createdRecipes?: GraphQLTypes["RecipeUniqueWhere"] | undefined
 };
