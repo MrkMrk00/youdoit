@@ -1,0 +1,216 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "TranslationsEntry",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "translations_entry",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createEntity",
+			"entity": {
+				"name": "TranslationsEntryValue",
+				"primary": "id",
+				"primaryColumn": "id",
+				"tableName": "translations_entry_value",
+				"fields": {
+					"id": {
+						"name": "id",
+						"columnName": "id",
+						"columnType": "uuid",
+						"nullable": false,
+						"type": "Uuid"
+					}
+				},
+				"unique": {},
+				"indexes": {},
+				"eventLog": {
+					"enabled": true
+				}
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "TranslationsEntry",
+			"field": {
+				"name": "key",
+				"columnName": "key",
+				"columnType": "text",
+				"nullable": false,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createColumn",
+			"entityName": "TranslationsEntryValue",
+			"field": {
+				"name": "value",
+				"columnName": "value",
+				"columnType": "text",
+				"nullable": false,
+				"type": "String"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "TranslationsEntryValue",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "entry",
+				"target": "TranslationsEntry",
+				"joiningColumn": {
+					"columnName": "entry_id",
+					"onDelete": "cascade"
+				},
+				"nullable": false,
+				"inversedBy": "values"
+			},
+			"inverseSide": {
+				"type": "OneHasMany",
+				"name": "values",
+				"target": "TranslationsEntryValue",
+				"ownedBy": "entry"
+			}
+		},
+		{
+			"modification": "createRelation",
+			"entityName": "TranslationsEntryValue",
+			"owningSide": {
+				"type": "ManyHasOne",
+				"name": "locale",
+				"target": "Locale",
+				"joiningColumn": {
+					"columnName": "locale_id",
+					"onDelete": "restrict"
+				},
+				"nullable": true
+			}
+		},
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "TranslationsEntry",
+			"unique": {
+				"fields": [
+					"key"
+				],
+				"name": "unique_TranslationsEntry_key_92db7b"
+			}
+		},
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "TranslationsEntryValue",
+			"unique": {
+				"fields": [
+					"entry",
+					"locale"
+				],
+				"name": "unique_TranslationsEntryValue_entry_locale_2c7dcb"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/TranslationsEntry",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"key": true,
+								"values": true
+							},
+							"create": {
+								"id": true,
+								"key": true,
+								"values": true
+							},
+							"update": {
+								"id": true,
+								"key": true,
+								"values": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/TranslationsEntryValue",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"id": true,
+								"entry": true,
+								"locale": true,
+								"value": true
+							},
+							"create": {
+								"id": true,
+								"entry": true,
+								"locale": true,
+								"value": true
+							},
+							"update": {
+								"id": true,
+								"entry": true,
+								"locale": true,
+								"value": true
+							},
+							"delete": true,
+							"customPrimary": true
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/TranslationsEntry",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"key": true,
+								"values": true
+							}
+						}
+					}
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/TranslationsEntryValue",
+					"value": {
+						"predicates": {},
+						"operations": {
+							"read": {
+								"entry": true,
+								"locale": true,
+								"value": true
+							}
+						}
+					}
+				}
+			]
+		}
+	]
+}
