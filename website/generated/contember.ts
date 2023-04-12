@@ -403,6 +403,30 @@ export const AllTypesProps: Record<string,any> = {
 		paginatePinnedRecipesPageLocale:{
 			filter:"PinnedRecipesPageLocaleWhere",
 			orderBy:"PinnedRecipesPageLocaleOrderBy"
+		},
+		getTranslationsEntry:{
+			by:"TranslationsEntryUniqueWhere",
+			filter:"TranslationsEntryWhere"
+		},
+		listTranslationsEntry:{
+			filter:"TranslationsEntryWhere",
+			orderBy:"TranslationsEntryOrderBy"
+		},
+		paginateTranslationsEntry:{
+			filter:"TranslationsEntryWhere",
+			orderBy:"TranslationsEntryOrderBy"
+		},
+		getTranslationsEntryValue:{
+			by:"TranslationsEntryValueUniqueWhere",
+			filter:"TranslationsEntryValueWhere"
+		},
+		listTranslationsEntryValue:{
+			filter:"TranslationsEntryValueWhere",
+			orderBy:"TranslationsEntryValueOrderBy"
+		},
+		paginateTranslationsEntryValue:{
+			filter:"TranslationsEntryValueWhere",
+			orderBy:"TranslationsEntryValueOrderBy"
 		}
 	},
 	Content:{
@@ -2116,6 +2140,71 @@ export const AllTypesProps: Record<string,any> = {
 	RecipeListItemUniqueWhere:{
 		id:"UUID"
 	},
+	TranslationsEntry:{
+		values:{
+			filter:"TranslationsEntryValueWhere",
+			orderBy:"TranslationsEntryValueOrderBy"
+		},
+		valuesByLocale:{
+			by:"TranslationsEntryValuesByLocaleUniqueWhere",
+			filter:"TranslationsEntryValueWhere"
+		},
+		paginateValues:{
+			filter:"TranslationsEntryValueWhere",
+			orderBy:"TranslationsEntryValueOrderBy"
+		}
+	},
+	TranslationsEntryValue:{
+		entry:{
+			filter:"TranslationsEntryWhere"
+		},
+		locale:{
+			filter:"LocaleWhere"
+		}
+	},
+	TranslationsEntryWhere:{
+		id:"UUIDCondition",
+		key:"StringCondition",
+		values:"TranslationsEntryValueWhere",
+		order:"IntCondition",
+		and:"TranslationsEntryWhere",
+		or:"TranslationsEntryWhere",
+		not:"TranslationsEntryWhere"
+	},
+	TranslationsEntryValueWhere:{
+		id:"UUIDCondition",
+		value:"StringCondition",
+		entry:"TranslationsEntryWhere",
+		locale:"LocaleWhere",
+		order:"IntCondition",
+		and:"TranslationsEntryValueWhere",
+		or:"TranslationsEntryValueWhere",
+		not:"TranslationsEntryValueWhere"
+	},
+	TranslationsEntryValueOrderBy:{
+		id:"OrderDirection",
+		value:"OrderDirection",
+		entry:"TranslationsEntryOrderBy",
+		locale:"LocaleOrderBy",
+		order:"OrderDirection"
+	},
+	TranslationsEntryOrderBy:{
+		id:"OrderDirection",
+		key:"OrderDirection",
+		order:"OrderDirection"
+	},
+	TranslationsEntryValuesByLocaleUniqueWhere:{
+		locale:"LocaleUniqueWhere"
+	},
+	TranslationsEntryUniqueWhere:{
+		id:"UUID",
+		values:"TranslationsEntryValueUniqueWhere"
+	},
+	TranslationsEntryValueUniqueWhere:{
+		id:"UUID",
+		entry:"TranslationsEntryUniqueWhere",
+		locale:"LocaleUniqueWhere"
+	},
 	QueryTransaction:{
 		getContent:{
 			by:"ContentUniqueWhere",
@@ -2518,6 +2607,30 @@ export const AllTypesProps: Record<string,any> = {
 		paginatePinnedRecipesPageLocale:{
 			filter:"PinnedRecipesPageLocaleWhere",
 			orderBy:"PinnedRecipesPageLocaleOrderBy"
+		},
+		getTranslationsEntry:{
+			by:"TranslationsEntryUniqueWhere",
+			filter:"TranslationsEntryWhere"
+		},
+		listTranslationsEntry:{
+			filter:"TranslationsEntryWhere",
+			orderBy:"TranslationsEntryOrderBy"
+		},
+		paginateTranslationsEntry:{
+			filter:"TranslationsEntryWhere",
+			orderBy:"TranslationsEntryOrderBy"
+		},
+		getTranslationsEntryValue:{
+			by:"TranslationsEntryValueUniqueWhere",
+			filter:"TranslationsEntryValueWhere"
+		},
+		listTranslationsEntryValue:{
+			filter:"TranslationsEntryValueWhere",
+			orderBy:"TranslationsEntryValueOrderBy"
+		},
+		paginateTranslationsEntryValue:{
+			filter:"TranslationsEntryValueWhere",
+			orderBy:"TranslationsEntryValueOrderBy"
 		}
 	},
 	Mutation:{
@@ -2674,6 +2787,12 @@ export const ReturnTypes: Record<string,any> = {
 		getPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
 		listPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
 		paginatePinnedRecipesPageLocale:"PinnedRecipesPageLocaleConnection",
+		getTranslationsEntry:"TranslationsEntry",
+		listTranslationsEntry:"TranslationsEntry",
+		paginateTranslationsEntry:"TranslationsEntryConnection",
+		getTranslationsEntryValue:"TranslationsEntryValue",
+		listTranslationsEntryValue:"TranslationsEntryValue",
+		paginateTranslationsEntryValue:"TranslationsEntryValueConnection",
 		transaction:"QueryTransaction",
 		_info:"Info",
 		schema:"_Schema",
@@ -3538,6 +3657,50 @@ export const ReturnTypes: Record<string,any> = {
 	PinnedRecipesPageEdge:{
 		node:"PinnedRecipesPage"
 	},
+	TranslationsEntry:{
+		_meta:"TranslationsEntryMeta",
+		id:"UUID",
+		key:"String",
+		values:"TranslationsEntryValue",
+		order:"Int",
+		valuesByLocale:"TranslationsEntryValue",
+		paginateValues:"TranslationsEntryValueConnection"
+	},
+	TranslationsEntryMeta:{
+		id:"FieldMeta",
+		key:"FieldMeta",
+		values:"FieldMeta",
+		order:"FieldMeta"
+	},
+	TranslationsEntryValue:{
+		_meta:"TranslationsEntryValueMeta",
+		id:"UUID",
+		value:"String",
+		entry:"TranslationsEntry",
+		locale:"Locale",
+		order:"Int"
+	},
+	TranslationsEntryValueMeta:{
+		id:"FieldMeta",
+		value:"FieldMeta",
+		entry:"FieldMeta",
+		locale:"FieldMeta",
+		order:"FieldMeta"
+	},
+	TranslationsEntryValueConnection:{
+		pageInfo:"PageInfo",
+		edges:"TranslationsEntryValueEdge"
+	},
+	TranslationsEntryValueEdge:{
+		node:"TranslationsEntryValue"
+	},
+	TranslationsEntryConnection:{
+		pageInfo:"PageInfo",
+		edges:"TranslationsEntryEdge"
+	},
+	TranslationsEntryEdge:{
+		node:"TranslationsEntry"
+	},
 	QueryTransaction:{
 		getContent:"Content",
 		listContent:"Content",
@@ -3639,7 +3802,13 @@ export const ReturnTypes: Record<string,any> = {
 		paginatePinnedRecipesPage:"PinnedRecipesPageConnection",
 		getPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
 		listPinnedRecipesPageLocale:"PinnedRecipesPageLocale",
-		paginatePinnedRecipesPageLocale:"PinnedRecipesPageLocaleConnection"
+		paginatePinnedRecipesPageLocale:"PinnedRecipesPageLocaleConnection",
+		getTranslationsEntry:"TranslationsEntry",
+		listTranslationsEntry:"TranslationsEntry",
+		paginateTranslationsEntry:"TranslationsEntryConnection",
+		getTranslationsEntryValue:"TranslationsEntryValue",
+		listTranslationsEntryValue:"TranslationsEntryValue",
+		paginateTranslationsEntryValue:"TranslationsEntryValueConnection"
 	},
 	Info:{
 		description:"String"
@@ -4742,6 +4911,12 @@ paginatePinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageWhere"] | u
 getPinnedRecipesPageLocale?: [{	by: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 listPinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 paginatePinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocaleConnection"]],
+getTranslationsEntry?: [{	by: ValueTypes["TranslationsEntryUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntry"]],
+listTranslationsEntry?: [{	filter?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntry"]],
+paginateTranslationsEntry?: [{	filter?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryConnection"]],
+getTranslationsEntryValue?: [{	by: ValueTypes["TranslationsEntryValueUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
+listTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
+paginateTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValueConnection"]],
 	transaction?:ValueTypes["QueryTransaction"],
 	_info?:ValueTypes["Info"],
 	schema?:ValueTypes["_Schema"],
@@ -6883,6 +7058,106 @@ recipe?: [{	filter?: ValueTypes["RecipeWhere"] | undefined | null | Variable<any
 	node?:ValueTypes["PinnedRecipesPage"],
 		__typename?: boolean | `@${string}`
 }>;
+	["TranslationsEntry"]: AliasType<{
+	_meta?:ValueTypes["TranslationsEntryMeta"],
+	id?:boolean | `@${string}`,
+	key?:boolean | `@${string}`,
+values?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
+	order?:boolean | `@${string}`,
+valuesByLocale?: [{	by: ValueTypes["TranslationsEntryValuesByLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
+paginateValues?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValueConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	key?:ValueTypes["FieldMeta"],
+	values?:ValueTypes["FieldMeta"],
+	order?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryValue"]: AliasType<{
+	_meta?:ValueTypes["TranslationsEntryValueMeta"],
+	id?:boolean | `@${string}`,
+	value?:boolean | `@${string}`,
+entry?: [{	filter?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntry"]],
+locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["Locale"]],
+	order?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryValueMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	value?:ValueTypes["FieldMeta"],
+	entry?:ValueTypes["FieldMeta"],
+	locale?:ValueTypes["FieldMeta"],
+	order?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	key?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	values?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,
+	order?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["TranslationsEntryWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["TranslationsEntryWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>
+};
+	["TranslationsEntryValueWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	value?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	entry?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>,
+	locale?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any, string>,
+	order?: ValueTypes["IntCondition"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["TranslationsEntryValueWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["TranslationsEntryValueWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>
+};
+	["TranslationsEntryValueOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	value?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	entry?: ValueTypes["TranslationsEntryOrderBy"] | undefined | null | Variable<any, string>,
+	locale?: ValueTypes["LocaleOrderBy"] | undefined | null | Variable<any, string>,
+	order?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+};
+	["TranslationsEntryOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	key?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	order?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+};
+	["TranslationsEntryValuesByLocaleUniqueWhere"]: {
+	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["TranslationsEntryValueConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["TranslationsEntryValueEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryValueEdge"]: AliasType<{
+	node?:ValueTypes["TranslationsEntryValue"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	key?: string | undefined | null | Variable<any, string>,
+	values?: ValueTypes["TranslationsEntryValueUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["TranslationsEntryValueUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	entry?: ValueTypes["TranslationsEntryUniqueWhere"] | undefined | null | Variable<any, string>,
+	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["TranslationsEntryConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["TranslationsEntryEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryEdge"]: AliasType<{
+	node?:ValueTypes["TranslationsEntry"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ValueTypes["ContentUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>},ValueTypes["Content"]],
 listContent?: [{	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ContentOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Content"]],
@@ -6985,6 +7260,12 @@ paginatePinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageWhere"] | u
 getPinnedRecipesPageLocale?: [{	by: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 listPinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 paginatePinnedRecipesPageLocale?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocaleConnection"]],
+getTranslationsEntry?: [{	by: ValueTypes["TranslationsEntryUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntry"]],
+listTranslationsEntry?: [{	filter?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntry"]],
+paginateTranslationsEntry?: [{	filter?: ValueTypes["TranslationsEntryWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryConnection"]],
+getTranslationsEntryValue?: [{	by: ValueTypes["TranslationsEntryValueUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
+listTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
+paginateTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValueConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -7292,6 +7573,12 @@ paginatePinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageWhe
 getPinnedRecipesPageLocale?: [{	by: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 listPinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 paginatePinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocaleConnection"]],
+getTranslationsEntry?: [{	by: ResolverInputTypes["TranslationsEntryUniqueWhere"],	filter?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null},ResolverInputTypes["TranslationsEntry"]],
+listTranslationsEntry?: [{	filter?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TranslationsEntry"]],
+paginateTranslationsEntry?: [{	filter?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TranslationsEntryConnection"]],
+getTranslationsEntryValue?: [{	by: ResolverInputTypes["TranslationsEntryValueUniqueWhere"],	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
+listTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
+paginateTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TranslationsEntryValueConnection"]],
 	transaction?:ResolverInputTypes["QueryTransaction"],
 	_info?:ResolverInputTypes["Info"],
 	schema?:ResolverInputTypes["_Schema"],
@@ -9434,6 +9721,106 @@ recipe?: [{	filter?: ResolverInputTypes["RecipeWhere"] | undefined | null},Resol
 	node?:ResolverInputTypes["PinnedRecipesPage"],
 		__typename?: boolean | `@${string}`
 }>;
+	["TranslationsEntry"]: AliasType<{
+	_meta?:ResolverInputTypes["TranslationsEntryMeta"],
+	id?:boolean | `@${string}`,
+	key?:boolean | `@${string}`,
+values?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
+	order?:boolean | `@${string}`,
+valuesByLocale?: [{	by: ResolverInputTypes["TranslationsEntryValuesByLocaleUniqueWhere"],	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
+paginateValues?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TranslationsEntryValueConnection"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	key?:ResolverInputTypes["FieldMeta"],
+	values?:ResolverInputTypes["FieldMeta"],
+	order?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryValue"]: AliasType<{
+	_meta?:ResolverInputTypes["TranslationsEntryValueMeta"],
+	id?:boolean | `@${string}`,
+	value?:boolean | `@${string}`,
+entry?: [{	filter?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null},ResolverInputTypes["TranslationsEntry"]],
+locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},ResolverInputTypes["Locale"]],
+	order?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryValueMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	value?:ResolverInputTypes["FieldMeta"],
+	entry?:ResolverInputTypes["FieldMeta"],
+	locale?:ResolverInputTypes["FieldMeta"],
+	order?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	key?: ResolverInputTypes["StringCondition"] | undefined | null,
+	values?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,
+	order?: ResolverInputTypes["IntCondition"] | undefined | null,
+	and?: Array<ResolverInputTypes["TranslationsEntryWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["TranslationsEntryWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null
+};
+	["TranslationsEntryValueWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	value?: ResolverInputTypes["StringCondition"] | undefined | null,
+	entry?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null,
+	locale?: ResolverInputTypes["LocaleWhere"] | undefined | null,
+	order?: ResolverInputTypes["IntCondition"] | undefined | null,
+	and?: Array<ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null
+};
+	["TranslationsEntryValueOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	value?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	entry?: ResolverInputTypes["TranslationsEntryOrderBy"] | undefined | null,
+	locale?: ResolverInputTypes["LocaleOrderBy"] | undefined | null,
+	order?: ResolverInputTypes["OrderDirection"] | undefined | null
+};
+	["TranslationsEntryOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	key?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	order?: ResolverInputTypes["OrderDirection"] | undefined | null
+};
+	["TranslationsEntryValuesByLocaleUniqueWhere"]: {
+	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null
+};
+	["TranslationsEntryValueConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["TranslationsEntryValueEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryValueEdge"]: AliasType<{
+	node?:ResolverInputTypes["TranslationsEntryValue"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	key?: string | undefined | null,
+	values?: ResolverInputTypes["TranslationsEntryValueUniqueWhere"] | undefined | null
+};
+	["TranslationsEntryValueUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	entry?: ResolverInputTypes["TranslationsEntryUniqueWhere"] | undefined | null,
+	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null
+};
+	["TranslationsEntryConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["TranslationsEntryEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["TranslationsEntryEdge"]: AliasType<{
+	node?:ResolverInputTypes["TranslationsEntry"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ResolverInputTypes["ContentUniqueWhere"],	filter?: ResolverInputTypes["ContentWhere"] | undefined | null},ResolverInputTypes["Content"]],
 listContent?: [{	filter?: ResolverInputTypes["ContentWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ContentOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Content"]],
@@ -9536,6 +9923,12 @@ paginatePinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageWhe
 getPinnedRecipesPageLocale?: [{	by: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"],	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 listPinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 paginatePinnedRecipesPageLocale?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["PinnedRecipesPageLocaleConnection"]],
+getTranslationsEntry?: [{	by: ResolverInputTypes["TranslationsEntryUniqueWhere"],	filter?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null},ResolverInputTypes["TranslationsEntry"]],
+listTranslationsEntry?: [{	filter?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TranslationsEntry"]],
+paginateTranslationsEntry?: [{	filter?: ResolverInputTypes["TranslationsEntryWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TranslationsEntryConnection"]],
+getTranslationsEntryValue?: [{	by: ResolverInputTypes["TranslationsEntryValueUniqueWhere"],	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
+listTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
+paginateTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TranslationsEntryValueConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -9844,6 +10237,12 @@ export type ModelTypes = {
 	getPinnedRecipesPageLocale?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
 	listPinnedRecipesPageLocale: Array<ModelTypes["PinnedRecipesPageLocale"]>,
 	paginatePinnedRecipesPageLocale: ModelTypes["PinnedRecipesPageLocaleConnection"],
+	getTranslationsEntry?: ModelTypes["TranslationsEntry"] | undefined,
+	listTranslationsEntry: Array<ModelTypes["TranslationsEntry"]>,
+	paginateTranslationsEntry: ModelTypes["TranslationsEntryConnection"],
+	getTranslationsEntryValue?: ModelTypes["TranslationsEntryValue"] | undefined,
+	listTranslationsEntryValue: Array<ModelTypes["TranslationsEntryValue"]>,
+	paginateTranslationsEntryValue: ModelTypes["TranslationsEntryValueConnection"],
 	transaction?: ModelTypes["QueryTransaction"] | undefined,
 	_info?: ModelTypes["Info"] | undefined,
 	schema?: ModelTypes["_Schema"] | undefined,
@@ -11842,6 +12241,98 @@ export type ModelTypes = {
 	["PinnedRecipesPageEdge"]: {
 		node: ModelTypes["PinnedRecipesPage"]
 };
+	["TranslationsEntry"]: {
+		_meta?: ModelTypes["TranslationsEntryMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	key: string,
+	values: Array<ModelTypes["TranslationsEntryValue"]>,
+	order: number,
+	valuesByLocale?: ModelTypes["TranslationsEntryValue"] | undefined,
+	paginateValues: ModelTypes["TranslationsEntryValueConnection"]
+};
+	["TranslationsEntryMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	key?: ModelTypes["FieldMeta"] | undefined,
+	values?: ModelTypes["FieldMeta"] | undefined,
+	order?: ModelTypes["FieldMeta"] | undefined
+};
+	["TranslationsEntryValue"]: {
+		_meta?: ModelTypes["TranslationsEntryValueMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	value: string,
+	entry?: ModelTypes["TranslationsEntry"] | undefined,
+	locale?: ModelTypes["Locale"] | undefined,
+	order: number
+};
+	["TranslationsEntryValueMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	value?: ModelTypes["FieldMeta"] | undefined,
+	entry?: ModelTypes["FieldMeta"] | undefined,
+	locale?: ModelTypes["FieldMeta"] | undefined,
+	order?: ModelTypes["FieldMeta"] | undefined
+};
+	["TranslationsEntryWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	key?: ModelTypes["StringCondition"] | undefined,
+	values?: ModelTypes["TranslationsEntryValueWhere"] | undefined,
+	order?: ModelTypes["IntCondition"] | undefined,
+	and?: Array<ModelTypes["TranslationsEntryWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["TranslationsEntryWhere"] | undefined> | undefined,
+	not?: ModelTypes["TranslationsEntryWhere"] | undefined
+};
+	["TranslationsEntryValueWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	value?: ModelTypes["StringCondition"] | undefined,
+	entry?: ModelTypes["TranslationsEntryWhere"] | undefined,
+	locale?: ModelTypes["LocaleWhere"] | undefined,
+	order?: ModelTypes["IntCondition"] | undefined,
+	and?: Array<ModelTypes["TranslationsEntryValueWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["TranslationsEntryValueWhere"] | undefined> | undefined,
+	not?: ModelTypes["TranslationsEntryValueWhere"] | undefined
+};
+	["TranslationsEntryValueOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	value?: ModelTypes["OrderDirection"] | undefined,
+	entry?: ModelTypes["TranslationsEntryOrderBy"] | undefined,
+	locale?: ModelTypes["LocaleOrderBy"] | undefined,
+	order?: ModelTypes["OrderDirection"] | undefined
+};
+	["TranslationsEntryOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	key?: ModelTypes["OrderDirection"] | undefined,
+	order?: ModelTypes["OrderDirection"] | undefined
+};
+	["TranslationsEntryValuesByLocaleUniqueWhere"]: {
+	locale?: ModelTypes["LocaleUniqueWhere"] | undefined
+};
+	["TranslationsEntryValueConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["TranslationsEntryValueEdge"]>
+};
+	["TranslationsEntryValueEdge"]: {
+		node: ModelTypes["TranslationsEntryValue"]
+};
+	["TranslationsEntryUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	key?: string | undefined,
+	values?: ModelTypes["TranslationsEntryValueUniqueWhere"] | undefined
+};
+	["TranslationsEntryValueUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	entry?: ModelTypes["TranslationsEntryUniqueWhere"] | undefined,
+	locale?: ModelTypes["LocaleUniqueWhere"] | undefined
+};
+	["TranslationsEntryConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["TranslationsEntryEdge"]>
+};
+	["TranslationsEntryEdge"]: {
+		node: ModelTypes["TranslationsEntry"]
+};
 	["QueryTransaction"]: {
 		getContent?: ModelTypes["Content"] | undefined,
 	listContent: Array<ModelTypes["Content"]>,
@@ -11943,7 +12434,13 @@ export type ModelTypes = {
 	paginatePinnedRecipesPage: ModelTypes["PinnedRecipesPageConnection"],
 	getPinnedRecipesPageLocale?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
 	listPinnedRecipesPageLocale: Array<ModelTypes["PinnedRecipesPageLocale"]>,
-	paginatePinnedRecipesPageLocale: ModelTypes["PinnedRecipesPageLocaleConnection"]
+	paginatePinnedRecipesPageLocale: ModelTypes["PinnedRecipesPageLocaleConnection"],
+	getTranslationsEntry?: ModelTypes["TranslationsEntry"] | undefined,
+	listTranslationsEntry: Array<ModelTypes["TranslationsEntry"]>,
+	paginateTranslationsEntry: ModelTypes["TranslationsEntryConnection"],
+	getTranslationsEntryValue?: ModelTypes["TranslationsEntryValue"] | undefined,
+	listTranslationsEntryValue: Array<ModelTypes["TranslationsEntryValue"]>,
+	paginateTranslationsEntryValue: ModelTypes["TranslationsEntryValueConnection"]
 };
 	["Info"]: {
 		description?: string | undefined
@@ -12205,6 +12702,12 @@ export type GraphQLTypes = {
 	getPinnedRecipesPageLocale?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
 	listPinnedRecipesPageLocale: Array<GraphQLTypes["PinnedRecipesPageLocale"]>,
 	paginatePinnedRecipesPageLocale: GraphQLTypes["PinnedRecipesPageLocaleConnection"],
+	getTranslationsEntry?: GraphQLTypes["TranslationsEntry"] | undefined,
+	listTranslationsEntry: Array<GraphQLTypes["TranslationsEntry"]>,
+	paginateTranslationsEntry: GraphQLTypes["TranslationsEntryConnection"],
+	getTranslationsEntryValue?: GraphQLTypes["TranslationsEntryValue"] | undefined,
+	listTranslationsEntryValue: Array<GraphQLTypes["TranslationsEntryValue"]>,
+	paginateTranslationsEntryValue: GraphQLTypes["TranslationsEntryValueConnection"],
 	transaction?: GraphQLTypes["QueryTransaction"] | undefined,
 	_info?: GraphQLTypes["Info"] | undefined,
 	schema?: GraphQLTypes["_Schema"] | undefined,
@@ -14346,6 +14849,106 @@ export type GraphQLTypes = {
 	__typename: "PinnedRecipesPageEdge",
 	node: GraphQLTypes["PinnedRecipesPage"]
 };
+	["TranslationsEntry"]: {
+	__typename: "TranslationsEntry",
+	_meta?: GraphQLTypes["TranslationsEntryMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	key: string,
+	values: Array<GraphQLTypes["TranslationsEntryValue"]>,
+	order: number,
+	valuesByLocale?: GraphQLTypes["TranslationsEntryValue"] | undefined,
+	paginateValues: GraphQLTypes["TranslationsEntryValueConnection"]
+};
+	["TranslationsEntryMeta"]: {
+	__typename: "TranslationsEntryMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	key?: GraphQLTypes["FieldMeta"] | undefined,
+	values?: GraphQLTypes["FieldMeta"] | undefined,
+	order?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["TranslationsEntryValue"]: {
+	__typename: "TranslationsEntryValue",
+	_meta?: GraphQLTypes["TranslationsEntryValueMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	value: string,
+	entry?: GraphQLTypes["TranslationsEntry"] | undefined,
+	locale?: GraphQLTypes["Locale"] | undefined,
+	order: number
+};
+	["TranslationsEntryValueMeta"]: {
+	__typename: "TranslationsEntryValueMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	value?: GraphQLTypes["FieldMeta"] | undefined,
+	entry?: GraphQLTypes["FieldMeta"] | undefined,
+	locale?: GraphQLTypes["FieldMeta"] | undefined,
+	order?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["TranslationsEntryWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	key?: GraphQLTypes["StringCondition"] | undefined,
+	values?: GraphQLTypes["TranslationsEntryValueWhere"] | undefined,
+	order?: GraphQLTypes["IntCondition"] | undefined,
+	and?: Array<GraphQLTypes["TranslationsEntryWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["TranslationsEntryWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["TranslationsEntryWhere"] | undefined
+};
+	["TranslationsEntryValueWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	value?: GraphQLTypes["StringCondition"] | undefined,
+	entry?: GraphQLTypes["TranslationsEntryWhere"] | undefined,
+	locale?: GraphQLTypes["LocaleWhere"] | undefined,
+	order?: GraphQLTypes["IntCondition"] | undefined,
+	and?: Array<GraphQLTypes["TranslationsEntryValueWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["TranslationsEntryValueWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["TranslationsEntryValueWhere"] | undefined
+};
+	["TranslationsEntryValueOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	value?: GraphQLTypes["OrderDirection"] | undefined,
+	entry?: GraphQLTypes["TranslationsEntryOrderBy"] | undefined,
+	locale?: GraphQLTypes["LocaleOrderBy"] | undefined,
+	order?: GraphQLTypes["OrderDirection"] | undefined
+};
+	["TranslationsEntryOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	key?: GraphQLTypes["OrderDirection"] | undefined,
+	order?: GraphQLTypes["OrderDirection"] | undefined
+};
+	["TranslationsEntryValuesByLocaleUniqueWhere"]: {
+		locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined
+};
+	["TranslationsEntryValueConnection"]: {
+	__typename: "TranslationsEntryValueConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["TranslationsEntryValueEdge"]>
+};
+	["TranslationsEntryValueEdge"]: {
+	__typename: "TranslationsEntryValueEdge",
+	node: GraphQLTypes["TranslationsEntryValue"]
+};
+	["TranslationsEntryUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	key?: string | undefined,
+	values?: GraphQLTypes["TranslationsEntryValueUniqueWhere"] | undefined
+};
+	["TranslationsEntryValueUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	entry?: GraphQLTypes["TranslationsEntryUniqueWhere"] | undefined,
+	locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined
+};
+	["TranslationsEntryConnection"]: {
+	__typename: "TranslationsEntryConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["TranslationsEntryEdge"]>
+};
+	["TranslationsEntryEdge"]: {
+	__typename: "TranslationsEntryEdge",
+	node: GraphQLTypes["TranslationsEntry"]
+};
 	["QueryTransaction"]: {
 	__typename: "QueryTransaction",
 	getContent?: GraphQLTypes["Content"] | undefined,
@@ -14448,7 +15051,13 @@ export type GraphQLTypes = {
 	paginatePinnedRecipesPage: GraphQLTypes["PinnedRecipesPageConnection"],
 	getPinnedRecipesPageLocale?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
 	listPinnedRecipesPageLocale: Array<GraphQLTypes["PinnedRecipesPageLocale"]>,
-	paginatePinnedRecipesPageLocale: GraphQLTypes["PinnedRecipesPageLocaleConnection"]
+	paginatePinnedRecipesPageLocale: GraphQLTypes["PinnedRecipesPageLocaleConnection"],
+	getTranslationsEntry?: GraphQLTypes["TranslationsEntry"] | undefined,
+	listTranslationsEntry: Array<GraphQLTypes["TranslationsEntry"]>,
+	paginateTranslationsEntry: GraphQLTypes["TranslationsEntryConnection"],
+	getTranslationsEntryValue?: GraphQLTypes["TranslationsEntryValue"] | undefined,
+	listTranslationsEntryValue: Array<GraphQLTypes["TranslationsEntryValue"]>,
+	paginateTranslationsEntryValue: GraphQLTypes["TranslationsEntryValueConnection"]
 };
 	["Info"]: {
 	__typename: "Info",
@@ -14875,6 +15484,13 @@ type ZEUS_VARIABLES = {
 	["RecipeListOrderBy"]: ValueTypes["RecipeListOrderBy"];
 	["RecipeListUniqueWhere"]: ValueTypes["RecipeListUniqueWhere"];
 	["RecipeListItemUniqueWhere"]: ValueTypes["RecipeListItemUniqueWhere"];
+	["TranslationsEntryWhere"]: ValueTypes["TranslationsEntryWhere"];
+	["TranslationsEntryValueWhere"]: ValueTypes["TranslationsEntryValueWhere"];
+	["TranslationsEntryValueOrderBy"]: ValueTypes["TranslationsEntryValueOrderBy"];
+	["TranslationsEntryOrderBy"]: ValueTypes["TranslationsEntryOrderBy"];
+	["TranslationsEntryValuesByLocaleUniqueWhere"]: ValueTypes["TranslationsEntryValuesByLocaleUniqueWhere"];
+	["TranslationsEntryUniqueWhere"]: ValueTypes["TranslationsEntryUniqueWhere"];
+	["TranslationsEntryValueUniqueWhere"]: ValueTypes["TranslationsEntryValueUniqueWhere"];
 	["_MutationErrorType"]: ValueTypes["_MutationErrorType"];
 	["MutationTransactionOptions"]: ValueTypes["MutationTransactionOptions"];
 	["Json"]: ValueTypes["Json"];
