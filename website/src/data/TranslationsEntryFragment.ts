@@ -1,0 +1,18 @@
+import type { GraphQLTypes, InputType } from '../../generated/contember'
+import { Selector } from '../../generated/contember'
+import type { scalarResolver } from '../utilities/createScalarResolver'
+import { TranslationsEntryValueFragment } from './TranslationsEntryValueFragment'
+
+export function TranslationsEntryFragment() {
+	return Selector('TranslationsEntry')({
+		id: true,
+		key: true,
+		values: [{}, TranslationsEntryValueFragment()],
+	})
+}
+
+export type TranslationsEntryResult = InputType<
+	GraphQLTypes['TranslationsEntry'],
+	ReturnType<typeof TranslationsEntryFragment>,
+	typeof scalarResolver
+>
