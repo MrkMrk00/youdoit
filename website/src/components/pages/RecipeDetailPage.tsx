@@ -5,6 +5,7 @@ import type { FunctionComponent } from 'react'
 import { useMemo, useState } from 'react'
 import { useMirrorLoading } from 'shared-loading-indicator'
 import type { RecipeLocaleResult } from '../../data/RecipeLocaleFragment'
+import { useTranslate } from '../../hooks/useTranslate'
 import { contember } from '../../utilities/contember'
 import { scalarResolver } from '../../utilities/createScalarResolver'
 import { hardcodedUserEmail } from '../../utilities/hardcodedUserEmail'
@@ -121,6 +122,8 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 	)
 	useMirrorLoading(updateStepImplementationMutation.isLoading)
 
+	const translate = useTranslate()
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -144,7 +147,7 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 									}}
 									disabled={createPinnedMutation.isLoading}
 								>
-									Přidat do oblíbených
+									{translate('recipeDetailPage.pinButton')}
 								</Button>
 							</div>
 						</div>
