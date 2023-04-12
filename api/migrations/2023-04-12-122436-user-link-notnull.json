@@ -1,0 +1,10 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "makeRelationNotNull",
+			"entityName": "User",
+			"fieldName": "link"
+		}
+	]
+}
