@@ -59,7 +59,7 @@ export default function ({
 				{recipeDetailPage && (
 					<RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={pinnedRecipesPageUrl} />
 				)}
-				{user && currentUrlPage === userPageUrl && <UserPage user={user} />}
+				{user && currentUrlPage === userPageUrl && <UserPage user={user} pinnedRecipesPageUrl={pinnedRecipesPageUrl} />}
 			</Layout>
 		</TranslationsProvider>
 	)
