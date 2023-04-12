@@ -35,6 +35,7 @@ export const PinnedRecipesPage: FunctionComponent<PinnedRecipesPageProps> = ({ p
 	})
 
 	useMirrorLoading(recipes.isLoading)
+
 	return (
 		<Container>
 			<div className={styles.wrapper}>
@@ -48,7 +49,8 @@ export const PinnedRecipesPage: FunctionComponent<PinnedRecipesPageProps> = ({ p
 								<PinnedRecipeTile
 									pathname={pinnedRecipe.derivedBy.localesByLocale.link?.url ?? '/'}
 									query={{ pinnedId: pinnedRecipe.id }}
-									tile={pinnedRecipe.derivedBy.localesByLocale}
+									pinnedRecipe={pinnedRecipe}
+									onDeletetionComplete={recipes.refetch}
 								/>
 							</li>
 						)
