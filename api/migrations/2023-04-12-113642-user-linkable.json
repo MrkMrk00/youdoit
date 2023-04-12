@@ -1,0 +1,72 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createRelation",
+			"entityName": "Linkable",
+			"owningSide": {
+				"type": "OneHasOne",
+				"name": "user",
+				"target": "User",
+				"joiningColumn": {
+					"columnName": "user_id",
+					"onDelete": "cascade"
+				},
+				"nullable": true,
+				"inversedBy": "link"
+			},
+			"inverseSide": {
+				"type": "OneHasOne",
+				"name": "link",
+				"target": "Linkable",
+				"ownedBy": "user",
+				"nullable": false
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Linkable/operations/create/user",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Linkable/operations/update/user",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/Linkable/operations/read/user",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/create/link",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/update/link",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/User/operations/read/link",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/Linkable/operations/read/user",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/User/operations/read/link",
+					"value": true
+				}
+			]
+		}
+	]
+}
