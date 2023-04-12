@@ -1,0 +1,15 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "updateColumnDefinition",
+			"entityName": "User",
+			"fieldName": "link",
+			"definition": {
+				"columnType": "text",
+				"nullable": false,
+				"type": "String"
+			}
+		}
+	]
+}

@@ -9,7 +9,7 @@ export class User {
 	pinnedRecipes = d.oneHasMany(PinnedRecipe, 'user')
 	createdRecipes = d.oneHasMany(Recipe, 'createdBy')
 
-	link = d.stringColumn().unique()
+	link = d.stringColumn().unique().notNull()
 
 	image = d.manyHasOne(Image)
 	firstName = d.stringColumn().notNull()
