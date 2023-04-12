@@ -91,7 +91,10 @@ ${indent(
 createSchema({
 	model: schema.model,
 	ignore: [
-		// 'User',
+		'Content',
+		'ContentBlock',
+		'ContentReference',
+		'ContentReferenceLinkableItem',
 		// 'AppEvent',
 		// 'TenantPerson',
 		// 'Image',
