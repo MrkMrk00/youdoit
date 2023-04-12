@@ -1,5 +1,6 @@
 import type { FunctionComponent } from 'react'
 import type { StepResult } from '../data/StepFragment'
+import { useTranslate } from '../hooks/useTranslate'
 import styles from './Step.module.sass'
 import { Timer } from './Timer'
 
@@ -11,6 +12,8 @@ export interface StepProps {
 }
 
 export const Step: FunctionComponent<StepProps> = ({ step, disabled, onChange, checked }) => {
+	const translate = useTranslate()
+
 	return (
 		<label className={styles.checkbox}>
 			<input
@@ -27,7 +30,7 @@ export const Step: FunctionComponent<StepProps> = ({ step, disabled, onChange, c
 				<span className={styles.tick} />
 			</div>
 			{step.hasTimer && step.timerCount && (
-				<Timer startButtonTitle="Tapni pro spuštění" secondsToSet={step.timerCount} />
+				<Timer startButtonTitle={translate('timer.tapToStart')} secondsToSet={step.timerCount} />
 			)}
 		</label>
 	)

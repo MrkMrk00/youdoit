@@ -3,11 +3,11 @@ import { Selector } from '../../generated/contember'
 import type { scalarResolver } from '../utilities/createScalarResolver'
 import { TranslationsEntryValueFragment } from './TranslationsEntryValueFragment'
 
-export function TranslationsEntryFragment() {
+export function TranslationsEntryFragment(locale: string) {
 	return Selector('TranslationsEntry')({
 		id: true,
 		key: true,
-		values: [{}, TranslationsEntryValueFragment()],
+		valuesByLocale: [{ by: { locale: { code: locale } } }, TranslationsEntryValueFragment()],
 	})
 }
 

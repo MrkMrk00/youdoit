@@ -5,10 +5,12 @@ import { HomePage } from '../components/pages/HomePage'
 import { PinnedRecipesPage } from '../components/pages/PinnedRecipesPage'
 import { RecipeDetailPage } from '../components/pages/RecipeDetailPage'
 import { Seo } from '../components/Seo'
+import { TranslationsProvider } from '../contexts/TranslationsContext'
 import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { PinnedRecipesPageLocaleFragment } from '../data/PinnedRecipesLocaleFragment'
 import { RecipeLocaleFragment } from '../data/RecipeLocaleFragment'
+import { TranslationsEntryFragment } from '../data/TranslationsEntryFragment'
 import { contember } from '../utilities/contember'
 import { scalarResolver } from '../utilities/createScalarResolver'
 import { getLinkableUrlFromContext } from '../utilities/getLinkableUrlFromContext'
@@ -29,17 +31,26 @@ export default function ({
 	recipeDetailPage,
 	recipes,
 	categories,
+	translations,
 }: PageProps) {
 	return (
-		<Layout homePageUrl={homePageUrl} pinnedRecipesPageUrl={pinnedRecipesPageUrl} currentPageUrl={currentUrlPage}>
-			<Seo {...seo} />
-			{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
-			{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} locale={locale} />}
-			{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
-			{recipeDetailPage && (
-				<RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={pinnedRecipesPageUrl} />
+		<TranslationsProvider
+			translationsEntries={Object.fromEntries(
+				translations.map((translationEntry) => {
+					return [translationEntry.key, translationEntry.valuesByLocale?.value ?? translationEntry.key]
+				}),
 			)}
-		</Layout>
+		>
+			<Layout homePageUrl={homePageUrl} pinnedRecipesPageUrl={pinnedRecipesPageUrl} currentPageUrl={currentUrlPage}>
+				<Seo {...seo} />
+				{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
+				{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} locale={locale} />}
+				{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
+				{recipeDetailPage && (
+					<RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={pinnedRecipesPageUrl} />
+				)}
+			</Layout>
+		</TranslationsProvider>
 	)
 }
 
@@ -147,6 +158,10 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 	}
 	const { homePage, pinnedRecipesPage, category, recipe } = data.getLinkable
 
+	const translations = await contember('query', { scalars: scalarResolver })({
+		listTranslationsEntry: [{}, TranslationsEntryFragment(locale)],
+	})
+
 	// if (!page) {
 	// 	return {
 	// 		notFound: true,
@@ -165,6 +180,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			recipeDetailPage: recipe,
 			categories: data.listCategoryLocale,
 			recipes: data.listRecipeLocale,
+			translations: translations.listTranslationsEntry,
 			seo: {
 				canonicalUrl,
 				// seo: {
