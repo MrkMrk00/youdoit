@@ -9,7 +9,7 @@ export interface ContainerProps {
 
 export const Container: React.FunctionComponent<ContainerProps> = ({
 	children,
-	size = 'normal',
+	size = 'small',
 	disableGutters = false,
 }) => {
 	return (

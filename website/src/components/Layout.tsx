@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 import type { FunctionComponent, ReactNode } from 'react'
+import { Container } from './Container'
 import { Icon } from './Icon'
 import styles from './Layout.module.sass'
 
@@ -23,27 +24,31 @@ export const Layout: FunctionComponent<LayoutProps> = ({
 		<div className={styles.wrapper}>
 			<div className={styles.content}>{children}</div>
 			<div className={styles.navigation}>
-				{userPageUrl ? (
-					<Link href={userPageUrl}>
-						<UserIcon iconUrl={userPageUrl} currentPageUrl={currentPageUrl} />
-					</Link>
-				) : (
-					<UserIcon iconUrl={userPageUrl} currentPageUrl={currentPageUrl} />
-				)}
-				{pinnedRecipesPageUrl ? (
-					<Link href={pinnedRecipesPageUrl}>
-						<AppleIcon currentPageUrl={currentPageUrl} iconUrl={pinnedRecipesPageUrl} />
-					</Link>
-				) : (
-					<AppleIcon currentPageUrl={currentPageUrl} iconUrl={pinnedRecipesPageUrl} />
-				)}
-				{homePageUrl ? (
-					<Link href={homePageUrl}>
-						<MarketIcon currentPageUrl={currentPageUrl} iconUrl={homePageUrl} />
-					</Link>
-				) : (
-					<MarketIcon currentPageUrl={currentPageUrl} iconUrl={homePageUrl} />
-				)}
+				<Container>
+					<div className={styles.navigationContent}>
+						{userPageUrl ? (
+							<Link href={userPageUrl}>
+								<UserIcon iconUrl={userPageUrl} currentPageUrl={currentPageUrl} />
+							</Link>
+						) : (
+							<UserIcon iconUrl={userPageUrl} currentPageUrl={currentPageUrl} />
+						)}
+						{pinnedRecipesPageUrl ? (
+							<Link href={pinnedRecipesPageUrl}>
+								<AppleIcon currentPageUrl={currentPageUrl} iconUrl={pinnedRecipesPageUrl} />
+							</Link>
+						) : (
+							<AppleIcon currentPageUrl={currentPageUrl} iconUrl={pinnedRecipesPageUrl} />
+						)}
+						{homePageUrl ? (
+							<Link href={homePageUrl}>
+								<MarketIcon currentPageUrl={currentPageUrl} iconUrl={homePageUrl} />
+							</Link>
+						) : (
+							<MarketIcon currentPageUrl={currentPageUrl} iconUrl={homePageUrl} />
+						)}
+					</div>
+				</Container>
 			</div>
 		</div>
 	)
