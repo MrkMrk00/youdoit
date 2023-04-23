@@ -125,7 +125,7 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 	const translate = useTranslate()
 
 	return (
-		<>
+		<Container>
 			<div className={styles.wrapper}>
 				<div className={styles.header}>
 					<DetailHeader
@@ -183,6 +183,6 @@ export const RecipeDetailPage: FunctionComponent<RecipeDetailPageProps> = ({ rec
 					</Container>
 				</div>
 			</div>
-		</>
+		</Container>
 	)
 }
