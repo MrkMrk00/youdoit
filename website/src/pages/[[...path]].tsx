@@ -1,5 +1,6 @@
 import { One, OrderDirection } from '../../generated/contember'
 import { Layout } from '../components/Layout'
+import type { LocaleSwitcherProps } from '../components/LocaleSwitcher'
 import { CategoryPage } from '../components/pages/CategoryPage'
 import { HomePage } from '../components/pages/HomePage'
 import { PinnedRecipesPage } from '../components/pages/PinnedRecipesPage'
@@ -38,6 +39,15 @@ export default function ({
 	translations,
 	user,
 }: PageProps) {
+	const page = (homePage || pinnedRecipesPage || categoryPage || recipeDetailPage) ?? homePage
+
+	console.log(page)
+
+	const localeSwitcher: LocaleSwitcherProps = {
+		activeLocale: locale,
+		pageLocales: page?.base?.locales,
+	}
+
 	return (
 		<TranslationsProvider
 			translationsEntries={Object.fromEntries(
@@ -59,7 +69,9 @@ export default function ({
 				{recipeDetailPage && (
 					<RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={pinnedRecipesPageUrl} />
 				)}
-				{user && currentUrlPage === userPageUrl && <UserPage user={user} pinnedRecipesPageUrl={pinnedRecipesPageUrl} />}
+				{user && currentUrlPage === userPageUrl && (
+					<UserPage user={user} pinnedRecipesPageUrl={pinnedRecipesPageUrl} localeSwitcher={localeSwitcher} />
+				)}
 			</Layout>
 		</TranslationsProvider>
 	)

@@ -11,6 +11,7 @@ export function PinnedRecipesPageLocaleFragment() {
 				locales: [
 					{},
 					{
+						id: true,
 						locale: [{}, LocaleFragment()],
 						link: [
 							{},

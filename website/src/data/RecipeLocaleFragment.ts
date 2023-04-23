@@ -13,7 +13,7 @@ export const RecipeLocaleFragment = (locale: string) =>
 			{},
 			{
 				id: true,
-				locales: [{}, { locale: [{}, LocaleFragment()], link: [{}, { url: true }] }],
+				locales: [{}, { id: true, locale: [{}, LocaleFragment()], link: [{}, { url: true }] }],
 				createdBy: [{}, { firstName: true, lastName: true, image: [{}, ImageFragment()] }],
 				// pinnedRecipes: [{}, {}]
 				categories: [{}, { localesByLocale: [{ by: { locale: { code: locale } } }, { title: true }] }],

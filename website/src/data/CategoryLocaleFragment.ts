@@ -15,6 +15,7 @@ export const CategoryLocaleFragment = (locale: string) =>
 				locales: [
 					{},
 					{
+						id: true,
 						locale: [{}, LocaleFragment()],
 						link: [
 							{},

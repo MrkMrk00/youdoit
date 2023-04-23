@@ -11,6 +11,7 @@ export function HomePageLocaleFragment() {
 				locales: [
 					{},
 					{
+						id: true,
 						locale: [{}, LocaleFragment()],
 						link: [
 							{},

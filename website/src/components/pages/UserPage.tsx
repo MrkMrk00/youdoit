@@ -5,14 +5,17 @@ import type { UserResult } from '../../data/UserFragment'
 import { useTranslate } from '../../hooks/useTranslate'
 import { Container } from '../Container'
 import { Icon } from '../Icon'
+import type { LocaleSwitcherProps } from '../LocaleSwitcher'
+import { LocaleSwitcher } from '../LocaleSwitcher'
 import styles from './UserPage.module.sass'
 
 export interface UserPageProps {
 	user: UserResult
 	pinnedRecipesPageUrl: string | null
+	localeSwitcher?: LocaleSwitcherProps
 }
 
-export const UserPage: FunctionComponent<UserPageProps> = ({ user, pinnedRecipesPageUrl }) => {
+export const UserPage: FunctionComponent<UserPageProps> = ({ user, pinnedRecipesPageUrl, localeSwitcher }) => {
 	const translate = useTranslate()
 	return (
 		<Container>
@@ -32,6 +35,9 @@ export const UserPage: FunctionComponent<UserPageProps> = ({ user, pinnedRecipes
 							<Icon name="arrowRight" />
 						</div>
 					)}
+					<div className={styles.link}>
+						<LocaleSwitcher {...localeSwitcher} />
+					</div>
 				</div>
 			</div>
 		</Container>
