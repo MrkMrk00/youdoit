@@ -1,5 +1,6 @@
 import { Component, SlugField, TextField } from '@contember/admin'
 import { ImageField } from './ImageField'
+import { SeoField } from './SeoField'
 
 export const User = Component(() => {
 	return (
@@ -9,6 +10,7 @@ export const User = Component(() => {
 			<TextField field="firstName" label="First name" />
 			<TextField field="lastName" label="Last name" />
 			<TextField field="email" label="Email" />
+			<SeoField field="seo" />
 		</>
 	)
 })

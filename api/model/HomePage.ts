@@ -1,9 +1,9 @@
 import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-definition'
-import { publicRole } from './acl'
 import { Linkable } from './Linkable'
 import { Locale } from './Locale'
 import { One } from './One'
 import { Seo } from './Seo'
+import { publicRole } from './acl'
 
 @acl.allow(publicRole, { read: true })
 export class HomePage {
@@ -19,5 +19,5 @@ export class HomePageLocale {
 
 	title = d.stringColumn()
 	link = d.oneHasOneInverse(Linkable, 'homePage').notNull()
-	seo = d.oneHasOne(Seo)
+	seo = d.oneHasOne(Seo).setNullOnDelete()
 }

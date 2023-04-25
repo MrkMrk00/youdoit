@@ -1,16 +1,31 @@
 import Head from 'next/head'
 import type { FunctionComponent } from 'react'
+import { useMemo } from 'react'
+import type { SeoResult } from '../data/SeoFragment'
 
 export type SeoProps = {
 	canonicalUrl: string | null
-	// seo: SeoResult
+	seo: SeoResult
 }
 
-export const Seo: FunctionComponent<SeoProps> = () => {
+export const Seo: FunctionComponent<SeoProps> = ({
+	canonicalUrl,
+	seo: { title, description, ogTitle, ogDescription, ogImage, noIndex, noFollow },
+}) => {
+	const robots = useMemo(() => {
+		const robots: string[] = []
+		if (noIndex) {
+			robots.push('noindex')
+		}
+		if (noFollow) {
+			robots.push('nofollow')
+		}
+		return robots
+	}, [noFollow, noIndex])
+
 	return (
 		<Head>
-			<title>Title</title>
-			{/* <title>{title}</title>
+			<title>{title}</title>
 			{description && <meta name="description" content={description} />}
 			<meta property="og:locale" content="en_US" />
 			{ogTitle && <meta property="og:title" content={ogTitle} />}
@@ -23,14 +38,8 @@ export const Seo: FunctionComponent<SeoProps> = () => {
 					{ogImage.height && <meta property="og:image:height" content={`${ogImage.height}`} />}
 				</>
 			)}
-			{noIndex && noFollow ? (
-				<meta name="robots" content="noindex, nofollow" />
-			) : noIndex ? (
-				<meta name="robots" content="noindex" />
-			) : noFollow ? (
-				<meta name="robots" content="nofollow" />
-			) : null}
-			{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}{' '} */}
+			{robots.length > 0 && <meta name="robots" content={robots.join(', ')} />}
+			{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 		</Head>
 	)
 }

@@ -1,13 +1,14 @@
 import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-definition'
-import { publicRole } from './acl'
 import { Category } from './Category'
 import { Image } from './Image'
 import { Linkable } from './Linkable'
 import { Locale } from './Locale'
 import { PinnedRecipe } from './PinnedRecipe'
+import { Seo } from './Seo'
 import { StepGroup } from './StepGroup'
 import { TipGroup } from './TipGroup'
 import { User } from './User'
+import { publicRole } from './acl'
 
 @acl.allow(publicRole, { read: true })
 export class Recipe {
@@ -35,4 +36,6 @@ export class RecipeLocale {
 	title = d.stringColumn()
 	tileDescription = d.stringColumn()
 	description = d.stringColumn()
+
+	seo = d.oneHasOne(Seo).setNullOnDelete()
 }

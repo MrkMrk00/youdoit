@@ -1,9 +1,10 @@
 import { AclDefinition as acl, SchemaDefinition as d } from '@contember/schema-definition'
-import { publicRole } from './acl'
 import { Image } from './Image'
 import { Linkable } from './Linkable'
 import { PinnedRecipe } from './PinnedRecipe'
 import { Recipe } from './Recipe'
+import { Seo } from './Seo'
+import { publicRole } from './acl'
 
 @acl.allow(publicRole, { read: true })
 export class User {
@@ -16,4 +17,6 @@ export class User {
 	firstName = d.stringColumn().notNull()
 	lastName = d.stringColumn().notNull()
 	email = d.stringColumn().notNull().unique()
+
+	seo = d.oneHasOne(Seo).setNullOnDelete()
 }

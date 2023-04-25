@@ -14,6 +14,7 @@ import {
 import { ImageField } from './ImageField'
 import { LinkUrlField } from './LinkUrlField'
 import { LocaleSideDimension } from './LocaleSideDimensions'
+import { SeoField } from './SeoField'
 import { StepGroup } from './StepGroup'
 import { TipGroup } from './TipGroup'
 
@@ -85,6 +86,9 @@ export const Recipe = Component((_, enviroment) => {
 				<Repeater field="tipGroups" label="Tip groups" sortableBy="order">
 					<TipGroup />
 				</Repeater>
+			</Section>
+			<Section heading="Seo">
+				<SeoField field="seo" />
 			</Section>
 		</>
 	)
