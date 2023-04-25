@@ -1,0 +1,51 @@
+{
+	"formatVersion": 3,
+	"modifications": [
+		{
+			"modification": "createColumn",
+			"entityName": "General",
+			"field": {
+				"name": "unique",
+				"columnName": "unique",
+				"columnType": "One",
+				"nullable": false,
+				"type": "Enum"
+			}
+		},
+		{
+			"modification": "createUniqueConstraint",
+			"entityName": "General",
+			"unique": {
+				"fields": [
+					"unique"
+				],
+				"name": "unique_General_unique_83daa7"
+			}
+		},
+		{
+			"modification": "patchAclSchema",
+			"patch": [
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/General/operations/read/unique",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/General/operations/create/unique",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/admin/entities/General/operations/update/unique",
+					"value": true
+				},
+				{
+					"op": "add",
+					"path": "/roles/public/entities/General/operations/read/unique",
+					"value": true
+				}
+			]
+		}
+	]
+}
