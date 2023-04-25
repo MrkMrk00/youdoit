@@ -7,9 +7,11 @@ import { publicRole } from './acl'
 export class General {
 	unique = d.enumColumn(One).notNull().unique()
 
+	// @TODO add locales
 	// Webmanifest
 	name = d.stringColumn()
 	shortName = d.stringColumn()
 
+	// @TODO add locales
 	seo = d.oneHasOne(Seo).setNullOnDelete()
 }

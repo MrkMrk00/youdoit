@@ -5,8 +5,10 @@ import { useMemo } from 'react'
 import { SharedLoadingIndicatorContextProvider, SharedProgressLoadingIndicator } from 'shared-loading-indicator'
 import { PageNavigationLoadingTracker } from '../components/PageNavigationLoadingTracker'
 import '../styles/globals.sass'
+import { registerServiceWorker } from '../utilities/registerServiceWorker'
 
 const inter = Inter()
+registerServiceWorker()
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const queryClient = useMemo(
