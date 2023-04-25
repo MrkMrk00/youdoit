@@ -3,6 +3,7 @@ import { Selector } from '../../generated/contember'
 import type { scalarResolver } from '../utilities/createScalarResolver'
 import { ImageFragment } from './ImageFragment'
 import { LocaleFragment } from './LocaleFragment'
+import { SeoFragment } from './SeoFragment'
 import { StepGroupFragment } from './StepGroupFragment'
 import { TipGroupFragment } from './TipGroupFragment'
 
@@ -29,6 +30,7 @@ export const RecipeLocaleFragment = (locale: string) =>
 		title: true,
 		description: true,
 		tileDescription: true,
+		seo: [{}, SeoFragment()],
 	})
 
 export type RecipeLocaleResult = InputType<

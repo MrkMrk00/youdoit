@@ -9,6 +9,7 @@ import { UserPage } from '../components/pages/UserPage'
 import { Seo } from '../components/Seo'
 import { TranslationsProvider } from '../contexts/TranslationsContext'
 import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
+import { GeneralFragment } from '../data/GenralFragment'
 import { HomePageFragment } from '../data/HomePageFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { PinnedRecipesPageLocaleFragment } from '../data/PinnedRecipesLocaleFragment'
@@ -119,6 +120,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 	}
 
 	const data = await contember('query', { scalars: scalarResolver })({
+		getGeneral: [{ by: { unique: One.One } }, GeneralFragment()],
 		listCategoryLocale: [{ orderBy: [{ base: { order: OrderDirection.asc } }] }, CategoryLocaleFragment(locale)],
 		listRecipeLocale: [{ orderBy: [{ base: { publishDate: OrderDirection.desc } }] }, RecipeLocaleFragment(locale)],
 		getLinkable: [
@@ -132,14 +134,6 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 				category: [{}, CategoryLocaleFragment(locale)],
 				recipe: [{}, RecipeLocaleFragment(locale)],
 				user: [{}, UserFragment()],
-				// genericPage: [{}, GenericPageFragment()],
-				// redirect: [
-				// 	{},
-				// 	{
-				// 		id: true,
-				// 		target: [{}, LinkFragment()],
-				// 	},
-				// ],
 			},
 		],
 		getHomePage: [{ by: { unique: One.One } }, HomePageFragment()],
@@ -150,20 +144,6 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		],
 		getUser: [{ by: { email: hardcodedUserEmail } }, UserFragment()],
 	})
-
-	// const redirectUrl = (() => {
-	// 	const target = data.getLinkable?.redirect?.target
-	// 	return target ? contemberLinkToHref(target) : null
-	// })()
-
-	// if (redirectUrl) {
-	// 	return {
-	// 		redirect: {
-	// 			permanent: false,
-	// 			destination: redirectUrl,
-	// 		},
-	// 	}
-	// }
 
 	const canonicalUrl = (() => {
 		const url = data.getLinkable?.url
@@ -215,10 +195,10 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 			user: data.getUser,
 			seo: {
 				canonicalUrl,
-				// seo: {
-				// 	...(data.getGeneral?.seo ?? {}),
-				// 	...Object.fromEntries(Object.entries(page.seo ?? {}).filter(([_, value]) => Boolean(value))),
-				// },
+				seo: {
+					...(data.getGeneral?.seo ?? {}),
+					...Object.fromEntries(Object.entries(page.seo ?? {}).filter(([_, value]) => Boolean(value))),
+				},
 			},
 		},
 		revalidate: 60,
