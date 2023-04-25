@@ -45,6 +45,12 @@ export const getServerSideProps = handleGetServerSideProps(async ({ res, locale 
 				type: 'image/png',
 				purpose: 'any',
 			},
+			{
+				src: '/favicon.png',
+				sizes: '1024x1024',
+				type: 'image/png',
+				purpose: 'maskable',
+			},
 		],
 		background_color: '#000000',
 		theme_color: '#0072FF',
