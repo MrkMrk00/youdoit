@@ -427,6 +427,18 @@ export const AllTypesProps: Record<string,any> = {
 		paginateTranslationsEntryValue:{
 			filter:"TranslationsEntryValueWhere",
 			orderBy:"TranslationsEntryValueOrderBy"
+		},
+		getGeneral:{
+			by:"GeneralUniqueWhere",
+			filter:"GeneralWhere"
+		},
+		listGeneral:{
+			filter:"GeneralWhere",
+			orderBy:"GeneralOrderBy"
+		},
+		paginateGeneral:{
+			filter:"GeneralWhere",
+			orderBy:"GeneralOrderBy"
 		}
 	},
 	Content:{
@@ -2217,6 +2229,33 @@ export const AllTypesProps: Record<string,any> = {
 		entry:"TranslationsEntryUniqueWhere",
 		locale:"LocaleUniqueWhere"
 	},
+	General:{
+		seo:{
+			filter:"SeoWhere"
+		}
+	},
+	GeneralUniqueWhere:{
+		id:"UUID",
+		unique:"One",
+		seo:"SeoUniqueWhere"
+	},
+	GeneralWhere:{
+		id:"UUIDCondition",
+		name:"StringCondition",
+		shortName:"StringCondition",
+		seo:"SeoWhere",
+		unique:"OneCondition",
+		and:"GeneralWhere",
+		or:"GeneralWhere",
+		not:"GeneralWhere"
+	},
+	GeneralOrderBy:{
+		id:"OrderDirection",
+		name:"OrderDirection",
+		shortName:"OrderDirection",
+		seo:"SeoOrderBy",
+		unique:"OrderDirection"
+	},
 	QueryTransaction:{
 		getContent:{
 			by:"ContentUniqueWhere",
@@ -2643,6 +2682,18 @@ export const AllTypesProps: Record<string,any> = {
 		paginateTranslationsEntryValue:{
 			filter:"TranslationsEntryValueWhere",
 			orderBy:"TranslationsEntryValueOrderBy"
+		},
+		getGeneral:{
+			by:"GeneralUniqueWhere",
+			filter:"GeneralWhere"
+		},
+		listGeneral:{
+			filter:"GeneralWhere",
+			orderBy:"GeneralOrderBy"
+		},
+		paginateGeneral:{
+			filter:"GeneralWhere",
+			orderBy:"GeneralOrderBy"
 		}
 	},
 	Mutation:{
@@ -2805,6 +2856,9 @@ export const ReturnTypes: Record<string,any> = {
 		getTranslationsEntryValue:"TranslationsEntryValue",
 		listTranslationsEntryValue:"TranslationsEntryValue",
 		paginateTranslationsEntryValue:"TranslationsEntryValueConnection",
+		getGeneral:"General",
+		listGeneral:"General",
+		paginateGeneral:"GeneralConnection",
 		transaction:"QueryTransaction",
 		_info:"Info",
 		schema:"_Schema",
@@ -3717,6 +3771,28 @@ export const ReturnTypes: Record<string,any> = {
 	TranslationsEntryEdge:{
 		node:"TranslationsEntry"
 	},
+	General:{
+		_meta:"GeneralMeta",
+		id:"UUID",
+		name:"String",
+		shortName:"String",
+		seo:"Seo",
+		unique:"One"
+	},
+	GeneralMeta:{
+		id:"FieldMeta",
+		name:"FieldMeta",
+		shortName:"FieldMeta",
+		seo:"FieldMeta",
+		unique:"FieldMeta"
+	},
+	GeneralConnection:{
+		pageInfo:"PageInfo",
+		edges:"GeneralEdge"
+	},
+	GeneralEdge:{
+		node:"General"
+	},
 	QueryTransaction:{
 		getContent:"Content",
 		listContent:"Content",
@@ -3824,7 +3900,10 @@ export const ReturnTypes: Record<string,any> = {
 		paginateTranslationsEntry:"TranslationsEntryConnection",
 		getTranslationsEntryValue:"TranslationsEntryValue",
 		listTranslationsEntryValue:"TranslationsEntryValue",
-		paginateTranslationsEntryValue:"TranslationsEntryValueConnection"
+		paginateTranslationsEntryValue:"TranslationsEntryValueConnection",
+		getGeneral:"General",
+		listGeneral:"General",
+		paginateGeneral:"GeneralConnection"
 	},
 	Info:{
 		description:"String"
@@ -4933,6 +5012,9 @@ paginateTranslationsEntry?: [{	filter?: ValueTypes["TranslationsEntryWhere"] | u
 getTranslationsEntryValue?: [{	by: ValueTypes["TranslationsEntryValueUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
 listTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
 paginateTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValueConnection"]],
+getGeneral?: [{	by: ValueTypes["GeneralUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>},ValueTypes["General"]],
+listGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["General"]],
+paginateGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["GeneralConnection"]],
 	transaction?:ValueTypes["QueryTransaction"],
 	_info?:ValueTypes["Info"],
 	schema?:ValueTypes["_Schema"],
@@ -7184,6 +7266,56 @@ locale?: [{	filter?: ValueTypes["LocaleWhere"] | undefined | null | Variable<any
 	node?:ValueTypes["TranslationsEntry"],
 		__typename?: boolean | `@${string}`
 }>;
+	["General"]: AliasType<{
+	_meta?:ValueTypes["GeneralMeta"],
+	id?:boolean | `@${string}`,
+	name?:boolean | `@${string}`,
+	shortName?:boolean | `@${string}`,
+seo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>},ValueTypes["Seo"]],
+	unique?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["GeneralMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	name?:ValueTypes["FieldMeta"],
+	shortName?:ValueTypes["FieldMeta"],
+	seo?:ValueTypes["FieldMeta"],
+	unique?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["GeneralUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	unique?: ValueTypes["One"] | undefined | null | Variable<any, string>,
+	seo?: ValueTypes["SeoUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["GeneralWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	name?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	shortName?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	seo?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, string>,
+	unique?: ValueTypes["OneCondition"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["GeneralWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["GeneralWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>
+};
+	["GeneralOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	name?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	shortName?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	seo?: ValueTypes["SeoOrderBy"] | undefined | null | Variable<any, string>,
+	unique?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+};
+	["GeneralConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["GeneralEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["GeneralEdge"]: AliasType<{
+	node?:ValueTypes["General"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ValueTypes["ContentUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>},ValueTypes["Content"]],
 listContent?: [{	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ContentOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Content"]],
@@ -7292,6 +7424,9 @@ paginateTranslationsEntry?: [{	filter?: ValueTypes["TranslationsEntryWhere"] | u
 getTranslationsEntryValue?: [{	by: ValueTypes["TranslationsEntryValueUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
 listTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValue"]],
 paginateTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["TranslationsEntryValueOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["TranslationsEntryValueConnection"]],
+getGeneral?: [{	by: ValueTypes["GeneralUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>},ValueTypes["General"]],
+listGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["General"]],
+paginateGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["GeneralConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -7605,6 +7740,9 @@ paginateTranslationsEntry?: [{	filter?: ResolverInputTypes["TranslationsEntryWhe
 getTranslationsEntryValue?: [{	by: ResolverInputTypes["TranslationsEntryValueUniqueWhere"],	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
 listTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
 paginateTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TranslationsEntryValueConnection"]],
+getGeneral?: [{	by: ResolverInputTypes["GeneralUniqueWhere"],	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null},ResolverInputTypes["General"]],
+listGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["General"]],
+paginateGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["GeneralConnection"]],
 	transaction?:ResolverInputTypes["QueryTransaction"],
 	_info?:ResolverInputTypes["Info"],
 	schema?:ResolverInputTypes["_Schema"],
@@ -9857,6 +9995,56 @@ locale?: [{	filter?: ResolverInputTypes["LocaleWhere"] | undefined | null},Resol
 	node?:ResolverInputTypes["TranslationsEntry"],
 		__typename?: boolean | `@${string}`
 }>;
+	["General"]: AliasType<{
+	_meta?:ResolverInputTypes["GeneralMeta"],
+	id?:boolean | `@${string}`,
+	name?:boolean | `@${string}`,
+	shortName?:boolean | `@${string}`,
+seo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null},ResolverInputTypes["Seo"]],
+	unique?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["GeneralMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	name?:ResolverInputTypes["FieldMeta"],
+	shortName?:ResolverInputTypes["FieldMeta"],
+	seo?:ResolverInputTypes["FieldMeta"],
+	unique?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["GeneralUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	unique?: ResolverInputTypes["One"] | undefined | null,
+	seo?: ResolverInputTypes["SeoUniqueWhere"] | undefined | null
+};
+	["GeneralWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	name?: ResolverInputTypes["StringCondition"] | undefined | null,
+	shortName?: ResolverInputTypes["StringCondition"] | undefined | null,
+	seo?: ResolverInputTypes["SeoWhere"] | undefined | null,
+	unique?: ResolverInputTypes["OneCondition"] | undefined | null,
+	and?: Array<ResolverInputTypes["GeneralWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["GeneralWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["GeneralWhere"] | undefined | null
+};
+	["GeneralOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	name?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	shortName?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	seo?: ResolverInputTypes["SeoOrderBy"] | undefined | null,
+	unique?: ResolverInputTypes["OrderDirection"] | undefined | null
+};
+	["GeneralConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["GeneralEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["GeneralEdge"]: AliasType<{
+	node?:ResolverInputTypes["General"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ResolverInputTypes["ContentUniqueWhere"],	filter?: ResolverInputTypes["ContentWhere"] | undefined | null},ResolverInputTypes["Content"]],
 listContent?: [{	filter?: ResolverInputTypes["ContentWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ContentOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Content"]],
@@ -9965,6 +10153,9 @@ paginateTranslationsEntry?: [{	filter?: ResolverInputTypes["TranslationsEntryWhe
 getTranslationsEntryValue?: [{	by: ResolverInputTypes["TranslationsEntryValueUniqueWhere"],	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
 listTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["TranslationsEntryValue"]],
 paginateTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEntryValueWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["TranslationsEntryValueOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["TranslationsEntryValueConnection"]],
+getGeneral?: [{	by: ResolverInputTypes["GeneralUniqueWhere"],	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null},ResolverInputTypes["General"]],
+listGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["General"]],
+paginateGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["GeneralConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -10279,6 +10470,9 @@ export type ModelTypes = {
 	getTranslationsEntryValue?: ModelTypes["TranslationsEntryValue"] | undefined,
 	listTranslationsEntryValue: Array<ModelTypes["TranslationsEntryValue"]>,
 	paginateTranslationsEntryValue: ModelTypes["TranslationsEntryValueConnection"],
+	getGeneral?: ModelTypes["General"] | undefined,
+	listGeneral: Array<ModelTypes["General"]>,
+	paginateGeneral: ModelTypes["GeneralConnection"],
 	transaction?: ModelTypes["QueryTransaction"] | undefined,
 	_info?: ModelTypes["Info"] | undefined,
 	schema?: ModelTypes["_Schema"] | undefined,
@@ -12379,6 +12573,52 @@ export type ModelTypes = {
 	["TranslationsEntryEdge"]: {
 		node: ModelTypes["TranslationsEntry"]
 };
+	["General"]: {
+		_meta?: ModelTypes["GeneralMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	name?: string | undefined,
+	shortName?: string | undefined,
+	seo?: ModelTypes["Seo"] | undefined,
+	unique: ModelTypes["One"]
+};
+	["GeneralMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	name?: ModelTypes["FieldMeta"] | undefined,
+	shortName?: ModelTypes["FieldMeta"] | undefined,
+	seo?: ModelTypes["FieldMeta"] | undefined,
+	unique?: ModelTypes["FieldMeta"] | undefined
+};
+	["GeneralUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	unique?: ModelTypes["One"] | undefined,
+	seo?: ModelTypes["SeoUniqueWhere"] | undefined
+};
+	["GeneralWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	name?: ModelTypes["StringCondition"] | undefined,
+	shortName?: ModelTypes["StringCondition"] | undefined,
+	seo?: ModelTypes["SeoWhere"] | undefined,
+	unique?: ModelTypes["OneCondition"] | undefined,
+	and?: Array<ModelTypes["GeneralWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["GeneralWhere"] | undefined> | undefined,
+	not?: ModelTypes["GeneralWhere"] | undefined
+};
+	["GeneralOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	name?: ModelTypes["OrderDirection"] | undefined,
+	shortName?: ModelTypes["OrderDirection"] | undefined,
+	seo?: ModelTypes["SeoOrderBy"] | undefined,
+	unique?: ModelTypes["OrderDirection"] | undefined
+};
+	["GeneralConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["GeneralEdge"]>
+};
+	["GeneralEdge"]: {
+		node: ModelTypes["General"]
+};
 	["QueryTransaction"]: {
 		getContent?: ModelTypes["Content"] | undefined,
 	listContent: Array<ModelTypes["Content"]>,
@@ -12486,7 +12726,10 @@ export type ModelTypes = {
 	paginateTranslationsEntry: ModelTypes["TranslationsEntryConnection"],
 	getTranslationsEntryValue?: ModelTypes["TranslationsEntryValue"] | undefined,
 	listTranslationsEntryValue: Array<ModelTypes["TranslationsEntryValue"]>,
-	paginateTranslationsEntryValue: ModelTypes["TranslationsEntryValueConnection"]
+	paginateTranslationsEntryValue: ModelTypes["TranslationsEntryValueConnection"],
+	getGeneral?: ModelTypes["General"] | undefined,
+	listGeneral: Array<ModelTypes["General"]>,
+	paginateGeneral: ModelTypes["GeneralConnection"]
 };
 	["Info"]: {
 		description?: string | undefined
@@ -12754,6 +12997,9 @@ export type GraphQLTypes = {
 	getTranslationsEntryValue?: GraphQLTypes["TranslationsEntryValue"] | undefined,
 	listTranslationsEntryValue: Array<GraphQLTypes["TranslationsEntryValue"]>,
 	paginateTranslationsEntryValue: GraphQLTypes["TranslationsEntryValueConnection"],
+	getGeneral?: GraphQLTypes["General"] | undefined,
+	listGeneral: Array<GraphQLTypes["General"]>,
+	paginateGeneral: GraphQLTypes["GeneralConnection"],
 	transaction?: GraphQLTypes["QueryTransaction"] | undefined,
 	_info?: GraphQLTypes["Info"] | undefined,
 	schema?: GraphQLTypes["_Schema"] | undefined,
@@ -15005,6 +15251,56 @@ export type GraphQLTypes = {
 	__typename: "TranslationsEntryEdge",
 	node: GraphQLTypes["TranslationsEntry"]
 };
+	["General"]: {
+	__typename: "General",
+	_meta?: GraphQLTypes["GeneralMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	name?: string | undefined,
+	shortName?: string | undefined,
+	seo?: GraphQLTypes["Seo"] | undefined,
+	unique: GraphQLTypes["One"]
+};
+	["GeneralMeta"]: {
+	__typename: "GeneralMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	name?: GraphQLTypes["FieldMeta"] | undefined,
+	shortName?: GraphQLTypes["FieldMeta"] | undefined,
+	seo?: GraphQLTypes["FieldMeta"] | undefined,
+	unique?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["GeneralUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	unique?: GraphQLTypes["One"] | undefined,
+	seo?: GraphQLTypes["SeoUniqueWhere"] | undefined
+};
+	["GeneralWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	name?: GraphQLTypes["StringCondition"] | undefined,
+	shortName?: GraphQLTypes["StringCondition"] | undefined,
+	seo?: GraphQLTypes["SeoWhere"] | undefined,
+	unique?: GraphQLTypes["OneCondition"] | undefined,
+	and?: Array<GraphQLTypes["GeneralWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["GeneralWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["GeneralWhere"] | undefined
+};
+	["GeneralOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	name?: GraphQLTypes["OrderDirection"] | undefined,
+	shortName?: GraphQLTypes["OrderDirection"] | undefined,
+	seo?: GraphQLTypes["SeoOrderBy"] | undefined,
+	unique?: GraphQLTypes["OrderDirection"] | undefined
+};
+	["GeneralConnection"]: {
+	__typename: "GeneralConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["GeneralEdge"]>
+};
+	["GeneralEdge"]: {
+	__typename: "GeneralEdge",
+	node: GraphQLTypes["General"]
+};
 	["QueryTransaction"]: {
 	__typename: "QueryTransaction",
 	getContent?: GraphQLTypes["Content"] | undefined,
@@ -15113,7 +15409,10 @@ export type GraphQLTypes = {
 	paginateTranslationsEntry: GraphQLTypes["TranslationsEntryConnection"],
 	getTranslationsEntryValue?: GraphQLTypes["TranslationsEntryValue"] | undefined,
 	listTranslationsEntryValue: Array<GraphQLTypes["TranslationsEntryValue"]>,
-	paginateTranslationsEntryValue: GraphQLTypes["TranslationsEntryValueConnection"]
+	paginateTranslationsEntryValue: GraphQLTypes["TranslationsEntryValueConnection"],
+	getGeneral?: GraphQLTypes["General"] | undefined,
+	listGeneral: Array<GraphQLTypes["General"]>,
+	paginateGeneral: GraphQLTypes["GeneralConnection"]
 };
 	["Info"]: {
 	__typename: "Info",
@@ -15547,6 +15846,9 @@ type ZEUS_VARIABLES = {
 	["TranslationsEntryValuesByLocaleUniqueWhere"]: ValueTypes["TranslationsEntryValuesByLocaleUniqueWhere"];
 	["TranslationsEntryUniqueWhere"]: ValueTypes["TranslationsEntryUniqueWhere"];
 	["TranslationsEntryValueUniqueWhere"]: ValueTypes["TranslationsEntryValueUniqueWhere"];
+	["GeneralUniqueWhere"]: ValueTypes["GeneralUniqueWhere"];
+	["GeneralWhere"]: ValueTypes["GeneralWhere"];
+	["GeneralOrderBy"]: ValueTypes["GeneralOrderBy"];
 	["_MutationErrorType"]: ValueTypes["_MutationErrorType"];
 	["MutationTransactionOptions"]: ValueTypes["MutationTransactionOptions"];
 	["Json"]: ValueTypes["Json"];
