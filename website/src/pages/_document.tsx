@@ -5,9 +5,8 @@ export default class AppDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					<meta name="color-scheme" content="light dark" />
-					<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
-					<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+					<meta name="color-scheme" content="only light" />
+					<meta name="theme-color" content="#0072FF" />
 					<link rel="manifest" href="/app.webmanifest" />
 				</Head>
 				<body>
