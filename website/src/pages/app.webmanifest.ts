@@ -33,7 +33,7 @@ export const getServerSideProps = handleGetServerSideProps(async ({ res, locale 
 		short_name: general?.shortName,
 		description: general?.seo?.description,
 		start_url: '/',
-		display: 'minimal-ui',
+		display: 'standalone',
 		lang: locale,
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore Id is not in the official WebAppManifest type, but it is in the specification.
