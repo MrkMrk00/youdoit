@@ -3,7 +3,7 @@ import { Selector } from '../../generated/contember'
 import type { scalarResolver } from '../utilities/createScalarResolver'
 import { LocaleFragment } from './LocaleFragment'
 
-export function PageLocaleFragment() {
+export function HomePageFragment() {
 	return Selector('HomePage')({
 		locales: [
 			{},
@@ -16,8 +16,8 @@ export function PageLocaleFragment() {
 	})
 }
 
-export type PageLocaleResult = InputType<
+export type HomePageResult = InputType<
 	GraphQLTypes['HomePage'],
-	ReturnType<typeof PageLocaleFragment>,
+	ReturnType<typeof HomePageFragment>,
 	typeof scalarResolver
 >

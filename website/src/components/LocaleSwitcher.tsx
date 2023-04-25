@@ -1,17 +1,33 @@
+import Link from 'next/link'
 import type { FunctionComponent } from 'react'
-import type { PageLocaleResult } from '../data/PageLocaleFragment'
+import { useMemo } from 'react'
+import { useTranslate } from '../hooks/useTranslate'
 import styles from './LocaleSwitcher.module.sass'
 
 export interface LocaleSwitcherProps {
 	activeLocale?: string
-	pageLocales?: PageLocaleResult['locales']
+	pageLocales?: Array<{ link: string; code: string }>
 }
 
 export const LocaleSwitcher: FunctionComponent<LocaleSwitcherProps> = ({ activeLocale, pageLocales }) => {
-	console.log(activeLocale, pageLocales)
+	const otherPageLocales = useMemo(
+		() => pageLocales?.filter((locale) => locale.code !== activeLocale),
+		[activeLocale, pageLocales],
+	)
+
+	const translate = useTranslate()
+
+	console.log('otherPageLocales', otherPageLocales)
+
 	return (
 		<div className={styles.wrapper}>
-			<div>Locale switcher</div>
+			{otherPageLocales?.map((locale, i) => {
+				return (
+					<Link key={i} href={locale.link}>
+						{translate('localeSwitcher.text') + ' ' + locale.code}
+					</Link>
+				)
+			})}
 		</div>
 	)
 }

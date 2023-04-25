@@ -9,6 +9,7 @@ import { UserPage } from '../components/pages/UserPage'
 import { Seo } from '../components/Seo'
 import { TranslationsProvider } from '../contexts/TranslationsContext'
 import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
+import { HomePageFragment } from '../data/HomePageFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
 import { PinnedRecipesPageLocaleFragment } from '../data/PinnedRecipesLocaleFragment'
 import { RecipeLocaleFragment } from '../data/RecipeLocaleFragment'
@@ -24,28 +25,21 @@ import { hardcodedUserEmail } from '../utilities/hardcodedUserEmail'
 export type PageProps = InferDataLoaderProps<typeof getStaticProps>
 
 export default function ({
+	pages,
 	locale,
+	locales,
 	seo,
-	homePage,
-	pinnedRecipesPage,
 	homePageUrl,
 	pinnedRecipesPageUrl,
 	userPageUrl,
 	currentUrlPage,
-	categoryPage,
-	recipeDetailPage,
 	recipes,
 	categories,
 	translations,
-	user,
 }: PageProps) {
-	const page = (homePage || pinnedRecipesPage || categoryPage || recipeDetailPage) ?? homePage
-
-	console.log(page)
-
 	const localeSwitcher: LocaleSwitcherProps = {
 		activeLocale: locale,
-		pageLocales: page?.base?.locales,
+		pageLocales: locales,
 	}
 
 	return (
@@ -63,15 +57,17 @@ export default function ({
 				currentPageUrl={currentUrlPage}
 			>
 				<Seo {...seo} />
-				{homePage && recipes && <HomePage homePage={homePage} recipes={recipes} categories={categories} />}
-				{pinnedRecipesPage && <PinnedRecipesPage pinnedrecipesPage={pinnedRecipesPage} locale={locale} />}
-				{categoryPage && <CategoryPage categoryPage={categoryPage} allRecipesLink={homePageUrl} />}
-				{recipeDetailPage && (
-					<RecipeDetailPage recipeDetailPage={recipeDetailPage} allRecipesLink={pinnedRecipesPageUrl} />
-				)}
-				{user && currentUrlPage === userPageUrl && (
-					<UserPage user={user} pinnedRecipesPageUrl={pinnedRecipesPageUrl} localeSwitcher={localeSwitcher} />
-				)}
+				{pages.homePage ? (
+					<HomePage homePage={pages.homePage} recipes={recipes} categories={categories} />
+				) : pages.pinnedRecipesPage ? (
+					<PinnedRecipesPage pinnedrecipesPage={pages.pinnedRecipesPage} locale={locale} />
+				) : pages.category ? (
+					<CategoryPage categoryPage={pages.category} allRecipesLink={homePageUrl} />
+				) : pages.recipe ? (
+					<RecipeDetailPage recipeDetailPage={pages.recipe} allRecipesLink={pinnedRecipesPageUrl} />
+				) : pages.user ? (
+					<UserPage user={pages.user} pinnedRecipesPageUrl={pinnedRecipesPageUrl} localeSwitcher={localeSwitcher} />
+				) : null}
 			</Layout>
 		</TranslationsProvider>
 	)
@@ -146,6 +142,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 				// ],
 			},
 		],
+		getHomePage: [{ by: { unique: One.One } }, HomePageFragment()],
 		getHomePageLocale: [{ by: { locale: { code: locale }, base: { unique: One.One } } }, { link: [{}, { url: true }] }],
 		getPinnedRecipesPageLocale: [
 			{ by: { locale: { code: locale }, base: { unique: One.One } } },
@@ -176,28 +173,42 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		return (process.env.NEXT_PUBLIC_WEB_URL ?? '') + url
 	})()
 
-	if (!data.getLinkable) {
+	const pages = {
+		homePage: data.getLinkable?.homePage,
+		pinnedRecipesPage: data.getLinkable?.pinnedRecipesPage,
+		category: data.getLinkable?.category,
+		recipe: data.getLinkable?.recipe,
+		user: data.getLinkable?.user,
+	}
+
+	const page = Object.values(pages).find((page) => Boolean(page))
+
+	if (!page) {
 		return {
 			notFound: true,
 		}
 	}
-	const { homePage, pinnedRecipesPage, category, recipe } = data.getLinkable
 
 	const translations = await contember('query', { scalars: scalarResolver })({
 		listTranslationsEntry: [{}, TranslationsEntryFragment(locale)],
 	})
 
+	const locales = (data.getHomePage?.locales ?? []).map((locale) => {
+		return {
+			code: locale.locale?.code ?? 'unknown',
+			link: locale.link?.url ?? '/',
+		}
+	})
+
 	return {
 		props: {
+			pages,
 			locale,
-			homePage,
-			pinnedRecipesPage,
+			locales,
 			homePageUrl: data.getHomePageLocale?.link?.url ?? null,
 			pinnedRecipesPageUrl: data.getPinnedRecipesPageLocale?.link?.url ?? null,
 			userPageUrl: data.getUser?.link?.url ?? null,
-			currentUrlPage: data.getLinkable.url,
-			categoryPage: category,
-			recipeDetailPage: recipe,
+			currentUrlPage: data.getLinkable?.url ?? '/',
 			categories: data.listCategoryLocale,
 			recipes: data.listRecipeLocale,
 			translations: translations.listTranslationsEntry,
