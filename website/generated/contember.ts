@@ -439,6 +439,18 @@ export const AllTypesProps: Record<string,any> = {
 		paginateGeneral:{
 			filter:"GeneralWhere",
 			orderBy:"GeneralOrderBy"
+		},
+		getRedirect:{
+			by:"RedirectUniqueWhere",
+			filter:"RedirectWhere"
+		},
+		listRedirect:{
+			filter:"RedirectWhere",
+			orderBy:"RedirectOrderBy"
+		},
+		paginateRedirect:{
+			filter:"RedirectWhere",
+			orderBy:"RedirectOrderBy"
 		}
 	},
 	Content:{
@@ -553,6 +565,7 @@ export const AllTypesProps: Record<string,any> = {
 		recipe:"RecipeLocaleWhere",
 		pinnedRecipesPage:"PinnedRecipesPageLocaleWhere",
 		user:"UserWhere",
+		redirect:"RedirectWhere",
 		and:"LinkableWhere",
 		or:"LinkableWhere",
 		not:"LinkableWhere"
@@ -887,6 +900,38 @@ export const AllTypesProps: Record<string,any> = {
 		or:"PinnedRecipesPageWhere",
 		not:"PinnedRecipesPageWhere"
 	},
+	RedirectWhere:{
+		id:"UUIDCondition",
+		link:"LinkableWhere",
+		target:"LinkWhere",
+		and:"RedirectWhere",
+		or:"RedirectWhere",
+		not:"RedirectWhere"
+	},
+	LinkWhere:{
+		id:"UUIDCondition",
+		type:"LinkTypeCondition",
+		title:"StringCondition",
+		externalLink:"StringCondition",
+		internalLink:"LinkableWhere",
+		and:"LinkWhere",
+		or:"LinkWhere",
+		not:"LinkWhere"
+	},
+	LinkTypeCondition:{
+		and:"LinkTypeCondition",
+		or:"LinkTypeCondition",
+		not:"LinkTypeCondition",
+		eq:"LinkType",
+		notEq:"LinkType",
+		in:"LinkType",
+		notIn:"LinkType",
+		lt:"LinkType",
+		lte:"LinkType",
+		gt:"LinkType",
+		gte:"LinkType"
+	},
+	LinkType: "enum" as const,
 	ContentReference:{
 		block:{
 			filter:"ContentBlockWhere"
@@ -927,6 +972,9 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		user:{
 			filter:"UserWhere"
+		},
+		redirect:{
+			filter:"RedirectWhere"
 		}
 	},
 	HomePageLocale:{
@@ -990,7 +1038,8 @@ export const AllTypesProps: Record<string,any> = {
 		category:"CategoryLocaleOrderBy",
 		recipe:"RecipeLocaleOrderBy",
 		pinnedRecipesPage:"PinnedRecipesPageLocaleOrderBy",
-		user:"UserOrderBy"
+		user:"UserOrderBy",
+		redirect:"RedirectOrderBy"
 	},
 	CategoryLocaleOrderBy:{
 		id:"OrderDirection",
@@ -1063,6 +1112,18 @@ export const AllTypesProps: Record<string,any> = {
 	PinnedRecipesPageOrderBy:{
 		id:"OrderDirection",
 		unique:"OrderDirection"
+	},
+	RedirectOrderBy:{
+		id:"OrderDirection",
+		link:"LinkableOrderBy",
+		target:"LinkOrderBy"
+	},
+	LinkOrderBy:{
+		id:"OrderDirection",
+		type:"OrderDirection",
+		title:"OrderDirection",
+		externalLink:"OrderDirection",
+		internalLink:"LinkableOrderBy"
 	},
 	HomePageLocalesByLocaleUniqueWhere:{
 		locale:"LocaleUniqueWhere"
@@ -1160,7 +1221,8 @@ export const AllTypesProps: Record<string,any> = {
 		category:"CategoryLocaleUniqueWhere",
 		recipe:"RecipeLocaleUniqueWhere",
 		pinnedRecipesPage:"PinnedRecipesPageLocaleUniqueWhere",
-		user:"UserUniqueWhere"
+		user:"UserUniqueWhere",
+		redirect:"RedirectUniqueWhere"
 	},
 	HomePageLocaleUniqueWhere:{
 		id:"UUID",
@@ -1211,6 +1273,14 @@ export const AllTypesProps: Record<string,any> = {
 		createdRecipes:"RecipeUniqueWhere",
 		link:"LinkableUniqueWhere",
 		seo:"SeoUniqueWhere"
+	},
+	RedirectUniqueWhere:{
+		id:"UUID",
+		link:"LinkableUniqueWhere",
+		target:"LinkUniqueWhere"
+	},
+	LinkUniqueWhere:{
+		id:"UUID"
 	},
 	HomePageLocalesByLinkUniqueWhere:{
 		link:"LinkableUniqueWhere"
@@ -2021,6 +2091,19 @@ export const AllTypesProps: Record<string,any> = {
 	LocalePinnedRecipesPageBySeoUniqueWhere:{
 		seo:"SeoUniqueWhere"
 	},
+	Redirect:{
+		link:{
+			filter:"LinkableWhere"
+		},
+		target:{
+			filter:"LinkWhere"
+		}
+	},
+	Link:{
+		internalLink:{
+			filter:"LinkableWhere"
+		}
+	},
 	ContentReferenceLinkableItemOrderBy:{
 		id:"OrderDirection",
 		item:"LinkableOrderBy",
@@ -2065,45 +2148,6 @@ export const AllTypesProps: Record<string,any> = {
 	ContentBlockUniqueWhere:{
 		id:"UUID",
 		references:"ContentReferenceUniqueWhere"
-	},
-	Link:{
-		internalLink:{
-			filter:"LinkableWhere"
-		}
-	},
-	LinkType: "enum" as const,
-	LinkUniqueWhere:{
-		id:"UUID"
-	},
-	LinkWhere:{
-		id:"UUIDCondition",
-		type:"LinkTypeCondition",
-		title:"StringCondition",
-		externalLink:"StringCondition",
-		internalLink:"LinkableWhere",
-		and:"LinkWhere",
-		or:"LinkWhere",
-		not:"LinkWhere"
-	},
-	LinkTypeCondition:{
-		and:"LinkTypeCondition",
-		or:"LinkTypeCondition",
-		not:"LinkTypeCondition",
-		eq:"LinkType",
-		notEq:"LinkType",
-		in:"LinkType",
-		notIn:"LinkType",
-		lt:"LinkType",
-		lte:"LinkType",
-		gt:"LinkType",
-		gte:"LinkType"
-	},
-	LinkOrderBy:{
-		id:"OrderDirection",
-		type:"OrderDirection",
-		title:"OrderDirection",
-		externalLink:"OrderDirection",
-		internalLink:"LinkableOrderBy"
 	},
 	PinnedRecipeCreateInput:{
 		user:"PinnedRecipeCreateUserEntityRelationInput",
@@ -2720,6 +2764,18 @@ export const AllTypesProps: Record<string,any> = {
 		paginateGeneral:{
 			filter:"GeneralWhere",
 			orderBy:"GeneralOrderBy"
+		},
+		getRedirect:{
+			by:"RedirectUniqueWhere",
+			filter:"RedirectWhere"
+		},
+		listRedirect:{
+			filter:"RedirectWhere",
+			orderBy:"RedirectOrderBy"
+		},
+		paginateRedirect:{
+			filter:"RedirectWhere",
+			orderBy:"RedirectOrderBy"
 		}
 	},
 	Mutation:{
@@ -2885,6 +2941,9 @@ export const ReturnTypes: Record<string,any> = {
 		getGeneral:"General",
 		listGeneral:"General",
 		paginateGeneral:"GeneralConnection",
+		getRedirect:"Redirect",
+		listRedirect:"Redirect",
+		paginateRedirect:"RedirectConnection",
 		transaction:"QueryTransaction",
 		_info:"Info",
 		schema:"_Schema",
@@ -2961,7 +3020,8 @@ export const ReturnTypes: Record<string,any> = {
 		category:"CategoryLocale",
 		recipe:"RecipeLocale",
 		pinnedRecipesPage:"PinnedRecipesPageLocale",
-		user:"User"
+		user:"User",
+		redirect:"Redirect"
 	},
 	LinkableMeta:{
 		id:"FieldMeta",
@@ -2970,7 +3030,8 @@ export const ReturnTypes: Record<string,any> = {
 		category:"FieldMeta",
 		recipe:"FieldMeta",
 		pinnedRecipesPage:"FieldMeta",
-		user:"FieldMeta"
+		user:"FieldMeta",
+		redirect:"FieldMeta"
 	},
 	HomePageLocale:{
 		_meta:"HomePageLocaleMeta",
@@ -3587,6 +3648,32 @@ export const ReturnTypes: Record<string,any> = {
 	PinnedRecipesPageLocaleEdge:{
 		node:"PinnedRecipesPageLocale"
 	},
+	Redirect:{
+		_meta:"RedirectMeta",
+		id:"UUID",
+		link:"Linkable",
+		target:"Link"
+	},
+	RedirectMeta:{
+		id:"FieldMeta",
+		link:"FieldMeta",
+		target:"FieldMeta"
+	},
+	Link:{
+		_meta:"LinkMeta",
+		id:"UUID",
+		type:"LinkType",
+		title:"String",
+		externalLink:"String",
+		internalLink:"Linkable"
+	},
+	LinkMeta:{
+		id:"FieldMeta",
+		type:"FieldMeta",
+		title:"FieldMeta",
+		externalLink:"FieldMeta",
+		internalLink:"FieldMeta"
+	},
 	ContentReferenceLinkableItemConnection:{
 		pageInfo:"PageInfo",
 		edges:"ContentReferenceLinkableItemEdge"
@@ -3614,21 +3701,6 @@ export const ReturnTypes: Record<string,any> = {
 	},
 	ContentEdge:{
 		node:"Content"
-	},
-	Link:{
-		_meta:"LinkMeta",
-		id:"UUID",
-		type:"LinkType",
-		title:"String",
-		externalLink:"String",
-		internalLink:"Linkable"
-	},
-	LinkMeta:{
-		id:"FieldMeta",
-		type:"FieldMeta",
-		title:"FieldMeta",
-		externalLink:"FieldMeta",
-		internalLink:"FieldMeta"
 	},
 	LinkConnection:{
 		pageInfo:"PageInfo",
@@ -3825,6 +3897,13 @@ export const ReturnTypes: Record<string,any> = {
 	GeneralEdge:{
 		node:"General"
 	},
+	RedirectConnection:{
+		pageInfo:"PageInfo",
+		edges:"RedirectEdge"
+	},
+	RedirectEdge:{
+		node:"Redirect"
+	},
 	QueryTransaction:{
 		getContent:"Content",
 		listContent:"Content",
@@ -3935,7 +4014,10 @@ export const ReturnTypes: Record<string,any> = {
 		paginateTranslationsEntryValue:"TranslationsEntryValueConnection",
 		getGeneral:"General",
 		listGeneral:"General",
-		paginateGeneral:"GeneralConnection"
+		paginateGeneral:"GeneralConnection",
+		getRedirect:"Redirect",
+		listRedirect:"Redirect",
+		paginateRedirect:"RedirectConnection"
 	},
 	Info:{
 		description:"String"
@@ -5047,6 +5129,9 @@ paginateTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueW
 getGeneral?: [{	by: ValueTypes["GeneralUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>},ValueTypes["General"]],
 listGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["General"]],
 paginateGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["GeneralConnection"]],
+getRedirect?: [{	by: ValueTypes["RedirectUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>},ValueTypes["Redirect"]],
+listRedirect?: [{	filter?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RedirectOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Redirect"]],
+paginateRedirect?: [{	filter?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RedirectOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RedirectConnection"]],
 	transaction?:ValueTypes["QueryTransaction"],
 	_info?:ValueTypes["Info"],
 	schema?:ValueTypes["_Schema"],
@@ -5201,6 +5286,7 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	recipe?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>,
 	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>,
 	user?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>,
+	redirect?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>,
 	and?: Array<ValueTypes["LinkableWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	or?: Array<ValueTypes["LinkableWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>
@@ -5553,6 +5639,40 @@ paginateReferences?: [{	filter?: ValueTypes["ContentReferenceWhere"] | undefined
 	or?: Array<ValueTypes["PinnedRecipesPageWhere"] | undefined | null> | undefined | null | Variable<any, string>,
 	not?: ValueTypes["PinnedRecipesPageWhere"] | undefined | null | Variable<any, string>
 };
+	["RedirectWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>,
+	target?: ValueTypes["LinkWhere"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["RedirectWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["RedirectWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>
+};
+	["LinkWhere"]: {
+	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
+	type?: ValueTypes["LinkTypeCondition"] | undefined | null | Variable<any, string>,
+	title?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	externalLink?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
+	internalLink?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>,
+	and?: Array<ValueTypes["LinkWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["LinkWhere"] | undefined | null> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["LinkWhere"] | undefined | null | Variable<any, string>
+};
+	["LinkTypeCondition"]: {
+	and?: Array<ValueTypes["LinkTypeCondition"]> | undefined | null | Variable<any, string>,
+	or?: Array<ValueTypes["LinkTypeCondition"]> | undefined | null | Variable<any, string>,
+	not?: ValueTypes["LinkTypeCondition"] | undefined | null | Variable<any, string>,
+	null?: boolean | undefined | null | Variable<any, string>,
+	isNull?: boolean | undefined | null | Variable<any, string>,
+	eq?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
+	notEq?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
+	in?: Array<ValueTypes["LinkType"]> | undefined | null | Variable<any, string>,
+	notIn?: Array<ValueTypes["LinkType"]> | undefined | null | Variable<any, string>,
+	lt?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
+	lte?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
+	gt?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
+	gte?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>
+};
+	["LinkType"]:LinkType;
 	["ContentReference"]: AliasType<{
 	_meta?:ValueTypes["ContentReferenceMeta"],
 	id?:boolean | `@${string}`,
@@ -5594,6 +5714,7 @@ category?: [{	filter?: ValueTypes["CategoryLocaleWhere"] | undefined | null | Va
 recipe?: [{	filter?: ValueTypes["RecipeLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["RecipeLocale"]],
 pinnedRecipesPage?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undefined | null | Variable<any, string>},ValueTypes["PinnedRecipesPageLocale"]],
 user?: [{	filter?: ValueTypes["UserWhere"] | undefined | null | Variable<any, string>},ValueTypes["User"]],
+redirect?: [{	filter?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>},ValueTypes["Redirect"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["LinkableMeta"]: AliasType<{
@@ -5604,6 +5725,7 @@ user?: [{	filter?: ValueTypes["UserWhere"] | undefined | null | Variable<any, st
 	recipe?:ValueTypes["FieldMeta"],
 	pinnedRecipesPage?:ValueTypes["FieldMeta"],
 	user?:ValueTypes["FieldMeta"],
+	redirect?:ValueTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["HomePageLocale"]: AliasType<{
@@ -5675,7 +5797,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	category?: ValueTypes["CategoryLocaleOrderBy"] | undefined | null | Variable<any, string>,
 	recipe?: ValueTypes["RecipeLocaleOrderBy"] | undefined | null | Variable<any, string>,
 	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleOrderBy"] | undefined | null | Variable<any, string>,
-	user?: ValueTypes["UserOrderBy"] | undefined | null | Variable<any, string>
+	user?: ValueTypes["UserOrderBy"] | undefined | null | Variable<any, string>,
+	redirect?: ValueTypes["RedirectOrderBy"] | undefined | null | Variable<any, string>
 };
 	["CategoryLocaleOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
@@ -5766,6 +5889,22 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	_randomSeeded?: number | undefined | null | Variable<any, string>,
 	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
 	unique?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>
+};
+	["RedirectOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["LinkableOrderBy"] | undefined | null | Variable<any, string>,
+	target?: ValueTypes["LinkOrderBy"] | undefined | null | Variable<any, string>
+};
+	["LinkOrderBy"]: {
+	_random?: boolean | undefined | null | Variable<any, string>,
+	_randomSeeded?: number | undefined | null | Variable<any, string>,
+	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	type?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	title?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	externalLink?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
+	internalLink?: ValueTypes["LinkableOrderBy"] | undefined | null | Variable<any, string>
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ValueTypes["LocaleUniqueWhere"] | undefined | null | Variable<any, string>
@@ -5865,7 +6004,8 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	category?: ValueTypes["CategoryLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
 	recipe?: ValueTypes["RecipeLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
 	pinnedRecipesPage?: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null | Variable<any, string>,
-	user?: ValueTypes["UserUniqueWhere"] | undefined | null | Variable<any, string>
+	user?: ValueTypes["UserUniqueWhere"] | undefined | null | Variable<any, string>,
+	redirect?: ValueTypes["RedirectUniqueWhere"] | undefined | null | Variable<any, string>
 };
 	["HomePageLocaleUniqueWhere"]: {
 	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
@@ -5917,6 +6057,14 @@ paginateLocales?: [{	filter?: ValueTypes["HomePageLocaleWhere"] | undefined | nu
 	createdRecipes?: ValueTypes["RecipeUniqueWhere"] | undefined | null | Variable<any, string>,
 	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>,
 	seo?: ValueTypes["SeoUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["RedirectUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>,
+	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>,
+	target?: ValueTypes["LinkUniqueWhere"] | undefined | null | Variable<any, string>
+};
+	["LinkUniqueWhere"]: {
+	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ValueTypes["LinkableUniqueWhere"] | undefined | null | Variable<any, string>
@@ -6834,6 +6982,36 @@ paginateLocales?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undef
 	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
 	seo?: ValueTypes["SeoUniqueWhere"] | undefined | null | Variable<any, string>
 };
+	["Redirect"]: AliasType<{
+	_meta?:ValueTypes["RedirectMeta"],
+	id?:boolean | `@${string}`,
+link?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>},ValueTypes["Linkable"]],
+target?: [{	filter?: ValueTypes["LinkWhere"] | undefined | null | Variable<any, string>},ValueTypes["Link"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["RedirectMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	link?:ValueTypes["FieldMeta"],
+	target?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["Link"]: AliasType<{
+	_meta?:ValueTypes["LinkMeta"],
+	id?:boolean | `@${string}`,
+	type?:boolean | `@${string}`,
+	title?:boolean | `@${string}`,
+	externalLink?:boolean | `@${string}`,
+internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>},ValueTypes["Linkable"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["LinkMeta"]: AliasType<{
+	id?:ValueTypes["FieldMeta"],
+	type?:ValueTypes["FieldMeta"],
+	title?:ValueTypes["FieldMeta"],
+	externalLink?:ValueTypes["FieldMeta"],
+	internalLink?:ValueTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
 	["ContentReferenceLinkableItemOrderBy"]: {
 	_random?: boolean | undefined | null | Variable<any, string>,
 	_randomSeeded?: number | undefined | null | Variable<any, string>,
@@ -6923,61 +7101,6 @@ paginateLocales?: [{	filter?: ValueTypes["PinnedRecipesPageLocaleWhere"] | undef
 	node?:ValueTypes["Content"],
 		__typename?: boolean | `@${string}`
 }>;
-	["Link"]: AliasType<{
-	_meta?:ValueTypes["LinkMeta"],
-	id?:boolean | `@${string}`,
-	type?:boolean | `@${string}`,
-	title?:boolean | `@${string}`,
-	externalLink?:boolean | `@${string}`,
-internalLink?: [{	filter?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>},ValueTypes["Linkable"]],
-		__typename?: boolean | `@${string}`
-}>;
-	["LinkMeta"]: AliasType<{
-	id?:ValueTypes["FieldMeta"],
-	type?:ValueTypes["FieldMeta"],
-	title?:ValueTypes["FieldMeta"],
-	externalLink?:ValueTypes["FieldMeta"],
-	internalLink?:ValueTypes["FieldMeta"],
-		__typename?: boolean | `@${string}`
-}>;
-	["LinkType"]:LinkType;
-	["LinkUniqueWhere"]: {
-	id?: ValueTypes["UUID"] | undefined | null | Variable<any, string>
-};
-	["LinkWhere"]: {
-	id?: ValueTypes["UUIDCondition"] | undefined | null | Variable<any, string>,
-	type?: ValueTypes["LinkTypeCondition"] | undefined | null | Variable<any, string>,
-	title?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
-	externalLink?: ValueTypes["StringCondition"] | undefined | null | Variable<any, string>,
-	internalLink?: ValueTypes["LinkableWhere"] | undefined | null | Variable<any, string>,
-	and?: Array<ValueTypes["LinkWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	or?: Array<ValueTypes["LinkWhere"] | undefined | null> | undefined | null | Variable<any, string>,
-	not?: ValueTypes["LinkWhere"] | undefined | null | Variable<any, string>
-};
-	["LinkTypeCondition"]: {
-	and?: Array<ValueTypes["LinkTypeCondition"]> | undefined | null | Variable<any, string>,
-	or?: Array<ValueTypes["LinkTypeCondition"]> | undefined | null | Variable<any, string>,
-	not?: ValueTypes["LinkTypeCondition"] | undefined | null | Variable<any, string>,
-	null?: boolean | undefined | null | Variable<any, string>,
-	isNull?: boolean | undefined | null | Variable<any, string>,
-	eq?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
-	notEq?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
-	in?: Array<ValueTypes["LinkType"]> | undefined | null | Variable<any, string>,
-	notIn?: Array<ValueTypes["LinkType"]> | undefined | null | Variable<any, string>,
-	lt?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
-	lte?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
-	gt?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>,
-	gte?: ValueTypes["LinkType"] | undefined | null | Variable<any, string>
-};
-	["LinkOrderBy"]: {
-	_random?: boolean | undefined | null | Variable<any, string>,
-	_randomSeeded?: number | undefined | null | Variable<any, string>,
-	id?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	type?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	title?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	externalLink?: ValueTypes["OrderDirection"] | undefined | null | Variable<any, string>,
-	internalLink?: ValueTypes["LinkableOrderBy"] | undefined | null | Variable<any, string>
-};
 	["LinkConnection"]: AliasType<{
 	pageInfo?:ValueTypes["PageInfo"],
 	edges?:ValueTypes["LinkEdge"],
@@ -7366,6 +7489,15 @@ seo?: [{	filter?: ValueTypes["SeoWhere"] | undefined | null | Variable<any, stri
 	node?:ValueTypes["General"],
 		__typename?: boolean | `@${string}`
 }>;
+	["RedirectConnection"]: AliasType<{
+	pageInfo?:ValueTypes["PageInfo"],
+	edges?:ValueTypes["RedirectEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RedirectEdge"]: AliasType<{
+	node?:ValueTypes["Redirect"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ValueTypes["ContentUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>},ValueTypes["Content"]],
 listContent?: [{	filter?: ValueTypes["ContentWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["ContentOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Content"]],
@@ -7477,6 +7609,9 @@ paginateTranslationsEntryValue?: [{	filter?: ValueTypes["TranslationsEntryValueW
 getGeneral?: [{	by: ValueTypes["GeneralUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>},ValueTypes["General"]],
 listGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["General"]],
 paginateGeneral?: [{	filter?: ValueTypes["GeneralWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["GeneralOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["GeneralConnection"]],
+getRedirect?: [{	by: ValueTypes["RedirectUniqueWhere"] | Variable<any, string>,	filter?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>},ValueTypes["Redirect"]],
+listRedirect?: [{	filter?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RedirectOrderBy"]> | undefined | null | Variable<any, string>,	offset?: number | undefined | null | Variable<any, string>,	limit?: number | undefined | null | Variable<any, string>},ValueTypes["Redirect"]],
+paginateRedirect?: [{	filter?: ValueTypes["RedirectWhere"] | undefined | null | Variable<any, string>,	orderBy?: Array<ValueTypes["RedirectOrderBy"]> | undefined | null | Variable<any, string>,	skip?: number | undefined | null | Variable<any, string>,	first?: number | undefined | null | Variable<any, string>},ValueTypes["RedirectConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -7793,6 +7928,9 @@ paginateTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEnt
 getGeneral?: [{	by: ResolverInputTypes["GeneralUniqueWhere"],	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null},ResolverInputTypes["General"]],
 listGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["General"]],
 paginateGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["GeneralConnection"]],
+getRedirect?: [{	by: ResolverInputTypes["RedirectUniqueWhere"],	filter?: ResolverInputTypes["RedirectWhere"] | undefined | null},ResolverInputTypes["Redirect"]],
+listRedirect?: [{	filter?: ResolverInputTypes["RedirectWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RedirectOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Redirect"]],
+paginateRedirect?: [{	filter?: ResolverInputTypes["RedirectWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RedirectOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RedirectConnection"]],
 	transaction?:ResolverInputTypes["QueryTransaction"],
 	_info?:ResolverInputTypes["Info"],
 	schema?:ResolverInputTypes["_Schema"],
@@ -7947,6 +8085,7 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	recipe?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null,
 	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null,
 	user?: ResolverInputTypes["UserWhere"] | undefined | null,
+	redirect?: ResolverInputTypes["RedirectWhere"] | undefined | null,
 	and?: Array<ResolverInputTypes["LinkableWhere"] | undefined | null> | undefined | null,
 	or?: Array<ResolverInputTypes["LinkableWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["LinkableWhere"] | undefined | null
@@ -8299,6 +8438,40 @@ paginateReferences?: [{	filter?: ResolverInputTypes["ContentReferenceWhere"] | u
 	or?: Array<ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null> | undefined | null,
 	not?: ResolverInputTypes["PinnedRecipesPageWhere"] | undefined | null
 };
+	["RedirectWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	link?: ResolverInputTypes["LinkableWhere"] | undefined | null,
+	target?: ResolverInputTypes["LinkWhere"] | undefined | null,
+	and?: Array<ResolverInputTypes["RedirectWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["RedirectWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["RedirectWhere"] | undefined | null
+};
+	["LinkWhere"]: {
+	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
+	type?: ResolverInputTypes["LinkTypeCondition"] | undefined | null,
+	title?: ResolverInputTypes["StringCondition"] | undefined | null,
+	externalLink?: ResolverInputTypes["StringCondition"] | undefined | null,
+	internalLink?: ResolverInputTypes["LinkableWhere"] | undefined | null,
+	and?: Array<ResolverInputTypes["LinkWhere"] | undefined | null> | undefined | null,
+	or?: Array<ResolverInputTypes["LinkWhere"] | undefined | null> | undefined | null,
+	not?: ResolverInputTypes["LinkWhere"] | undefined | null
+};
+	["LinkTypeCondition"]: {
+	and?: Array<ResolverInputTypes["LinkTypeCondition"]> | undefined | null,
+	or?: Array<ResolverInputTypes["LinkTypeCondition"]> | undefined | null,
+	not?: ResolverInputTypes["LinkTypeCondition"] | undefined | null,
+	null?: boolean | undefined | null,
+	isNull?: boolean | undefined | null,
+	eq?: ResolverInputTypes["LinkType"] | undefined | null,
+	notEq?: ResolverInputTypes["LinkType"] | undefined | null,
+	in?: Array<ResolverInputTypes["LinkType"]> | undefined | null,
+	notIn?: Array<ResolverInputTypes["LinkType"]> | undefined | null,
+	lt?: ResolverInputTypes["LinkType"] | undefined | null,
+	lte?: ResolverInputTypes["LinkType"] | undefined | null,
+	gt?: ResolverInputTypes["LinkType"] | undefined | null,
+	gte?: ResolverInputTypes["LinkType"] | undefined | null
+};
+	["LinkType"]:LinkType;
 	["ContentReference"]: AliasType<{
 	_meta?:ResolverInputTypes["ContentReferenceMeta"],
 	id?:boolean | `@${string}`,
@@ -8340,6 +8513,7 @@ category?: [{	filter?: ResolverInputTypes["CategoryLocaleWhere"] | undefined | n
 recipe?: [{	filter?: ResolverInputTypes["RecipeLocaleWhere"] | undefined | null},ResolverInputTypes["RecipeLocale"]],
 pinnedRecipesPage?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"] | undefined | null},ResolverInputTypes["PinnedRecipesPageLocale"]],
 user?: [{	filter?: ResolverInputTypes["UserWhere"] | undefined | null},ResolverInputTypes["User"]],
+redirect?: [{	filter?: ResolverInputTypes["RedirectWhere"] | undefined | null},ResolverInputTypes["Redirect"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["LinkableMeta"]: AliasType<{
@@ -8350,6 +8524,7 @@ user?: [{	filter?: ResolverInputTypes["UserWhere"] | undefined | null},ResolverI
 	recipe?:ResolverInputTypes["FieldMeta"],
 	pinnedRecipesPage?:ResolverInputTypes["FieldMeta"],
 	user?:ResolverInputTypes["FieldMeta"],
+	redirect?:ResolverInputTypes["FieldMeta"],
 		__typename?: boolean | `@${string}`
 }>;
 	["HomePageLocale"]: AliasType<{
@@ -8421,7 +8596,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	category?: ResolverInputTypes["CategoryLocaleOrderBy"] | undefined | null,
 	recipe?: ResolverInputTypes["RecipeLocaleOrderBy"] | undefined | null,
 	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleOrderBy"] | undefined | null,
-	user?: ResolverInputTypes["UserOrderBy"] | undefined | null
+	user?: ResolverInputTypes["UserOrderBy"] | undefined | null,
+	redirect?: ResolverInputTypes["RedirectOrderBy"] | undefined | null
 };
 	["CategoryLocaleOrderBy"]: {
 	_random?: boolean | undefined | null,
@@ -8512,6 +8688,22 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	_randomSeeded?: number | undefined | null,
 	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
 	unique?: ResolverInputTypes["OrderDirection"] | undefined | null
+};
+	["RedirectOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	link?: ResolverInputTypes["LinkableOrderBy"] | undefined | null,
+	target?: ResolverInputTypes["LinkOrderBy"] | undefined | null
+};
+	["LinkOrderBy"]: {
+	_random?: boolean | undefined | null,
+	_randomSeeded?: number | undefined | null,
+	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	type?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	title?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	externalLink?: ResolverInputTypes["OrderDirection"] | undefined | null,
+	internalLink?: ResolverInputTypes["LinkableOrderBy"] | undefined | null
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ResolverInputTypes["LocaleUniqueWhere"] | undefined | null
@@ -8611,7 +8803,8 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	category?: ResolverInputTypes["CategoryLocaleUniqueWhere"] | undefined | null,
 	recipe?: ResolverInputTypes["RecipeLocaleUniqueWhere"] | undefined | null,
 	pinnedRecipesPage?: ResolverInputTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined | null,
-	user?: ResolverInputTypes["UserUniqueWhere"] | undefined | null
+	user?: ResolverInputTypes["UserUniqueWhere"] | undefined | null,
+	redirect?: ResolverInputTypes["RedirectUniqueWhere"] | undefined | null
 };
 	["HomePageLocaleUniqueWhere"]: {
 	id?: ResolverInputTypes["UUID"] | undefined | null,
@@ -8663,6 +8856,14 @@ paginateLocales?: [{	filter?: ResolverInputTypes["HomePageLocaleWhere"] | undefi
 	createdRecipes?: ResolverInputTypes["RecipeUniqueWhere"] | undefined | null,
 	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null,
 	seo?: ResolverInputTypes["SeoUniqueWhere"] | undefined | null
+};
+	["RedirectUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null,
+	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null,
+	target?: ResolverInputTypes["LinkUniqueWhere"] | undefined | null
+};
+	["LinkUniqueWhere"]: {
+	id?: ResolverInputTypes["UUID"] | undefined | null
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ResolverInputTypes["LinkableUniqueWhere"] | undefined | null
@@ -9580,6 +9781,36 @@ paginateLocales?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"]
 	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
 	seo?: ResolverInputTypes["SeoUniqueWhere"] | undefined | null
 };
+	["Redirect"]: AliasType<{
+	_meta?:ResolverInputTypes["RedirectMeta"],
+	id?:boolean | `@${string}`,
+link?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | null},ResolverInputTypes["Linkable"]],
+target?: [{	filter?: ResolverInputTypes["LinkWhere"] | undefined | null},ResolverInputTypes["Link"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["RedirectMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	link?:ResolverInputTypes["FieldMeta"],
+	target?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
+	["Link"]: AliasType<{
+	_meta?:ResolverInputTypes["LinkMeta"],
+	id?:boolean | `@${string}`,
+	type?:boolean | `@${string}`,
+	title?:boolean | `@${string}`,
+	externalLink?:boolean | `@${string}`,
+internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | null},ResolverInputTypes["Linkable"]],
+		__typename?: boolean | `@${string}`
+}>;
+	["LinkMeta"]: AliasType<{
+	id?:ResolverInputTypes["FieldMeta"],
+	type?:ResolverInputTypes["FieldMeta"],
+	title?:ResolverInputTypes["FieldMeta"],
+	externalLink?:ResolverInputTypes["FieldMeta"],
+	internalLink?:ResolverInputTypes["FieldMeta"],
+		__typename?: boolean | `@${string}`
+}>;
 	["ContentReferenceLinkableItemOrderBy"]: {
 	_random?: boolean | undefined | null,
 	_randomSeeded?: number | undefined | null,
@@ -9669,61 +9900,6 @@ paginateLocales?: [{	filter?: ResolverInputTypes["PinnedRecipesPageLocaleWhere"]
 	node?:ResolverInputTypes["Content"],
 		__typename?: boolean | `@${string}`
 }>;
-	["Link"]: AliasType<{
-	_meta?:ResolverInputTypes["LinkMeta"],
-	id?:boolean | `@${string}`,
-	type?:boolean | `@${string}`,
-	title?:boolean | `@${string}`,
-	externalLink?:boolean | `@${string}`,
-internalLink?: [{	filter?: ResolverInputTypes["LinkableWhere"] | undefined | null},ResolverInputTypes["Linkable"]],
-		__typename?: boolean | `@${string}`
-}>;
-	["LinkMeta"]: AliasType<{
-	id?:ResolverInputTypes["FieldMeta"],
-	type?:ResolverInputTypes["FieldMeta"],
-	title?:ResolverInputTypes["FieldMeta"],
-	externalLink?:ResolverInputTypes["FieldMeta"],
-	internalLink?:ResolverInputTypes["FieldMeta"],
-		__typename?: boolean | `@${string}`
-}>;
-	["LinkType"]:LinkType;
-	["LinkUniqueWhere"]: {
-	id?: ResolverInputTypes["UUID"] | undefined | null
-};
-	["LinkWhere"]: {
-	id?: ResolverInputTypes["UUIDCondition"] | undefined | null,
-	type?: ResolverInputTypes["LinkTypeCondition"] | undefined | null,
-	title?: ResolverInputTypes["StringCondition"] | undefined | null,
-	externalLink?: ResolverInputTypes["StringCondition"] | undefined | null,
-	internalLink?: ResolverInputTypes["LinkableWhere"] | undefined | null,
-	and?: Array<ResolverInputTypes["LinkWhere"] | undefined | null> | undefined | null,
-	or?: Array<ResolverInputTypes["LinkWhere"] | undefined | null> | undefined | null,
-	not?: ResolverInputTypes["LinkWhere"] | undefined | null
-};
-	["LinkTypeCondition"]: {
-	and?: Array<ResolverInputTypes["LinkTypeCondition"]> | undefined | null,
-	or?: Array<ResolverInputTypes["LinkTypeCondition"]> | undefined | null,
-	not?: ResolverInputTypes["LinkTypeCondition"] | undefined | null,
-	null?: boolean | undefined | null,
-	isNull?: boolean | undefined | null,
-	eq?: ResolverInputTypes["LinkType"] | undefined | null,
-	notEq?: ResolverInputTypes["LinkType"] | undefined | null,
-	in?: Array<ResolverInputTypes["LinkType"]> | undefined | null,
-	notIn?: Array<ResolverInputTypes["LinkType"]> | undefined | null,
-	lt?: ResolverInputTypes["LinkType"] | undefined | null,
-	lte?: ResolverInputTypes["LinkType"] | undefined | null,
-	gt?: ResolverInputTypes["LinkType"] | undefined | null,
-	gte?: ResolverInputTypes["LinkType"] | undefined | null
-};
-	["LinkOrderBy"]: {
-	_random?: boolean | undefined | null,
-	_randomSeeded?: number | undefined | null,
-	id?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	type?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	title?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	externalLink?: ResolverInputTypes["OrderDirection"] | undefined | null,
-	internalLink?: ResolverInputTypes["LinkableOrderBy"] | undefined | null
-};
 	["LinkConnection"]: AliasType<{
 	pageInfo?:ResolverInputTypes["PageInfo"],
 	edges?:ResolverInputTypes["LinkEdge"],
@@ -10113,6 +10289,15 @@ seo?: [{	filter?: ResolverInputTypes["SeoWhere"] | undefined | null},ResolverInp
 	node?:ResolverInputTypes["General"],
 		__typename?: boolean | `@${string}`
 }>;
+	["RedirectConnection"]: AliasType<{
+	pageInfo?:ResolverInputTypes["PageInfo"],
+	edges?:ResolverInputTypes["RedirectEdge"],
+		__typename?: boolean | `@${string}`
+}>;
+	["RedirectEdge"]: AliasType<{
+	node?:ResolverInputTypes["Redirect"],
+		__typename?: boolean | `@${string}`
+}>;
 	["QueryTransaction"]: AliasType<{
 getContent?: [{	by: ResolverInputTypes["ContentUniqueWhere"],	filter?: ResolverInputTypes["ContentWhere"] | undefined | null},ResolverInputTypes["Content"]],
 listContent?: [{	filter?: ResolverInputTypes["ContentWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["ContentOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Content"]],
@@ -10224,6 +10409,9 @@ paginateTranslationsEntryValue?: [{	filter?: ResolverInputTypes["TranslationsEnt
 getGeneral?: [{	by: ResolverInputTypes["GeneralUniqueWhere"],	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null},ResolverInputTypes["General"]],
 listGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["General"]],
 paginateGeneral?: [{	filter?: ResolverInputTypes["GeneralWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["GeneralOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["GeneralConnection"]],
+getRedirect?: [{	by: ResolverInputTypes["RedirectUniqueWhere"],	filter?: ResolverInputTypes["RedirectWhere"] | undefined | null},ResolverInputTypes["Redirect"]],
+listRedirect?: [{	filter?: ResolverInputTypes["RedirectWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RedirectOrderBy"]> | undefined | null,	offset?: number | undefined | null,	limit?: number | undefined | null},ResolverInputTypes["Redirect"]],
+paginateRedirect?: [{	filter?: ResolverInputTypes["RedirectWhere"] | undefined | null,	orderBy?: Array<ResolverInputTypes["RedirectOrderBy"]> | undefined | null,	skip?: number | undefined | null,	first?: number | undefined | null},ResolverInputTypes["RedirectConnection"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["Info"]: AliasType<{
@@ -10541,6 +10729,9 @@ export type ModelTypes = {
 	getGeneral?: ModelTypes["General"] | undefined,
 	listGeneral: Array<ModelTypes["General"]>,
 	paginateGeneral: ModelTypes["GeneralConnection"],
+	getRedirect?: ModelTypes["Redirect"] | undefined,
+	listRedirect: Array<ModelTypes["Redirect"]>,
+	paginateRedirect: ModelTypes["RedirectConnection"],
 	transaction?: ModelTypes["QueryTransaction"] | undefined,
 	_info?: ModelTypes["Info"] | undefined,
 	schema?: ModelTypes["_Schema"] | undefined,
@@ -10689,6 +10880,7 @@ export type ModelTypes = {
 	recipe?: ModelTypes["RecipeLocaleWhere"] | undefined,
 	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleWhere"] | undefined,
 	user?: ModelTypes["UserWhere"] | undefined,
+	redirect?: ModelTypes["RedirectWhere"] | undefined,
 	and?: Array<ModelTypes["LinkableWhere"] | undefined> | undefined,
 	or?: Array<ModelTypes["LinkableWhere"] | undefined> | undefined,
 	not?: ModelTypes["LinkableWhere"] | undefined
@@ -11041,6 +11233,40 @@ export type ModelTypes = {
 	or?: Array<ModelTypes["PinnedRecipesPageWhere"] | undefined> | undefined,
 	not?: ModelTypes["PinnedRecipesPageWhere"] | undefined
 };
+	["RedirectWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	link?: ModelTypes["LinkableWhere"] | undefined,
+	target?: ModelTypes["LinkWhere"] | undefined,
+	and?: Array<ModelTypes["RedirectWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["RedirectWhere"] | undefined> | undefined,
+	not?: ModelTypes["RedirectWhere"] | undefined
+};
+	["LinkWhere"]: {
+	id?: ModelTypes["UUIDCondition"] | undefined,
+	type?: ModelTypes["LinkTypeCondition"] | undefined,
+	title?: ModelTypes["StringCondition"] | undefined,
+	externalLink?: ModelTypes["StringCondition"] | undefined,
+	internalLink?: ModelTypes["LinkableWhere"] | undefined,
+	and?: Array<ModelTypes["LinkWhere"] | undefined> | undefined,
+	or?: Array<ModelTypes["LinkWhere"] | undefined> | undefined,
+	not?: ModelTypes["LinkWhere"] | undefined
+};
+	["LinkTypeCondition"]: {
+	and?: Array<ModelTypes["LinkTypeCondition"]> | undefined,
+	or?: Array<ModelTypes["LinkTypeCondition"]> | undefined,
+	not?: ModelTypes["LinkTypeCondition"] | undefined,
+	null?: boolean | undefined,
+	isNull?: boolean | undefined,
+	eq?: ModelTypes["LinkType"] | undefined,
+	notEq?: ModelTypes["LinkType"] | undefined,
+	in?: Array<ModelTypes["LinkType"]> | undefined,
+	notIn?: Array<ModelTypes["LinkType"]> | undefined,
+	lt?: ModelTypes["LinkType"] | undefined,
+	lte?: ModelTypes["LinkType"] | undefined,
+	gt?: ModelTypes["LinkType"] | undefined,
+	gte?: ModelTypes["LinkType"] | undefined
+};
+	["LinkType"]:LinkType;
 	["ContentReference"]: {
 		_meta?: ModelTypes["ContentReferenceMeta"] | undefined,
 	id: ModelTypes["UUID"],
@@ -11077,7 +11303,8 @@ export type ModelTypes = {
 	category?: ModelTypes["CategoryLocale"] | undefined,
 	recipe?: ModelTypes["RecipeLocale"] | undefined,
 	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocale"] | undefined,
-	user?: ModelTypes["User"] | undefined
+	user?: ModelTypes["User"] | undefined,
+	redirect?: ModelTypes["Redirect"] | undefined
 };
 	["LinkableMeta"]: {
 		id?: ModelTypes["FieldMeta"] | undefined,
@@ -11086,7 +11313,8 @@ export type ModelTypes = {
 	category?: ModelTypes["FieldMeta"] | undefined,
 	recipe?: ModelTypes["FieldMeta"] | undefined,
 	pinnedRecipesPage?: ModelTypes["FieldMeta"] | undefined,
-	user?: ModelTypes["FieldMeta"] | undefined
+	user?: ModelTypes["FieldMeta"] | undefined,
+	redirect?: ModelTypes["FieldMeta"] | undefined
 };
 	["HomePageLocale"]: {
 		_meta?: ModelTypes["HomePageLocaleMeta"] | undefined,
@@ -11153,7 +11381,8 @@ export type ModelTypes = {
 	category?: ModelTypes["CategoryLocaleOrderBy"] | undefined,
 	recipe?: ModelTypes["RecipeLocaleOrderBy"] | undefined,
 	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleOrderBy"] | undefined,
-	user?: ModelTypes["UserOrderBy"] | undefined
+	user?: ModelTypes["UserOrderBy"] | undefined,
+	redirect?: ModelTypes["RedirectOrderBy"] | undefined
 };
 	["CategoryLocaleOrderBy"]: {
 	_random?: boolean | undefined,
@@ -11244,6 +11473,22 @@ export type ModelTypes = {
 	_randomSeeded?: number | undefined,
 	id?: ModelTypes["OrderDirection"] | undefined,
 	unique?: ModelTypes["OrderDirection"] | undefined
+};
+	["RedirectOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	link?: ModelTypes["LinkableOrderBy"] | undefined,
+	target?: ModelTypes["LinkOrderBy"] | undefined
+};
+	["LinkOrderBy"]: {
+	_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: ModelTypes["OrderDirection"] | undefined,
+	type?: ModelTypes["OrderDirection"] | undefined,
+	title?: ModelTypes["OrderDirection"] | undefined,
+	externalLink?: ModelTypes["OrderDirection"] | undefined,
+	internalLink?: ModelTypes["LinkableOrderBy"] | undefined
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 	locale?: ModelTypes["LocaleUniqueWhere"] | undefined
@@ -11343,7 +11588,8 @@ export type ModelTypes = {
 	category?: ModelTypes["CategoryLocaleUniqueWhere"] | undefined,
 	recipe?: ModelTypes["RecipeLocaleUniqueWhere"] | undefined,
 	pinnedRecipesPage?: ModelTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined,
-	user?: ModelTypes["UserUniqueWhere"] | undefined
+	user?: ModelTypes["UserUniqueWhere"] | undefined,
+	redirect?: ModelTypes["RedirectUniqueWhere"] | undefined
 };
 	["HomePageLocaleUniqueWhere"]: {
 	id?: ModelTypes["UUID"] | undefined,
@@ -11395,6 +11641,14 @@ export type ModelTypes = {
 	createdRecipes?: ModelTypes["RecipeUniqueWhere"] | undefined,
 	link?: ModelTypes["LinkableUniqueWhere"] | undefined,
 	seo?: ModelTypes["SeoUniqueWhere"] | undefined
+};
+	["RedirectUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined,
+	link?: ModelTypes["LinkableUniqueWhere"] | undefined,
+	target?: ModelTypes["LinkUniqueWhere"] | undefined
+};
+	["LinkUniqueWhere"]: {
+	id?: ModelTypes["UUID"] | undefined
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 	link?: ModelTypes["LinkableUniqueWhere"] | undefined
@@ -12231,6 +12485,32 @@ export type ModelTypes = {
 	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
 	seo?: ModelTypes["SeoUniqueWhere"] | undefined
 };
+	["Redirect"]: {
+		_meta?: ModelTypes["RedirectMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	link?: ModelTypes["Linkable"] | undefined,
+	target?: ModelTypes["Link"] | undefined
+};
+	["RedirectMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	link?: ModelTypes["FieldMeta"] | undefined,
+	target?: ModelTypes["FieldMeta"] | undefined
+};
+	["Link"]: {
+		_meta?: ModelTypes["LinkMeta"] | undefined,
+	id: ModelTypes["UUID"],
+	type: ModelTypes["LinkType"],
+	title?: string | undefined,
+	externalLink?: string | undefined,
+	internalLink?: ModelTypes["Linkable"] | undefined
+};
+	["LinkMeta"]: {
+		id?: ModelTypes["FieldMeta"] | undefined,
+	type?: ModelTypes["FieldMeta"] | undefined,
+	title?: ModelTypes["FieldMeta"] | undefined,
+	externalLink?: ModelTypes["FieldMeta"] | undefined,
+	internalLink?: ModelTypes["FieldMeta"] | undefined
+};
 	["ContentReferenceLinkableItemOrderBy"]: {
 	_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
@@ -12311,59 +12591,6 @@ export type ModelTypes = {
 };
 	["ContentEdge"]: {
 		node: ModelTypes["Content"]
-};
-	["Link"]: {
-		_meta?: ModelTypes["LinkMeta"] | undefined,
-	id: ModelTypes["UUID"],
-	type: ModelTypes["LinkType"],
-	title?: string | undefined,
-	externalLink?: string | undefined,
-	internalLink?: ModelTypes["Linkable"] | undefined
-};
-	["LinkMeta"]: {
-		id?: ModelTypes["FieldMeta"] | undefined,
-	type?: ModelTypes["FieldMeta"] | undefined,
-	title?: ModelTypes["FieldMeta"] | undefined,
-	externalLink?: ModelTypes["FieldMeta"] | undefined,
-	internalLink?: ModelTypes["FieldMeta"] | undefined
-};
-	["LinkType"]:LinkType;
-	["LinkUniqueWhere"]: {
-	id?: ModelTypes["UUID"] | undefined
-};
-	["LinkWhere"]: {
-	id?: ModelTypes["UUIDCondition"] | undefined,
-	type?: ModelTypes["LinkTypeCondition"] | undefined,
-	title?: ModelTypes["StringCondition"] | undefined,
-	externalLink?: ModelTypes["StringCondition"] | undefined,
-	internalLink?: ModelTypes["LinkableWhere"] | undefined,
-	and?: Array<ModelTypes["LinkWhere"] | undefined> | undefined,
-	or?: Array<ModelTypes["LinkWhere"] | undefined> | undefined,
-	not?: ModelTypes["LinkWhere"] | undefined
-};
-	["LinkTypeCondition"]: {
-	and?: Array<ModelTypes["LinkTypeCondition"]> | undefined,
-	or?: Array<ModelTypes["LinkTypeCondition"]> | undefined,
-	not?: ModelTypes["LinkTypeCondition"] | undefined,
-	null?: boolean | undefined,
-	isNull?: boolean | undefined,
-	eq?: ModelTypes["LinkType"] | undefined,
-	notEq?: ModelTypes["LinkType"] | undefined,
-	in?: Array<ModelTypes["LinkType"]> | undefined,
-	notIn?: Array<ModelTypes["LinkType"]> | undefined,
-	lt?: ModelTypes["LinkType"] | undefined,
-	lte?: ModelTypes["LinkType"] | undefined,
-	gt?: ModelTypes["LinkType"] | undefined,
-	gte?: ModelTypes["LinkType"] | undefined
-};
-	["LinkOrderBy"]: {
-	_random?: boolean | undefined,
-	_randomSeeded?: number | undefined,
-	id?: ModelTypes["OrderDirection"] | undefined,
-	type?: ModelTypes["OrderDirection"] | undefined,
-	title?: ModelTypes["OrderDirection"] | undefined,
-	externalLink?: ModelTypes["OrderDirection"] | undefined,
-	internalLink?: ModelTypes["LinkableOrderBy"] | undefined
 };
 	["LinkConnection"]: {
 		pageInfo: ModelTypes["PageInfo"],
@@ -12705,6 +12932,13 @@ export type ModelTypes = {
 	["GeneralEdge"]: {
 		node: ModelTypes["General"]
 };
+	["RedirectConnection"]: {
+		pageInfo: ModelTypes["PageInfo"],
+	edges: Array<ModelTypes["RedirectEdge"]>
+};
+	["RedirectEdge"]: {
+		node: ModelTypes["Redirect"]
+};
 	["QueryTransaction"]: {
 		getContent?: ModelTypes["Content"] | undefined,
 	listContent: Array<ModelTypes["Content"]>,
@@ -12815,7 +13049,10 @@ export type ModelTypes = {
 	paginateTranslationsEntryValue: ModelTypes["TranslationsEntryValueConnection"],
 	getGeneral?: ModelTypes["General"] | undefined,
 	listGeneral: Array<ModelTypes["General"]>,
-	paginateGeneral: ModelTypes["GeneralConnection"]
+	paginateGeneral: ModelTypes["GeneralConnection"],
+	getRedirect?: ModelTypes["Redirect"] | undefined,
+	listRedirect: Array<ModelTypes["Redirect"]>,
+	paginateRedirect: ModelTypes["RedirectConnection"]
 };
 	["Info"]: {
 		description?: string | undefined
@@ -13086,6 +13323,9 @@ export type GraphQLTypes = {
 	getGeneral?: GraphQLTypes["General"] | undefined,
 	listGeneral: Array<GraphQLTypes["General"]>,
 	paginateGeneral: GraphQLTypes["GeneralConnection"],
+	getRedirect?: GraphQLTypes["Redirect"] | undefined,
+	listRedirect: Array<GraphQLTypes["Redirect"]>,
+	paginateRedirect: GraphQLTypes["RedirectConnection"],
 	transaction?: GraphQLTypes["QueryTransaction"] | undefined,
 	_info?: GraphQLTypes["Info"] | undefined,
 	schema?: GraphQLTypes["_Schema"] | undefined,
@@ -13239,6 +13479,7 @@ export type GraphQLTypes = {
 	recipe?: GraphQLTypes["RecipeLocaleWhere"] | undefined,
 	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleWhere"] | undefined,
 	user?: GraphQLTypes["UserWhere"] | undefined,
+	redirect?: GraphQLTypes["RedirectWhere"] | undefined,
 	and?: Array<GraphQLTypes["LinkableWhere"] | undefined> | undefined,
 	or?: Array<GraphQLTypes["LinkableWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["LinkableWhere"] | undefined
@@ -13591,6 +13832,40 @@ export type GraphQLTypes = {
 	or?: Array<GraphQLTypes["PinnedRecipesPageWhere"] | undefined> | undefined,
 	not?: GraphQLTypes["PinnedRecipesPageWhere"] | undefined
 };
+	["RedirectWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	link?: GraphQLTypes["LinkableWhere"] | undefined,
+	target?: GraphQLTypes["LinkWhere"] | undefined,
+	and?: Array<GraphQLTypes["RedirectWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["RedirectWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["RedirectWhere"] | undefined
+};
+	["LinkWhere"]: {
+		id?: GraphQLTypes["UUIDCondition"] | undefined,
+	type?: GraphQLTypes["LinkTypeCondition"] | undefined,
+	title?: GraphQLTypes["StringCondition"] | undefined,
+	externalLink?: GraphQLTypes["StringCondition"] | undefined,
+	internalLink?: GraphQLTypes["LinkableWhere"] | undefined,
+	and?: Array<GraphQLTypes["LinkWhere"] | undefined> | undefined,
+	or?: Array<GraphQLTypes["LinkWhere"] | undefined> | undefined,
+	not?: GraphQLTypes["LinkWhere"] | undefined
+};
+	["LinkTypeCondition"]: {
+		and?: Array<GraphQLTypes["LinkTypeCondition"]> | undefined,
+	or?: Array<GraphQLTypes["LinkTypeCondition"]> | undefined,
+	not?: GraphQLTypes["LinkTypeCondition"] | undefined,
+	null?: boolean | undefined,
+	isNull?: boolean | undefined,
+	eq?: GraphQLTypes["LinkType"] | undefined,
+	notEq?: GraphQLTypes["LinkType"] | undefined,
+	in?: Array<GraphQLTypes["LinkType"]> | undefined,
+	notIn?: Array<GraphQLTypes["LinkType"]> | undefined,
+	lt?: GraphQLTypes["LinkType"] | undefined,
+	lte?: GraphQLTypes["LinkType"] | undefined,
+	gt?: GraphQLTypes["LinkType"] | undefined,
+	gte?: GraphQLTypes["LinkType"] | undefined
+};
+	["LinkType"]: LinkType;
 	["ContentReference"]: {
 	__typename: "ContentReference",
 	_meta?: GraphQLTypes["ContentReferenceMeta"] | undefined,
@@ -13632,7 +13907,8 @@ export type GraphQLTypes = {
 	category?: GraphQLTypes["CategoryLocale"] | undefined,
 	recipe?: GraphQLTypes["RecipeLocale"] | undefined,
 	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocale"] | undefined,
-	user?: GraphQLTypes["User"] | undefined
+	user?: GraphQLTypes["User"] | undefined,
+	redirect?: GraphQLTypes["Redirect"] | undefined
 };
 	["LinkableMeta"]: {
 	__typename: "LinkableMeta",
@@ -13642,7 +13918,8 @@ export type GraphQLTypes = {
 	category?: GraphQLTypes["FieldMeta"] | undefined,
 	recipe?: GraphQLTypes["FieldMeta"] | undefined,
 	pinnedRecipesPage?: GraphQLTypes["FieldMeta"] | undefined,
-	user?: GraphQLTypes["FieldMeta"] | undefined
+	user?: GraphQLTypes["FieldMeta"] | undefined,
+	redirect?: GraphQLTypes["FieldMeta"] | undefined
 };
 	["HomePageLocale"]: {
 	__typename: "HomePageLocale",
@@ -13713,7 +13990,8 @@ export type GraphQLTypes = {
 	category?: GraphQLTypes["CategoryLocaleOrderBy"] | undefined,
 	recipe?: GraphQLTypes["RecipeLocaleOrderBy"] | undefined,
 	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleOrderBy"] | undefined,
-	user?: GraphQLTypes["UserOrderBy"] | undefined
+	user?: GraphQLTypes["UserOrderBy"] | undefined,
+	redirect?: GraphQLTypes["RedirectOrderBy"] | undefined
 };
 	["CategoryLocaleOrderBy"]: {
 		_random?: boolean | undefined,
@@ -13804,6 +14082,22 @@ export type GraphQLTypes = {
 	_randomSeeded?: number | undefined,
 	id?: GraphQLTypes["OrderDirection"] | undefined,
 	unique?: GraphQLTypes["OrderDirection"] | undefined
+};
+	["RedirectOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	link?: GraphQLTypes["LinkableOrderBy"] | undefined,
+	target?: GraphQLTypes["LinkOrderBy"] | undefined
+};
+	["LinkOrderBy"]: {
+		_random?: boolean | undefined,
+	_randomSeeded?: number | undefined,
+	id?: GraphQLTypes["OrderDirection"] | undefined,
+	type?: GraphQLTypes["OrderDirection"] | undefined,
+	title?: GraphQLTypes["OrderDirection"] | undefined,
+	externalLink?: GraphQLTypes["OrderDirection"] | undefined,
+	internalLink?: GraphQLTypes["LinkableOrderBy"] | undefined
 };
 	["HomePageLocalesByLocaleUniqueWhere"]: {
 		locale?: GraphQLTypes["LocaleUniqueWhere"] | undefined
@@ -13903,7 +14197,8 @@ export type GraphQLTypes = {
 	category?: GraphQLTypes["CategoryLocaleUniqueWhere"] | undefined,
 	recipe?: GraphQLTypes["RecipeLocaleUniqueWhere"] | undefined,
 	pinnedRecipesPage?: GraphQLTypes["PinnedRecipesPageLocaleUniqueWhere"] | undefined,
-	user?: GraphQLTypes["UserUniqueWhere"] | undefined
+	user?: GraphQLTypes["UserUniqueWhere"] | undefined,
+	redirect?: GraphQLTypes["RedirectUniqueWhere"] | undefined
 };
 	["HomePageLocaleUniqueWhere"]: {
 		id?: GraphQLTypes["UUID"] | undefined,
@@ -13955,6 +14250,14 @@ export type GraphQLTypes = {
 	createdRecipes?: GraphQLTypes["RecipeUniqueWhere"] | undefined,
 	link?: GraphQLTypes["LinkableUniqueWhere"] | undefined,
 	seo?: GraphQLTypes["SeoUniqueWhere"] | undefined
+};
+	["RedirectUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined,
+	link?: GraphQLTypes["LinkableUniqueWhere"] | undefined,
+	target?: GraphQLTypes["LinkUniqueWhere"] | undefined
+};
+	["LinkUniqueWhere"]: {
+		id?: GraphQLTypes["UUID"] | undefined
 };
 	["HomePageLocalesByLinkUniqueWhere"]: {
 		link?: GraphQLTypes["LinkableUniqueWhere"] | undefined
@@ -14872,6 +15175,36 @@ export type GraphQLTypes = {
 	["LocalePinnedRecipesPageBySeoUniqueWhere"]: {
 		seo?: GraphQLTypes["SeoUniqueWhere"] | undefined
 };
+	["Redirect"]: {
+	__typename: "Redirect",
+	_meta?: GraphQLTypes["RedirectMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	link?: GraphQLTypes["Linkable"] | undefined,
+	target?: GraphQLTypes["Link"] | undefined
+};
+	["RedirectMeta"]: {
+	__typename: "RedirectMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	link?: GraphQLTypes["FieldMeta"] | undefined,
+	target?: GraphQLTypes["FieldMeta"] | undefined
+};
+	["Link"]: {
+	__typename: "Link",
+	_meta?: GraphQLTypes["LinkMeta"] | undefined,
+	id: GraphQLTypes["UUID"],
+	type: GraphQLTypes["LinkType"],
+	title?: string | undefined,
+	externalLink?: string | undefined,
+	internalLink?: GraphQLTypes["Linkable"] | undefined
+};
+	["LinkMeta"]: {
+	__typename: "LinkMeta",
+	id?: GraphQLTypes["FieldMeta"] | undefined,
+	type?: GraphQLTypes["FieldMeta"] | undefined,
+	title?: GraphQLTypes["FieldMeta"] | undefined,
+	externalLink?: GraphQLTypes["FieldMeta"] | undefined,
+	internalLink?: GraphQLTypes["FieldMeta"] | undefined
+};
 	["ContentReferenceLinkableItemOrderBy"]: {
 		_random?: boolean | undefined,
 	_randomSeeded?: number | undefined,
@@ -14960,61 +15293,6 @@ export type GraphQLTypes = {
 	["ContentEdge"]: {
 	__typename: "ContentEdge",
 	node: GraphQLTypes["Content"]
-};
-	["Link"]: {
-	__typename: "Link",
-	_meta?: GraphQLTypes["LinkMeta"] | undefined,
-	id: GraphQLTypes["UUID"],
-	type: GraphQLTypes["LinkType"],
-	title?: string | undefined,
-	externalLink?: string | undefined,
-	internalLink?: GraphQLTypes["Linkable"] | undefined
-};
-	["LinkMeta"]: {
-	__typename: "LinkMeta",
-	id?: GraphQLTypes["FieldMeta"] | undefined,
-	type?: GraphQLTypes["FieldMeta"] | undefined,
-	title?: GraphQLTypes["FieldMeta"] | undefined,
-	externalLink?: GraphQLTypes["FieldMeta"] | undefined,
-	internalLink?: GraphQLTypes["FieldMeta"] | undefined
-};
-	["LinkType"]: LinkType;
-	["LinkUniqueWhere"]: {
-		id?: GraphQLTypes["UUID"] | undefined
-};
-	["LinkWhere"]: {
-		id?: GraphQLTypes["UUIDCondition"] | undefined,
-	type?: GraphQLTypes["LinkTypeCondition"] | undefined,
-	title?: GraphQLTypes["StringCondition"] | undefined,
-	externalLink?: GraphQLTypes["StringCondition"] | undefined,
-	internalLink?: GraphQLTypes["LinkableWhere"] | undefined,
-	and?: Array<GraphQLTypes["LinkWhere"] | undefined> | undefined,
-	or?: Array<GraphQLTypes["LinkWhere"] | undefined> | undefined,
-	not?: GraphQLTypes["LinkWhere"] | undefined
-};
-	["LinkTypeCondition"]: {
-		and?: Array<GraphQLTypes["LinkTypeCondition"]> | undefined,
-	or?: Array<GraphQLTypes["LinkTypeCondition"]> | undefined,
-	not?: GraphQLTypes["LinkTypeCondition"] | undefined,
-	null?: boolean | undefined,
-	isNull?: boolean | undefined,
-	eq?: GraphQLTypes["LinkType"] | undefined,
-	notEq?: GraphQLTypes["LinkType"] | undefined,
-	in?: Array<GraphQLTypes["LinkType"]> | undefined,
-	notIn?: Array<GraphQLTypes["LinkType"]> | undefined,
-	lt?: GraphQLTypes["LinkType"] | undefined,
-	lte?: GraphQLTypes["LinkType"] | undefined,
-	gt?: GraphQLTypes["LinkType"] | undefined,
-	gte?: GraphQLTypes["LinkType"] | undefined
-};
-	["LinkOrderBy"]: {
-		_random?: boolean | undefined,
-	_randomSeeded?: number | undefined,
-	id?: GraphQLTypes["OrderDirection"] | undefined,
-	type?: GraphQLTypes["OrderDirection"] | undefined,
-	title?: GraphQLTypes["OrderDirection"] | undefined,
-	externalLink?: GraphQLTypes["OrderDirection"] | undefined,
-	internalLink?: GraphQLTypes["LinkableOrderBy"] | undefined
 };
 	["LinkConnection"]: {
 	__typename: "LinkConnection",
@@ -15405,6 +15683,15 @@ export type GraphQLTypes = {
 	__typename: "GeneralEdge",
 	node: GraphQLTypes["General"]
 };
+	["RedirectConnection"]: {
+	__typename: "RedirectConnection",
+	pageInfo: GraphQLTypes["PageInfo"],
+	edges: Array<GraphQLTypes["RedirectEdge"]>
+};
+	["RedirectEdge"]: {
+	__typename: "RedirectEdge",
+	node: GraphQLTypes["Redirect"]
+};
 	["QueryTransaction"]: {
 	__typename: "QueryTransaction",
 	getContent?: GraphQLTypes["Content"] | undefined,
@@ -15516,7 +15803,10 @@ export type GraphQLTypes = {
 	paginateTranslationsEntryValue: GraphQLTypes["TranslationsEntryValueConnection"],
 	getGeneral?: GraphQLTypes["General"] | undefined,
 	listGeneral: Array<GraphQLTypes["General"]>,
-	paginateGeneral: GraphQLTypes["GeneralConnection"]
+	paginateGeneral: GraphQLTypes["GeneralConnection"],
+	getRedirect?: GraphQLTypes["Redirect"] | undefined,
+	listRedirect: Array<GraphQLTypes["Redirect"]>,
+	paginateRedirect: GraphQLTypes["RedirectConnection"]
 };
 	["Info"]: {
 	__typename: "Info",
@@ -15731,15 +16021,15 @@ export const enum StepGroupItemType {
 	step = "step",
 	tip = "tip"
 }
+export const enum LinkType {
+	internal = "internal",
+	external = "external"
+}
 export const enum OrderDirection {
 	asc = "asc",
 	desc = "desc",
 	ascNullsFirst = "ascNullsFirst",
 	descNullsLast = "descNullsLast"
-}
-export const enum LinkType {
-	internal = "internal",
-	external = "external"
 }
 export const enum _MutationErrorType {
 	NotNullConstraintViolation = "NotNullConstraintViolation",
@@ -15810,6 +16100,10 @@ type ZEUS_VARIABLES = {
 	["TipGroupLocaleWhere"]: ValueTypes["TipGroupLocaleWhere"];
 	["PinnedRecipesPageLocaleWhere"]: ValueTypes["PinnedRecipesPageLocaleWhere"];
 	["PinnedRecipesPageWhere"]: ValueTypes["PinnedRecipesPageWhere"];
+	["RedirectWhere"]: ValueTypes["RedirectWhere"];
+	["LinkWhere"]: ValueTypes["LinkWhere"];
+	["LinkTypeCondition"]: ValueTypes["LinkTypeCondition"];
+	["LinkType"]: ValueTypes["LinkType"];
 	["HomePageLocaleOrderBy"]: ValueTypes["HomePageLocaleOrderBy"];
 	["OrderDirection"]: ValueTypes["OrderDirection"];
 	["HomePageOrderBy"]: ValueTypes["HomePageOrderBy"];
@@ -15824,6 +16118,8 @@ type ZEUS_VARIABLES = {
 	["UserOrderBy"]: ValueTypes["UserOrderBy"];
 	["PinnedRecipesPageLocaleOrderBy"]: ValueTypes["PinnedRecipesPageLocaleOrderBy"];
 	["PinnedRecipesPageOrderBy"]: ValueTypes["PinnedRecipesPageOrderBy"];
+	["RedirectOrderBy"]: ValueTypes["RedirectOrderBy"];
+	["LinkOrderBy"]: ValueTypes["LinkOrderBy"];
 	["HomePageLocalesByLocaleUniqueWhere"]: ValueTypes["HomePageLocalesByLocaleUniqueWhere"];
 	["LocaleUniqueWhere"]: ValueTypes["LocaleUniqueWhere"];
 	["RecipeLocaleUniqueWhere"]: ValueTypes["RecipeLocaleUniqueWhere"];
@@ -15851,6 +16147,8 @@ type ZEUS_VARIABLES = {
 	["PinnedRecipesPageLocaleUniqueWhere"]: ValueTypes["PinnedRecipesPageLocaleUniqueWhere"];
 	["PinnedRecipesPageUniqueWhere"]: ValueTypes["PinnedRecipesPageUniqueWhere"];
 	["UserUniqueWhere"]: ValueTypes["UserUniqueWhere"];
+	["RedirectUniqueWhere"]: ValueTypes["RedirectUniqueWhere"];
+	["LinkUniqueWhere"]: ValueTypes["LinkUniqueWhere"];
 	["HomePageLocalesByLinkUniqueWhere"]: ValueTypes["HomePageLocalesByLinkUniqueWhere"];
 	["HomePageLocalesBySeoUniqueWhere"]: ValueTypes["HomePageLocalesBySeoUniqueWhere"];
 	["PinnedRecipeOrderBy"]: ValueTypes["PinnedRecipeOrderBy"];
@@ -15925,11 +16223,6 @@ type ZEUS_VARIABLES = {
 	["ContentReferenceUniqueWhere"]: ValueTypes["ContentReferenceUniqueWhere"];
 	["ContentUniqueWhere"]: ValueTypes["ContentUniqueWhere"];
 	["ContentBlockUniqueWhere"]: ValueTypes["ContentBlockUniqueWhere"];
-	["LinkType"]: ValueTypes["LinkType"];
-	["LinkUniqueWhere"]: ValueTypes["LinkUniqueWhere"];
-	["LinkWhere"]: ValueTypes["LinkWhere"];
-	["LinkTypeCondition"]: ValueTypes["LinkTypeCondition"];
-	["LinkOrderBy"]: ValueTypes["LinkOrderBy"];
 	["PinnedRecipeCreateInput"]: ValueTypes["PinnedRecipeCreateInput"];
 	["PinnedRecipeCreateUserEntityRelationInput"]: ValueTypes["PinnedRecipeCreateUserEntityRelationInput"];
 	["PinnedRecipeCreateDerivedByEntityRelationInput"]: ValueTypes["PinnedRecipeCreateDerivedByEntityRelationInput"];
