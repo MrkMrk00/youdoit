@@ -12,11 +12,13 @@ import { CategoryLocaleFragment } from '../data/CategoryLocaleFragment'
 import { GeneralFragment } from '../data/GenralFragment'
 import { HomePageFragment } from '../data/HomePageFragment'
 import { HomePageLocaleFragment } from '../data/HomePageLocaleFragment'
+import { LinkFragment } from '../data/LinkFragment'
 import { PinnedRecipesPageLocaleFragment } from '../data/PinnedRecipesLocaleFragment'
 import { RecipeLocaleFragment } from '../data/RecipeLocaleFragment'
 import { TranslationsEntryFragment } from '../data/TranslationsEntryFragment'
 import { UserFragment } from '../data/UserFragment'
 import { contember } from '../utilities/contember'
+import { contemberLinkToHref } from '../utilities/contemberLinkToHref'
 import { scalarResolver } from '../utilities/createScalarResolver'
 import { getLinkableUrlFromContext } from '../utilities/getLinkableUrlFromContext'
 import type { InferDataLoaderProps } from '../utilities/handlers'
@@ -78,9 +80,9 @@ export const getStaticPaths = handleGetStaticPaths(async (context) => {
 	const { listLinkable } = await contember('query', { scalars: scalarResolver })({
 		listLinkable: [
 			{
-				// filter: {
-				// 	redirect: { id: { isNull: true } },
-				// },
+				filter: {
+					redirect: { id: { isNull: true } },
+				},
 			},
 			{
 				id: true,
@@ -134,6 +136,7 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 				category: [{}, CategoryLocaleFragment(locale)],
 				recipe: [{}, RecipeLocaleFragment(locale)],
 				user: [{}, UserFragment()],
+				redirect: [{}, { id: true, target: [{}, LinkFragment()] }],
 			},
 		],
 		getHomePage: [{ by: { unique: One.One } }, HomePageFragment()],
@@ -144,6 +147,20 @@ export const getStaticProps = handleGetStaticProps(async (context) => {
 		],
 		getUser: [{ by: { email: hardcodedUserEmail } }, UserFragment()],
 	})
+
+	const redirectUrl = (() => {
+		const target = data.getLinkable?.redirect?.target
+		return target ? contemberLinkToHref(target) : null
+	})()
+
+	if (redirectUrl) {
+		return {
+			redirect: {
+				permanent: false,
+				destination: redirectUrl,
+			},
+		}
+	}
 
 	const canonicalUrl = (() => {
 		const url = data.getLinkable?.url
