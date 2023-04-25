@@ -1,4 +1,5 @@
 import { Box, EditPage, TextField } from '@contember/admin'
+import { SeoField } from '../components/SeoField'
 
 export default () => (
 	<EditPage
@@ -12,5 +13,6 @@ export default () => (
 			<TextField field="name" label="Name" />
 			<TextField field="shortName" label="Short name" />
 		</Box>
+		<SeoField field="seo" />
 	</EditPage>
 )

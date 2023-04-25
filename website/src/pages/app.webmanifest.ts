@@ -41,11 +41,14 @@ export const getServerSideProps = handleGetServerSideProps(async ({ res, locale 
 		icons: [
 			{
 				src: '/favicon.png',
-				sizes: '256x256',
-				type: 'image/svg+xml',
+				sizes: '1024x1024',
+				type: 'image/png',
 				purpose: 'any',
 			},
 		],
+		background_color: '#000000',
+		theme_color: '#0072FF',
+		orientation: 'portrait',
 	}
 	res.setHeader('Content-Type', 'application/manifest+json')
 	res.write(JSON.stringify(data))
