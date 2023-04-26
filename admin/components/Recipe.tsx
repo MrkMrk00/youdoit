@@ -21,7 +21,7 @@ import { TipGroup } from './TipGroup'
 export const Recipe = Component((_, enviroment) => {
 	return (
 		<>
-			<Section heading="Basic informations">
+			<Section heading="Basic information">
 				<LocaleSideDimension>
 					<LinkUrlField derivedFrom="title" />
 				</LocaleSideDimension>
