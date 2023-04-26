@@ -6,7 +6,7 @@ export default () => (
 		entity="Recipe"
 		rendererProps={{
 			title: 'Add a new recipe',
-			navigation: <NavigateBackButton to="recipelist">Recipes</NavigateBackButton>,
+			navigation: <NavigateBackButton to="recipeList">Recipes</NavigateBackButton>,
 		}}
 		redirectOnSuccess="recipeEdit(id: $entity.id)"
 		setOnCreate="(publishDate = 'now')"
