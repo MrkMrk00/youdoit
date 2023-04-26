@@ -88,7 +88,9 @@ export const Recipe = Component((_, enviroment) => {
 				</Repeater>
 			</Section>
 			<Section heading="Seo">
-				<SeoField field="seo" />
+				<LocaleSideDimension>
+					<SeoField field="seo" />
+				</LocaleSideDimension>
 			</Section>
 		</>
 	)
